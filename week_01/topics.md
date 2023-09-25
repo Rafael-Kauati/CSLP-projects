@@ -16,6 +16,19 @@
   * Standard Template Library (STL): The STL provides a wide range of containers and algorithms for working with data, making it easier to write efficient and effective code.
   * Exception Handling: C++ provides robust exception handling capabilities, making it easier to write code that can handle errors and unexpected situations.
 
+#### Data Types
+
+|Data Type |	Meaning | Size (in Bytes) | 
+|---|---|---|
+|int | Integer | 4 |
+|float | Floating-point | 4 |
+|double | Double Floating-point | 8 |
+|char | Character | 1 |
+|wchar_t | Wide Character | 2 |
+|bool | Boolean | 1 |
+|void | Empty | 0 |
+
+More on [GeekForGeeks - C++ Basis](https://www.geeksforgeeks.org/cpp-basics/)
 
 ## 2. Standart Template Library (STL)
 
