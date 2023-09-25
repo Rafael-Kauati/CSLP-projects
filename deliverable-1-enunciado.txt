@@ -1,0 +1,13 @@
+Deliverable 1
+
+    Implement a class to manipulate digital images. Test this class implementing a program to copy an image to another file, pixel by pixel.
+    Using the OpenCV library, implement a video player that could be able to display video in RGB or YUV formats. Include an option in your player to perform the conversion between RGB  and YUV color spaces. Take into consideration the planar mode in the three possible subsampling modes of YUV: 4:4:4, 4:2:2: and 4:2:0.
+    Include an option in your player to perform the next low level image processing operations. You should implement the algorithms by yourself. Take into consideration that you do not have to save the processed videos, but only display the processed images.
+
+    Include a watermark into an image (it can be a string identifying the group or a chosen picture).
+    Transform an image into other color spaces, namely between RGB and YUV
+    Calculate and display the color histograms of an image.
+    Convert a color image/frame to grayscale
+    Apply histogram equalization.
+    Apply Gaussian and blur filters to an image, exploring different filter kernels.
+    Explore the use of segmentation algorithms based on threshold (as bonus, explore more advanced algorithms - e.g. watershed, region growing, etc).
