@@ -43,8 +43,84 @@ More on [GeekForGeeks - C++ Basis](https://www.geeksforgeeks.org/cpp-basics/)
 * ### Constructors & Destructors
 
 
+## 4.  Procedural paradigm
+
+### Can be defined by these concepts : 
+
+* Pre-defined Functions
+
+* Local Variable
+
+* Global Variable
+
+* Parameter Passing
+
+* Modularity
+
+* Top-Down Approach
+
+* High-level of abstraction
+
+* Highly suitable for parallel programming
+
+* Function/Variables are the primary progamming tools
+
+
+## 5. Object-Oriented Programming paradigm
+
+### Can be defined by these concepts : 
+
+* Classes instantiated as objects
+
+* Inheritance
+
+* Polymorphism
+
+* Modularity
+
+* Encapsulation (data security) 
+
+* High-level of abstraction
+
+* Not suitable for parallel programming
+
+* Classes/Objects are the primary progamming tools
+
+
+## 6. Logic Programming paradigm 
+
+### Can be defined by these concepts :  
+
+* Based on Logical  Rules
+
+* Automatic Inference
+
+* Non-Determinism
+
+* Recursion
+
+* Pattern Matching
+
+
+## 7. Functional Programming paradigm 
+
+### Can be defined by these concepts :
+
+*  First-Class and Higher-Order Functions
+
+* Immutability
+
+*  Pure Functions:
+
+* Recursion
+
+* Declarative Style
+
 ## References
 
 * [GeekForGeeks - C++ Basis](https://www.geeksforgeeks.org/cpp-basics/)
 * [GeekForGeeks - Introduction to C++](https://www.geeksforgeeks.org/introduction-to-c-programming-language/?ref=lbp)
-
+* [Wikipedia -  Functional Programming](https://en.wikipedia.org/wiki/Functional_programming)
+* [Programiz -  Procedural Programming](https://programiz.pro/resources/what-is-procedural-programming/)
+* [Wikipedia - Logical Programming](https://en.wikipedia.org/wiki/Logic_programming)
+* [Perfoce - Parallel Programming](https://www.perforce.com/blog/qac/multithreading-parallel-programming-c-cpp)
