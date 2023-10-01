@@ -147,7 +147,22 @@ int main() {
     }
     */
 
-   
+   //g)
+
+   // Threshold the image using a chosen threshold value
+    int thresholdValue = 128; // You can adjust this threshold value as needed
+    cv::Mat thresholdImg1, thresholdImg2;
+    cv::threshold(image, thresholdImg1, thresholdValue, 255, cv::THRESH_BINARY);
+    cv::threshold(greyMat, thresholdImg2, thresholdValue, 255, cv::THRESH_BINARY);
+
+    // Display the original and thresholded images
+    cv::imshow("Thresholded Image RGB", thresholdImg1);
+    cv::waitKey(0);
+    cv::imshow("Thresholded Image GrayScaled", thresholdImg2);
+    cv::waitKey(0);
+
+
+
 
 
     return 0;
