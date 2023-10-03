@@ -1,3 +1,0 @@
-/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Program_2/CMakeFiles/video_player.dir
-/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Program_2/CMakeFiles/edit_cache.dir
-/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Program_2/CMakeFiles/rebuild_cache.dir

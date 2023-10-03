@@ -11,7 +11,7 @@ int main() {
     std::string outFilename = "outImg.jpg";
 
     Vec3b value;
-
+    
     //  Load input image object, create the output with the same pixel width and height
     Mat input = imread(inpFilename, IMREAD_COLOR);
     Mat output(input.rows, input.cols, CV_8UC3, Scalar(10, 100, 150));
