@@ -3,10 +3,14 @@
 #include <iostream>
 
 using namespace cv;
-int main();
 
-int main() {
-    const std::string videoPath = "/home/tk/UA/3-ano/cslp/curr-repo/CSLP-projects/Projeto/Video-Player/20230912_140658.mp4";
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        std::cerr << "Usage: " << argv[0] << " <video_file_path>" << std::endl;
+        return -1;
+    }
+
+    const std::string videoPath = argv[1];
     cv::VideoCapture cap;
     bool opened = cap.open(videoPath);
 
@@ -37,7 +41,7 @@ int main() {
             cv::imshow("Video Player (YUV)", yuvFrame);
         }
 
-        int key = cv::waitKey(15);
+        int key = cv::waitKey(1);
 
         if (key == 'r') {
             rgbMode = true;

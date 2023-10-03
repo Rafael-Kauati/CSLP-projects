@@ -1,3 +1,3 @@
 #!/bin/bash
 clear
-cmake . && make && ./main $#
+cmake . && make && ./main
