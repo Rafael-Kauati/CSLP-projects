@@ -8,8 +8,7 @@
 /**
  * @brief The VideoPlayer class encapsulates video playing functionality.
  * 
- * This class provides methods to play a video file, switch between RGB and YUV modes,
- * and display frames from the video.
+ * This class provides methods to play a video file in both YUV and RGB modes.
  */
 class VideoPlayer {
 public:
@@ -26,16 +25,15 @@ public:
     ~VideoPlayer();
 
     /**
-     * @brief Starts playing the video and allows switching between RGB and YUV modes.
+     * @brief Starts playing the video in YUV and RGB modes.
      * 
-     * This function continuously reads frames from the video file, converts them to YUV
-     * format if not in RGB mode, and displays the frames.
+     * This function reads frames from the video file, displays them in YUV mode,
+     * converts them to RGB mode, and displays the frames again.
      */
     void play();
 
 private:
     cv::VideoCapture cap; ///< OpenCV VideoCapture object to handle video input.
-    bool rgbMode; ///< A flag indicating whether the video is displayed in RGB mode or YUV mode.
 };
 
 #endif // VIDEO_PLAYER_HPP

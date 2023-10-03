@@ -18,36 +18,23 @@ int main(int argc, char* argv[]) {
         std::cerr << "Error: Video file not found or could not be opened." << std::endl;
         return -1;
     }
- 
-    bool rgbMode = false;
 
-    while (true) {
-        cv::Mat frame;
-        cap >> frame;
+    cv::Mat yuvFrame, rgbFrame;
 
-        if (frame.empty()) {
-            std::cout << "End of video" << std::endl;
-            break;
-        }
+    while (cap.read(yuvFrame)) {
+        // Mostrar o frame em YUV
+        cv::imshow("Video Player (YUV)", yuvFrame);
+        cv::waitKey(10);
 
-        if (rgbMode) {
-            cv::imshow("Video Player (RGB)", frame);
-        } else {
-            // Converter de RGB para YUV
-            cv::Mat yuvFrame;
-            cv::cvtColor(frame, yuvFrame, cv::COLOR_BGR2YUV);
+        // Converter de YUV para RGB
+        cv::cvtColor(yuvFrame, rgbFrame, cv::COLOR_YUV2BGR);
 
-            // Mostrar o frame em YUV
-            cv::imshow("Video Player (YUV)", yuvFrame);
-        }
+        // Mostrar o frame em RGB
+        cv::imshow("Video Player (RGB)", rgbFrame);
+        cv::waitKey(10);
 
-        int key = cv::waitKey(1);
-
-        if (key == 'r') {
-            rgbMode = true;
-        } else if (key == 'y') {
-            rgbMode = false;
-        } else if (key == 27) {
+        if (cv::waitKey(20) == 27) { // Pressione 'Esc' para sair do loop
+            std::cerr << "Video player terminated by user." << std::endl;
             break;
         }
     }
