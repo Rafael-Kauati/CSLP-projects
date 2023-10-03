@@ -7,6 +7,10 @@ using namespace std;
 
 class BitStream {
 
+    private:
+        int* bitBuffer[8];
+        int bufferLen = 8;
+
     public:
         int readOneFileBit(string inFile, int charIndex, int bitIndex) {
             ifstream file (inFile, ios::binary | ios::in);
@@ -65,7 +69,7 @@ class BitStream {
             return output;
         }
 
-        void writeOneFileBit(string inFile, int charIndex, int bitIndex, int newBit) {
+        void changeOneFileBit(string inFile, int charIndex, int bitIndex, int newBit) {
             fstream file (inFile, ios::binary | ios::in | ios::out);
             char c;
 
@@ -78,6 +82,18 @@ class BitStream {
             c = ((c & ~(1 << bitIndex)) | (newBit << bitIndex));
             
             file.put(c);
+        }
+
+        void writeOneFileBit(string outFile, int newBit) {
+            ifstream file (outFile, ios::binary | ios::in);
+            int charIndex = 0;
+            char c;
+
+            while (file.get(c)) {
+                charIndex++;
+            }
+
+            changeOneFileBit(outFile, charIndex, bitIndex, newBit);
         }
 
 };
@@ -118,13 +134,13 @@ int main() {
 
    
 
-    bitSt.writeOneFileBit("test.txt", 0, 0, 0);
-    bitSt.writeOneFileBit("test.txt", 0, 1, 1);
-    bitSt.writeOneFileBit("test.txt", 0, 2, 1);
-    bitSt.writeOneFileBit("test.txt", 0, 3, 0);
-    bitSt.writeOneFileBit("test.txt", 0, 4, 1);
-    bitSt.writeOneFileBit("test.txt", 0, 5, 0);
-    bitSt.writeOneFileBit("test.txt", 0, 6, 0);
-    bitSt.writeOneFileBit("test.txt", 0, 7, 0);
+    bitSt.changeOneFileBit("test.txt", 0, 0, 0);
+    bitSt.changeOneFileBit("test.txt", 0, 1, 1);
+    bitSt.changeOneFileBit("test.txt", 0, 2, 1);
+    bitSt.changeOneFileBit("test.txt", 0, 3, 0);
+    bitSt.changeOneFileBit("test.txt", 0, 4, 1);
+    bitSt.changeOneFileBit("test.txt", 0, 5, 0);
+    bitSt.changeOneFileBit("test.txt", 0, 6, 0);
+    bitSt.changeOneFileBit("test.txt", 0, 7, 0);
 
 }
