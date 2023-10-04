@@ -43,6 +43,29 @@ class BitStream {
 
             return bitVector;
         }
+        
+        char readFileChar(int initialBitPosition) {
+            
+            vector<int> charBits = readNFileBit(initialBitPosition, 8);
+
+            char finalChar;
+
+            for (long unsigned int bitIndex = 0; bitIndex < charBits.size(); bitIndex++ ) {
+                finalChar |= 1 << charBits[bitIndex];
+            }
+
+            cout << finalChar;
+
+            return finalChar;
+        }
+        
+/*         string readFileString(int initialBitPosition, int numChars) {
+            for (int charIndex = 0; charIndex < newString.length(); charIndex++) {
+                writeFileChar(newString[charIndex]);
+            }
+            return;
+        } */
+
 
         void writeOneFileBit(int newBit) {
 
@@ -74,6 +97,20 @@ class BitStream {
                 writeOneFileBit(bit);
             }
 
+            return;
+        }
+        
+        void writeFileChar(char newChar) {
+            for (int bitIndex = 0; bitIndex < 8; bitIndex++) {
+                writeOneFileBit(((newChar >> bitIndex) & 1));
+            }
+            return;
+        }
+        
+        void writeFileString(string newString) {
+            for (long unsigned int charIndex = 0; charIndex < newString.length(); charIndex++) {
+                writeFileChar(newString[charIndex]);
+            }
             return;
         }
 
