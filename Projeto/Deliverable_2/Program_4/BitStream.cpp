@@ -45,26 +45,27 @@ class BitStream {
         }
         
         char readFileChar(int initialBitPosition) {
-            
             vector<int> charBits = readNFileBit(initialBitPosition, 8);
-
             char finalChar;
 
-            for (long unsigned int bitIndex = 0; bitIndex < charBits.size(); bitIndex++ ) {
-                finalChar |= 1 << charBits[bitIndex];
+            for (int bitIndex = 7; bitIndex >= 0; bitIndex--) {
+                finalChar |= charBits[7 - bitIndex] << (bitIndex);
             }
-
-            cout << finalChar;
 
             return finalChar;
         }
         
-/*         string readFileString(int initialBitPosition, int numChars) {
-            for (int charIndex = 0; charIndex < newString.length(); charIndex++) {
-                writeFileChar(newString[charIndex]);
+        string readFileString(int initialBitPosition, int numChars) {
+            string output;
+            int nextIndex = initialBitPosition;
+
+            for (int charIndex = 0; charIndex < numChars; charIndex++) {
+                output += readFileChar(nextIndex);
+                nextIndex += 8;
             }
-            return;
-        } */
+
+            return output;
+        }
 
 
         void writeOneFileBit(int newBit) {
@@ -101,7 +102,7 @@ class BitStream {
         }
         
         void writeFileChar(char newChar) {
-            for (int bitIndex = 0; bitIndex < 8; bitIndex++) {
+            for (int bitIndex = 7; bitIndex >= 0; bitIndex--) {
                 writeOneFileBit(((newChar >> bitIndex) & 1));
             }
             return;
@@ -167,7 +168,7 @@ int main() {
     bitSt.writeOneFileBit(0);
     bitSt.writeOneFileBit(0);
 
-    cout << " -> [";
+    cout << " > read: [";
     for (int i = 0; i < 8; i++) {
         cout << bitSt.readOneFileBit(i);
     }
@@ -178,7 +179,7 @@ int main() {
     
     //  Print the bits
     int counter = 0;
-    cout << " -> [";
+    cout << " > read: [";
     for(int i : bits) {
 
         if (counter % 8 == 0 && counter != 0) {
@@ -190,7 +191,20 @@ int main() {
     cout << "] \n";
 
     bitSt.writeNFileBit(bits);
-
     bitSt.close();
 
+
+    BitStream charFiles("inputStrings.txt", "outputStrings.txt");
+
+    charFiles.writeFileChar('P');
+    charFiles.writeFileString("Ramos");
+
+    
+    cout << " > read Char: " << charFiles.readFileChar(0) << "\n";
+    cout << " > read Char: " << charFiles.readFileChar(8) << "\n";
+    cout << " > read Char: " << charFiles.readFileChar(16) << "\n";
+    cout << " > read Char: " << charFiles.readFileChar(24) << "\n";
+    cout << " > read Char: " << charFiles.readFileChar(32) << "\n";
+    cout << " > read String: " << charFiles.readFileString(0, 5) << "\n";
+    charFiles.close();
 }
