@@ -120,7 +120,7 @@ int main() {
         }
     }
 
-    
+
 
     cv::imshow("YUV Image", yuvImage);
     cv::waitKey(0);
@@ -211,20 +211,6 @@ int main() {
     
 
 
-    //Bilateral filter  Update the VERSION argument <min> value or use a ...<max> suffix to tell
-    /*
-    cv::Mat convertedImage;
-    cv::normalize(image, convertedImage, 0, 255, cv::NORM_MINMAX, CV_8U);
-
-    cv::Mat bilateralBlurImg = convertedImage.clone(); // Create a copy of the converted image
-
-    for (int i = 1; i < MAX_KERNEL_LENGTH; i = i + 2) {
-        cv::bilateralFilter(bilateralBlurImg, bilateralBlurImg, i, i*2, i*2);
-        cv::imshow("Bilateral filter effect", bilateralBlurImg);
-        cv::waitKey(DELAY_BLUR);
-    }
-    */
-
    //g)
 
    // Threshold the image using a chosen threshold value
@@ -232,7 +218,6 @@ int main() {
 
     cv::Mat thresholded = image.clone(); // Imagem thresholded
 
-    // Aplicar thresholding manualmente
     // Aplicar thresholding manualmente
    for (int i = 0; i < image.rows; ++i) {
     for (int j = 0; j < image.cols; ++j) {
