@@ -21,23 +21,56 @@ int main(int argc, char* argv[]) {
 
     cv::Mat yuvFrame, rgbFrame;
 
-    while (cap.read(yuvFrame)) {
-        // Mostrar o frame em YUV
-        cv::imshow("Video Player (YUV)", yuvFrame);
-        cv::waitKey(10);
+    cv::Mat yuv;
 
-        // Converter de YUV para RGB
-        cv::cvtColor(yuvFrame, rgbFrame, cv::COLOR_YUV2BGR);
+    cv::Mat yuv444, yuv422, yuv420;
 
-        // Mostrar o frame em RGB
-        cv::imshow("Video Player (RGB)", rgbFrame);
-        cv::waitKey(10);
+    
 
-        if (cv::waitKey(20) == 27) { // Pressione 'Esc' para sair do loop
-            std::cerr << "Video player terminated by user." << std::endl;
-            break;
-        }
+    while (true) {
+    bool read = cap.read(yuvFrame);
+
+    if (!read) {
+        // No more frames to read
+        break;
     }
+
+    cv::cvtColor(yuvFrame, yuvFrame, cv::COLOR_BGR2YUV);
+
+    // Show the frame in YUV
+    cv::imshow("Video Player (YUV)", yuvFrame);
+    cv::waitKey(5);
+
+    yuv444 = yuvFrame.clone();
+    yuv422 = yuvFrame.clone();
+    yuv420 = yuvFrame.clone();
+
+    // 4:2:2 subsampling
+    cv::resize(yuv422, yuv422, cv::Size(), 0.5, 1, cv::INTER_LINEAR);
+    cv::resize(yuv422, yuv422, yuvFrame.size(), 0, 0, cv::INTER_LINEAR);
+
+    cv::imshow("Video Player (YUV mode 4:2:2)", yuv422);
+    cv::waitKey(5);
+
+    // 4:2:0 subsampling
+    cv::resize(yuv420, yuv420, cv::Size(), 0.5, 0.5, cv::INTER_LINEAR);
+    cv::resize(yuv420, yuv420, yuvFrame.size(), 0, 0, cv::INTER_LINEAR);
+
+    cv::imshow("Video Player (YUV mode 4:2:0)", yuv420);
+    cv::waitKey(5);
+
+    // Convert from YUV to RGB
+    cv::cvtColor(yuvFrame, rgbFrame, cv::COLOR_YUV2BGR);
+
+    // Show the frame in RGB
+    cv::imshow("Video Player (RGB)", rgbFrame);
+    cv::waitKey(5);
+
+    if (cv::waitKey(20) == 27) { // Press 'Esc' to exit the loop
+        std::cerr << "Video player terminated by user." << std::endl;
+        break;
+    }
+}
 
     return 0;
 }
