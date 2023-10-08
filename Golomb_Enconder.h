@@ -5,10 +5,11 @@
 #ifndef CSLP_PROJECTS_GOLOMB_ENCONDER_H
 #define CSLP_PROJECTS_GOLOMB_ENCONDER_H
 
-
-class Golomb_Enconder {
-
-};
+#include "stdio.h"
+#include "iostream"
+#include "string"
+#include "vector"
+#include "cmath"
 
 
 #endif //CSLP_PROJECTS_GOLOMB_ENCONDER_H
