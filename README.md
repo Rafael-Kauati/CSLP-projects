@@ -13,6 +13,26 @@
 [![first-timers-only Friendly](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](http://www.firsttimersonly.com/)
 This project does not have test as it would not have passed them, so they were removed
 
+### Huffman enconding basic solution : 
+In golomb enconding (variation from huffman enconding)
+
+represent :
+
+n = 12 with m  = 5;
+
+n -> q = 2(001) and r =2(10)
+
+n --> 00110
+
+
+represent :
+n = 13 with m = 5
+
+n -> q= 2 (001) r = 3(011)
+
+n --> 001110
+
+
 ## Other stuff
 
 Goes here
