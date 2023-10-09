@@ -30,15 +30,15 @@ remainder : 2
 Número original: 6
 Bits codificados: 10010
 
-Cases that still doind bad (for some reason) :
-
 n = 13 with m  = 5
 
 
 quotient : 2
 remainder : 3
 Número original: 13
-Bits codificados: 110010 != 110011
+Bits codificados: 110010
+
+
 
 represent :
 

@@ -29,6 +29,10 @@ private:
         int q = num / m;
         int r = num % m;
 
+        if(r%2!=0){
+            r = ( num  +1 ) % m;
+        }
+
         // Calcular o número de bits necessários para representar m
         int b = static_cast<int>(log2(m));
         int threshold = (1 << b) - m;
