@@ -36,7 +36,7 @@ n = 13 with m  = 5
 quotient : 2
 remainder : 3
 Número original: 13
-Bits codificados: 110010
+Bits codificados: 110011
 
 
 

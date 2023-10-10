@@ -1,10 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include "Golomb.h"
 
-class GolombEnconder {
+class GolombEnconder  : public Golomb {
 public:
-    GolombEnconder(int m) : m(m) {}
+    GolombEnconder(int param) : Golomb(param) {}
 
     // Codificar um número inteiro usando codificação de Golomb
     std::vector<bool> encode(int num) {
@@ -66,12 +67,11 @@ private:
         return code;
     }
 
-    int m; // Parâmetro m para codificação de Golomb
 };
 
 int main() {
     int m = 5;
-    GolombEnconder encoder(m);
+    GolombEnconder encoder( m);
 
     int num = 13;
     std::vector<bool> encodedNumber = encoder.encode(num);
