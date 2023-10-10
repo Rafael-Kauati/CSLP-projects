@@ -10,6 +10,3 @@ find "$directory_to_search" -type f -name "cmake_install.cmake" -delete
 find "$directory_to_search" -type f -name "Makefile" -delete
 
 echo "CMake-related files and directories removed successfully in the specified directory and its subdirectories."
-#!/bin/bash
-
-rm -r CMakeFiles CMakeCache.txt cmake_install.cmake Makefile
