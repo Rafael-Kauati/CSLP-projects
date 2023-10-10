@@ -46,7 +46,7 @@ class BitStream {
         
         char readFileChar(int initialBitPosition) {
             vector<int> charBits = readNFileBit(initialBitPosition, 8);
-            char finalChar;
+            char finalChar = '\0';
 
             for (int bitIndex = 7; bitIndex >= 0; bitIndex--) {
                 finalChar |= charBits[7 - bitIndex] << (bitIndex);
@@ -56,7 +56,7 @@ class BitStream {
         }
         
         string readFileString(int initialBitPosition, int numChars) {
-            string output;
+            string output = "";
             int nextIndex = initialBitPosition;
 
             for (int charIndex = 0; charIndex < numChars; charIndex++) {
@@ -73,18 +73,18 @@ class BitStream {
             if (bufferLen < 7) {
                 bitBuffer[bufferLen] = newBit;
                 bufferLen++;
-                cout << " + inbuf: " << newBit << "\n";
+                /* cout << " + inbuf: " << newBit << "\n"; */
             }
             else {
                 unsigned char byte = 0;
                 bitBuffer[bufferLen] = newBit;
 
-                cout << " - outbuff: ";
+                /* cout << " - outbuff: "; */
                 for (int bitIndex = 0; bitIndex < 8; bitIndex++) {
                     byte |= bitBuffer[bitIndex] << (7 - bitIndex);
-                cout << bitBuffer[bitIndex] << " ";
+                    /* cout << bitBuffer[bitIndex] << " "; */
                 }
-                cout << "\n";
+                /* cout << "\n"; */
 
                 bufferLen = 0;
 
@@ -123,18 +123,18 @@ class BitStream {
                     bitBuffer[bitIndex] = 0;
                 }
 
-                cout << " - outbuff: ";
+                /* cout << " - outbuff: "; */
                 for (int bitIndex = 0; bitIndex < 8; bitIndex++) {
                     byte |= bitBuffer[bitIndex] << (7 - bitIndex);
 
                     if (bitIndex < bufferLen) {
-                        cout << bitBuffer[bitIndex] << " ";
+                        /* cout << bitBuffer[bitIndex] << " "; */
                     }
                     else {
-                        cout << "x ";
+                        /* cout << "x "; */
                     }
                 }
-                cout << "\n";
+                /* cout << "\n"; */
 
                 bufferLen = 0;
                 outputFile << byte;
