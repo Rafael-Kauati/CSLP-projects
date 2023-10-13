@@ -46,7 +46,7 @@ private:
                 binaryCodeRemainder.push_back((r >> i) & 1);
             }
 
-        // Se r >= 2^b - m, codifique o número r + 2^b - m usando b + 1 bits
+            // Se r >= 2^b - m, codifique o número r + 2^b - m usando b + 1 bits
         } else {
             r += (1 << b) - m;
             for (int i = b; i >= 0; --i) {
@@ -70,10 +70,10 @@ private:
 };
 
 int main() {
-    int m = 5;
+    int m = 4;
     GolombEnconder encoder( m);
 
-    int num = 13;
+    int num = 6;
     std::vector<bool> encodedNumber = encoder.encode(num);
 
     std::cout << "Número original: " << num << std::endl;
