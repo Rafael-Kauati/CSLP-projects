@@ -9,13 +9,16 @@
 #include "stdio.h"
 #include "iostream"
 
-class Golomb {
+class GolombParam {
 protected:
     int m;
 
 public:
 
-    Golomb(int param): m(param){ std::cout << "Golomb paramamenter  : "<< m << "\n";};
+    GolombParam(int param): m(param){ std::cout << "Golomb paramamenter  : "<< m << "\n";};
+
+    void set(int param) {m=param;};
+    int  get(int param) {return m;};
 };
 
 

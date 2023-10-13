@@ -1,15 +1,7 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
-#include <string>
-#include "Golomb.h"
-
+#include "GolombDecoder.hpp"
 using namespace std;
 
-class GolombDecoder : public Golomb {
-
-private:
-    int binaryToDecimal(std::string n)
+    int GolombDecoder::binaryToDecimal(std::string n)
     {
         std::string num = n;
         int dec_value = 0;
@@ -26,11 +18,10 @@ private:
 
         return dec_value;
     }
-public:
-    GolombDecoder(int param) : Golomb(param) {}
 
-    std::vector<int> decode(const std::vector<int>& encodedBits) {
-        std::vector<int> decodedValues;
+
+    int GolombDecoder::decode(const std::vector<bool>& encodedBits) {
+        std::vector<bool> decodedValues;
         int n = 0;
         int quotient = 0;
         int remainder = 1;
@@ -56,18 +47,20 @@ public:
         std::cout << "Q value: " << quotient << std::endl;
         std::cout << "R value: " << remainder << std::endl;
 
-        return decodedValues;
+        return decodedValue;
     }
-};
 
+
+/*
 int main() {
-    int m = 5; // Parâmetro Golomb
-    std::vector<int> encodedBits = {1,1,0,0,1,1}; // Valores codificados Golomb
+    int m = 4; // Parâmetro Golomb
+    std::vector<bool> encodedBits = {1,0,1,1}; // Valores codificados Golomb
 
     GolombDecoder decoder(m);
-    std::vector<int> decodedValues = decoder.decode(encodedBits);
+    int decodedValues = decoder.decode(encodedBits);
 
-    std::cout << "Decoded value: " << decodedValues[0] << std::endl;
+    std::cout << "Decoded value: " << decodedValues << std::endl;
 
     return 0;
 }
+*/
