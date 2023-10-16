@@ -15,7 +15,6 @@ public:
     int m;
 
 private:
-    std::vector<bool> golombRemainder(int num);
     std::vector<bool> unaryCode(int num);
 };
 

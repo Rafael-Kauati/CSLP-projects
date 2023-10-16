@@ -5,13 +5,13 @@
 #include <vector>
 #include <string>
 #include <iostream>
-
+#include <cmath>
 class GolombDecoder {
 private:
     int binaryToDecimal(std::string n);
 
 public:
-    GolombDecoder(int param) : m(param) {}
+    GolombDecoder(int param);
 
     int decode(const std::vector<bool>& encodedBits);
 

@@ -1,39 +1,28 @@
 #include "GolombEncoder.hpp"
 
-GolombEncoder::GolombEncoder( int param) :  m(param) {}
+GolombEncoder::GolombEncoder( int param) :  m(param) {
+    if(m <= 0 ){
+        std::cerr<<"Error :  the golomb parameter m should be positive" ;
+    }
+}
 
 std::vector<bool> GolombEncoder::encode(int num) {
     int quotient = num / m;
     int remainder = num % m;
 
-    std::cout << "quotient : " << quotient << std::endl;
-    std::cout << "remainder : " << remainder << std::endl;
-
     std::vector<bool> encodedQuotient = unaryCode(quotient);
-    std::vector<bool> encodedRemainder = golombRemainder(remainder);
+
+    int k = static_cast<int>(ceil(log2(m))); // Calculate the number of bits required to represent m
+    std::vector<bool> encodedRemainder;
+    for (int i = k - 1; i >= 0; --i) {
+        encodedRemainder.push_back((remainder >> i) & 1);
+    }
 
     std::vector<bool> encodedNumber = encodedQuotient;
     encodedNumber.insert(encodedNumber.end(), encodedRemainder.begin(), encodedRemainder.end());
 
     return encodedNumber;
 }
-std::vector<bool> GolombEncoder::golombRemainder(int num) {
-        int q = num / m;
-        int r = num % m;
-
-        std::vector<bool> binaryCodeRemainder;
-        if (num == 0) {
-            binaryCodeRemainder.push_back(0);
-        }
-
-        while (num > 0) {
-            int resto = num % 2;
-            binaryCodeRemainder.insert(binaryCodeRemainder.begin(), resto);
-            num = num / 2;
-        }
-
-        return binaryCodeRemainder;
-    }
 
     // Codificação unária de um número não negativo
     std::vector<bool> GolombEncoder::unaryCode(int num) {
@@ -46,12 +35,13 @@ std::vector<bool> GolombEncoder::golombRemainder(int num) {
     }
 
 
-/*
+    /*
+
 int main() {
-    int m = 4;
+    int m = 5;
     GolombEncoder encoder(m);
 
-    int num = 7;
+    int num = 12;
     std::vector<bool> encodedNumber = encoder.encode(num);
 
     std::cout << "Número original: " << num << std::endl;

@@ -1,5 +1,11 @@
 #include "GolombDecoder.hpp"
 using namespace std;
+GolombDecoder::GolombDecoder(int param)  : m(param){
+    if(m <= 0 ){
+        std::cerr<<"Error :  the golomb parameter m should be positive" ;
+    }
+}
+
 
     int GolombDecoder::binaryToDecimal(std::string n)
     {
@@ -35,7 +41,6 @@ using namespace std;
 
 
         for(int i = n; i < encodedBits.size() ; i ++){
-            std::cout << "num : " << encodedBits[i] << std::endl;
             binValue.append(to_string(encodedBits[i]));
         }
         remainder  = binaryToDecimal(binValue);
@@ -44,8 +49,7 @@ using namespace std;
         int decodedValue = quotient * m + remainder;
         decodedValues.push_back(decodedValue);
 
-        std::cout << "Q value: " << quotient << std::endl;
-        std::cout << "R value: " << remainder << std::endl;
+
 
         return decodedValue;
     }
