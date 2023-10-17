@@ -6,16 +6,18 @@
 #include <iostream>
 #include <cmath>
 
+using namespace std;
+
 class GolombEncoder{
-public:
-    GolombEncoder( int param);
+    public:
+        GolombEncoder( int param);
 
-    std::vector<bool> encode(int num);
+        vector<bool> encode(int num);
 
-    int m;
+        int m;
 
-private:
-    std::vector<bool> unaryCode(int num);
+    private:
+        vector<bool> unaryCode(int num);
 };
 
 #endif // GOLOMBENCODER_HPP

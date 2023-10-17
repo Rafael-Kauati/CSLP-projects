@@ -6,16 +6,19 @@
 #include <string>
 #include <iostream>
 #include <cmath>
+
+using namespace std;
+
 class GolombDecoder {
-private:
-    int binaryToDecimal(std::string n);
+    private:
+        int binaryToDecimal(string n);
 
-public:
-    GolombDecoder(int param);
+    public:
+        GolombDecoder(int param);
 
-    int decode(const std::vector<bool>& encodedBits);
+        int decode(const vector<bool>& encodedBits);
 
-    int m;
+        int m;
 };
 
 #endif // GOLOMBDECODER_HPP

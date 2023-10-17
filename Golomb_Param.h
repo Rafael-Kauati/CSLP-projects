@@ -18,7 +18,7 @@ public:
     GolombParam(int param): m(param){ std::cout << "Golomb paramamenter  : "<< m << "\n";};
 
     void set(int param) {m=param;};
-    int  get(int param) {return m;};
+    int  get() {return m;};
 };
 
 

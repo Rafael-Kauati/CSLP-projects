@@ -7,27 +7,30 @@
 #include "GolombDecoder.hpp"
 #include "GolombEncoder.hpp"
 
+using namespace std;
+
 TEST_CASE("Golomb Encoding and Decoding Test", "[Golomb]") {
     SECTION("Encoding and Decoding with Golomb") {
+        cout << "Initiating variables\n\n";
         int m = 4; // Golomb parameter
         GolombEncoder encoder(m);
         GolombDecoder decoder(m);
 
         // Test multiple values for encoding and decoding
-        std::vector<int> testValues = {7, 12, 3, 19, 8};
+        vector<int> testValues = {7, 12, 3, 19, 8};
 
         for (const auto& num : testValues) {
+            cout << " Testing value: " << num << " ...";
 
-        std::vector<bool> encodedBits = encoder.encode(num);
+            vector<bool> encodedBits = encoder.encode(num);
 
-        std::cout   << "\n";
-        int decodedValues = decoder.decode(encodedBits);
+            int decodedValues = decoder.decode(encodedBits);
 
-        // Ensure the decoded values match the original input
-        REQUIRE(decodedValues == num);
+            // Ensure the decoded values match the original input
+            REQUIRE(decodedValues == num);
+
+            cout << " Success!\n";
 
         }
     }
 }
-/*
- */
