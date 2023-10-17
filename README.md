@@ -11,7 +11,6 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-153-orange.svg?style=flat-square)](#contributors-)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![first-timers-only Friendly](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](http://www.firsttimersonly.com/)
-This project does not have test as it would not have passed them, so they were removed
 
 ### Huffman enconding basic solution : 
 In golomb enconding (variation from huffman enconding)
