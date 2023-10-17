@@ -1,17 +1,19 @@
 #include <opencv4/opencv2/opencv.hpp>
 #include <iostream>
 
-/*! \mainpage
-*/
 /*!
  * @brief Function to solve the Deliverable 1, Program 3 Image Processment operations 
- * Everythin is done with the image (cv::Mat) variable, that represents the original image that will be processed with the code execution
- * For now you should change the global/relative path of the image that u want to be processed
-*/
+ *
+ * This function loads an image and a watermark, applies the watermark to the image, calculates histograms for each channel, 
+ * converts the image to YUV and grayscale, calculates the histogram of the grayscale image, applies histogram equalization, 
+ * applies a Gaussian blur, and applies a threshold.
+ * 
+ * @return int Returns 0 on successful execution, -1 if the image or watermark could not be loaded.
+ */
 
 int main() {
     //! Load the image
-    cv::Mat image = cv::imread("/home/tk/UA/3-ano/cslp/curr-repo/CSLP-projects/Projeto/Image-Editor-Program-3/img.jpg");
+    cv::Mat image = cv::imread("/home/d479/Uni/3ANO/1SEMESTRE/CSLP/CSLP-projects/Projeto/Image-Editor-Program-3/img2.jpg");
     std::cout << "Image Type: " << image.type() << std::endl;
 
 
@@ -21,32 +23,31 @@ int main() {
     }
 
 
-    /*!
-     * @brief a), "Include a watermark into an image" 
-     * The watermark is choosed by the global/relative path of the image file
-    */
-    //! Load the watermark image
-    cv::Mat watermark = cv::imread("/home/tk/UA/3-ano/cslp/curr-repo/CSLP-projects/Projeto/Image-Editor-Program-3/wm.png");
+    // a), "Include a watermark into an image" 
+    // The watermark is choosed by the global/relative path of the image file
+    
+    // Load the watermark image
+    cv::Mat watermark = cv::imread("/home/d479/Uni/3ANO/1SEMESTRE/CSLP/CSLP-projects/Projeto/Image-Editor-Program-3/wm2.jpg");
 
     if (watermark.empty()) {
         std::cerr << "Error: Could not open or find the watermark image." << std::endl;
         return -1;
     }
 
-    /// Define the position of the watermark in the img 
+    // Define the position of the watermark in the img 
     cv::Point watermarkPosition(20, 40);
 
-    /// Pos the watermark onto the main image
+    // Pos the watermark onto the main image
     for (int y = 0; y < watermark.rows; ++y) {
         for (int x = 0; x < watermark.cols; ++x) {
             cv::Vec3b pixel = watermark.at<cv::Vec3b>(y, x);
 
-            /// Check for a non-white pixel (you can adjust the threshold as needed)
+            // Check for a non-white pixel (you can adjust the threshold as needed)
             if (pixel[0] > 200 && pixel[1] > 200 && pixel[2] > 200) {
                 continue; // Skip white pixels
             }
 
-            /// Overlay the pixel onto the main image
+            // Overlay the pixel onto the main image
             int mainImageX = watermarkPosition.x + x;
             int mainImageY = watermarkPosition.y + y;
 
@@ -59,12 +60,12 @@ int main() {
     std::vector<cv::Mat> channels;
     cv::split(image, channels);
 
-    /// Calculate histograms for each channel
-    int histSize = 256; /// Number of bins
-    float range[] = {0, 256}; /// Range of pixel values
+    // Calculate histograms for each channel
+    int histSize = 256; // Number of bins
+    float range[] = {0, 256}; // Range of pixel values
     const float* histRange = {range};
     bool uniform = true;
-    bool accumulate = true; /// or false, depending on your requirement
+    bool accumulate = true; // or false, depending on your requirement
     cv::Mat r_hist, g_hist, b_hist;
 
     cv::calcHist(&channels[2], 1, nullptr, cv::noArray(), r_hist, 1, &histSize, &histRange, uniform, accumulate);
@@ -93,11 +94,11 @@ int main() {
                  cv::Scalar(0, 0, 255), 2, 8, 0);
     }
     
-    ///a)
+    //a)
     cv::imshow("Image with Watermark", image);
     cv::waitKey(0);
 
-    ///b)
+    //b)
     int rows = image.rows;
     int cols = image.cols;
 
@@ -105,17 +106,17 @@ int main() {
 
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
-            /// Extract RGB values
+            // Extract RGB values
             uchar r = image.at<cv::Vec3b>(i, j)[2]; // Red
             uchar g = image.at<cv::Vec3b>(i, j)[1]; // Green
             uchar b = image.at<cv::Vec3b>(i, j)[0]; // Blue
 
-            /// Convert RGB to YUV
+            // Convert RGB to YUV
             uchar y = static_cast<uchar>(0.299 * r + 0.587 * g + 0.114 * b);  // Luma (Y')
             uchar u = static_cast<uchar>(-0.14713 * r - 0.28886 * g + 0.436 * b + 128); // U
             uchar v = static_cast<uchar>(0.615 * r - 0.51499 * g - 0.10001 * b + 128); // V
 
-            /// Set YUV values
+            // Set YUV values
             yuvImage.at<cv::Vec3b>(i, j)[0] = y;
             yuvImage.at<cv::Vec3b>(i, j)[1] = u;
             yuvImage.at<cv::Vec3b>(i, j)[2] = v;
@@ -127,11 +128,11 @@ int main() {
     cv::imshow("YUV Image", yuvImage);
     cv::waitKey(0);
 
-    ///c)
+    //c)
     cv::imshow("Histogram", histImage);
     cv::waitKey(0);
 
-    ///d)
+    //d)
     cv::Mat grayscaleImage(rows, cols, CV_8UC1);
 
     for (int i = 0; i < rows; ++i) {
@@ -153,16 +154,16 @@ int main() {
     //cv::waitKey(0);
 
 
-    ///e)
-    /// Calcular o histograma da imagem de entrada
+    //e)
+    // Calcular o histograma da imagem de entrada
     cv::Mat hist;
     int histsize = 256; // Número de bins no histograma
     float Range[] = {0, 256}; // Range do pixel no histograma
     const float* HistRange = {Range};
     cv::calcHist(&grayscaleImage, 1, 0, cv::Mat(), hist, 1, &histsize, &HistRange, true, false);
 
-    /// Normalizar o histograma acumulado
-    /// Normalizar e equalizar o histograma
+    // Normalizar o histograma acumulado
+    // Normalizar e equalizar o histograma
     cv::Mat cumulativeHist = hist.clone();
     for (int i = 1; i < histsize; ++i) {
         cumulativeHist.at<float>(i) += cumulativeHist.at<float>(i - 1);
@@ -170,7 +171,7 @@ int main() {
     cumulativeHist /= cumulativeHist.at<float>(histsize - 1);
     cumulativeHist *= 255;
 
-    /// Aplicar a equalização ao mapa de intensidade original
+    // Aplicar a equalização ao mapa de intensidade original
     cv::Mat equalizedImage(grayscaleImage.size(), grayscaleImage.type());
     for (int i = 0; i < grayscaleImage.rows; ++i) {
         for (int j = 0; j < grayscaleImage.cols; ++j) {
@@ -178,7 +179,7 @@ int main() {
         }
     }
 
-    /// Mostrar a imagem original e a imagem equalizada
+    // Mostrar a imagem original e a imagem equalizada
     cv::imshow("Default grayscaled image", grayscaleImage);
     cv::waitKey(0);
 

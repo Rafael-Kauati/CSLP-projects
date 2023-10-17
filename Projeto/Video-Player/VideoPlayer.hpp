@@ -15,12 +15,14 @@ public:
     /**
      * @brief Constructs a new VideoPlayer object.
      * 
-     * @param videoPath The path to the video file to be played.
+     * The constructor initializes the OpenCV VideoCapture object.
+     *      * @param videoPath The path to the video file to be played.
      */
     VideoPlayer(const std::string& videoPath);
 
     /**
      * @brief Destroys the VideoPlayer object and releases resources.
+     * The destructor releases the OpenCV VideoCapture object.
      */
     ~VideoPlayer();
 

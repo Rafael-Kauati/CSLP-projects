@@ -4,6 +4,13 @@
 using namespace cv;
 using namespace std;
 
+/**
+ * @brief Main function to read and display a video file.
+ * This function reads a video file frame by frame using the VideoCapture class.
+ * It displays each frame in a window called "MyVideo" until the 'esc' key is pressed.
+ * 
+ * @return 0 if successful, -1 otherwise
+*/
 int main() {
 
     std::string inpVideo = "inpVideo.mp4";

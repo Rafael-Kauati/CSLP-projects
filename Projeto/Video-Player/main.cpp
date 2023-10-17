@@ -4,6 +4,18 @@
 
 using namespace cv;
 
+/**
+ * @brief Main function for video processing
+ * 
+ * This function takes a video file path as an argument, opens the video file, and performs various operations on the video frames.
+ * It converts the frames from BGR to YUV, performs 4:2:2 and 4:2:0 subsampling, and converts the frames back to RGB.
+ * The processed frames are displayed in separate windows.
+ * 
+ * @param argc The number of command-line arguments
+ * @param argv The command-line arguments. argv[1] should be the path to the video file.
+ * 
+ * @return Returns 0 if the function completes successfully. Returns -1 if the number of command-line arguments is not 2 or if the video file could not be opened.
+ */
 int main(int argc, char* argv[]) {
     if (argc != 2) {
         std::cerr << "Usage: " << argv[0] << " <video_file_path>" << std::endl;
