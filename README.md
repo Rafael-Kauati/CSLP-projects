@@ -2,6 +2,18 @@
 ### Our projects for the CSLP class of 23/24
 ---
 
+## Codes do document : 
+
+* Golomb_Decoder.cpp 
+* GolombDecoder.hpp 
+* Golomb_Enconder.cpp 
+* GolombEncoder.hpp
+* Tests.cpp
+
+How to run : cmake . && make && ./GolombCodingTests
+
+
+
 <p align="center">
     <img src="https://codesandbox.io/static/img/banner.png?v=2" height="300px">
 </p>

@@ -55,16 +55,3 @@ GolombDecoder::GolombDecoder(int param)  : m(param){
     }
 
 
-/*
-int main() {
-    int m = 4; // Parâmetro Golomb
-    std::vector<bool> encodedBits = {1,0,1,1}; // Valores codificados Golomb
-
-    GolombDecoder decoder(m);
-    int decodedValues = decoder.decode(encodedBits);
-
-    std::cout << "Decoded value: " << decodedValues << std::endl;
-
-    return 0;
-}
-*/

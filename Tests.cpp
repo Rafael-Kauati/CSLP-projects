@@ -17,13 +17,9 @@ TEST_CASE("Golomb Encoding and Decoding Test", "[Golomb]") {
         std::vector<int> testValues = {7, 12, 3, 19, 8};
 
         for (const auto& num : testValues) {
-            //std::cout << "\nValue: "  << num << std::endl;
 
         std::vector<bool> encodedBits = encoder.encode(num);
-        //std::cout << "\nEnconded values : "  << std::endl;
-        //for(bool b : encodedBits){
-          //  std::cout << b;
-        //}
+
         std::cout   << "\n";
         int decodedValues = decoder.decode(encodedBits);
 

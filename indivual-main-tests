@@ -1,0 +1,29 @@
+int main() {
+    int m = 5;
+    GolombEncoder encoder(m);
+
+    int num = 12;
+    std::vector<bool> encodedNumber = encoder.encode(num);
+
+    std::cout << "Número original: " << num << std::endl;
+    std::cout << "Bits codificados: ";
+    for (bool bit : encodedNumber) {
+        std::cout << bit;
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
+
+
+int main() {
+    int m = 4; // Parâmetro Golomb
+    std::vector<bool> encodedBits = {1,0,1,1}; // Valores codificados Golomb
+
+    GolombDecoder decoder(m);
+    int decodedValues = decoder.decode(encodedBits);
+
+    std::cout << "Decoded value: " << decodedValues << std::endl;
+
+    return 0;
+}
