@@ -6,7 +6,7 @@
 TEST_CASE("Simple test") {
     
     SECTION("Read bits from an input file") {
-        BitStream bitStrm("../input.bin", "../output.bin");
+        BitStream bitStrm("../resources/input.bin", "../resources/output.bin");
 
         REQUIRE(bitStrm.readOneFileBit(0) == 1);
         REQUIRE(bitStrm.readOneFileBit(1) == 0);
@@ -23,7 +23,7 @@ TEST_CASE("Simple test") {
     }
     
     SECTION("Write bits to an output file") {
-        BitStream bitStrm("../input.bin", "../output.bin");
+        BitStream bitStrm("../resources/input.bin", "../resources/output.bin");
         bitStrm.writeOneFileBit(0);
         bitStrm.writeOneFileBit(1);
         bitStrm.writeOneFileBit(0);
@@ -34,7 +34,7 @@ TEST_CASE("Simple test") {
         bitStrm.writeOneFileBit(0);
 
         bitStrm.close();
-        BitStream readTester("../output.bin", "");
+        BitStream readTester("../resources/output.bin", "");
 
         REQUIRE(readTester.readOneFileBit(0) == 0);
         REQUIRE(readTester.readOneFileBit(1) == 1);
@@ -51,11 +51,11 @@ TEST_CASE("Simple test") {
     }
     
     SECTION("Write and read multiple bits to an output file") {
-        BitStream bitStrm("../input.bin", "../output.bin");
+        BitStream bitStrm("../resources/input.bin", "../resources/output.bin");
         bitStrm.writeNFileBit(vector <int> {0, 0, 0, 0, 1, 1, 1, 1});
         bitStrm.close();
 
-        BitStream readTester("../output.bin", "");
+        BitStream readTester("../resources/output.bin", "");
         REQUIRE(readTester.readNFileBit(0, 8) == vector <int> {0, 0, 0, 0, 1, 1, 1, 1});
         readTester.close();
 
@@ -64,11 +64,11 @@ TEST_CASE("Simple test") {
     }
     
     SECTION("Write and read chars") {
-        BitStream bitStrm("../input.bin", "../output.bin");
+        BitStream bitStrm("../resources/input.bin", "../resources/output.bin");
         bitStrm.writeFileChar('R');
         bitStrm.close();
 
-        BitStream readTester("../output.bin", "");
+        BitStream readTester("../resources/output.bin", "");
         REQUIRE(readTester.readFileChar(0) == 'R');
         readTester.close();
 
@@ -77,11 +77,11 @@ TEST_CASE("Simple test") {
     }
     
     SECTION("Write and read strings") {
-        BitStream bitStrm("../input.bin", "../output.bin");
+        BitStream bitStrm("../resources/input.bin", "../resources/output.bin");
         bitStrm.writeFileString("PRamos");
         bitStrm.close();
 
-        BitStream readTester("../output.bin", "");
+        BitStream readTester("../resources/output.bin", "");
         REQUIRE(readTester.readFileString(0, 6) == "PRamos");
         readTester.close();
 
