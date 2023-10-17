@@ -12,7 +12,8 @@ std::vector<bool> GolombEncoder::encode(int num) {
 
     std::vector<bool> encodedQuotient = unaryCode(quotient);
 
-    int k = static_cast<int>(ceil(log2(m))); // Calculate the number of bits required to represent m
+    int k = static_cast<int>(ceil(log2(m)));
+
     std::vector<bool> encodedRemainder;
     for (int i = k - 1; i >= 0; --i) {
         encodedRemainder.push_back((remainder >> i) & 1);
@@ -34,23 +35,3 @@ std::vector<bool> GolombEncoder::encode(int num) {
         return code;
     }
 
-
-    /*
-
-int main() {
-    int m = 5;
-    GolombEncoder encoder(m);
-
-    int num = 12;
-    std::vector<bool> encodedNumber = encoder.encode(num);
-
-    std::cout << "Número original: " << num << std::endl;
-    std::cout << "Bits codificados: ";
-    for (bool bit : encodedNumber) {
-        std::cout << bit;
-    }
-    std::cout << std::endl;
-
-    return 0;
-}
-*/
