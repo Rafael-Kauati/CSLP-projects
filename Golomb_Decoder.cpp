@@ -8,7 +8,14 @@ GolombDecoder::GolombDecoder (int param) : m (param) {
     }
 }
 
-
+/**
+ * @brief Converts a binary string to a decimal integer.
+ *
+ * This method takes a binary string as input and converts it to a decimal integer.
+ *
+ * @param n The binary string to be converted.
+ * @return The decimal integer representation of the binary string.
+ */
 int GolombDecoder::binaryToDecimal(string n) {
     string num = n;
     int dec_value = 0;
@@ -26,7 +33,14 @@ int GolombDecoder::binaryToDecimal(string n) {
     return dec_value;
 }
 
-
+/**
+ * @brief Decodes a sequence of encoded bits.
+ *
+ * This method takes a vector of boolean values representing the encoded bits and decodes them using the Golomb decoding algorithm.
+ *
+ * @param encodedBits The vector of boolean values representing the encoded bits.
+ * @return The decoded integer value.
+ */
 int GolombDecoder::decode(const vector<bool>& encodedBits) {
     vector<bool> decodedValues;
     int n = 0;

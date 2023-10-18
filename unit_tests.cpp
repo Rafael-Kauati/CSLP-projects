@@ -9,8 +9,22 @@
 
 using namespace std;
 
-TEST_CASE("Golomb Encoding and Decoding Test", "[Golomb]") {
-    SECTION("Encoding and Decoding with Golomb") {
+/**
+ * @brief Test case for Golomb Encoding and Decoding.
+ *
+ * This test case verifies the functionality of the GolombEncoder and GolombDecoder classes
+ * by encoding and decoding multiple values and ensuring the decoded values match the original input.
+ */
+TEST_CASE("Golomb Encoding and Decoding Test", "[Golomb]")
+{
+    /**
+     * @brief Encoding and Decoding with Golomb.
+     *
+     * This section initiates variables, creates GolombEncoder and GolombDecoder objects,
+     * and tests multiple values for encoding and decoding.
+     */
+    SECTION("Encoding and Decoding with Golomb")
+    {
         cout << "Initiating variables\n\n";
         int m = 4; // Golomb parameter
         GolombEncoder encoder(m);
@@ -19,7 +33,8 @@ TEST_CASE("Golomb Encoding and Decoding Test", "[Golomb]") {
         // Test multiple values for encoding and decoding
         vector<int> testValues = {7, 12, 3, 19, 8};
 
-        for (const auto& num : testValues) {
+        for (const auto &num : testValues)
+        {
             cout << " Testing value: " << num << " ...";
 
             vector<bool> encodedBits = encoder.encode(num);
@@ -30,7 +45,6 @@ TEST_CASE("Golomb Encoding and Decoding Test", "[Golomb]") {
             REQUIRE(decodedValues == num);
 
             cout << " Success!\n";
-
         }
     }
 }
