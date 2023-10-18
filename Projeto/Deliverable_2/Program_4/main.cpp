@@ -4,7 +4,18 @@
 
 using namespace cv;
 
-
+/**
+ * @brief Main function for video processing
+ * 
+ * \n This function takes a video file path as an argument, opens the video file, and performs various operations on the video frames.
+ * \n It allows the user to choose between RGB and YUV color modes and to set the speed of the video playback.
+ * \n The processed frames are displayed in a window.
+ * 
+ * @param argc The number of command-line arguments
+ * @param argv The command-line arguments. argv[1] should be the path to the video file.
+ * 
+ * @return Returns 0 if the function completes successfully. Returns -1 if the video file could not be opened.
+ */
 int main(int argc, char* argv[]) {
 
     //  Initial variables
