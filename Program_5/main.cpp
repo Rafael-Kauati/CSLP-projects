@@ -4,6 +4,12 @@
 #include <vector>
 #include "../Program_4/BitStream.h"
 
+/**
+ * @brief Main function for testing the BitStream class
+ * This function demonstrates the usage of the BitStream class by performing various operations such as writing and reading bits, chars, and strings from/to binary files.
+ * 
+ * @return 0 if the program executed successfully
+*/
 int main() {
 
     cout << " ---------- Test program for BitStream ----------\n";
