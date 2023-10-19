@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['for_20the_20cslp_20class_20of_202023_202024_0',['### Our projects for the CSLP class of 2023/2024',['../index.html#autotoc_md1',1,'']]]
+  ['encode_0',['encode',['../classGolombEncoder.html#ac2732ec4411b608a7fb4e3a7e6c7a0a4',1,'GolombEncoder']]]
 ];

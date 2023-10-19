@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['video_5fplayer_2ecpp_0',['video_player.cpp',['../video__player_8cpp.html',1,'']]],
-  ['videoplayer_1',['videoplayer',['../classVideoPlayer.html',1,'VideoPlayer'],['../classVideoPlayer.html#aea826424c06bc41e484f44921610801e',1,'VideoPlayer::VideoPlayer()']]],
-  ['videoplayer_2ehpp_2',['VideoPlayer.hpp',['../VideoPlayer_8hpp.html',1,'']]]
+  ['stringify_0',['stringify',['../CMakeCCompilerId_8c.html#a43e1cad902b6477bec893cb6430bd6c8',1,'STRINGIFY:&#160;CMakeCCompilerId.c'],['../CMakeCXXCompilerId_8cpp.html#a43e1cad902b6477bec893cb6430bd6c8',1,'STRINGIFY:&#160;CMakeCXXCompilerId.cpp']]],
+  ['stringify_5fhelper_1',['stringify_helper',['../CMakeCCompilerId_8c.html#a2ae9b72bb13abaabfcf2ee0ba7d3fa1d',1,'STRINGIFY_HELPER:&#160;CMakeCCompilerId.c'],['../CMakeCXXCompilerId_8cpp.html#a2ae9b72bb13abaabfcf2ee0ba7d3fa1d',1,'STRINGIFY_HELPER:&#160;CMakeCXXCompilerId.cpp']]],
+  ['stuff_2',['Other stuff',['../index.html#autotoc_md6',1,'']]]
 ];

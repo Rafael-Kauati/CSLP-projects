@@ -92,7 +92,7 @@ Definition at line \mbox{\hyperlink{Deliverable__2_2Program__5_2tests_2unit__tes
 \DoxyCodeLine{00013\ }
 \DoxyCodeLine{00021\ \ \ \ \ SECTION(\textcolor{stringliteral}{"{}Read\ bits\ from\ an\ input\ file"{}})}
 \DoxyCodeLine{00022\ \ \ \ \ \{}
-\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ bitStrm(\textcolor{stringliteral}{"{}../resources/input.bin"{}},\ \textcolor{stringliteral}{"{}../resources/output.bin"{}});}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ bitStrm(\textcolor{stringliteral}{"{}resources/input.bin"{}},\ \textcolor{stringliteral}{"{}resources/output.bin"{}});}
 \DoxyCodeLine{00024\ }
 \DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ REQUIRE(bitStrm.readOneFileBit(0)\ ==\ 1);}
 \DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ REQUIRE(bitStrm.readOneFileBit(1)\ ==\ 0);}
@@ -110,7 +110,7 @@ Definition at line \mbox{\hyperlink{Deliverable__2_2Program__5_2tests_2unit__tes
 \DoxyCodeLine{00038\ }
 \DoxyCodeLine{00048\ \ \ \ \ SECTION(\textcolor{stringliteral}{"{}Write\ bits\ to\ an\ output\ file"{}})}
 \DoxyCodeLine{00049\ \ \ \ \ \{}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ bitStrm(\textcolor{stringliteral}{"{}../resources/input.bin"{}},\ \textcolor{stringliteral}{"{}../resources/output.bin"{}});}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ bitStrm(\textcolor{stringliteral}{"{}resources/input.bin"{}},\ \textcolor{stringliteral}{"{}resources/output.bin"{}});}
 \DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ bitStrm.writeOneFileBit(0);}
 \DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ bitStrm.writeOneFileBit(1);}
 \DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ bitStrm.writeOneFileBit(0);}
@@ -121,7 +121,7 @@ Definition at line \mbox{\hyperlink{Deliverable__2_2Program__5_2tests_2unit__tes
 \DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ bitStrm.writeOneFileBit(0);}
 \DoxyCodeLine{00059\ }
 \DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ bitStrm.close();}
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ readTester(\textcolor{stringliteral}{"{}../resources/output.bin"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ readTester(\textcolor{stringliteral}{"{}resources/output.bin"{}},\ \textcolor{stringliteral}{"{}"{}});}
 \DoxyCodeLine{00062\ }
 \DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ REQUIRE(readTester.readOneFileBit(0)\ ==\ 0);}
 \DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ REQUIRE(readTester.readOneFileBit(1)\ ==\ 1);}
@@ -139,11 +139,11 @@ Definition at line \mbox{\hyperlink{Deliverable__2_2Program__5_2tests_2unit__tes
 \DoxyCodeLine{00076\ }
 \DoxyCodeLine{00086\ \ \ \ \ SECTION(\textcolor{stringliteral}{"{}Write\ and\ read\ multiple\ bits\ to\ an\ output\ file"{}})}
 \DoxyCodeLine{00087\ \ \ \ \ \{}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ bitStrm(\textcolor{stringliteral}{"{}../resources/input.bin"{}},\ \textcolor{stringliteral}{"{}../resources/output.bin"{}});}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ bitStrm(\textcolor{stringliteral}{"{}resources/input.bin"{}},\ \textcolor{stringliteral}{"{}resources/output.bin"{}});}
 \DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ bitStrm.writeNFileBit(vector<int>\{0,\ 0,\ 0,\ 0,\ 1,\ 1,\ 1,\ 1\});}
 \DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ bitStrm.close();}
 \DoxyCodeLine{00091\ }
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ readTester(\textcolor{stringliteral}{"{}../resources/output.bin"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ readTester(\textcolor{stringliteral}{"{}resources/output.bin"{}},\ \textcolor{stringliteral}{"{}"{}});}
 \DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ REQUIRE(readTester.readNFileBit(0,\ 8)\ ==\ vector<int>\{0,\ 0,\ 0,\ 0,\ 1,\ 1,\ 1,\ 1\});}
 \DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ readTester.close();}
 \DoxyCodeLine{00095\ }
@@ -153,11 +153,11 @@ Definition at line \mbox{\hyperlink{Deliverable__2_2Program__5_2tests_2unit__tes
 \DoxyCodeLine{00099\ }
 \DoxyCodeLine{00109\ \ \ \ \ SECTION(\textcolor{stringliteral}{"{}Write\ and\ read\ chars"{}})}
 \DoxyCodeLine{00110\ \ \ \ \ \{}
-\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ bitStrm(\textcolor{stringliteral}{"{}../resources/input.bin"{}},\ \textcolor{stringliteral}{"{}../resources/output.bin"{}});}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ bitStrm(\textcolor{stringliteral}{"{}resources/input.bin"{}},\ \textcolor{stringliteral}{"{}resources/output.bin"{}});}
 \DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ bitStrm.writeFileChar(\textcolor{charliteral}{'R'});}
 \DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ bitStrm.close();}
 \DoxyCodeLine{00114\ }
-\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ readTester(\textcolor{stringliteral}{"{}../resources/output.bin"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ readTester(\textcolor{stringliteral}{"{}resources/output.bin"{}},\ \textcolor{stringliteral}{"{}"{}});}
 \DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ REQUIRE(readTester.readFileChar(0)\ ==\ \textcolor{charliteral}{'R'});}
 \DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ readTester.close();}
 \DoxyCodeLine{00118\ }
@@ -167,11 +167,11 @@ Definition at line \mbox{\hyperlink{Deliverable__2_2Program__5_2tests_2unit__tes
 \DoxyCodeLine{00122\ }
 \DoxyCodeLine{00132\ \ \ \ \ SECTION(\textcolor{stringliteral}{"{}Write\ and\ read\ strings"{}})}
 \DoxyCodeLine{00133\ \ \ \ \ \{}
-\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ bitStrm(\textcolor{stringliteral}{"{}../resources/input.bin"{}},\ \textcolor{stringliteral}{"{}../resources/output.bin"{}});}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ bitStrm(\textcolor{stringliteral}{"{}resources/input.bin"{}},\ \textcolor{stringliteral}{"{}resources/output.bin"{}});}
 \DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ bitStrm.writeFileString(\textcolor{stringliteral}{"{}PRamos"{}});}
 \DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ bitStrm.close();}
 \DoxyCodeLine{00137\ }
-\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ readTester(\textcolor{stringliteral}{"{}../resources/output.bin"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ readTester(\textcolor{stringliteral}{"{}resources/output.bin"{}},\ \textcolor{stringliteral}{"{}"{}});}
 \DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ REQUIRE(readTester.readFileString(0,\ 6)\ ==\ \textcolor{stringliteral}{"{}PRamos"{}});}
 \DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ readTester.close();}
 \DoxyCodeLine{00141\ }
