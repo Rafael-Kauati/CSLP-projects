@@ -1,0 +1,89 @@
+\doxysection{main.\+cpp}
+\hypertarget{Deliverable__2_2Program__5_2main_8cpp_source}{}\label{Deliverable__2_2Program__5_2main_8cpp_source}\index{Deliverable\_2/Program\_5/main.cpp@{Deliverable\_2/Program\_5/main.cpp}}
+\mbox{\hyperlink{Deliverable__2_2Program__5_2main_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}../Program\_4/BitStream.h"{}}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00013}\mbox{\hyperlink{Deliverable__2_2Program__5_2main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{00013}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{Deliverable__2_2Program__5_2main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00015}00015\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Test\ program\ for\ BitStream\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00016}00016\ \ \ \ \ \textcolor{comment}{//\ \ Initiate\ BitStream\ object}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00017}00017\ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ bitSt(\textcolor{stringliteral}{"{}resources/input.bin"{}},\ \textcolor{stringliteral}{"{}resources/output.bin"{}});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00019}00019\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Write\ One\ bit\ to\ a\ file\ one\ by\ one\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00020}00020\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00021}00021\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00022}00022\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00023}00023\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00024}00024\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00025}00025\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00026}00026\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00027}00027\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00029}00029\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00030}00030\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00031}00031\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00032}00032\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00033}00033\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00034}00034\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00035}00035\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00036}00036\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00038}00038\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ >\ write:\ [10110001]\ [00100100]\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00040}00040\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Read\ the\ bits\ in\ a\ file\ one\ by\ one\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00041}00041\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ >\ read:\ \ ["{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00042}00042\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 8;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00043}00043\ \ \ \ \ \ \ \ \ cout\ <<\ bitSt.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(i);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00044}00044\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00045}00045\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}]\ \(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00047}00047\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Read\ N\ bits\ in\ a\ file\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00048}00048\ \ \ \ \ \textcolor{comment}{//\ \ Get\ all\ bits\ in\ the\ file}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00049}00049\ \ \ \ \ std::vector<int>\ bits\ =\ bitSt.\mbox{\hyperlink{classBitStream_ae3d4beb03845d1ac7bdf500202a689c5}{readNFileBit}}(0,16);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00050}00050\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00051}00051\ \ \ \ \ \textcolor{comment}{//\ \ Print\ the\ bits}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{keywordtype}{int}\ counter\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00053}00053\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ >\ read:\ \ ["{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i\ :\ bits)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (counter\ \%\ 8\ ==\ 0\ \&\&\ counter\ !=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}]\ ["{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00059}00059\ \ \ \ \ \ \ \ \ std::cout\ <<\ i;}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00060}00060\ \ \ \ \ \ \ \ \ counter++;}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00061}00061\ \ \ \ \ \}\ \ \ \ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00062}00062\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}]\ \(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00064}00064\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a7a5fe06c054a3f706e9de07693884f12}{writeNFileBit}}(bits);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00065}00065\ \ \ \ \ bitSt.\mbox{\hyperlink{classBitStream_a17a01273ccc12e3c0a1045a010736a8e}{close}}();}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00068}00068\ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ charFiles(\textcolor{stringliteral}{"{}resources/inputStrings.txt"{}},\ \textcolor{stringliteral}{"{}resources/outputStrings.txt"{}});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00070}00070\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Write\ a\ Char\ to\ a\ file\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00071}00071\ \ \ \ \ charFiles.\mbox{\hyperlink{classBitStream_a84c9b1a85995d2be2239eba694a1790a}{writeFileChar}}(\textcolor{charliteral}{'P'});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00072}00072\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ >\ write:\ 'P'\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00074}00074\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Write\ a\ String\ to\ a\ file\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00075}00075\ \ \ \ \ charFiles.\mbox{\hyperlink{classBitStream_ae84dd3b5d7375c466167a0eb697c578a}{writeFileString}}(\textcolor{stringliteral}{"{}Ramos"{}});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00076}00076\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ >\ write:\ 'Ramos'\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00078}00078\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00079}00079\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Read\ a\ Char\ in\ a\ file\ one\ by\ one\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00080}00080\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ >\ read\ Char:\ "{}}\ <<\ charFiles.\mbox{\hyperlink{classBitStream_a789416651569bb7558d4d941fa10d19a}{readFileChar}}(0)\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00081}00081\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ >\ read\ Char:\ "{}}\ <<\ charFiles.\mbox{\hyperlink{classBitStream_a789416651569bb7558d4d941fa10d19a}{readFileChar}}(8)\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00082}00082\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ >\ read\ Char:\ "{}}\ <<\ charFiles.\mbox{\hyperlink{classBitStream_a789416651569bb7558d4d941fa10d19a}{readFileChar}}(16)\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00083}00083\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ >\ read\ Char:\ "{}}\ <<\ charFiles.\mbox{\hyperlink{classBitStream_a789416651569bb7558d4d941fa10d19a}{readFileChar}}(24)\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00084}00084\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ >\ read\ Char:\ "{}}\ <<\ charFiles.\mbox{\hyperlink{classBitStream_a789416651569bb7558d4d941fa10d19a}{readFileChar}}(32)\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00085}00085\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ >\ read\ Char:\ "{}}\ <<\ charFiles.\mbox{\hyperlink{classBitStream_a789416651569bb7558d4d941fa10d19a}{readFileChar}}(40)\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00086}00086\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Read\ a\ String\ in\ a\ file\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00087}00087\ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ >\ read\ String:\ "{}}\ <<\ charFiles.\mbox{\hyperlink{classBitStream_a983fd95150a9844625e237c9243abd11}{readFileString}}(0,\ 6)\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00088}00088\ \ \ \ \ charFiles.\mbox{\hyperlink{classBitStream_a17a01273ccc12e3c0a1045a010736a8e}{close}}();}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2main_8cpp_source_l00089}00089\ \}}
+
+\end{DoxyCode}

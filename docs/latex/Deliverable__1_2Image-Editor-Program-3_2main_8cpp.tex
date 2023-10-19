@@ -1,0 +1,292 @@
+\doxysection{Deliverable\+\_\+1/\+Image-\/\+Editor-\/\+Program-\/3/main.cpp File Reference}
+\hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp}{}\label{Deliverable__1_2Image-Editor-Program-3_2main_8cpp}\index{Deliverable\_1/Image-\/Editor-\/Program-\/3/main.cpp@{Deliverable\_1/Image-\/Editor-\/Program-\/3/main.cpp}}
+{\ttfamily \#include $<$opencv4/opencv2/opencv.\+hpp$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+Include dependency graph for main.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{Deliverable__1_2Image-Editor-Program-3_2main_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Function to solve the Deliverable 1, Program 3 Image Processment operations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function to solve the Deliverable 1, Program 3 Image Processment operations. 
+
+This function loads an image and a watermark, applies the watermark to the image, calculates histograms for each channel, converts the image to YUV and grayscale, calculates the histogram of the grayscale image, applies histogram equalization, applies a Gaussian blur, and applies a threshold.
+
+\begin{DoxyReturn}{Returns}
+int Returns 0 on successful execution, -\/1 if the image or watermark could not be loaded. 
+\end{DoxyReturn}
+Load the image
+
+f)
+
+Normal blur
+
+Gaussian blur
+
+g)
+
+Threshold the image using a chosen threshold value
+
+Aplicar thresholding manualmente Aplicar thresholding manualmente
+
+Extract RGB values
+
+Aplicar thresholding para cada canal (R, G, B)
+
+Set valores thresholded nos canais R, G, B
+
+Display the original and thresholded images
+
+Definition at line \mbox{\hyperlink{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00014}{14}} of file \mbox{\hyperlink{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source}{main.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ cv::Mat\ image\ =\ cv::imread(\textcolor{stringliteral}{"{}/home/d479/Uni/3ANO/1SEMESTRE/CSLP/CSLP-\/projects/Projeto/Image-\/Editor-\/Program-\/3/img2.jpg"{}});}
+\DoxyCodeLine{00017\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Image\ Type:\ "{}}\ <<\ image.type()\ <<\ std::endl;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordflow}{if}\ (image.empty())\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ Could\ not\ open\ or\ find\ the\ image."{}}\ <<\ std::endl;}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00023\ \ \ \ \ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{comment}{//\ a),\ "{}Include\ a\ watermark\ into\ an\ image"{}\ }}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{//\ The\ watermark\ is\ choosed\ by\ the\ global/relative\ path\ of\ the\ image\ file}}
+\DoxyCodeLine{00028\ \ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//\ Load\ the\ watermark\ image}}
+\DoxyCodeLine{00030\ \ \ \ \ cv::Mat\ watermark\ =\ cv::imread(\textcolor{stringliteral}{"{}/home/d479/Uni/3ANO/1SEMESTRE/CSLP/CSLP-\/projects/Projeto/Image-\/Editor-\/Program-\/3/wm2.jpg"{}});}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{if}\ (watermark.empty())\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ Could\ not\ open\ or\ find\ the\ watermark\ image."{}}\ <<\ std::endl;}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00035\ \ \ \ \ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//\ Define\ the\ position\ of\ the\ watermark\ in\ the\ img\ }}
+\DoxyCodeLine{00038\ \ \ \ \ cv::Point\ watermarkPosition(20,\ 40);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{//\ Pos\ the\ watermark\ onto\ the\ main\ image}}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ y\ =\ 0;\ y\ <\ watermark.rows;\ ++y)\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\ =\ 0;\ x\ <\ watermark.cols;\ ++x)\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ cv::Vec3b\ pixel\ =\ watermark.at<cv::Vec3b>(y,\ x);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ for\ a\ non-\/white\ pixel\ (you\ can\ adjust\ the\ threshold\ as\ needed)}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pixel[0]\ >\ 200\ \&\&\ pixel[1]\ >\ 200\ \&\&\ pixel[2]\ >\ 200)\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ \textcolor{comment}{//\ Skip\ white\ pixels}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Overlay\ the\ pixel\ onto\ the\ main\ image}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ mainImageX\ =\ watermarkPosition.x\ +\ x;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ mainImageY\ =\ watermarkPosition.y\ +\ y;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mainImageX\ >=\ 0\ \&\&\ mainImageX\ <\ image.cols\ \&\&\ mainImageY\ >=\ 0\ \&\&\ mainImageY\ <\ image.rows)\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ image.at<cv::Vec3b>(mainImageY,\ mainImageX)\ =\ pixel;}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ std::vector<cv::Mat>\ channels;}
+\DoxyCodeLine{00061\ \ \ \ \ cv::split(image,\ channels);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{comment}{//\ Calculate\ histograms\ for\ each\ channel}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{int}\ histSize\ =\ 256;\ \textcolor{comment}{//\ Number\ of\ bins}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{float}\ range[]\ =\ \{0,\ 256\};\ \textcolor{comment}{//\ Range\ of\ pixel\ values}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ histRange\ =\ \{range\};}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{bool}\ uniform\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{bool}\ accumulate\ =\ \textcolor{keyword}{true};\ \textcolor{comment}{//\ or\ false,\ depending\ on\ your\ requirement}}
+\DoxyCodeLine{00069\ \ \ \ \ cv::Mat\ r\_hist,\ g\_hist,\ b\_hist;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ cv::calcHist(\&channels[2],\ 1,\ \textcolor{keyword}{nullptr},\ cv::noArray(),\ r\_hist,\ 1,\ \&histSize,\ \&histRange,\ uniform,\ accumulate);}
+\DoxyCodeLine{00072\ \ \ \ \ cv::calcHist(\&channels[1],\ 1,\ \textcolor{keyword}{nullptr},\ cv::noArray(),\ g\_hist,\ 1,\ \&histSize,\ \&histRange,\ uniform,\ accumulate);}
+\DoxyCodeLine{00073\ \ \ \ \ cv::calcHist(\&channels[0],\ 1,\ \textcolor{keyword}{nullptr},\ cv::noArray(),\ b\_hist,\ 1,\ \&histSize,\ \&histRange,\ uniform,\ accumulate);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ cv::normalize(b\_hist,\ b\_hist,\ 0,\ 1,\ cv::NORM\_MINMAX);}
+\DoxyCodeLine{00076\ \ \ \ \ cv::normalize(g\_hist,\ g\_hist,\ 0,\ 1,\ cv::NORM\_MINMAX);}
+\DoxyCodeLine{00077\ \ \ \ \ cv::normalize(r\_hist,\ r\_hist,\ 0,\ 1,\ cv::NORM\_MINMAX);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{int}\ histWidth\ =\ 512;}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{int}\ histHeight\ =\ 400;}
+\DoxyCodeLine{00081\ \ \ \ \ cv::Mat\ histImage(histHeight,\ histWidth,\ CV\_8UC3,\ cv::Scalar(255,\ 255,\ 255));}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{int}\ binWidth\ =\ cvRound((\textcolor{keywordtype}{double})histWidth\ /\ histSize);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ histSize;\ i++)\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ cv::line(histImage,\ cv::Point(binWidth\ *\ (i\ -\/\ 1),\ histHeight\ -\/\ cvRound(b\_hist.at<\textcolor{keywordtype}{float}>(i\ -\/\ 1)\ *\ histHeight)),}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cv::Point(binWidth\ *\ i,\ histHeight\ -\/\ cvRound(b\_hist.at<\textcolor{keywordtype}{float}>(i)\ *\ histHeight)),}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cv::Scalar(255,\ 0,\ 0),\ 2,\ 8,\ 0);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ cv::line(histImage,\ cv::Point(binWidth\ *\ (i\ -\/\ 1),\ histHeight\ -\/\ cvRound(g\_hist.at<\textcolor{keywordtype}{float}>(i\ -\/\ 1)\ *\ histHeight)),}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cv::Point(binWidth\ *\ i,\ histHeight\ -\/\ cvRound(g\_hist.at<\textcolor{keywordtype}{float}>(i)\ *\ histHeight)),}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cv::Scalar(0,\ 255,\ 0),\ 2,\ 8,\ 0);}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ cv::line(histImage,\ cv::Point(binWidth\ *\ (i\ -\/\ 1),\ histHeight\ -\/\ cvRound(r\_hist.at<\textcolor{keywordtype}{float}>(i\ -\/\ 1)\ *\ histHeight)),}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cv::Point(binWidth\ *\ i,\ histHeight\ -\/\ cvRound(r\_hist.at<\textcolor{keywordtype}{float}>(i)\ *\ histHeight)),}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cv::Scalar(0,\ 0,\ 255),\ 2,\ 8,\ 0);}
+\DoxyCodeLine{00095\ \ \ \ \ \}}
+\DoxyCodeLine{00096\ \ \ \ \ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{comment}{//a)}}
+\DoxyCodeLine{00098\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Image\ with\ Watermark"{}},\ image);}
+\DoxyCodeLine{00099\ \ \ \ \ cv::waitKey(0);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{comment}{//b)}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{int}\ rows\ =\ image.rows;}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{int}\ cols\ =\ image.cols;}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ cv::Mat\ yuvImage(rows,\ cols,\ CV\_8UC3);}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ rows;\ ++i)\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ cols;\ ++j)\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ RGB\ values}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ r\ =\ image.at<cv::Vec3b>(i,\ j)[2];\ \textcolor{comment}{//\ Red}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ g\ =\ image.at<cv::Vec3b>(i,\ j)[1];\ \textcolor{comment}{//\ Green}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ b\ =\ image.at<cv::Vec3b>(i,\ j)[0];\ \textcolor{comment}{//\ Blue}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convert\ RGB\ to\ YUV}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ y\ =\ \textcolor{keyword}{static\_cast<}uchar\textcolor{keyword}{>}(0.299\ *\ r\ +\ 0.587\ *\ g\ +\ 0.114\ *\ b);\ \ \textcolor{comment}{//\ Luma\ (Y')}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ u\ =\ \textcolor{keyword}{static\_cast<}uchar\textcolor{keyword}{>}(-\/0.14713\ *\ r\ -\/\ 0.28886\ *\ g\ +\ 0.436\ *\ b\ +\ 128);\ \textcolor{comment}{//\ U}}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ v\ =\ \textcolor{keyword}{static\_cast<}uchar\textcolor{keyword}{>}(0.615\ *\ r\ -\/\ 0.51499\ *\ g\ -\/\ 0.10001\ *\ b\ +\ 128);\ \textcolor{comment}{//\ V}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ YUV\ values}}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ yuvImage.at<cv::Vec3b>(i,\ j)[0]\ =\ y;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ yuvImage.at<cv::Vec3b>(i,\ j)[1]\ =\ u;}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ yuvImage.at<cv::Vec3b>(i,\ j)[2]\ =\ v;}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}YUV\ Image"{}},\ yuvImage);}
+\DoxyCodeLine{00129\ \ \ \ \ cv::waitKey(0);}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{comment}{//c)}}
+\DoxyCodeLine{00132\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Histogram"{}},\ histImage);}
+\DoxyCodeLine{00133\ \ \ \ \ cv::waitKey(0);}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{comment}{//d)}}
+\DoxyCodeLine{00136\ \ \ \ \ cv::Mat\ grayscaleImage(rows,\ cols,\ CV\_8UC1);}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ rows;\ ++i)\ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ cols;\ ++j)\ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ RGB\ values\ \ Update\ the\ VERSION\ argument\ <min>\ value\ or\ use\ a\ ...<max>\ suffix\ to\ tell}}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ r\ =\ image.at<cv::Vec3b>(i,\ j)[2];\ \textcolor{comment}{//\ Red}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ g\ =\ image.at<cv::Vec3b>(i,\ j)[1];\ \textcolor{comment}{//\ Green}}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ b\ =\ image.at<cv::Vec3b>(i,\ j)[0];\ \textcolor{comment}{//\ Blue}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convert\ RGB\ to\ grayscale}}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ gray\ =\ \textcolor{keyword}{static\_cast<}uchar\textcolor{keyword}{>}(0.299\ *\ r\ +\ 0.587\ *\ g\ +\ 0.114\ *\ b);\ \ \textcolor{comment}{//\ Grayscale\ intensity}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ grayscale\ value}}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ grayscaleImage.at<uchar>(i,\ j)\ =\ gray;}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \}}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{comment}{//cv::imshow("{}Grayscale\ Image"{},\ grayscaleImage);}}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{comment}{//cv::waitKey(0);}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{comment}{//e)}}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{comment}{//\ Calcular\ o\ histograma\ da\ imagem\ de\ entrada}}
+\DoxyCodeLine{00159\ \ \ \ \ cv::Mat\ hist;}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordtype}{int}\ histsize\ =\ 256;\ \textcolor{comment}{//\ Número\ de\ bins\ no\ histograma}}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{float}\ Range[]\ =\ \{0,\ 256\};\ \textcolor{comment}{//\ Range\ do\ pixel\ no\ histograma}}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ HistRange\ =\ \{Range\};}
+\DoxyCodeLine{00163\ \ \ \ \ cv::calcHist(\&grayscaleImage,\ 1,\ 0,\ cv::Mat(),\ hist,\ 1,\ \&histsize,\ \&HistRange,\ \textcolor{keyword}{true},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{comment}{//\ Normalizar\ o\ histograma\ acumulado}}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{comment}{//\ Normalizar\ e\ equalizar\ o\ histograma}}
+\DoxyCodeLine{00167\ \ \ \ \ cv::Mat\ cumulativeHist\ =\ hist.clone();}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ histsize;\ ++i)\ \{}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ cumulativeHist.at<\textcolor{keywordtype}{float}>(i)\ +=\ cumulativeHist.at<\textcolor{keywordtype}{float}>(i\ -\/\ 1);}
+\DoxyCodeLine{00170\ \ \ \ \ \}}
+\DoxyCodeLine{00171\ \ \ \ \ cumulativeHist\ /=\ cumulativeHist.at<\textcolor{keywordtype}{float}>(histsize\ -\/\ 1);}
+\DoxyCodeLine{00172\ \ \ \ \ cumulativeHist\ *=\ 255;}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{comment}{//\ Aplicar\ a\ equalização\ ao\ mapa\ de\ intensidade\ original}}
+\DoxyCodeLine{00175\ \ \ \ \ cv::Mat\ equalizedImage(grayscaleImage.size(),\ grayscaleImage.type());}
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ grayscaleImage.rows;\ ++i)\ \{}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ grayscaleImage.cols;\ ++j)\ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ equalizedImage.at<uchar>(i,\ j)\ =\ cv::saturate\_cast<uchar>(cumulativeHist.at<\textcolor{keywordtype}{float}>(grayscaleImage.at<uchar>(i,\ j)));}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00180\ \ \ \ \ \}}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{comment}{//\ Mostrar\ a\ imagem\ original\ e\ a\ imagem\ equalizada}}
+\DoxyCodeLine{00183\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Default\ grayscaled\ image"{}},\ grayscaleImage);}
+\DoxyCodeLine{00184\ \ \ \ \ cv::waitKey(0);}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Equalized\ Grayscale\ Image"{}},\ equalizedImage);}
+\DoxyCodeLine{00187\ \ \ \ \ cv::waitKey(0);}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordtype}{int}\ MAX\_KERNEL\_LENGTH\ =\ 31;}
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keywordtype}{int}\ DELAY\_BLUR\ =\ 100;}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00197\ \ \ \ \ cv::Mat\ blurImg\ =\ image.clone();}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ MAX\_KERNEL\_LENGTH;\ i\ =\ i\ +\ 2)\ \{}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ cv::blur(blurImg,\ blurImg,\ cv::Size(i,\ i),\ cv::Point(-\/1,-\/1));}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Gaussian\ blur\ effect"{}},\ blurImg);}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ cv::waitKey(DELAY\_BLUR);}
+\DoxyCodeLine{00203\ \ \ \ \ \}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \ \ \ cv::Mat\ gaussianedBlurImage\ =\ image.clone();}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ MAX\_KERNEL\_LENGTH;\ i\ =\ i\ +\ 2)\ \{}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ cv::GaussianBlur(gaussianedBlurImage,\ gaussianedBlurImage,\ cv::Size(i,\ i),\ 0,\ 0);}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Gaussian\ blur\ effect\ "{}},\ gaussianedBlurImage);}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ cv::waitKey(DELAY\_BLUR);}
+\DoxyCodeLine{00212\ \ \ \ \ \}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \ \ \ \ }
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00220\ \ \ \ \textcolor{keywordtype}{int}\ thresholdValue\ =\ 128;\ \textcolor{comment}{//\ Limiar\ de\ thresholding}}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \ \ \ \ cv::Mat\ thresholded\ =\ image.clone();\ \textcolor{comment}{//\ Imagem\ thresholded}}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00226\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ image.rows;\ ++i)\ \{}
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ image.cols;\ ++j)\ \{}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ uchar\ r\ =\ image.at<cv::Vec3b>(i,\ j)[2];\ \textcolor{comment}{//\ Red}}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ uchar\ g\ =\ image.at<cv::Vec3b>(i,\ j)[1];\ \textcolor{comment}{//\ Green}}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ uchar\ b\ =\ image.at<cv::Vec3b>(i,\ j)[0];\ \textcolor{comment}{//\ Blue}}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ uchar\ thresholdedR\ =\ (r\ >\ thresholdValue)\ ?\ 255\ :\ 0;}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ uchar\ thresholdedG\ =\ (g\ >\ thresholdValue)\ ?\ 255\ :\ 0;}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ uchar\ thresholdedB\ =\ (b\ >\ thresholdValue)\ ?\ 255\ :\ 0;}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ thresholded.at<cv::Vec3b>(i,\ j)[2]\ =\ thresholdedR;}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ thresholded.at<cv::Vec3b>(i,\ j)[1]\ =\ thresholdedG;}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ thresholded.at<cv::Vec3b>(i,\ j)[0]\ =\ thresholdedB;}
+\DoxyCodeLine{00242\ \ \ \ \ \}}
+\DoxyCodeLine{00243\ \}}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00248\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Thresholded\ Image\ RGB"{}},\ thresholded);}
+\DoxyCodeLine{00249\ \ \ \ \ cv::waitKey(0);}
+\DoxyCodeLine{00250\ \ \ \ \ \textcolor{comment}{//cv::imshow("{}Thresholded\ Image\ GrayScaled"{},\ thresholdImg2);}}
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{comment}{//cv::waitKey(0);}}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00255\ \}}
+
+\end{DoxyCode}

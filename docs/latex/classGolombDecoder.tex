@@ -1,0 +1,145 @@
+\doxysection{Golomb\+Decoder Class Reference}
+\hypertarget{classGolombDecoder}{}\label{classGolombDecoder}\index{GolombDecoder@{GolombDecoder}}
+
+
+A class for decoding Golomb-\/encoded bit sequences.  
+
+
+
+
+{\ttfamily \#include $<$Golomb\+Decoder.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGolombDecoder_aebdde9ddf440c0f3118a60771df60169}{Golomb\+Decoder}} (int param)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classGolombDecoder}{Golomb\+Decoder} object with the specified parameter. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classGolombDecoder_a4b0749daccbf9b74112595218d8f223d}{decode}} (const vector$<$ bool $>$ \&encoded\+Bits)
+\begin{DoxyCompactList}\small\item\em Decodes a sequence of encoded bits. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classGolombDecoder_aae33f35abe2c61a31474d025ac2d2c45}{m}}
+\begin{DoxyCompactList}\small\item\em The value of parameter m used in the Golomb decoding algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class for decoding Golomb-\/encoded bit sequences. 
+
+The \doxylink{classGolombDecoder}{Golomb\+Decoder} class provides methods to decode Golomb-\/encoded bit sequences using the Golomb decoding algorithm. 
+
+Definition at line \mbox{\hyperlink{GolombDecoder_8hpp_source_l00017}{17}} of file \mbox{\hyperlink{GolombDecoder_8hpp_source}{Golomb\+Decoder.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classGolombDecoder_aebdde9ddf440c0f3118a60771df60169}\label{classGolombDecoder_aebdde9ddf440c0f3118a60771df60169} 
+\index{GolombDecoder@{GolombDecoder}!GolombDecoder@{GolombDecoder}}
+\index{GolombDecoder@{GolombDecoder}!GolombDecoder@{GolombDecoder}}
+\doxysubsubsection{\texorpdfstring{GolombDecoder()}{GolombDecoder()}}
+{\footnotesize\ttfamily Golomb\+Decoder\+::\+Golomb\+Decoder (\begin{DoxyParamCaption}\item[{int}]{param }\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classGolombDecoder}{Golomb\+Decoder} object with the specified parameter. 
+
+This constructor initializes a \doxylink{classGolombDecoder}{Golomb\+Decoder} object with the specified parameter value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em param} & The value of the parameter used in the Golomb decoding algorithm. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{Golomb__Decoder_8cpp_source_l00005}{5}} of file \mbox{\hyperlink{Golomb__Decoder_8cpp_source}{Golomb\+\_\+\+Decoder.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00005\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classGolombDecoder_aae33f35abe2c61a31474d025ac2d2c45}{m}}\ (param)\ \{}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{classGolombDecoder_aae33f35abe2c61a31474d025ac2d2c45}{m}}\ <=\ 0\ )\{}
+\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ cerr<<\textcolor{stringliteral}{"{}Error:\ The\ golomb\ parameter\ m\ should\ be\ positive"{}}\ ;}
+\DoxyCodeLine{00008\ \ \ \ \ \}}
+\DoxyCodeLine{00009\ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classGolombDecoder_a4b0749daccbf9b74112595218d8f223d}\label{classGolombDecoder_a4b0749daccbf9b74112595218d8f223d} 
+\index{GolombDecoder@{GolombDecoder}!decode@{decode}}
+\index{decode@{decode}!GolombDecoder@{GolombDecoder}}
+\doxysubsubsection{\texorpdfstring{decode()}{decode()}}
+{\footnotesize\ttfamily int Golomb\+Decoder\+::decode (\begin{DoxyParamCaption}\item[{const vector$<$ bool $>$ \&}]{encoded\+Bits }\end{DoxyParamCaption})}
+
+
+
+Decodes a sequence of encoded bits. 
+
+This method takes a vector of boolean values representing the encoded bits and decodes them using the Golomb decoding algorithm.
+
+
+\begin{DoxyParams}{Parameters}
+{\em encoded\+Bits} & The vector of boolean values representing the encoded bits. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The decoded integer value. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{Golomb__Decoder_8cpp_source_l00044}{44}} of file \mbox{\hyperlink{Golomb__Decoder_8cpp_source}{Golomb\+\_\+\+Decoder.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00045\ \ \ \ \ vector<bool>\ decodedValues;}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ 0;}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{int}\ quotient\ =\ 0;}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{int}\ remainder\ =\ 1;}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{string}\ binValue;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{while}\ (n\ <\ encodedBits.size()\ \&\&\ encodedBits[n]\ ==\ 1)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ quotient++;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ n++;}
+\DoxyCodeLine{00054\ \ \ \ \ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ n++;\ \textcolor{comment}{//\ Skip\ the\ delimiter\ '0'}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i\ =\ n;\ i\ <\ encodedBits.size()\ ;\ i\ ++)\{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ binValue.append(to\_string(encodedBits[i]));}
+\DoxyCodeLine{00060\ \ \ \ \ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ remainder\ \ =\ binaryToDecimal(binValue);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{int}\ decodedValue\ =\ quotient\ *\ \mbox{\hyperlink{classGolombDecoder_aae33f35abe2c61a31474d025ac2d2c45}{m}}\ +\ remainder;}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ decodedValues.push\_back(decodedValue);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordflow}{return}\ decodedValue;}
+\DoxyCodeLine{00069\ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classGolombDecoder_aae33f35abe2c61a31474d025ac2d2c45}\label{classGolombDecoder_aae33f35abe2c61a31474d025ac2d2c45} 
+\index{GolombDecoder@{GolombDecoder}!m@{m}}
+\index{m@{m}!GolombDecoder@{GolombDecoder}}
+\doxysubsubsection{\texorpdfstring{m}{m}}
+{\footnotesize\ttfamily int Golomb\+Decoder\+::m}
+
+
+
+The value of parameter m used in the Golomb decoding algorithm. 
+
+
+
+Definition at line \mbox{\hyperlink{GolombDecoder_8hpp_source_l00050}{50}} of file \mbox{\hyperlink{GolombDecoder_8hpp_source}{Golomb\+Decoder.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Deliverable\+\_\+3/\mbox{\hyperlink{GolombDecoder_8hpp}{Golomb\+Decoder.\+hpp}}\item 
+Deliverable\+\_\+3/\mbox{\hyperlink{Golomb__Decoder_8cpp}{Golomb\+\_\+\+Decoder.\+cpp}}\end{DoxyCompactItemize}

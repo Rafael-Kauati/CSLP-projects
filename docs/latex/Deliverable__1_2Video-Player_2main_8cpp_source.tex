@@ -1,0 +1,82 @@
+\doxysection{main.\+cpp}
+\hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source}{}\label{Deliverable__1_2Video-Player_2main_8cpp_source}\index{Deliverable\_1/Video-\/Player/main.cpp@{Deliverable\_1/Video-\/Player/main.cpp}}
+\mbox{\hyperlink{Deliverable__1_2Video-Player_2main_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <opencv4/opencv2/opencv.hpp>}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <opencv4/opencv2/core.hpp>}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00005}00005\ \textcolor{keyword}{using\ namespace\ }cv;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00019}\mbox{\hyperlink{Deliverable__1_2Video-Player_2main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{00019}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00020}00020\ \ \ \ \ \textcolor{keywordflow}{if}\ (argc\ !=\ 2)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00021}00021\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Usage:\ "{}}\ <<\ argv[0]\ <<\ \textcolor{stringliteral}{"{}\ <video\_file\_path>"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00023}00023\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ videoPath\ =\ argv[1];}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00026}00026\ \ \ \ \ cv::VideoCapture\ cap;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00027}00027\ \ \ \ \ \textcolor{keywordtype}{bool}\ opened\ =\ cap.open(videoPath);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{if}\ (!opened)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00030}00030\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ Video\ file\ not\ found\ or\ could\ not\ be\ opened."{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00032}00032\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00034}00034\ \ \ \ \ cv::Mat\ yuvFrame,\ rgbFrame;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00036}00036\ \ \ \ \ cv::Mat\ yuv;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00038}00038\ \ \ \ \ cv::Mat\ yuv444,\ yuv422,\ yuv420;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00040}00040\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00042}00042\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ read\ =\ cap.read(yuvFrame);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{if}\ (!read)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ No\ more\ frames\ to\ read}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00048}00048\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00050}00050\ \ \ \ \ cv::cvtColor(yuvFrame,\ yuvFrame,\ cv::COLOR\_BGR2YUV);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{comment}{//\ Show\ the\ frame\ in\ YUV}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00053}00053\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Video\ Player\ (YUV)"{}},\ yuvFrame);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00054}00054\ \ \ \ \ cv::waitKey(5);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00056}00056\ \ \ \ \ yuv444\ =\ yuvFrame.clone();}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00057}00057\ \ \ \ \ yuv422\ =\ yuvFrame.clone();}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00058}00058\ \ \ \ \ yuv420\ =\ yuvFrame.clone();}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00060}00060\ \ \ \ \ \textcolor{comment}{//\ 4:2:2\ subsampling}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00061}00061\ \ \ \ \ cv::resize(yuv422,\ yuv422,\ cv::Size(),\ 0.5,\ 1,\ cv::INTER\_LINEAR);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00062}00062\ \ \ \ \ cv::resize(yuv422,\ yuv422,\ yuvFrame.size(),\ 0,\ 0,\ cv::INTER\_LINEAR);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00064}00064\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Video\ Player\ (YUV\ mode\ 4:2:2)"{}},\ yuv422);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00065}00065\ \ \ \ \ cv::waitKey(5);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00067}00067\ \ \ \ \ \textcolor{comment}{//\ 4:2:0\ subsampling}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00068}00068\ \ \ \ \ cv::resize(yuv420,\ yuv420,\ cv::Size(),\ 0.5,\ 0.5,\ cv::INTER\_LINEAR);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00069}00069\ \ \ \ \ cv::resize(yuv420,\ yuv420,\ yuvFrame.size(),\ 0,\ 0,\ cv::INTER\_LINEAR);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00071}00071\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Video\ Player\ (YUV\ mode\ 4:2:0)"{}},\ yuv420);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00072}00072\ \ \ \ \ cv::waitKey(5);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00074}00074\ \ \ \ \ \textcolor{comment}{//\ Convert\ from\ YUV\ to\ RGB}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00075}00075\ \ \ \ \ cv::cvtColor(yuvFrame,\ rgbFrame,\ cv::COLOR\_YUV2BGR);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00077}00077\ \ \ \ \ \textcolor{comment}{//\ Show\ the\ frame\ in\ RGB}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00078}00078\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Video\ Player\ (RGB)"{}},\ rgbFrame);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00079}00079\ \ \ \ \ cv::waitKey(5);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00081}00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (cv::waitKey(20)\ ==\ 27)\ \{\ \textcolor{comment}{//\ Press\ 'Esc'\ to\ exit\ the\ loop}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00082}00082\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Video\ player\ terminated\ by\ user."{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00084}00084\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00085}00085\ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00087}00087\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_source_l00088}00088\ \}}
+
+\end{DoxyCode}
