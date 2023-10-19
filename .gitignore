@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 # Created by https://www.toptal.com/developers/gitignore/api/java,c++
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,c++
+=======
+# Created by https://www.toptal.com/developers/gitignore/api/java,c++,opencv,cmake
+# Edit at https://www.toptal.com/developers/gitignore?templates=java,c++,opencv,cmake
+>>>>>>> deliverable-1
 
 ### C++ ###
 # Prerequisites
@@ -35,6 +40,26 @@
 *.out
 *.app
 
+<<<<<<< HEAD
+=======
+### CMake ###
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+### CMake Patch ###
+# External projects
+*-prefix/
+
+>>>>>>> deliverable-1
 ### Java ###
 # Compiled class file
 *.class
@@ -61,4 +86,20 @@
 hs_err_pid*
 replay_pid*
 
+<<<<<<< HEAD
 # End of https://www.toptal.com/developers/gitignore/api/java,c++
+=======
+### OpenCV ###
+#OpenCV for Mac and Linux
+#build and release folders
+*/CMakeFiles
+*/CMakeCache.txt
+*/Makefile
+*/cmake_install.cmake
+.DS_Store
+
+# End of https://www.toptal.com/developers/gitignore/api/java,c++,opencv,cmake
+
+# Our examples
+Examples_cpp
+>>>>>>> deliverable-1
