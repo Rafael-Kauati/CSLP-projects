@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['_5f_5fhas_5finclude_0',['__has_include',['../CMakeCCompilerId_8c.html#ae5510d82e4946f1656f4969911c54736',1,'__has_include:&#160;CMakeCCompilerId.c'],['../CMakeCXXCompilerId_8cpp.html#ae5510d82e4946f1656f4969911c54736',1,'__has_include:&#160;CMakeCXXCompilerId.cpp']]]
+  ['applyblur_0',['applyBlur',['../Deliverable__1_2Program__3_2main_8cpp.html#a60f40226d3db3264eaa5d75f317e8bda',1,'main.cpp']]],
+  ['applyhistogramequalization_1',['applyHistogramEqualization',['../Deliverable__1_2Program__3_2main_8cpp.html#aef1924aee051f3ad35c8d46c7dbef0e2',1,'main.cpp']]],
+  ['applysegmentation_2',['applySegmentation',['../Deliverable__1_2Program__3_2main_8cpp.html#a51a099542cc87564b7bce4858cfac035',1,'main.cpp']]],
+  ['applywatermark_3',['applyWatermark',['../Deliverable__1_2Program__3_2main_8cpp.html#a4ae57bdd73c47a36da5627c5b575e51f',1,'main.cpp']]],
+  ['applyyuv_4',['applyYuV',['../Deliverable__1_2Program__3_2main_8cpp.html#ace198bec23fdfedfe6c26decb5a79660',1,'main.cpp']]]
 ];

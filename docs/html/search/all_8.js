@@ -1,11 +1,6 @@
 var searchData=
 [
-  ['golomb_5fdecoder_2ecpp_0',['Golomb_Decoder.cpp',['../Golomb__Decoder_8cpp.html',1,'']]],
-  ['golomb_5fenconder_2ecpp_1',['Golomb_Enconder.cpp',['../Golomb__Enconder_8cpp.html',1,'']]],
-  ['golomb_5fparam_2eh_2',['Golomb_Param.h',['../Golomb__Param_8h.html',1,'']]],
-  ['golombdecoder_3',['golombdecoder',['../classGolombDecoder.html',1,'GolombDecoder'],['../classGolombDecoder.html#aebdde9ddf440c0f3118a60771df60169',1,'GolombDecoder::GolombDecoder()']]],
-  ['golombdecoder_2ehpp_4',['GolombDecoder.hpp',['../GolombDecoder_8hpp.html',1,'']]],
-  ['golombencoder_5',['golombencoder',['../classGolombEncoder.html',1,'GolombEncoder'],['../classGolombEncoder.html#aa4a114544929a3903e58eebea0e23920',1,'GolombEncoder::GolombEncoder()']]],
-  ['golombencoder_2ehpp_6',['GolombEncoder.hpp',['../GolombEncoder_8hpp.html',1,'']]],
-  ['grayscaleconversion_7',['grayScaleConversion',['../Deliverable__1_2Program__3_2main_8cpp.html#a2dee8a622dd4abc54ae83c113e168947',1,'main.cpp']]]
+  ['m_0',['m',['../classGolombDecoder.html#aae33f35abe2c61a31474d025ac2d2c45',1,'GolombDecoder::m'],['../classGolombEncoder.html#ad9919a22d0e4c50002f53ecc8c2a1b0f',1,'GolombEncoder::m']]],
+  ['main_1',['main',['../copy__images_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;copy_images.cpp'],['../Deliverable__1_2Program__3_2main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;main.cpp'],['../Deliverable__1_2Video-Player_2main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;main.cpp'],['../Deliverable__2_2Program__5_2main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;main.cpp']]],
+  ['main_2ecpp_2',['main.cpp',['../Deliverable__1_2Program__3_2main_8cpp.html',1,'(Global Namespace)'],['../Deliverable__1_2Video-Player_2main_8cpp.html',1,'(Global Namespace)'],['../Deliverable__2_2Program__5_2main_8cpp.html',1,'(Global Namespace)']]]
 ];

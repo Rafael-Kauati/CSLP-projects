@@ -14,7 +14,27 @@
 
 ## Documentation
 
-Created by [Doxygen](https://www.doxygen.nl/) and available inside every (completed) Deliverable's folder 
+Created by [Doxygen](https://www.doxygen.nl/) and available inside every Deliverable's folder 
+
+### To read the Doxygen Documentation:
+```
+cd Project
+doxygen Doxyfile
+firefox ../docs/html/index.html
+```
+
+### To compile the programs:
+```
+cd Projeto/Deliverable_X/Program_Y
+cmake . && make
+./programName
+```
+
+### To run the unit tests:
+Only some Programs, such as Program_5 and Program_7, have unit tests!
+```
+./unit_tests
+```
 
 ## Other stuff
 
