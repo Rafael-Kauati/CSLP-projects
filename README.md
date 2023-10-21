@@ -12,29 +12,126 @@
 [![PRs Welcome](https://img.shields.io/badge/Completed%20Deliverables-Del%201-orange.svg?style=for-the-badge)](http://makeapullrequest.com)
 [![PRs Welcome](https://img.shields.io/badge/Current%20Deliverables-Del%202%20and%203-blue.svg?style=for-the-badge)](http://makeapullrequest.com)
 
+## Project Structure
+```
+. # <- root
+├── clean.sh
+├── doxy-clean.sh
+├── Examples_cpp
+│   ├── classes-test.cpp
+│   ├── hello_world.cpp
+│   ├── README.md
+│   ├── vectors.cpp
+│   └── vectors.out
+├── Projeto
+│   ├── Deliverable_1
+│   │   ├── deliverable-1-enunciado.txt
+│   │   ├── Program_1
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── copy_images
+│   │   │   ├── copy_images.cpp
+│   │   │   ├── inpImg.jpg
+│   │   │   └── outImg.jpg
+│   │   ├── Program_3
+│   │   │   ├── auto-cmake.sh
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── imgs
+│   │   │   │   ├── ...
+│   │   │   ├── kodak
+│   │   │   │   ├── ...
+│   │   │   ├── main
+│   │   │   ├── main.cpp
+│   │   │   └── vid.mp4
+│   │   └── Video-Player
+│   │       ├── 20230912_140658.mp4
+│   │       ├── CMakeLists.txt
+│   │       ├── main
+│   │       ├── main.cpp
+│   │       ├── run-video-player.sh
+│   │       └── VideoPlayer.hpp
+│   ├── Deliverable_2
+│   │   ├── Program_4
+│   │   │   ├── BitStream.h
+│   │   │   └── test.txt
+│   │   └── Program_5
+│   │       ├── CMakeLists.txt
+│   │       ├── main
+│   │       ├── main.cpp
+│   │       ├── Makefile
+│   │       ├── resources
+│   │       │   ├── ...
+│   │       ├── tests
+│   │       │   ├── Makefile
+│   │       │   ├── output.bin
+│   │       │   ├── unit_tests.cpp
+│   │       │   └── unit_tests.out
+│   │       └── unit_tests
+│   ├── Deliverable_3
+│   │   ├── Program_6
+│   │   │   ├── clean.sh
+│   │   │   ├── Golomb_Decoder.cpp
+│   │   │   ├── GolombDecoder.hpp
+│   │   │   ├── GolombEncoder.hpp
+│   │   │   ├── Golomb_Enconder.cpp
+│   │   │   └── Golomb_Param.h
+│   │   └── Program_7
+│   │       ├── CMakeLists.txt
+│   │       ├── GolombCodingTests
+│   │       ├── tests
+│   │       │   └── unit_tests.cpp
+│   │       └── unit_tests
+│   └── Doxyfile
+├── README.md
+└── week_01
+    └── topics.md
+```
+
 ## Documentation
 
 Created by [Doxygen](https://www.doxygen.nl/) and available inside every Deliverable's folder 
 
 ### To read the Doxygen Documentation:
-```
+```bash
+# assuming you're in the repository's root
 cd Project
 doxygen Doxyfile
 firefox ../docs/html/index.html
 ```
+**Run each command separately** to avoid errors.
 
 ### To compile the programs:
-```
+```bash
+# assuming you're in the repository's root
 cd Projeto/Deliverable_X/Program_Y
 cmake . && make
 ./programName
 ```
 
 ### To run the unit tests:
-Only some Programs, such as Program_5 and Program_7, have unit tests!
-```
+Only some Programs, such as `Program_5` and `Program_7`, have unit tests!
+Make sure you are inside the program's directory before you run the script!
+```bash
+# assuming you're in the program's dir
 ./unit_tests
 ```
+### To clean genereated files:
+After running and testing our programs you can use `clean.sh` to clean cmake auto generated file:
+```bash
+# assuming you're in the repository's root
+./clean.sh
+```
+If you want to clean doxygen auto generated documentation you can run the `doxy-clean.sh` script:
+```bash
+# assuming you're in the repository's root
+./doxy-clean.sh
+```
+
+> **NOTE**
+> If the clean scripts do not work for you try give them execute permission by running:
+> ```bash
+> chmod u+x <clean.sh || doxy-clean.sh> 
+>```
+>_
 
 ## Other stuff
 
