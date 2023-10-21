@@ -1,0 +1,239 @@
+\doxysection{main.\+cpp}
+\hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source}{}\label{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source}\index{Deliverable\_1/Image-\/Editor-\/Program-\/3/main.cpp@{Deliverable\_1/Image-\/Editor-\/Program-\/3/main.cpp}}
+\mbox{\hyperlink{Deliverable__1_2Image-Editor-Program-3_2main_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <opencv4/opencv2/opencv.hpp>}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00014}\mbox{\hyperlink{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{00014}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00016}00016\ \ \ \ \ cv::Mat\ image\ =\ cv::imread(\textcolor{stringliteral}{"{}/home/d479/Uni/3ANO/1SEMESTRE/CSLP/CSLP-\/projects/Projeto/Image-\/Editor-\/Program-\/3/img2.jpg"{}});}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00017}00017\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Image\ Type:\ "{}}\ <<\ image.type()\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00020}00020\ \ \ \ \ \textcolor{keywordflow}{if}\ (image.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00021}00021\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ Could\ not\ open\ or\ find\ the\ image."{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00023}00023\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00026}00026\ \ \ \ \ \textcolor{comment}{//\ a),\ "{}Include\ a\ watermark\ into\ an\ image"{}\ }}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00027}00027\ \ \ \ \ \textcolor{comment}{//\ The\ watermark\ is\ choosed\ by\ the\ global/relative\ path\ of\ the\ image\ file}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00028}00028\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00029}00029\ \ \ \ \ \textcolor{comment}{//\ Load\ the\ watermark\ image}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00030}00030\ \ \ \ \ cv::Mat\ watermark\ =\ cv::imread(\textcolor{stringliteral}{"{}/home/d479/Uni/3ANO/1SEMESTRE/CSLP/CSLP-\/projects/Projeto/Image-\/Editor-\/Program-\/3/wm2.jpg"{}});}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordflow}{if}\ (watermark.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00033}00033\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ Could\ not\ open\ or\ find\ the\ watermark\ image."{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00035}00035\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{comment}{//\ Define\ the\ position\ of\ the\ watermark\ in\ the\ img\ }}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00038}00038\ \ \ \ \ cv::Point\ watermarkPosition(20,\ 40);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00040}00040\ \ \ \ \ \textcolor{comment}{//\ Pos\ the\ watermark\ onto\ the\ main\ image}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00041}00041\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ y\ =\ 0;\ y\ <\ watermark.rows;\ ++y)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\ =\ 0;\ x\ <\ watermark.cols;\ ++x)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ cv::Vec3b\ pixel\ =\ watermark.at<cv::Vec3b>(y,\ x);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ for\ a\ non-\/white\ pixel\ (you\ can\ adjust\ the\ threshold\ as\ needed)}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pixel[0]\ >\ 200\ \&\&\ pixel[1]\ >\ 200\ \&\&\ pixel[2]\ >\ 200)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\ \textcolor{comment}{//\ Skip\ white\ pixels}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Overlay\ the\ pixel\ onto\ the\ main\ image}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ mainImageX\ =\ watermarkPosition.x\ +\ x;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ mainImageY\ =\ watermarkPosition.y\ +\ y;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mainImageX\ >=\ 0\ \&\&\ mainImageX\ <\ image.cols\ \&\&\ mainImageY\ >=\ 0\ \&\&\ mainImageY\ <\ image.rows)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ image.at<cv::Vec3b>(mainImageY,\ mainImageX)\ =\ pixel;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00058}00058\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00060}00060\ \ \ \ \ std::vector<cv::Mat>\ channels;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00061}00061\ \ \ \ \ cv::split(image,\ channels);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00063}00063\ \ \ \ \ \textcolor{comment}{//\ Calculate\ histograms\ for\ each\ channel}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00064}00064\ \ \ \ \ \textcolor{keywordtype}{int}\ histSize\ =\ 256;\ \textcolor{comment}{//\ Number\ of\ bins}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00065}00065\ \ \ \ \ \textcolor{keywordtype}{float}\ range[]\ =\ \{0,\ 256\};\ \textcolor{comment}{//\ Range\ of\ pixel\ values}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00066}00066\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ histRange\ =\ \{range\};}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00067}00067\ \ \ \ \ \textcolor{keywordtype}{bool}\ uniform\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00068}00068\ \ \ \ \ \textcolor{keywordtype}{bool}\ accumulate\ =\ \textcolor{keyword}{true};\ \textcolor{comment}{//\ or\ false,\ depending\ on\ your\ requirement}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00069}00069\ \ \ \ \ cv::Mat\ r\_hist,\ g\_hist,\ b\_hist;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00071}00071\ \ \ \ \ cv::calcHist(\&channels[2],\ 1,\ \textcolor{keyword}{nullptr},\ cv::noArray(),\ r\_hist,\ 1,\ \&histSize,\ \&histRange,\ uniform,\ accumulate);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00072}00072\ \ \ \ \ cv::calcHist(\&channels[1],\ 1,\ \textcolor{keyword}{nullptr},\ cv::noArray(),\ g\_hist,\ 1,\ \&histSize,\ \&histRange,\ uniform,\ accumulate);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00073}00073\ \ \ \ \ cv::calcHist(\&channels[0],\ 1,\ \textcolor{keyword}{nullptr},\ cv::noArray(),\ b\_hist,\ 1,\ \&histSize,\ \&histRange,\ uniform,\ accumulate);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00075}00075\ \ \ \ \ cv::normalize(b\_hist,\ b\_hist,\ 0,\ 1,\ cv::NORM\_MINMAX);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00076}00076\ \ \ \ \ cv::normalize(g\_hist,\ g\_hist,\ 0,\ 1,\ cv::NORM\_MINMAX);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00077}00077\ \ \ \ \ cv::normalize(r\_hist,\ r\_hist,\ 0,\ 1,\ cv::NORM\_MINMAX);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00079}00079\ \ \ \ \ \textcolor{keywordtype}{int}\ histWidth\ =\ 512;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00080}00080\ \ \ \ \ \textcolor{keywordtype}{int}\ histHeight\ =\ 400;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00081}00081\ \ \ \ \ cv::Mat\ histImage(histHeight,\ histWidth,\ CV\_8UC3,\ cv::Scalar(255,\ 255,\ 255));}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00083}00083\ \ \ \ \ \textcolor{keywordtype}{int}\ binWidth\ =\ cvRound((\textcolor{keywordtype}{double})histWidth\ /\ histSize);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ histSize;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00086}00086\ \ \ \ \ \ \ \ \ cv::line(histImage,\ cv::Point(binWidth\ *\ (i\ -\/\ 1),\ histHeight\ -\/\ cvRound(b\_hist.at<\textcolor{keywordtype}{float}>(i\ -\/\ 1)\ *\ histHeight)),}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cv::Point(binWidth\ *\ i,\ histHeight\ -\/\ cvRound(b\_hist.at<\textcolor{keywordtype}{float}>(i)\ *\ histHeight)),}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cv::Scalar(255,\ 0,\ 0),\ 2,\ 8,\ 0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ cv::line(histImage,\ cv::Point(binWidth\ *\ (i\ -\/\ 1),\ histHeight\ -\/\ cvRound(g\_hist.at<\textcolor{keywordtype}{float}>(i\ -\/\ 1)\ *\ histHeight)),}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cv::Point(binWidth\ *\ i,\ histHeight\ -\/\ cvRound(g\_hist.at<\textcolor{keywordtype}{float}>(i)\ *\ histHeight)),}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cv::Scalar(0,\ 255,\ 0),\ 2,\ 8,\ 0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00092}00092\ \ \ \ \ \ \ \ \ cv::line(histImage,\ cv::Point(binWidth\ *\ (i\ -\/\ 1),\ histHeight\ -\/\ cvRound(r\_hist.at<\textcolor{keywordtype}{float}>(i\ -\/\ 1)\ *\ histHeight)),}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cv::Point(binWidth\ *\ i,\ histHeight\ -\/\ cvRound(r\_hist.at<\textcolor{keywordtype}{float}>(i)\ *\ histHeight)),}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cv::Scalar(0,\ 0,\ 255),\ 2,\ 8,\ 0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00095}00095\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00096}00096\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00097}00097\ \ \ \ \ \textcolor{comment}{//a)}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00098}00098\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Image\ with\ Watermark"{}},\ image);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00099}00099\ \ \ \ \ cv::waitKey(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00101}00101\ \ \ \ \ \textcolor{comment}{//b)}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00102}00102\ \ \ \ \ \textcolor{keywordtype}{int}\ rows\ =\ image.rows;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00103}00103\ \ \ \ \ \textcolor{keywordtype}{int}\ cols\ =\ image.cols;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00105}00105\ \ \ \ \ cv::Mat\ yuvImage(rows,\ cols,\ CV\_8UC3);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00107}00107\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ rows;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00108}00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ cols;\ ++j)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ RGB\ values}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ r\ =\ image.at<cv::Vec3b>(i,\ j)[2];\ \textcolor{comment}{//\ Red}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ g\ =\ image.at<cv::Vec3b>(i,\ j)[1];\ \textcolor{comment}{//\ Green}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ b\ =\ image.at<cv::Vec3b>(i,\ j)[0];\ \textcolor{comment}{//\ Blue}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convert\ RGB\ to\ YUV}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ y\ =\ \textcolor{keyword}{static\_cast<}uchar\textcolor{keyword}{>}(0.299\ *\ r\ +\ 0.587\ *\ g\ +\ 0.114\ *\ b);\ \ \textcolor{comment}{//\ Luma\ (Y')}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ u\ =\ \textcolor{keyword}{static\_cast<}uchar\textcolor{keyword}{>}(-\/0.14713\ *\ r\ -\/\ 0.28886\ *\ g\ +\ 0.436\ *\ b\ +\ 128);\ \textcolor{comment}{//\ U}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ v\ =\ \textcolor{keyword}{static\_cast<}uchar\textcolor{keyword}{>}(0.615\ *\ r\ -\/\ 0.51499\ *\ g\ -\/\ 0.10001\ *\ b\ +\ 128);\ \textcolor{comment}{//\ V}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ YUV\ values}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ yuvImage.at<cv::Vec3b>(i,\ j)[0]\ =\ y;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ yuvImage.at<cv::Vec3b>(i,\ j)[1]\ =\ u;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ yuvImage.at<cv::Vec3b>(i,\ j)[2]\ =\ v;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00123}00123\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00124}00124\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00128}00128\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}YUV\ Image"{}},\ yuvImage);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00129}00129\ \ \ \ \ cv::waitKey(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00131}00131\ \ \ \ \ \textcolor{comment}{//c)}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00132}00132\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Histogram"{}},\ histImage);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00133}00133\ \ \ \ \ cv::waitKey(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00135}00135\ \ \ \ \ \textcolor{comment}{//d)}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00136}00136\ \ \ \ \ cv::Mat\ grayscaleImage(rows,\ cols,\ CV\_8UC1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00138}00138\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ rows;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00139}00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ cols;\ ++j)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ RGB\ values\ \ Update\ the\ VERSION\ argument\ <min>\ value\ or\ use\ a\ ...<max>\ suffix\ to\ tell}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ r\ =\ image.at<cv::Vec3b>(i,\ j)[2];\ \textcolor{comment}{//\ Red}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ g\ =\ image.at<cv::Vec3b>(i,\ j)[1];\ \textcolor{comment}{//\ Green}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ b\ =\ image.at<cv::Vec3b>(i,\ j)[0];\ \textcolor{comment}{//\ Blue}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convert\ RGB\ to\ grayscale}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ uchar\ gray\ =\ \textcolor{keyword}{static\_cast<}uchar\textcolor{keyword}{>}(0.299\ *\ r\ +\ 0.587\ *\ g\ +\ 0.114\ *\ b);\ \ \textcolor{comment}{//\ Grayscale\ intensity}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ grayscale\ value}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ grayscaleImage.at<uchar>(i,\ j)\ =\ gray;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00150}00150\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00151}00151\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00153}00153\ \ \ \ \ \textcolor{comment}{//cv::imshow("{}Grayscale\ Image"{},\ grayscaleImage);}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00154}00154\ \ \ \ \ \textcolor{comment}{//cv::waitKey(0);}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00157}00157\ \ \ \ \ \textcolor{comment}{//e)}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00158}00158\ \ \ \ \ \textcolor{comment}{//\ Calcular\ o\ histograma\ da\ imagem\ de\ entrada}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00159}00159\ \ \ \ \ cv::Mat\ hist;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00160}00160\ \ \ \ \ \textcolor{keywordtype}{int}\ histsize\ =\ 256;\ \textcolor{comment}{//\ Número\ de\ bins\ no\ histograma}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00161}00161\ \ \ \ \ \textcolor{keywordtype}{float}\ Range[]\ =\ \{0,\ 256\};\ \textcolor{comment}{//\ Range\ do\ pixel\ no\ histograma}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00162}00162\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}*\ HistRange\ =\ \{Range\};}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00163}00163\ \ \ \ \ cv::calcHist(\&grayscaleImage,\ 1,\ 0,\ cv::Mat(),\ hist,\ 1,\ \&histsize,\ \&HistRange,\ \textcolor{keyword}{true},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00165}00165\ \ \ \ \ \textcolor{comment}{//\ Normalizar\ o\ histograma\ acumulado}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00166}00166\ \ \ \ \ \textcolor{comment}{//\ Normalizar\ e\ equalizar\ o\ histograma}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00167}00167\ \ \ \ \ cv::Mat\ cumulativeHist\ =\ hist.clone();}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00168}00168\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ histsize;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00169}00169\ \ \ \ \ \ \ \ \ cumulativeHist.at<\textcolor{keywordtype}{float}>(i)\ +=\ cumulativeHist.at<\textcolor{keywordtype}{float}>(i\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00170}00170\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00171}00171\ \ \ \ \ cumulativeHist\ /=\ cumulativeHist.at<\textcolor{keywordtype}{float}>(histsize\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00172}00172\ \ \ \ \ cumulativeHist\ *=\ 255;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00174}00174\ \ \ \ \ \textcolor{comment}{//\ Aplicar\ a\ equalização\ ao\ mapa\ de\ intensidade\ original}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00175}00175\ \ \ \ \ cv::Mat\ equalizedImage(grayscaleImage.size(),\ grayscaleImage.type());}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00176}00176\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ grayscaleImage.rows;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00177}00177\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ grayscaleImage.cols;\ ++j)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ equalizedImage.at<uchar>(i,\ j)\ =\ cv::saturate\_cast<uchar>(cumulativeHist.at<\textcolor{keywordtype}{float}>(grayscaleImage.at<uchar>(i,\ j)));}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00179}00179\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00180}00180\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00182}00182\ \ \ \ \ \textcolor{comment}{//\ Mostrar\ a\ imagem\ original\ e\ a\ imagem\ equalizada}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00183}00183\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Default\ grayscaled\ image"{}},\ grayscaleImage);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00184}00184\ \ \ \ \ cv::waitKey(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00186}00186\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Equalized\ Grayscale\ Image"{}},\ equalizedImage);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00187}00187\ \ \ \ \ cv::waitKey(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00193}00193\ \ \ \ \ \textcolor{keywordtype}{int}\ MAX\_KERNEL\_LENGTH\ =\ 31;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00194}00194\ \ \ \ \ \textcolor{keywordtype}{int}\ DELAY\_BLUR\ =\ 100;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00197}00197\ \ \ \ \ cv::Mat\ blurImg\ =\ image.clone();}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00199}00199\ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ MAX\_KERNEL\_LENGTH;\ i\ =\ i\ +\ 2)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00200}00200\ \ \ \ \ \ \ \ \ cv::blur(blurImg,\ blurImg,\ cv::Size(i,\ i),\ cv::Point(-\/1,-\/1));}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00201}00201\ \ \ \ \ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Gaussian\ blur\ effect"{}},\ blurImg);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00202}00202\ \ \ \ \ \ \ \ \ cv::waitKey(DELAY\_BLUR);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00203}00203\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00205}00205\ \ \ \ \ cv::Mat\ gaussianedBlurImage\ =\ image.clone();}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00208}00208\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ MAX\_KERNEL\_LENGTH;\ i\ =\ i\ +\ 2)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00209}00209\ \ \ \ \ \ \ \ \ cv::GaussianBlur(gaussianedBlurImage,\ gaussianedBlurImage,\ cv::Size(i,\ i),\ 0,\ 0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00210}00210\ \ \ \ \ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Gaussian\ blur\ effect\ "{}},\ gaussianedBlurImage);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00211}00211\ \ \ \ \ \ \ \ \ cv::waitKey(DELAY\_BLUR);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00212}00212\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00214}00214\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00220}00220\ \ \ \ \textcolor{keywordtype}{int}\ thresholdValue\ =\ 128;\ \textcolor{comment}{//\ Limiar\ de\ thresholding}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00222}00222\ \ \ \ \ cv::Mat\ thresholded\ =\ image.clone();\ \textcolor{comment}{//\ Imagem\ thresholded}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00223}00223\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00226}00226\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ image.rows;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00227}00227\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ image.cols;\ ++j)\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00229}00229\ \ \ \ \ \ \ \ \ uchar\ r\ =\ image.at<cv::Vec3b>(i,\ j)[2];\ \textcolor{comment}{//\ Red}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00230}00230\ \ \ \ \ \ \ \ \ uchar\ g\ =\ image.at<cv::Vec3b>(i,\ j)[1];\ \textcolor{comment}{//\ Green}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00231}00231\ \ \ \ \ \ \ \ \ uchar\ b\ =\ image.at<cv::Vec3b>(i,\ j)[0];\ \textcolor{comment}{//\ Blue}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00234}00234\ \ \ \ \ \ \ \ \ uchar\ thresholdedR\ =\ (r\ >\ thresholdValue)\ ?\ 255\ :\ 0;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00235}00235\ \ \ \ \ \ \ \ \ uchar\ thresholdedG\ =\ (g\ >\ thresholdValue)\ ?\ 255\ :\ 0;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00236}00236\ \ \ \ \ \ \ \ \ uchar\ thresholdedB\ =\ (b\ >\ thresholdValue)\ ?\ 255\ :\ 0;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00239}00239\ \ \ \ \ \ \ \ \ thresholded.at<cv::Vec3b>(i,\ j)[2]\ =\ thresholdedR;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00240}00240\ \ \ \ \ \ \ \ \ thresholded.at<cv::Vec3b>(i,\ j)[1]\ =\ thresholdedG;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00241}00241\ \ \ \ \ \ \ \ \ thresholded.at<cv::Vec3b>(i,\ j)[0]\ =\ thresholdedB;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00242}00242\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00243}00243\ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00248}00248\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Thresholded\ Image\ RGB"{}},\ thresholded);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00249}00249\ \ \ \ \ cv::waitKey(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00250}00250\ \ \ \ \ \textcolor{comment}{//cv::imshow("{}Thresholded\ Image\ GrayScaled"{},\ thresholdImg2);}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00251}00251\ \ \ \ \ \textcolor{comment}{//cv::waitKey(0);}}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00253}00253\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00254}00254\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{Deliverable__1_2Image-Editor-Program-3_2main_8cpp_source_l00255}00255\ \}}
+
+\end{DoxyCode}

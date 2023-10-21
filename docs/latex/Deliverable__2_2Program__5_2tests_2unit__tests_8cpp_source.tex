@@ -1,0 +1,103 @@
+\doxysection{unit\+\_\+tests.\+cpp}
+\hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source}{}\label{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source}\index{Deliverable\_2/Program\_5/tests/unit\_tests.cpp@{Deliverable\_2/Program\_5/tests/unit\_tests.cpp}}
+\mbox{\hyperlink{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00001}\mbox{\hyperlink{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_a656eb5868e824d59f489f910db438420}{00001}}\ \textcolor{preprocessor}{\#define\ CATCH\_CONFIG\_MAIN}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <catch2/catch.hpp>}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}../../Program\_4/BitStream.h"{}}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00011}\mbox{\hyperlink{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_a1e59512b6e63578d43cdeb7b83bcef25}{00011}}\ \mbox{\hyperlink{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_a1e59512b6e63578d43cdeb7b83bcef25}{TEST\_CASE}}(\textcolor{stringliteral}{"{}Simple\ test"{}})}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00021}00021\ \ \ \ \ SECTION(\textcolor{stringliteral}{"{}Read\ bits\ from\ an\ input\ file"{}})}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00022}00022\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ bitStrm(\textcolor{stringliteral}{"{}resources/input.bin"{}},\ \textcolor{stringliteral}{"{}resources/output.bin"{}});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00025}00025\ \ \ \ \ \ \ \ \ REQUIRE(bitStrm.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(0)\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00026}00026\ \ \ \ \ \ \ \ \ REQUIRE(bitStrm.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(1)\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00027}00027\ \ \ \ \ \ \ \ \ REQUIRE(bitStrm.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(2)\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00028}00028\ \ \ \ \ \ \ \ \ REQUIRE(bitStrm.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(3)\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00029}00029\ \ \ \ \ \ \ \ \ REQUIRE(bitStrm.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(0)\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00030}00030\ \ \ \ \ \ \ \ \ REQUIRE(bitStrm.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(1)\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00031}00031\ \ \ \ \ \ \ \ \ REQUIRE(bitStrm.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(2)\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00032}00032\ \ \ \ \ \ \ \ \ REQUIRE(bitStrm.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(3)\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00034}00034\ \ \ \ \ \ \ \ \ bitStrm.\mbox{\hyperlink{classBitStream_a17a01273ccc12e3c0a1045a010736a8e}{close}}();}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00036}00036\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Single\ Bits\ read\ sucessfully!\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00048}00048\ \ \ \ \ SECTION(\textcolor{stringliteral}{"{}Write\ bits\ to\ an\ output\ file"{}})}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00049}00049\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ bitStrm(\textcolor{stringliteral}{"{}resources/input.bin"{}},\ \textcolor{stringliteral}{"{}resources/output.bin"{}});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00051}00051\ \ \ \ \ \ \ \ \ bitStrm.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00052}00052\ \ \ \ \ \ \ \ \ bitStrm.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ bitStrm.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ bitStrm.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ bitStrm.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ bitStrm.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00057}00057\ \ \ \ \ \ \ \ \ bitStrm.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ bitStrm.\mbox{\hyperlink{classBitStream_a29e73ae4efcbea4760ff966327f03a0d}{writeOneFileBit}}(0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00060}00060\ \ \ \ \ \ \ \ \ bitStrm.\mbox{\hyperlink{classBitStream_a17a01273ccc12e3c0a1045a010736a8e}{close}}();}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ readTester(\textcolor{stringliteral}{"{}resources/output.bin"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00063}00063\ \ \ \ \ \ \ \ \ REQUIRE(readTester.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(0)\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00064}00064\ \ \ \ \ \ \ \ \ REQUIRE(readTester.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(1)\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00065}00065\ \ \ \ \ \ \ \ \ REQUIRE(readTester.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(2)\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ REQUIRE(readTester.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(3)\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ REQUIRE(readTester.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(4)\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ REQUIRE(readTester.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(5)\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ REQUIRE(readTester.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(6)\ ==\ 1);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ REQUIRE(readTester.\mbox{\hyperlink{classBitStream_a259940b56179e7b948ca8a10d3118944}{readOneFileBit}}(7)\ ==\ 0);}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ readTester.\mbox{\hyperlink{classBitStream_a17a01273ccc12e3c0a1045a010736a8e}{close}}();}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Single\ Bits\ written\ sucessfully!\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00075}00075\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00086}00086\ \ \ \ \ SECTION(\textcolor{stringliteral}{"{}Write\ and\ read\ multiple\ bits\ to\ an\ output\ file"{}})}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00087}00087\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ bitStrm(\textcolor{stringliteral}{"{}resources/input.bin"{}},\ \textcolor{stringliteral}{"{}resources/output.bin"{}});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ bitStrm.\mbox{\hyperlink{classBitStream_a7a5fe06c054a3f706e9de07693884f12}{writeNFileBit}}(vector<int>\{0,\ 0,\ 0,\ 0,\ 1,\ 1,\ 1,\ 1\});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00090}00090\ \ \ \ \ \ \ \ \ bitStrm.\mbox{\hyperlink{classBitStream_a17a01273ccc12e3c0a1045a010736a8e}{close}}();}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ readTester(\textcolor{stringliteral}{"{}resources/output.bin"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00093}00093\ \ \ \ \ \ \ \ \ REQUIRE(readTester.\mbox{\hyperlink{classBitStream_ae3d4beb03845d1ac7bdf500202a689c5}{readNFileBit}}(0,\ 8)\ ==\ vector<int>\{0,\ 0,\ 0,\ 0,\ 1,\ 1,\ 1,\ 1\});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ readTester.\mbox{\hyperlink{classBitStream_a17a01273ccc12e3c0a1045a010736a8e}{close}}();}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Multiple\ Bits\ written\ sucessfully!\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00097}00097\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Multiple\ Bits\ read\ sucessfully!\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00098}00098\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00109}00109\ \ \ \ \ SECTION(\textcolor{stringliteral}{"{}Write\ and\ read\ chars"{}})}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00110}00110\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ bitStrm(\textcolor{stringliteral}{"{}resources/input.bin"{}},\ \textcolor{stringliteral}{"{}resources/output.bin"{}});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00112}00112\ \ \ \ \ \ \ \ \ bitStrm.\mbox{\hyperlink{classBitStream_a84c9b1a85995d2be2239eba694a1790a}{writeFileChar}}(\textcolor{charliteral}{'R'});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00113}00113\ \ \ \ \ \ \ \ \ bitStrm.\mbox{\hyperlink{classBitStream_a17a01273ccc12e3c0a1045a010736a8e}{close}}();}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ readTester(\textcolor{stringliteral}{"{}resources/output.bin"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00116}00116\ \ \ \ \ \ \ \ \ REQUIRE(readTester.\mbox{\hyperlink{classBitStream_a789416651569bb7558d4d941fa10d19a}{readFileChar}}(0)\ ==\ \textcolor{charliteral}{'R'});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00117}00117\ \ \ \ \ \ \ \ \ readTester.\mbox{\hyperlink{classBitStream_a17a01273ccc12e3c0a1045a010736a8e}{close}}();}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00119}00119\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Characters\ written\ sucessfully!\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00120}00120\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Characters\ read\ sucessfully!\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00121}00121\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00132}00132\ \ \ \ \ SECTION(\textcolor{stringliteral}{"{}Write\ and\ read\ strings"{}})}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00133}00133\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00134}00134\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ bitStrm(\textcolor{stringliteral}{"{}resources/input.bin"{}},\ \textcolor{stringliteral}{"{}resources/output.bin"{}});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00135}00135\ \ \ \ \ \ \ \ \ bitStrm.\mbox{\hyperlink{classBitStream_ae84dd3b5d7375c466167a0eb697c578a}{writeFileString}}(\textcolor{stringliteral}{"{}PRamos"{}});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00136}00136\ \ \ \ \ \ \ \ \ bitStrm.\mbox{\hyperlink{classBitStream_a17a01273ccc12e3c0a1045a010736a8e}{close}}();}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00138}00138\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBitStream}{BitStream}}\ readTester(\textcolor{stringliteral}{"{}resources/output.bin"{}},\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00139}00139\ \ \ \ \ \ \ \ \ REQUIRE(readTester.\mbox{\hyperlink{classBitStream_a983fd95150a9844625e237c9243abd11}{readFileString}}(0,\ 6)\ ==\ \textcolor{stringliteral}{"{}PRamos"{}});}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00140}00140\ \ \ \ \ \ \ \ \ readTester.\mbox{\hyperlink{classBitStream_a17a01273ccc12e3c0a1045a010736a8e}{close}}();}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00142}00142\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Strings\ written\ sucessfully!\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00143}00143\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Strings\ read\ sucessfully!\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00144}00144\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Deliverable__2_2Program__5_2tests_2unit__tests_8cpp_source_l00145}00145\ \}}
+
+\end{DoxyCode}

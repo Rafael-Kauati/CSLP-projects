@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 2.8)
+project( copy_images )
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+add_executable( copy_images copy_images.cpp )
+target_link_libraries( copy_images ${OpenCV_LIBS} )
