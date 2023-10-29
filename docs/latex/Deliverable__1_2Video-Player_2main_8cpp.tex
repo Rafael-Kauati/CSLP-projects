@@ -1,0 +1,120 @@
+\doxysection{Deliverable\+\_\+1/\+Video-\/\+Player/main.cpp File Reference}
+\hypertarget{Deliverable__1_2Video-Player_2main_8cpp}{}\label{Deliverable__1_2Video-Player_2main_8cpp}\index{Deliverable\_1/Video-\/Player/main.cpp@{Deliverable\_1/Video-\/Player/main.cpp}}
+{\ttfamily \#include $<$opencv4/opencv2/opencv.\+hpp$>$}\newline
+{\ttfamily \#include $<$opencv4/opencv2/core.\+hpp$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+Include dependency graph for main.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Deliverable__1_2Video-Player_2main_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{Deliverable__1_2Video-Player_2main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Main function for video processing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{Deliverable__1_2Video-Player_2main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{Deliverable__1_2Video-Player_2main_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Main function for video processing. 
+
+This function takes a video file path as an argument, opens the video file, and performs various operations on the video frames. It converts the frames from BGR to YUV, performs 4\+:2\+:2 and 4\+:2\+:0 subsampling, and converts the frames back to RGB. The processed frames are displayed in separate windows.
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & The number of command-\/line arguments \\
+\hline
+{\em argv} & The command-\/line arguments. argv\mbox{[}1\mbox{]} should be the path to the video file.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if the function completes successfully. Returns -\/1 if the number of command-\/line arguments is not 2 or if the video file could not be opened. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{Deliverable__1_2Video-Player_2main_8cpp_source_l00019}{19}} of file \mbox{\hyperlink{Deliverable__1_2Video-Player_2main_8cpp_source}{main.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordflow}{if}\ (argc\ !=\ 2)\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Usage:\ "{}}\ <<\ argv[0]\ <<\ \textcolor{stringliteral}{"{}\ <video\_file\_path>"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00023\ \ \ \ \ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ videoPath\ =\ argv[1];}
+\DoxyCodeLine{00026\ \ \ \ \ cv::VideoCapture\ cap;}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{bool}\ opened\ =\ cap.open(videoPath);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{if}\ (!opened)\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ Video\ file\ not\ found\ or\ could\ not\ be\ opened."{}}\ <<\ std::endl;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00032\ \ \ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ cv::Mat\ yuvFrame,\ rgbFrame;}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ cv::Mat\ yuv;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ cv::Mat\ yuv444,\ yuv422,\ yuv420;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ read\ =\ cap.read(yuvFrame);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{if}\ (!read)\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ No\ more\ frames\ to\ read}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ cv::cvtColor(yuvFrame,\ yuvFrame,\ cv::COLOR\_BGR2YUV);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{comment}{//\ Show\ the\ frame\ in\ YUV}}
+\DoxyCodeLine{00053\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Video\ Player\ (YUV)"{}},\ yuvFrame);}
+\DoxyCodeLine{00054\ \ \ \ \ cv::waitKey(5);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ yuv444\ =\ yuvFrame.clone();}
+\DoxyCodeLine{00057\ \ \ \ \ yuv422\ =\ yuvFrame.clone();}
+\DoxyCodeLine{00058\ \ \ \ \ yuv420\ =\ yuvFrame.clone();}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{comment}{//\ 4:2:2\ subsampling}}
+\DoxyCodeLine{00061\ \ \ \ \ cv::resize(yuv422,\ yuv422,\ cv::Size(),\ 0.5,\ 1,\ cv::INTER\_LINEAR);}
+\DoxyCodeLine{00062\ \ \ \ \ cv::resize(yuv422,\ yuv422,\ yuvFrame.size(),\ 0,\ 0,\ cv::INTER\_LINEAR);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Video\ Player\ (YUV\ mode\ 4:2:2)"{}},\ yuv422);}
+\DoxyCodeLine{00065\ \ \ \ \ cv::waitKey(5);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{comment}{//\ 4:2:0\ subsampling}}
+\DoxyCodeLine{00068\ \ \ \ \ cv::resize(yuv420,\ yuv420,\ cv::Size(),\ 0.5,\ 0.5,\ cv::INTER\_LINEAR);}
+\DoxyCodeLine{00069\ \ \ \ \ cv::resize(yuv420,\ yuv420,\ yuvFrame.size(),\ 0,\ 0,\ cv::INTER\_LINEAR);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Video\ Player\ (YUV\ mode\ 4:2:0)"{}},\ yuv420);}
+\DoxyCodeLine{00072\ \ \ \ \ cv::waitKey(5);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{comment}{//\ Convert\ from\ YUV\ to\ RGB}}
+\DoxyCodeLine{00075\ \ \ \ \ cv::cvtColor(yuvFrame,\ rgbFrame,\ cv::COLOR\_YUV2BGR);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{comment}{//\ Show\ the\ frame\ in\ RGB}}
+\DoxyCodeLine{00078\ \ \ \ \ cv::imshow(\textcolor{stringliteral}{"{}Video\ Player\ (RGB)"{}},\ rgbFrame);}
+\DoxyCodeLine{00079\ \ \ \ \ cv::waitKey(5);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (cv::waitKey(20)\ ==\ 27)\ \{\ \textcolor{comment}{//\ Press\ 'Esc'\ to\ exit\ the\ loop}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Video\ player\ terminated\ by\ user."{}}\ <<\ std::endl;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00084\ \ \ \ \ \}}
+\DoxyCodeLine{00085\ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00088\ \}}
+
+\end{DoxyCode}

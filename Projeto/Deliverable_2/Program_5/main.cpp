@@ -82,7 +82,6 @@ int main() {
     cout << " > read Char: " << charFiles.readFileChar() << "\n";
     cout << " > read Char: " << charFiles.readFileChar() << "\n";
     cout << " > read Char: " << charFiles.readFileChar() << "\n";
-    cout << " > read Char: " << charFiles.readFileChar() << "\n";
     charFiles.close();
 
     BitStream stringFiles("resources/inputStrings.txt", "resources/outputStrings.txt");
