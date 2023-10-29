@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/GolombCodingTests.dir/Golomb_Decoder.cpp.o CMakeFiles/GolombCodingTests.dir/Golomb_Enconder.cpp.o -o GolombCodingTests 
