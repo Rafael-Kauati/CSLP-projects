@@ -17,6 +17,8 @@ GolombDecoder::GolombDecoder (int param) : m (param) {
  * @return The decimal integer representation of the binary string.
  */
 int GolombDecoder::binaryToDecimal(string n) {
+
+
     string num = n;
     int dec_value = 0;
 
@@ -42,12 +44,11 @@ int GolombDecoder::binaryToDecimal(string n) {
  * @return The decoded integer value.
  */
 int GolombDecoder::decode(const vector<int>& encodedBits) {
-    vector<int> decodedValues;
-    int n = 0;
     int quotient = 0;
-    int remainder = 1;
-    string binValue;
+    int remainder = 0;
+    int n = 0;
 
+    // Decoding the unary part to find the quotient
     while (n < encodedBits.size() && encodedBits[n] == 1) {
         quotient++;
         n++;
@@ -55,17 +56,26 @@ int GolombDecoder::decode(const vector<int>& encodedBits) {
 
     n++; // Skip the delimiter '0'
 
-    for(int i = n; i < encodedBits.size() ; i ++){
-        binValue.append(to_string(encodedBits[i]));
+    // Decoding the binary part to find the remainder
+    int b = static_cast<int>(floor(log2(m))); // Calculate b as floor(log2(m))
+    string binValue;
+
+    for (int i = 0; i < b; ++i) {
+        binValue += to_string(encodedBits[n]);
+        n++;
     }
 
-    remainder  = binaryToDecimal(binValue);
+    // Check if the decoded remainder needs b+1 bits
+    if (stoi(binValue, nullptr, 2) >= (1 << (b + 1)) - m) {
+        binValue += to_string(encodedBits[n]);
+        n++;
+    }
+
+    remainder = stoi(binValue, nullptr, 2);
 
     int decodedValue = quotient * m + remainder;
-
-    decodedValues.push_back(decodedValue);
-
     return decodedValue;
 }
+
 
 

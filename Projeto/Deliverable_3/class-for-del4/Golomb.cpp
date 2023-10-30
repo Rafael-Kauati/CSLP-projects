@@ -1,9 +1,7 @@
 #include "GolombEncoder.hpp"
 #include "GolombDecoder.hpp"
-#include "BitStreamWithPosition.h"
+#include "BitStream.h"
 #include <string>
-
-
 
 class Golomb {
 public:
@@ -17,7 +15,7 @@ public:
      * @param num The integer to be encoded.
      * @return A vector of boolean values representing the encoded bits.
      */
-    vector<int> encode(int value ) {
+    vector<int> encode(int value) {
         vector<int> encodedBits;
 
         encodedBits = encoder.encode(value);
@@ -42,24 +40,27 @@ public:
      * @param encodedBits The vector of boolean values representing the encoded bits.
      * @return The decoded integer value.
      */
-    int decode(int pos) {
+    int decode()
+    {
          int decodedNumber;
 
-        vector<int> encNumbers = reader.readNFileBit(pos,8);
-        //int num = static_cast<int>(byte);
-        cout << "encNumbers  : " ;
+        //readFileChar
+        vector<int> encNumbers = reader.readNFileBit(8);
 
-        for(int v  : encNumbers){
-            cout <<  v;
-        }
         decodedNumber = decoder.decode(encNumbers);
         std::cout << "\n\nDecoded : " << decodedNumber;
 
         cout<<std::endl;
         cout<<std::endl;
-
         reader.close();
+
         return decodedNumber;
+    }
+
+    void close()
+    {
+        reader.close();
+        writer.close();
     }
 
 

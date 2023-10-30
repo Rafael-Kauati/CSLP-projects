@@ -49,8 +49,8 @@ cmake_ninja_workdir = /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Delivera
 
 build cmake_object_order_depends_target_unit_tests: phony || CMakeFiles/unit_tests.dir
 
-build CMakeFiles/unit_tests.dir/singletest.cpp.o: CXX_COMPILER__unit_tests_unscanned_Debug /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/singletest.cpp || cmake_object_order_depends_target_unit_tests
-  DEP_FILE = CMakeFiles/unit_tests.dir/singletest.cpp.o.d
+build CMakeFiles/unit_tests.dir/unit_tests.cpp.o: CXX_COMPILER__unit_tests_unscanned_Debug /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/unit_tests.cpp || cmake_object_order_depends_target_unit_tests
+  DEP_FILE = CMakeFiles/unit_tests.dir/unit_tests.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/unit_tests.dir
   OBJECT_FILE_DIR = CMakeFiles/unit_tests.dir
@@ -81,7 +81,7 @@ build CMakeFiles/unit_tests.dir/Golomb_Enconder.cpp.o: CXX_COMPILER__unit_tests_
 #############################################
 # Link the executable unit_tests
 
-build unit_tests: CXX_EXECUTABLE_LINKER__unit_tests_Debug CMakeFiles/unit_tests.dir/singletest.cpp.o CMakeFiles/unit_tests.dir/Golomb.cpp.o CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o CMakeFiles/unit_tests.dir/Golomb_Enconder.cpp.o
+build unit_tests: CXX_EXECUTABLE_LINKER__unit_tests_Debug CMakeFiles/unit_tests.dir/unit_tests.cpp.o CMakeFiles/unit_tests.dir/Golomb.cpp.o CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o CMakeFiles/unit_tests.dir/Golomb_Enconder.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/unit_tests.dir
   POST_BUILD = :

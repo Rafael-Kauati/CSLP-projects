@@ -24,24 +24,30 @@ vector<int> GolombEncoder::encode(int num)
     int quotient = num / m;
     int remainder = num % m;
 
+    cout << "Remainder : "<< remainder<<"\n";
+
     vector<int> encodedQuotient = unaryCode(quotient);
     vector<int> encodedRemainder;
 
-    int k = static_cast<int>(ceil(log2(m)));
-    // Array to store binary number
-    vector<int> binaryNum;
+    int b = static_cast<int>(floor(log2(m))); // Calculate b as floor(log2(m))
 
-    // Counter for binary array
-    int i = 0;
-    while (remainder > 0) {
-        binaryNum.push_back(remainder % 2);
-        remainder = remainder / 2;
-        i++;
+    if (remainder < (1 << (b + 1)) - m)
+    {
+        // If remainder < 2^(b+1) - m, code remainder using b bits
+        for (int i = b - 1; i >= 0; --i)
+        {
+            encodedRemainder.push_back((remainder >> i) & 1);
+        }
+    }
+    else
+    {
+        // If remainder >= 2^(b+1) - m, code remainder using b+1 bits
+        for (int i = b; i >= 0; --i)
+        {
+            encodedRemainder.push_back((remainder >> i) & 1);
+        }
     }
 
-    //for (int j = i - 1; j >= 0; j--)
-    //    cout << binaryNum[j];
-    encodedRemainder = binaryNum;
 
     vector<int> encodedNumber = encodedQuotient;
 
@@ -49,6 +55,7 @@ vector<int> GolombEncoder::encode(int num)
 
     return encodedNumber;
 }
+
 
 /**
  * @brief Generates the unary code representation of a non-negative integer.

@@ -1,4 +1,4 @@
-/home/tk/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/tk/.local/share/JetBrains/Toolbox/apps/clion/bin/ninja/linux/x64/ninja -G Ninja -S /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4 -B /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/cmake-build-debug
--- Configuring done (0.0s)
--- Generating done (0.0s)
--- Build files have been written to: /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/cmake-build-debug
+Cannot generate into /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4
+It was created with incompatible generator 'Unix Makefiles'
+
+Please either delete it manually or select another generation directory

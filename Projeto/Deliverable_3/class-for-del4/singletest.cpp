@@ -5,14 +5,15 @@
 #include <iostream>
 using namespace std;
 int main(){
-    Golomb golomb(1, "output.bin", "output.bin");
+    Golomb golomb(4, "output.bin", "output.bin");
 
     std::cout << "Encoded : ";
-    for(int b  : golomb.encode(6)){
+    vector<int> enc= golomb.encode(7);
+    for(int b  : enc){
         std::cout << b ;
     }
 
-    golomb.decode(0);
+    golomb.decode();
 
 
     return 0;

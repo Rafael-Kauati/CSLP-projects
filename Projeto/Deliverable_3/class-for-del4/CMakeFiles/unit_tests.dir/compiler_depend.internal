@@ -3,6 +3,7 @@
 
 CMakeFiles/unit_tests.dir/Golomb.cpp.o
  /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/Golomb.cpp
+ /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/BitStream.h
  /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/GolombDecoder.hpp
  /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/GolombEncoder.hpp
  /usr/include/alloca.h
@@ -87,6 +88,7 @@ CMakeFiles/unit_tests.dir/Golomb.cpp.o
  /usr/include/c++/13.2.1/bits/basic_string.tcc
  /usr/include/c++/13.2.1/bits/char_traits.h
  /usr/include/c++/13.2.1/bits/charconv.h
+ /usr/include/c++/13.2.1/bits/codecvt.h
  /usr/include/c++/13.2.1/bits/concept_check.h
  /usr/include/c++/13.2.1/bits/cpp_type_traits.h
  /usr/include/c++/13.2.1/bits/cxxabi_forced.h
@@ -94,6 +96,7 @@ CMakeFiles/unit_tests.dir/Golomb.cpp.o
  /usr/include/c++/13.2.1/bits/exception.h
  /usr/include/c++/13.2.1/bits/exception_defines.h
  /usr/include/c++/13.2.1/bits/exception_ptr.h
+ /usr/include/c++/13.2.1/bits/fstream.tcc
  /usr/include/c++/13.2.1/bits/functexcept.h
  /usr/include/c++/13.2.1/bits/functional_hash.h
  /usr/include/c++/13.2.1/bits/hash_bytes.h
@@ -155,6 +158,7 @@ CMakeFiles/unit_tests.dir/Golomb.cpp.o
  /usr/include/c++/13.2.1/ext/numeric_traits.h
  /usr/include/c++/13.2.1/ext/string_conversions.h
  /usr/include/c++/13.2.1/ext/type_traits.h
+ /usr/include/c++/13.2.1/fstream
  /usr/include/c++/13.2.1/initializer_list
  /usr/include/c++/13.2.1/ios
  /usr/include/c++/13.2.1/iosfwd
@@ -186,8 +190,10 @@ CMakeFiles/unit_tests.dir/Golomb.cpp.o
  /usr/include/c++/13.2.1/typeinfo
  /usr/include/c++/13.2.1/vector
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/atomic_word.h
+ /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/basic_file.h
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++allocator.h
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++config.h
+ /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++io.h
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++locale.h
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/cpu_defines.h
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/ctype_base.h
@@ -576,6 +582,7 @@ CMakeFiles/unit_tests.dir/Golomb_Enconder.cpp.o
  /usr/include/c++/13.2.1/bits/uses_allocator_args.h
  /usr/include/c++/13.2.1/bits/utility.h
  /usr/include/c++/13.2.1/bits/vector.tcc
+ /usr/include/c++/13.2.1/bitset
  /usr/include/c++/13.2.1/cctype
  /usr/include/c++/13.2.1/cerrno
  /usr/include/c++/13.2.1/clocale
@@ -661,6 +668,7 @@ CMakeFiles/unit_tests.dir/Golomb_Enconder.cpp.o
 
 CMakeFiles/unit_tests.dir/unit_tests.cpp.o
  /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/unit_tests.cpp
+ /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/BitStream.h
  /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/Golomb.cpp
  /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/GolombDecoder.hpp
  /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/GolombEncoder.hpp
