@@ -1,3 +1,4 @@
+#include <bitset>
 #include "GolombEncoder.hpp"
 
 using namespace std;
@@ -18,22 +19,31 @@ GolombEncoder::GolombEncoder(int param) : m(param)
  * @param num The integer to be encoded.
  * @return A vector of boolean values representing the encoded bits.
  */
-vector<bool> GolombEncoder::encode(int num)
+vector<int> GolombEncoder::encode(int num)
 {
     int quotient = num / m;
     int remainder = num % m;
 
-    vector<bool> encodedQuotient = unaryCode(quotient);
-    vector<bool> encodedRemainder;
+    vector<int> encodedQuotient = unaryCode(quotient);
+    vector<int> encodedRemainder;
 
     int k = static_cast<int>(ceil(log2(m)));
+    // Array to store binary number
+    vector<int> binaryNum;
 
-    for (int i = k - 1; i >= 0; --i)
-    {
-        encodedRemainder.push_back((remainder >> i) & 1);
+    // Counter for binary array
+    int i = 0;
+    while (remainder > 0) {
+        binaryNum.push_back(remainder % 2);
+        remainder = remainder / 2;
+        i++;
     }
 
-    vector<bool> encodedNumber = encodedQuotient;
+    //for (int j = i - 1; j >= 0; j--)
+    //    cout << binaryNum[j];
+    encodedRemainder = binaryNum;
+
+    vector<int> encodedNumber = encodedQuotient;
 
     encodedNumber.insert(encodedNumber.end(), encodedRemainder.begin(), encodedRemainder.end());
 
@@ -48,9 +58,9 @@ vector<bool> GolombEncoder::encode(int num)
  * @param num The non-negative integer to be encoded.
  * @return A vector of boolean values representing the unary code.
  */
-vector<bool> GolombEncoder::unaryCode(int num)
+vector<int> GolombEncoder::unaryCode(int num)
 {
-    vector<bool> code;
+    vector<int> code;
 
     for (int i = 0; i < num; ++i)
     {
@@ -58,6 +68,13 @@ vector<bool> GolombEncoder::unaryCode(int num)
     }
 
     code.push_back(0); // Adicionar um 0 no final
+    cout << " Quotient unary " <<  std::endl;
+    for (int i : code)
+    {
+        cout << i;
+    }
+    cout <<  std::endl;
+
 
     return code;
 }

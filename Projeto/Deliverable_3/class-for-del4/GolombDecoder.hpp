@@ -44,7 +44,7 @@ public:
      * @param encodedBits The vector of boolean values representing the encoded bits.
      * @return The decoded integer value.
      */
-    int decode(const vector<bool> &encodedBits);
+    int decode(const vector<int> &encodedBits);
 
     int m; ///< The value of parameter m used in the Golomb decoding algorithm.
 };

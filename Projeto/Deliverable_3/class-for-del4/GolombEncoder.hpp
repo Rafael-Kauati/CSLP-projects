@@ -32,7 +32,7 @@ public:
      * @param num The integer to be encoded.
      * @return A vector of boolean values representing the encoded bits.
      */
-    vector<bool> encode(int num);
+    vector<int> encode(int num);
 
     int m; ///< The value of parameter m used in the Golomb encoding algorithm.
 
@@ -45,7 +45,7 @@ private:
      * @param num The integer to be encoded.
      * @return A vector of boolean values representing the unary code.
      */
-    vector<bool> unaryCode(int num);
+    vector<int> unaryCode(int num);
 };
 
 #endif // GOLOMBENCODER_HPP

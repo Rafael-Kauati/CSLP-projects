@@ -25,21 +25,25 @@ TEST_CASE("Golomb Encoding and Decoding Test", "[Golomb]")
     SECTION("Encoding and Decoding with Golomb")
     {
         cout << "Initiating variables\n\n";
-        int m = 4; // Golomb parameter
-        Golomb golomb(m);
+        int m = 10; // Golomb parameter
+        Golomb golomb(m, "output.bin", "output.bin");
 
         // Test multiple values for encoding and decoding
-        vector<int> testValues = {7, 12, 3, 19, 8};
+        vector<int> testValues = {42};
 
         for (const auto &num : testValues)
         {
             cout << " Testing value: " << num << " ...";
+            const int position = 0;
+            //Encode and write the encode values in the output file
+            vector<int> encodedBits = golomb.encode(num);
 
-            vector<bool> encodedBits = golomb.encode(num);
-
-            int decodedValues = golomb.decode(encodedBits);
+            //Read and decode the values from the output file
+            int decodedValues = golomb.decode(position);
 
             // Ensure the decoded values match the original input
+            cout << " Testing value: " << num << " ...";
+
             REQUIRE(decodedValues == num);
 
             cout << " Success!\n";

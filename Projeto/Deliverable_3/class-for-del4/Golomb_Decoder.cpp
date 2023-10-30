@@ -41,8 +41,8 @@ int GolombDecoder::binaryToDecimal(string n) {
  * @param encodedBits The vector of boolean values representing the encoded bits.
  * @return The decoded integer value.
  */
-int GolombDecoder::decode(const vector<bool>& encodedBits) {
-    vector<bool> decodedValues;
+int GolombDecoder::decode(const vector<int>& encodedBits) {
+    vector<int> decodedValues;
     int n = 0;
     int quotient = 0;
     int remainder = 1;
