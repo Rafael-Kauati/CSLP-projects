@@ -1,5 +1,5 @@
-#ifndef Goulomb_Encoder_HPP
-#define Goulomb_Encoder_HPP
+#ifndef Golomb_Encoder_HPP
+#define Golomb_Encoder_HPP
 
 #include <vector>
 #include <iostream>
@@ -11,18 +11,18 @@ using namespace std;
 /**
  * @brief A class for encoding integers using the Golomb encoding algorithm.
  *
- * The Goulomb_Encoder class provides methods to encode integers using the Golomb encoding algorithm.
+ * The Golomb_Encoder class provides methods to encode integers using the Golomb encoding algorithm.
  */
-class Goulomb_Encoder {
+class Golomb_Encoder {
     public:
         /**
-         * @brief Constructs a Goulomb_Encoder object with the specified parameter.
+         * @brief Constructs a Golomb_Encoder object with the specified parameter.
          *
-         * This constructor initializes a Goulomb_Encoder object with the specified parameter value.
+         * This constructor initializes a Golomb_Encoder object with the specified parameter value.
          *
          * @param param The value of the parameter used in the Golomb encoding algorithm.
          */
-        Goulomb_Encoder(int param, BitStream& newStream);
+        Golomb_Encoder(int param, BitStream& newStream);
 
         /**
          * @brief Encodes an integer using the Golomb encoding algorithm.
@@ -47,4 +47,4 @@ class Goulomb_Encoder {
         void unaryCode(int num);
 };
 
-#endif // Goulomb_Encoder_HPP
+#endif // Golomb_Encoder_HPP

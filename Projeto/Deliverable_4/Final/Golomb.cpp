@@ -1,5 +1,5 @@
-#include "Video_Encoder.hpp"
-#include "Video_Decoder.hpp"
+#include "Golomb_Encoder.hpp"
+#include "Golomb_Decoder.hpp"
 #include "BitStream.h"
 #include <string>
 

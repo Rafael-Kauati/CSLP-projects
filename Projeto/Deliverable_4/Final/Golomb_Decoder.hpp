@@ -1,5 +1,5 @@
-#ifndef Goulomb_Decoder_HPP
-#define Goulomb_Decoder_HPP
+#ifndef Golomb_Decoder_HPP
+#define Golomb_Decoder_HPP
 
 #include <vector>
 #include <string>
@@ -12,18 +12,18 @@ using namespace std;
 /**
  * @brief A class for decoding Golomb-encoded bit sequences.
  *
- * The Goulomb_Decoder class provides methods to decode Golomb-encoded bit sequences using the Golomb decoding algorithm.
+ * The Golomb_Decoder class provides methods to decode Golomb-encoded bit sequences using the Golomb decoding algorithm.
  */
-class Goulomb_Decoder {
+class Golomb_Decoder {
     public:
         /**
-         * @brief Constructs a Goulomb_Decoder object with the specified parameter.
+         * @brief Constructs a Golomb_Decoder object with the specified parameter.
          *
-         * This constructor initializes a Goulomb_Decoder object with the specified parameter value.
+         * This constructor initializes a Golomb_Decoder object with the specified parameter value.
          *
          * @param param The value of the parameter used in the Golomb decoding algorithm.
          */
-        Goulomb_Decoder(int param, BitStream& stream);
+        Golomb_Decoder(int param, BitStream& stream);
 
         /**
          * @brief Decodes a sequence of encoded bits.
@@ -49,4 +49,4 @@ class Goulomb_Decoder {
         int binaryToDecimal(string n);
 };
 
-#endif // Goulomb_Decoder_HPP
+#endif // Golomb_Decoder_HPP

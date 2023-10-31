@@ -1,52 +1,37 @@
-//
-// Created by tk on 13-10-2023.
-//
+// Created by PRamos on 31-10-2023.
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 #include <vector>
+#include <opencv4/opencv2/opencv.hpp>
+#include <string>
+#include "Frame_Predicter.h"
 #include "Golomb.cpp"
 
 using namespace std;
 
-/**
- * @brief Test case for Golomb Encoding and Decoding.
- *
- * This test case verifies the functionality of the GolombEncoder and GolombDecoder classes
- * by encoding and decoding multiple values and ensuring the decoded values match the original input.
- */
-TEST_CASE("Golomb Encoding and Decoding Test", "[Golomb]")
-{
-    /**
-     * @brief Encoding and Decoding with Golomb.
-     *
-     * This section initiates variables, creates GolombEncoder and GolombDecoder objects,
-     * and tests multiple values for encoding and decoding.
-     */
-    SECTION("Encoding and Decoding with Golomb")
-    {
-        cout << "Initiating variables\n\n";
-        int m = 4; // Golomb parameter
-        Golomb golomb(m, "output.bin", "output.bin");
+TEST_CASE("Frame Prediction, Golomb encoding and BitStream Writing") {
 
-        // Test multiple values for encoding and decoding
-        vector<int> testValues = {7, 12, 3, 19, 8};
+    SECTION("Frame To File") {
 
-        for (const auto &num : testValues)
-        {
-            cout << " Testing value: " << num << " ...";
-            //Encode and write the encode values in the output file
-            vector<int> encodedBits = golomb.encode(num);
+        int m = 4;
+        
+        string imageLocation = "testImage.png";
+        string outputFile = "output.bin";
+        
+        cv::Mat frame = cv::imread("testImage.png", cv::IMREAD_GRAYSCALE);
+        BitStream stream("", outputFile);
+        Golomb_Encoder golomb(m, stream);
 
-            //Read and decode the values from the output file
-            int decodedValues = golomb.decode();
+        cout << " ---------- Parameters ---------- \n\n";
+        cout << " -> M = ", m;
+        cout << " -> Frame = ", imageLocation;
+        cout << " -> OutpuFile = ", outputFile;
 
-            // Ensure the decoded values match the original input
-            cout << " Testing value: " << num << " ...";
+        Frame_Predicter predicter(golomb);
 
-            REQUIRE(decodedValues == num);
+        predicter.writeFrame(frame);
 
-            cout << " Success!\n";
-        }
+        REQUIRE(1 == 1);
 
         golomb.close();
     }

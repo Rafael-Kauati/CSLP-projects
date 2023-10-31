@@ -1,9 +1,9 @@
 #include <bitset>
-#include "Goulomb_Encoder.hpp"
+#include "Golomb_Encoder.hpp"
 
 using namespace std;
 
-Goulomb_Encoder::Goulomb_Encoder(int param, BitStream& newStream) : m(param), stream(newStream)
+Golomb_Encoder::Golomb_Encoder(int param, BitStream& newStream) : m(param), stream(newStream)
 {
     if (m <= 0)
     {
@@ -18,11 +18,19 @@ Goulomb_Encoder::Goulomb_Encoder(int param, BitStream& newStream) : m(param), st
  *
  * @return A vector of boolean values representing the encoded bits.
  */
-void Goulomb_Encoder::encode(int num) {
+void Golomb_Encoder::encode(int num) {
+
+    int numberToEncode = 0;
+
+    //  Alter the number to encode to account for negative numbers
+    if (num < 0) {
+        numberToEncode = -2 * num - 1;
+    }
+    else {
+        numberToEncode = 2 * num;
+    }
 
     //  Iterate frame X and Y, encode each pixel and do bitstream write
-
-
     int quotient = num / m;
     int remainder = num % m;
 
@@ -55,7 +63,7 @@ void Goulomb_Encoder::encode(int num) {
  *
  * @param num The non-negative integer to be encoded.
  */
-void Goulomb_Encoder::unaryCode(int num) {
+void Golomb_Encoder::unaryCode(int num) {
     for (int i = 0; i < num; ++i) {
         stream.writeOneFileBit(1);
     }

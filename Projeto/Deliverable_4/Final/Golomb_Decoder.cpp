@@ -1,9 +1,9 @@
-#include "Goulomb_Decoder.hpp"
+#include "Golomb_Decoder.hpp"
 #include "BitStream.h"
 
 using namespace std;
 
-Goulomb_Decoder::Goulomb_Decoder (int param, BitStream& newStream) : m(param), stream(newStream) {
+Golomb_Decoder::Golomb_Decoder (int param, BitStream& newStream) : m(param), stream(newStream) {
     if(m <= 0 ){
         cerr<<"Error: The golomb parameter m should be positive" ;
     }
@@ -16,7 +16,7 @@ Goulomb_Decoder::Goulomb_Decoder (int param, BitStream& newStream) : m(param), s
  *
  * @return The decoded integer value.
  */
-int Goulomb_Decoder::decode(int num_pixels_in_frame) {
+int Golomb_Decoder::decode(int frame_x_size, int frame_y_size) {
     int quotient = 0;
     bool startUnary = 0;
     int remainder = 0;
@@ -85,7 +85,7 @@ int Goulomb_Decoder::decode(int num_pixels_in_frame) {
  * @param n The binary string to be converted.
  * @return The decimal integer representation of the binary string.
  */
-int Goulomb_Decoder::binaryToDecimal(string n) {
+int Golomb_Decoder::binaryToDecimal(string n) {
 
 
     string num = n;
