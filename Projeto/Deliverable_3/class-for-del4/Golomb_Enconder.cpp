@@ -53,7 +53,34 @@ vector<int> GolombEncoder::encode(int num)
 
     encodedNumber.insert(encodedNumber.end(), encodedRemainder.begin(), encodedRemainder.end());
 
-    return encodedNumber;
+    cout << "n\Base encoded number : \n";
+
+    for(int b  :encodedNumber)
+    {
+        cout << b;
+    }
+
+    vector<int> finalEncodedNumber;
+
+    for(int i = (8 - encodedNumber.size()); i > 0; i--)
+    {
+        finalEncodedNumber.push_back(0);
+    }
+
+    for(int b  :encodedNumber)
+    {
+        finalEncodedNumber.push_back(b);
+    }
+
+
+    cout<<"\nBefore writting : \n";
+    for(int b : finalEncodedNumber)
+    {
+        cout << b;
+    }
+    cout<<"\n";
+
+    return finalEncodedNumber;
 }
 
 

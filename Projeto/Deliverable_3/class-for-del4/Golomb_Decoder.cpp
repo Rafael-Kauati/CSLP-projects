@@ -45,14 +45,41 @@ int GolombDecoder::binaryToDecimal(string n) {
  */
 int GolombDecoder::decode(const vector<int>& encodedBits) {
     int quotient = 0;
+    bool startUnary = 0;
     int remainder = 0;
     int n = 0;
 
-    // Decoding the unary part to find the quotient
-    while (n < encodedBits.size() && encodedBits[n] == 1) {
-        quotient++;
-        n++;
+    cout << "Checking the readed value : " << std::endl;
+
+    for(int b : encodedBits)
+    {
+        cout << b;
     }
+
+    // Decoding the unary part to find the quotient
+    for (; n < encodedBits.size() ; n++) {
+        if(startUnary == 0){
+            //Encotrou o início da parte unary do número codificado (primeiro '1')
+
+            if(encodedBits[n] == 1){
+                startUnary = 1;
+                quotient++;
+                continue;
+            }
+        }
+        else
+        {
+            if(encodedBits[n] != 0){
+                quotient++;
+            }
+            //Encotrou o fim da parte unary do número codificado (primeiro '0' após os '1's)
+            else
+            {
+                break;
+            }
+        }
+    }
+
 
     n++; // Skip the delimiter '0'
 

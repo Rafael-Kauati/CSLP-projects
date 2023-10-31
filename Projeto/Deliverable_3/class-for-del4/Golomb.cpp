@@ -19,7 +19,7 @@ public:
         vector<int> encodedBits;
 
         encodedBits = encoder.encode(value);
-        cout << " Writing " << std::endl;
+        cout << " Writing " << encodedBits.size() << " bits" << std::endl;
 
         for(int v  : encodedBits){
             cout <<  v;
@@ -52,7 +52,6 @@ public:
 
         cout<<std::endl;
         cout<<std::endl;
-        reader.close();
 
         return decodedNumber;
     }
