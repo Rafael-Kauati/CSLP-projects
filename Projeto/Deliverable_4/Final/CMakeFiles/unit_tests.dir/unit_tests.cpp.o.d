@@ -396,5 +396,5 @@ CMakeFiles/unit_tests.dir/unit_tests.cpp.o: \
  /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Final/Frame_Predicter.h \
  /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Final/Golomb_Encoder.hpp \
  /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Final/BitStream.h \
- /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Final/Golomb.cpp \
- /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Final/Golomb_Decoder.hpp
+ /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Final/Golomb_Decoder.hpp \
+ /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Final/Golomb.cpp

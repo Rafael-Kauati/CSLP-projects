@@ -1,0 +1,2 @@
+Alter Golomb_Decoder.cpp to be able to know when it has read a pixel value;
+It must readOneBit from bitstream every iteration untill the value is achieved;

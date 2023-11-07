@@ -21,14 +21,15 @@ TEST_CASE("Frame Prediction, Golomb encoding and BitStream Writing") {
         
         cv::Mat frame = cv::imread("testImage.png", cv::IMREAD_GRAYSCALE);
         BitStream stream("", outputFile);
-        Golomb_Encoder golomb(m, stream);
+        Golomb_Encoder golombEnc(m, stream);
+        Golomb_Decoder golombDec(m, stream);
 
         cout << " ---------- Parameters ---------- \n\n";
         cout << " -> M = " << m << "\n";
         cout << " -> Frame = " << imageLocation << "\n";
         cout << " -> OutpuFile = " << outputFile << "\n";
 
-        Frame_Predicter predicter(golomb);
+        Frame_Predicter predicter(golombEnc, golombDec);
 
         predicter.writeFrame(frame);
 

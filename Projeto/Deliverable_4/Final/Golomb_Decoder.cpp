@@ -16,18 +16,13 @@ Golomb_Decoder::Golomb_Decoder (int param, BitStream& newStream) : m(param), str
  *
  * @return The decoded integer value.
  */
-int Golomb_Decoder::decode(int frame_x_size, int frame_y_size) {
+int Golomb_Decoder::decode() {
     int quotient = 0;
     bool startUnary = 0;
     int remainder = 0;
     int n = 0;
 
     const vector<int> encodedBits = stream.readNFileBit();
-
-    for(int b : encodedBits)
-    {
-        cout << b;
-    }
 
     // Decoding the unary part to find the quotient
     for (; n < encodedBits.size() ; n++) {
