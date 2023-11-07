@@ -1,0 +1,15 @@
+Apresentação de linguagem de programação:
+ - Dia 12 de novembro (ultimos a apresentar);
+ - Linguagem Crystal;
+ - Apenas uma hora;
+ - Um apresenta e dois ajudam o resto das pessoas;
+ - Mostrar experiência;
+ - Para que serve, como se usa e que ferramentas devem ser utilizadas;
+ - Colocar os requisitos para as pessoas no nosso padlet;
+ - PROFISSIONALISMO é tudo o que é avaliado;
+ - Vale 20% da nota;
+
+O que é preciso apresentar:
+ - O que é? Para que serve?
+ - Sintax/Semântica
+ - Ferramentas (compilador, interpretador, editor, etc...)
