@@ -6,6 +6,7 @@
 #include <string>
 #include "Frame_Predicter.h"
 #include "Golomb.cpp"
+#include "BitStream.h"
 
 using namespace std;
 
@@ -23,9 +24,9 @@ TEST_CASE("Frame Prediction, Golomb encoding and BitStream Writing") {
         Golomb_Encoder golomb(m, stream);
 
         cout << " ---------- Parameters ---------- \n\n";
-        cout << " -> M = ", m;
-        cout << " -> Frame = ", imageLocation;
-        cout << " -> OutpuFile = ", outputFile;
+        cout << " -> M = " << m << "\n";
+        cout << " -> Frame = " << imageLocation << "\n";
+        cout << " -> OutpuFile = " << outputFile << "\n";
 
         Frame_Predicter predicter(golomb);
 
@@ -33,6 +34,6 @@ TEST_CASE("Frame Prediction, Golomb encoding and BitStream Writing") {
 
         REQUIRE(1 == 1);
 
-        golomb.close();
+        predicter.closeStreams();
     }
 }

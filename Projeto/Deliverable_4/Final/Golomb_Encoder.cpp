@@ -71,3 +71,8 @@ void Golomb_Encoder::unaryCode(int num) {
     stream.writeOneFileBit(0);  // Adicionar um 0 no final
     return;
 }
+
+
+void Golomb_Encoder::closeStreams() {
+    stream.close();
+}

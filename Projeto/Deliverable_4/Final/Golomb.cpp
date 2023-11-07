@@ -5,7 +5,7 @@
 
 class Golomb {
 public:
-    Golomb(int param, string inputFile, string outputFile) : encoder(param), decoder(param), writer(inputFile, outputFile), reader(outputFile, "") {}
+    Golomb(int param, string inputFile, string outputFile, BitStream& stream) : encoder(param, stream), decoder(param, stream), writer(inputFile, outputFile), reader(outputFile, "") {}
 
     /**
      * @brief Encodes an integer using the Golomb encoding algorithm.
@@ -15,21 +15,8 @@ public:
      * @param num The integer to be encoded.
      * @return A vector of boolean values representing the encoded bits.
      */
-    vector<int> encode(int value) {
-        vector<int> encodedBits;
-
-        encodedBits = encoder.encode(value);
-        cout << " Writing " << encodedBits.size() << " bits" << std::endl;
-
-        for(int v  : encodedBits){
-            cout <<  v;
-        }
-        cout<<std::endl;
-        cout<<std::endl;
-
-        writer.writeNFileBit(  encodedBits);
-        writer.close();
-        return encodedBits;
+    void encode(int value) {
+        encoder.encode(value);
     }
 
     /**
@@ -40,24 +27,15 @@ public:
      * @param encodedBits The vector of boolean values representing the encoded bits.
      * @return The decoded integer value.
      */
-    int decode()
-    {
-         int decodedNumber;
+    int decode() {
+        int decodedNumber;
 
-        //readFileChar
-        vector<int> encNumbers = reader.readNFileBit(8);
-
-        decodedNumber = decoder.decode(encNumbers);
-        std::cout << "\n\nDecoded : " << decodedNumber;
-
-        cout<<std::endl;
-        cout<<std::endl;
+        decodedNumber = decoder.decode();
 
         return decodedNumber;
     }
 
-    void close()
-    {
+    void close() {
         reader.close();
         writer.close();
     }
@@ -65,10 +43,8 @@ public:
 
 private:
 
-    Video_Encoder encoder;
-    Video_Decoder decoder;
+    Golomb_Encoder encoder;
+    Golomb_Decoder decoder;
     BitStream     writer, reader;
 
 };
-
-

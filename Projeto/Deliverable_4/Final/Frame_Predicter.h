@@ -16,8 +16,12 @@ class Frame_Predicter {
 
     //  Public methods
     public:
-        Frame_Predicter(Golomb_Encoder* newEncoder) {
-            newEncoder = newEncoder;
+        Frame_Predicter();
+
+        Frame_Predicter(Golomb_Encoder newEncoder)  : encoder(newEncoder) {}
+
+        void closeStreams() {
+            encoder.closeStreams();
         }
 
         int writeFrame(cv::Mat& frame) {
@@ -46,5 +50,6 @@ class Frame_Predicter {
                     encoder.encode(errorValue);
                 }
             }
+            return 0;
         }
-}
+};

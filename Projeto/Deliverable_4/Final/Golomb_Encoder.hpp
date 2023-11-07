@@ -33,6 +33,9 @@ class Golomb_Encoder {
          */
         void encode(int num);
 
+
+        void closeStreams();
+
         int m; ///< The value of parameter m used in the Golomb encoding algorithm.
         BitStream& stream;
 

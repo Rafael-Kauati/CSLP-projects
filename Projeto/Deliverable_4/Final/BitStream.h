@@ -1,3 +1,6 @@
+#ifndef BitStream_HPP
+#define BitStream_HPP
+
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -237,3 +240,4 @@ public:
         outputFile.close();
     }
 };
+#endif

@@ -4,6 +4,8 @@
 CMakeFiles/unit_tests.dir/unit_tests.cpp.o: unit_tests.cpp \
   BitStream.h \
   Frame_Predicter.h \
+  Golomb.cpp \
+  Golomb_Decoder.hpp \
   Golomb_Encoder.hpp \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
@@ -760,7 +762,11 @@ CMakeFiles/unit_tests.dir/unit_tests.cpp.o: unit_tests.cpp \
 
 /usr/include/c++/13.2.1/ext/alloc_traits.h:
 
-/usr/include/c++/13.2.1/bits/char_traits.h:
+/usr/include/c++/13.2.1/tr1/beta_function.tcc:
+
+/usr/include/c++/13.2.1/ext/aligned_buffer.h:
+
+/usr/include/c++/13.2.1/exception:
 
 /usr/include/c++/13.2.1/bits/basic_ios.tcc:
 
@@ -908,19 +914,11 @@ CMakeFiles/unit_tests.dir/unit_tests.cpp.o: unit_tests.cpp \
 
 /usr/include/c++/13.2.1/bits/regex_automaton.tcc:
 
-/usr/include/bits/locale.h:
+/usr/include/bits/types/struct_timeval.h:
 
-/usr/include/c++/13.2.1/bits/stl_list.h:
+/usr/include/bits/stdio_lim.h:
 
-/usr/include/c++/13.2.1/bits/stl_uninitialized.h:
-
-/usr/include/bits/atomic_wide_counter.h:
-
-/usr/include/bits/posix_opt.h:
-
-/usr/include/errno.h:
-
-/usr/include/bits/getopt_posix.h:
+/usr/include/bits/time.h:
 
 /usr/include/bits/fp-logb.h:
 
@@ -968,23 +966,51 @@ Golomb_Encoder.hpp:
 
 /usr/include/c++/13.2.1/bits/allocated_ptr.h:
 
-/usr/local/include/opencv4/opencv2/stitching/detail/util_inl.hpp:
+/usr/local/include/opencv4/opencv2/flann/matrix.h:
 
-/usr/include/libintl.h:
+/usr/include/bits/getopt_core.h:
 
-/usr/include/bits/endianness.h:
+/usr/include/bits/sigstack.h:
 
-/usr/include/bits/types/sigval_t.h:
+/usr/local/include/opencv4/opencv2/videoio.hpp:
 
-/usr/include/c++/13.2.1/bits/exception_ptr.h:
+/usr/include/c++/13.2.1/numeric:
 
-/usr/include/bits/libm-simd-decl-stubs.h:
+/usr/include/bits/siginfo-consts-arch.h:
 
-/usr/include/c++/13.2.1/bits/memoryfwd.h:
+/usr/include/bits/siginfo-arch.h:
 
-/usr/include/c++/13.2.1/bits/regex_scanner.tcc:
+/usr/include/bits/cpu-set.h:
+
+/usr/include/c++/13.2.1/bits/enable_special_members.h:
+
+/usr/include/c++/13.2.1/bits/atomic_base.h:
+
+/usr/local/include/opencv4/opencv2/stitching/detail/camera.hpp:
+
+/usr/include/bits/confname.h:
+
+/usr/local/include/opencv4/opencv2/flann/heap.h:
+
+/usr/include/bits/signum-arch.h:
+
+/usr/include/c++/13.2.1/bits/stl_list.h:
+
+/usr/include/c++/13.2.1/bits/stl_uninitialized.h:
+
+/usr/include/bits/atomic_wide_counter.h:
+
+/usr/include/bits/posix_opt.h:
+
+/usr/include/bits/locale.h:
 
 /usr/include/c++/13.2.1/ctime:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdint.h:
+
+/usr/include/bits/sigstksz.h:
+
+/usr/include/c++/13.2.1/cstdint:
 
 /usr/include/bits/waitstatus.h:
 
@@ -1002,6 +1028,42 @@ Golomb_Encoder.hpp:
 
 /usr/include/c++/13.2.1/bits/streambuf_iterator.h:
 
+/usr/include/bits/types.h:
+
+Frame_Predicter.h:
+
+/usr/include/c++/13.2.1/bits/ptr_traits.h:
+
+/usr/include/errno.h:
+
+/usr/include/bits/getopt_posix.h:
+
+/usr/local/include/opencv4/opencv2/stitching/detail/util_inl.hpp:
+
+/usr/include/libintl.h:
+
+/usr/include/bits/endianness.h:
+
+/usr/include/bits/types/sigval_t.h:
+
+/usr/include/c++/13.2.1/bits/exception_ptr.h:
+
+/usr/include/bits/libm-simd-decl-stubs.h:
+
+Golomb_Decoder.hpp:
+
+/usr/include/c++/13.2.1/bits/memoryfwd.h:
+
+/usr/include/c++/13.2.1/bits/regex_scanner.tcc:
+
+/usr/include/c++/13.2.1/bits/cxxabi_forced.h:
+
+/usr/include/c++/13.2.1/bits/uses_allocator_args.h:
+
+/usr/include/alloca.h:
+
+/usr/include/c++/13.2.1/cstdio:
+
 /usr/local/include/opencv4/opencv2/ml.hpp:
 
 /usr/include/bits/byteswap.h:
@@ -1014,25 +1076,11 @@ Golomb_Encoder.hpp:
 
 /usr/include/c++/13.2.1/bits/concept_check.h:
 
-/usr/include/c++/13.2.1/bits/cxxabi_forced.h:
-
-/usr/include/c++/13.2.1/bits/uses_allocator_args.h:
-
-/usr/include/alloca.h:
-
-/usr/include/c++/13.2.1/cstdio:
-
-/usr/include/c++/13.2.1/bits/atomic_base.h:
-
-/usr/local/include/opencv4/opencv2/stitching/detail/camera.hpp:
-
-/usr/include/bits/confname.h:
-
-/usr/local/include/opencv4/opencv2/flann/heap.h:
-
-/usr/include/bits/signum-arch.h:
-
 /usr/include/asm-generic/errno-base.h:
+
+/usr/include/bits/iscanonical.h:
+
+/usr/include/bits/sigaction.h:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stddef.h:
 
@@ -1053,40 +1101,6 @@ Golomb_Encoder.hpp:
 /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++io.h:
 
 /usr/include/c++/13.2.1/bits/stl_relops.h:
-
-/usr/local/include/opencv4/opencv2/flann/matrix.h:
-
-/usr/include/bits/getopt_core.h:
-
-/usr/include/bits/sigstack.h:
-
-/usr/local/include/opencv4/opencv2/videoio.hpp:
-
-/usr/include/c++/13.2.1/numeric:
-
-/usr/include/bits/siginfo-consts-arch.h:
-
-/usr/include/bits/siginfo-arch.h:
-
-/usr/include/c++/13.2.1/bits/charconv.h:
-
-/usr/include/c++/13.2.1/bits/stl_tree.h:
-
-/usr/include/bits/uintn-identity.h:
-
-/usr/include/bits/cpu-set.h:
-
-/usr/include/c++/13.2.1/bits/enable_special_members.h:
-
-/usr/include/bits/iscanonical.h:
-
-/usr/include/bits/sigaction.h:
-
-/usr/include/bits/types.h:
-
-Frame_Predicter.h:
-
-/usr/include/c++/13.2.1/bits/ptr_traits.h:
 
 /usr/include/bits/types/time_t.h:
 
@@ -1160,19 +1174,15 @@ Frame_Predicter.h:
 
 /usr/include/bits/types/cookie_io_functions_t.h:
 
+Golomb.cpp:
+
 /usr/include/c++/13.2.1/debug/debug.h:
-
-/usr/include/bits/stdio_lim.h:
-
-/usr/include/bits/time.h:
 
 /usr/include/bits/local_lim.h:
 
 /usr/include/bits/libc-header-start.h:
 
 /usr/include/bits/siginfo-consts.h:
-
-/usr/include/bits/types/struct_timeval.h:
 
 /usr/include/c++/13.2.1/limits:
 
@@ -1194,12 +1204,6 @@ Frame_Predicter.h:
 
 /usr/include/c++/13.2.1/chrono:
 
-/usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdint.h:
-
-/usr/include/bits/sigstksz.h:
-
-/usr/include/c++/13.2.1/cstdint:
-
 /usr/include/c++/13.2.1/ext/numeric_traits.h:
 
 /usr/include/c++/13.2.1/bits/hashtable.h:
@@ -1207,6 +1211,14 @@ Frame_Predicter.h:
 /usr/include/bits/types/clockid_t.h:
 
 /usr/include/bits/stdint-intn.h:
+
+/usr/include/c++/13.2.1/bits/char_traits.h:
+
+/usr/include/c++/13.2.1/bits/stl_tree.h:
+
+/usr/include/bits/uintn-identity.h:
+
+/usr/include/c++/13.2.1/bits/charconv.h:
 
 /usr/include/c++/13.2.1/bits/chrono.h:
 
@@ -1232,11 +1244,11 @@ Frame_Predicter.h:
 
 /usr/include/c++/13.2.1/bits/uses_allocator.h:
 
-BitStream.h:
-
 /usr/include/bits/uio_lim.h:
 
 /usr/include/bits/math-vector.h:
+
+BitStream.h:
 
 /usr/include/c++/13.2.1/bits/functexcept.h:
 
@@ -1445,9 +1457,3 @@ BitStream.h:
 /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/os_defines.h:
 
 /usr/include/c++/13.2.1/cwctype:
-
-/usr/include/c++/13.2.1/exception:
-
-/usr/include/c++/13.2.1/tr1/beta_function.tcc:
-
-/usr/include/c++/13.2.1/ext/aligned_buffer.h:
