@@ -163,6 +163,30 @@ Golomb.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb.cpp.s
 .PHONY : Golomb.cpp.s
 
+Golomb_Decoder.o: Golomb_Decoder.cpp.o
+.PHONY : Golomb_Decoder.o
+
+# target to build an object file
+Golomb_Decoder.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o
+.PHONY : Golomb_Decoder.cpp.o
+
+Golomb_Decoder.i: Golomb_Decoder.cpp.i
+.PHONY : Golomb_Decoder.i
+
+# target to preprocess a source file
+Golomb_Decoder.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.i
+.PHONY : Golomb_Decoder.cpp.i
+
+Golomb_Decoder.s: Golomb_Decoder.cpp.s
+.PHONY : Golomb_Decoder.s
+
+# target to generate assembly for a file
+Golomb_Decoder.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.s
+.PHONY : Golomb_Decoder.cpp.s
+
 Golomb_Encoder.o: Golomb_Encoder.cpp.o
 .PHONY : Golomb_Encoder.o
 
@@ -224,6 +248,9 @@ help:
 	@echo "... Golomb.o"
 	@echo "... Golomb.i"
 	@echo "... Golomb.s"
+	@echo "... Golomb_Decoder.o"
+	@echo "... Golomb_Decoder.i"
+	@echo "... Golomb_Decoder.s"
 	@echo "... Golomb_Encoder.o"
 	@echo "... Golomb_Encoder.i"
 	@echo "... Golomb_Encoder.s"

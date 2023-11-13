@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/unit_tests.dir/Golomb.cpp.o"
   "CMakeFiles/unit_tests.dir/Golomb.cpp.o.d"
+  "CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o"
+  "CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o.d"
   "CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.o"
   "CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.o.d"
   "CMakeFiles/unit_tests.dir/unit_tests.cpp.o"

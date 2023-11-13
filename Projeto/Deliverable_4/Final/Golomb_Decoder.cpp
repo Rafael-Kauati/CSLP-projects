@@ -21,23 +21,26 @@ int Golomb_Decoder::decode() {
     bool startUnary = 0;
     int remainder = 0;
     int n = 0;
-
-    const vector<int> encodedBits = stream.readNFileBit();
+    int encodedBit = 0;
 
     // Decoding the unary part to find the quotient
-    for (; n < encodedBits.size() ; n++) {
+    while (1) {
+        encodedBit = stream.readOneFileBit();
         if(startUnary == 0){
             //Encotrou o início da parte unary do número codificado (primeiro '1')
 
-            if(encodedBits[n] == 1){
+            if(encodedBit == 1){
                 startUnary = 1;
                 quotient++;
                 continue;
             }
+            else {
+                cout << "ERRO!!!!\n";
+            }
         }
         else
         {
-            if(encodedBits[n] != 0){
+            if(encodedBit != 0){
                 quotient++;
             }
             //Encotrou o fim da parte unary do número codificado (primeiro '0' após os '1's)
@@ -48,28 +51,39 @@ int Golomb_Decoder::decode() {
         }
     }
 
-
-    n++; // Skip the delimiter '0'
+    cout << "quotient: " << quotient << "\n";
 
     // Decoding the binary part to find the remainder
     int b = static_cast<int>(floor(log2(m))); // Calculate b as floor(log2(m))
     string binValue;
 
     for (int i = 0; i < b; ++i) {
-        binValue += to_string(encodedBits[n]);
-        n++;
+        encodedBit = stream.readOneFileBit();
+        binValue += to_string(encodedBit);
     }
 
     // Check if the decoded remainder needs b+1 bits
     if (stoi(binValue, nullptr, 2) >= (1 << (b + 1)) - m) {
-        binValue += to_string(encodedBits[n]);
-        n++;
+        encodedBit = stream.readOneFileBit();
+        binValue += to_string(encodedBit);
     }
 
     remainder = stoi(binValue, nullptr, 2);
 
     int decodedValue = quotient * m + remainder;
-    return decodedValue;
+    cout << "DECODED : " << decodedValue << "\n";
+    int numberToDecode = 0;
+
+    // TO CHECK PLS
+    //  Alter the number to encode to account for negative numbers
+    if (decodedValue < 0) {
+        numberToDecode = -2 * decodedValue - 1;
+    }
+    else {
+        numberToDecode = 2 * decodedValue;
+    }
+
+    return numberToDecode;
 }
 
 /**

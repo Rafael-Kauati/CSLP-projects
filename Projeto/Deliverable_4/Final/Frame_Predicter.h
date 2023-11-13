@@ -127,6 +127,10 @@ private:
         //   For every row
         for (int i = 0; i < yFrameSize; i++)
         {
+            cout << "DECODING ROW: " << i << " of " << yFrameSize << "                    \n";
+            cout << "\e[A";
+            cout << "\r";
+
             //  For every column
             for (int j = 0; j < xFrameSize; j++)
             {
@@ -196,10 +200,10 @@ private:
                 }
 
                 //  Extract monochrome value
-                pixelValue = decoder.decode();
+                errorValue = decoder.decode();
 
                 //  Calculate the error value
-                errorValue = pixelValue - estimatedValue;
+                pixelValue = errorValue + estimatedValue;
 
                 //  Update estimated with the last pixel value
                 estimatedValue = pixelValue;

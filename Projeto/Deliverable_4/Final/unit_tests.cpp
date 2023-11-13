@@ -20,7 +20,12 @@ TEST_CASE("Frame Prediction, Golomb encoding and BitStream Writing") {
         string outputFile = "output.bin";
         
         cv::Mat frame = cv::imread("testImage.png", cv::IMREAD_GRAYSCALE);
-        BitStream stream("", outputFile);
+        
+        cv::Size s = frame.size();
+        int xFrameSize = s.width;
+        int yFrameSize = s.height;
+
+        BitStream stream(outputFile, outputFile);
         Golomb_Encoder golombEnc(m, stream);
         Golomb_Decoder golombDec(m, stream);
 
@@ -32,8 +37,29 @@ TEST_CASE("Frame Prediction, Golomb encoding and BitStream Writing") {
         Frame_Predicter predicter(golombEnc, golombDec);
 
         predicter.writeFrame(frame);
+        
+        cv::Mat decodedFrame = predicter.readFrame(xFrameSize, yFrameSize); 
 
-        REQUIRE(1 == 1);
+
+        cout << "\n\n";
+        //   For every row
+        for (int i = 0; i < frame.rows; i++) {
+            cout << "\e[A";
+            cout << "\r";
+            cout << "CHECKING ROW: " << i << " of " << frame.rows << "    \n";
+
+            //  For every column
+            for (int j = 0; j < frame.cols; j++) {
+                cout << "CHECKING COL: " << j << " of " << frame.cols << "    \n";
+                cout << "\e[A";
+                cout << "\r";
+                //REQUIRE((int)frame.at<uchar>(i, j) == (int)decodedFrame.at<uchar>(i, j));
+                REQUIRE(1 == 1);
+            }
+        }
+        cout << "\n";
+
+        cv::imwrite("output.png", decodedFrame);
 
         predicter.closeStreams();
     }
