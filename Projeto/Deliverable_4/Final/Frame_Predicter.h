@@ -122,7 +122,7 @@ private:
         int estimatedValue = 0;
         int errorValue = 0;
 
-        cv::Mat frame = cv::Mat::zeros(cv::Size(xFrameSize, yFrameSize), CV_8UC1);
+        cv::Mat frame = cv::Mat::zeros(cv::Size(xFrameSize, yFrameSize), cv::IMREAD_GRAYSCALE);
 
         //   For every row
         for (int i = 0; i < yFrameSize; i++)
@@ -208,7 +208,7 @@ private:
                 //  Update estimated with the last pixel value
                 estimatedValue = pixelValue;
 
-                frame.at<uchar>(i, j) = (uchar)pixelValue;
+                frame.at<uchar>(i, j) = pixelValue;
             }
         }
 

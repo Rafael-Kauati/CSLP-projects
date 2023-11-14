@@ -14,32 +14,36 @@ TEST_CASE("Frame Prediction, Golomb encoding and BitStream Writing") {
 
     SECTION("Frame To File") {
 
-        int m = 4;
+        int m = 8;
         
         string imageLocation = "testImage.png";
         string outputFile = "output.bin";
         
-        cv::Mat frame = cv::imread("testImage.png", cv::IMREAD_GRAYSCALE);
+        cv::Mat frame = cv::imread(imageLocation, cv::IMREAD_GRAYSCALE);
         
-        cv::Size s = frame.size();
-        int xFrameSize = s.width;
-        int yFrameSize = s.height;
+        int xFrameSize = frame.cols;
+        int yFrameSize = frame.rows;
 
-        BitStream stream(outputFile, outputFile);
-        Golomb_Encoder golombEnc(m, stream);
-        Golomb_Decoder golombDec(m, stream);
+        BitStream outStream("", outputFile);
+        BitStream inStream(outputFile, "");
+        Golomb_Encoder golombEnc(m, outStream);
+        Golomb_Decoder golombDec(m, inStream);
 
         cout << " ---------- Parameters ---------- \n\n";
         cout << " -> M = " << m << "\n";
         cout << " -> Frame = " << imageLocation << "\n";
         cout << " -> OutpuFile = " << outputFile << "\n";
 
-        Frame_Predicter predicter(golombEnc, golombDec);
+        Frame_Predicter predicterEnc(golombEnc, golombDec);
 
-        predicter.writeFrame(frame);
+        predicterEnc.writeFrame(frame, 1);
+        predicterEnc.closeStreams();
         
-        cv::Mat decodedFrame = predicter.readFrame(xFrameSize, yFrameSize); 
+        Frame_Predicter predicterDec(golombEnc, golombDec);
+        cv::Mat decodedFrame = predicterDec.readFrame(xFrameSize, yFrameSize, 1); 
+        predicterDec.closeStreams();
 
+        int lastF = 0;
 
         cout << "\n\n";
         //   For every row
@@ -50,17 +54,17 @@ TEST_CASE("Frame Prediction, Golomb encoding and BitStream Writing") {
 
             //  For every column
             for (int j = 0; j < frame.cols; j++) {
-                cout << "CHECKING COL: " << j << " of " << frame.cols << "    \n";
+                cout << "CHECKING COL: " << j << " of " << frame.cols << "   lastF> " << lastF << "                   \n";
                 cout << "\e[A";
                 cout << "\r";
-                //REQUIRE((int)frame.at<uchar>(i, j) == (int)decodedFrame.at<uchar>(i, j));
-                REQUIRE(1 == 1);
+                REQUIRE((int)frame.at<uchar>(i, j) == (int)decodedFrame.at<uchar>(i, j));
+                lastF = (int)frame.at<uchar>(i, j);
+                //REQUIRE(1 == 1);
             }
         }
         cout << "\n";
 
         cv::imwrite("output.png", decodedFrame);
 
-        predicter.closeStreams();
     }
 }
