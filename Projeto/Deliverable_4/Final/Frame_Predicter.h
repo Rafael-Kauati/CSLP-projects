@@ -98,7 +98,7 @@ private:
             cout << " -> WRITING FRAME: " << numFrame << " of " << this->numFrames << "    \n";
 
             //  Write the frame
-            this->writeFrame(frame, predictor, 0);
+            this->writeFrameRGB(frame, predictor, 0);
             
             numFrame++;
         }
@@ -112,7 +112,7 @@ private:
 
         cout << "\n";
 
-        cv::VideoWriter decodedVideoWriter(outputFile, fileT, (double)this->fps, cv::Size(this->xFrameSize, this->yFrameSize), 0);
+        cv::VideoWriter decodedVideoWriter(outputFile, fileT, (double)this->fps, cv::Size(this->xFrameSize, this->yFrameSize), 1);
         cv::Mat frame;
 
         for (int frameIndex = 0; frameIndex < this->numFrames; frameIndex++) {
@@ -120,7 +120,7 @@ private:
             cout << "\r";
             cout << " -> READING FRAME: " << frameIndex+1 << " of " << this->numFrames << "    \n";
 
-            frame = readFrame(predictor, 0);
+            frame = readFrameRGB(predictor, 0);
             decodedVideoWriter.write(frame);
         }
         decodedVideoWriter.release();

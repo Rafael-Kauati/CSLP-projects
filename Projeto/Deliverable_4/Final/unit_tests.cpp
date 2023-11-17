@@ -248,7 +248,7 @@ TEST_CASE("Video Encoding/Decoding") {
                 //  For every column
                 for (int j = 0; j < xFrameSize; j++) {
                     //REQUIRE(1==1);
-                    REQUIRE((int)originalFrame.at<uchar>(i, j) == (int)decodedFrame.at<uchar>(i, j));
+                    REQUIRE(originalFrame.at<cv::Vec3b>(i, j) == decodedFrame.at<cv::Vec3b>(i, j));
                 }
             }
             cout << "\n";
