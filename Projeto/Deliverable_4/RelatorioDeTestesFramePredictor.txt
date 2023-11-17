@@ -1,0 +1,7 @@
+Os resultados do frame predictor de uma imagem com 3 313 Kbytes:
+JPEG 1:
+JPEG 2:
+JPEG 3:
+JPEG 4:
+...
+fazer para todos

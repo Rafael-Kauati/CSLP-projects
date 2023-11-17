@@ -1,4 +1,0 @@
-Cannot generate into /home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4
-It was created with incompatible generator 'Unix Makefiles'
-
-Please either delete it manually or select another generation directory

@@ -1,4 +1,0 @@
-# ninja log v5
-0	734	1698668765360190535	CMakeFiles/unit_tests.dir/Golomb.cpp.o	c2fc51ad909abc7a
-1	773	1698668765399191902	CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o	3cb61a6b8afa3b1c
-1	832	1698668765458193969	CMakeFiles/unit_tests.dir/Golomb_Enconder.cpp.o	f9b735e16361efcb

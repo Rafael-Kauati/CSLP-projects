@@ -1,4 +1,0 @@
-/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Final/CMakeFiles/unit_tests.dir
-/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Final/CMakeFiles/test.dir
-/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Final/CMakeFiles/edit_cache.dir
-/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Final/CMakeFiles/rebuild_cache.dir

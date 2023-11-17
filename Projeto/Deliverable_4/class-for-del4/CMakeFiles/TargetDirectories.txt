@@ -1,4 +1,0 @@
-/home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/CMakeFiles/unit_tests.dir
-/home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/CMakeFiles/test.dir
-/home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/CMakeFiles/edit_cache.dir
-/home/tk/UA/3-ano/cslp/test/CSLP-projects/Projeto/Deliverable_3/class-for-del4/CMakeFiles/rebuild_cache.dir
