@@ -107,7 +107,7 @@ private:
     void readVideo(string outputFile, int predictor=6) {
         int fileT;
         if (this->fileType == 1) {
-            fileT = cv::VideoWriter::fourcc('m', 'p', '4', 'v');
+            fileT = cv::VideoWriter::fourcc('h', '2', '6', '4');
         }
 
         cout << "\n";

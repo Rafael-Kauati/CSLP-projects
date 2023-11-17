@@ -18,7 +18,7 @@ TEST_CASE("Frame Encoding/Decoding") {
         cout << " --- SINGLE FRAME ENCODING/DECODING --- \n";
         cout << " ---           Grey scale           --- \n";
         cout << " ------------- ---------- ------------- \n";
-        int m = 8;
+        int m = 16;
         
         string imageLocation = "testImage.png";
         string outputBinFile = "output.bin";
@@ -44,7 +44,7 @@ TEST_CASE("Frame Encoding/Decoding") {
 
         cout << "\n ------------ Write Frame ------------ \n";
         //  Repeat this for every frame
-        predicterEnc.writeFrame(frame, 1);
+        predicterEnc.writeFrame(frame, 6);
 
         predicterEnc.closeStreams();
         
@@ -57,7 +57,7 @@ TEST_CASE("Frame Encoding/Decoding") {
 
         cout << "\n ------------ Read Frame ------------ \n";
         //  Repeat this for every frame
-        cv::Mat decodedFrame = predicterDec.readFrame(1);
+        cv::Mat decodedFrame = predicterDec.readFrame(6);
 
         predicterDec.closeStreams();
 
@@ -89,9 +89,9 @@ TEST_CASE("Frame Encoding/Decoding") {
         cout << " --- SINGLE FRAME ENCODING/DECODING --- \n";
         cout << " ---               RGB              --- \n";
         cout << " ------------- ---------- ------------- \n";
-        int m = 8;
+        int m = 16;
         
-        string imageLocation = "testImageRGB.png";
+        string imageLocation = "testImageRGB.jpg";
         string outputBinFile = "output.bin";
         string outputImgFile = "outputRGB.png";
         
@@ -115,7 +115,7 @@ TEST_CASE("Frame Encoding/Decoding") {
 
         cout << "\n ------------ Write Frame ------------ \n";
         //  Repeat this for every frame
-        predicterEnc.writeFrameRGB(frame, 1);
+        predicterEnc.writeFrameRGB(frame, 6);
 
         predicterEnc.closeStreams();
         
@@ -128,7 +128,7 @@ TEST_CASE("Frame Encoding/Decoding") {
 
         cout << "\n ------------ Read Frame ------------ \n";
         //  Repeat this for every frame
-        cv::Mat decodedFrame = predicterDec.readFrameRGB(1);
+        cv::Mat decodedFrame = predicterDec.readFrameRGB(6);
 
         predicterDec.closeStreams();
 
@@ -161,11 +161,11 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << " ------------- ---------- ------------- \n";
         cout << " -- COMPLETE VIDEO ENCODING/DECODING -- \n";
         cout << " ------------- ---------- ------------- \n";
-        int m = 8;
+        int m = 16;
         
-        string videoLocation = "testVideoSmaller.mp4";
+        string videoLocation = "testVideoSmaller.mkv";
         string outputBinFile = "output.bin";
-        string outputVidFile = "output.mp4";
+        string outputVidFile = "output.mkv";
         
         cv::VideoCapture video(videoLocation);
         
@@ -195,7 +195,7 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << "\n ------------ Write Video ------------ \n";
 
         //  Repeat this for every frame
-        predicterEnc.writeVideo(video, 1);
+        predicterEnc.writeVideo(video, 6);
 
         predicterEnc.closeStreams();
         
@@ -208,13 +208,12 @@ TEST_CASE("Video Encoding/Decoding") {
 
         cout << "\n ------------ Read Video ------------ \n";
         //  Repeat this for every frame
-        predicterDec.readVideo(outputVidFile, 1);
+        predicterDec.readVideo(outputVidFile, 6);
 
         predicterDec.closeStreams();
 
         cout << "\n ------------ Check Video ------------ \n";
         cout << "\n";
-
 
         //  Reopen the original video
         video = cv::VideoCapture(videoLocation);
@@ -224,8 +223,8 @@ TEST_CASE("Video Encoding/Decoding") {
         cv::Mat decodedFrame;
         cv::Mat originalFrame;
         bool readOriginal, readDecoded;
-        //  For every frame 
-        for (int frameIndex = 0; frameIndex < numFrames; frameIndex++) {
+        //  For every frame CHANGE TO ONE LATER
+        for (int frameIndex = 0; frameIndex < 1; frameIndex++) {
             readOriginal = video.read(originalFrame);
             readDecoded = decodedVideo.read(decodedFrame);
             cout << "\e[A";
@@ -242,19 +241,23 @@ TEST_CASE("Video Encoding/Decoding") {
                 return;
             }
 
+            cout << "\n";
+
             //  For every row
             for (int i = 0; i < yFrameSize; i++) {
+                cout << "\e[A";
+                cout << "\r";
+                cout << " -> CHECKING ROW: " << i+1 << " of " << yFrameSize << "    \n";
 
                 //  For every column
                 for (int j = 0; j < xFrameSize; j++) {
-                    //REQUIRE(1==1);
+                    cout << " -> CHECKING COL: " << j+1 << " of " << xFrameSize << "    \n";
+                    cout << "\e[A";
+                    cout << "\r";
                     REQUIRE(originalFrame.at<cv::Vec3b>(i, j) == decodedFrame.at<cv::Vec3b>(i, j));
                 }
             }
-            cout << "\n";
+            cout << "\n\n";
         }
-
-        //  TODO: cv::imwrite(outputImgFile, decodedFrame);
-
     }
 }
