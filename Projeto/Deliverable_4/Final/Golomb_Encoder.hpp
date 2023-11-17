@@ -15,6 +15,7 @@ using namespace std;
  */
 class Golomb_Encoder {
     public:
+        Golomb_Encoder(string inputFile, string outputFile);
         /**
          * @brief Constructs a Golomb_Encoder object with the specified parameter.
          *
@@ -22,7 +23,7 @@ class Golomb_Encoder {
          *
          * @param param The value of the parameter used in the Golomb encoding algorithm.
          */
-        Golomb_Encoder(int param, BitStream& newStream);
+        Golomb_Encoder(BitStream newStream);
 
         /**
          * @brief Encodes an integer using the Golomb encoding algorithm.
@@ -33,11 +34,13 @@ class Golomb_Encoder {
          */
         void encode(int num);
 
+        void writeInt(int num, int numBytes);
+
+        void setMParam(int mParam);
 
         void closeStreams();
 
-        int m; ///< The value of parameter m used in the Golomb encoding algorithm.
-        BitStream& stream;
+        BitStream stream;
 
     private:
         /**
@@ -48,6 +51,8 @@ class Golomb_Encoder {
          * @param num The integer to be encoded.
          */
         void unaryCode(int num);
+
+        int m; ///< The value of parameter m used in the Golomb encoding algorithm.
 };
 
 #endif // Golomb_Encoder_HPP

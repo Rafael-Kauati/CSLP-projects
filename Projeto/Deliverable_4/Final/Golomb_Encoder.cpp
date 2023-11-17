@@ -3,13 +3,7 @@
 
 using namespace std;
 
-Golomb_Encoder::Golomb_Encoder(int param, BitStream& newStream) : m(param), stream(newStream)
-{
-    if (m <= 0)
-    {
-        cerr << "Error: The golomb parameter m should be positive";
-    }
-}
+Golomb_Encoder::Golomb_Encoder(string inputFile, string outputFile) : stream(BitStream::makeFromFiles(inputFile, outputFile)) {}
 
 /**
  * @brief Encodes an integer using the Golomb encoding algorithm.
@@ -31,13 +25,13 @@ void Golomb_Encoder::encode(int num) {
     }
 
     //  Iterate frame X and Y, encode each pixel and do bitstream write
-    int quotient = numberToEncode / m;
-    int remainder = numberToEncode % m;
+    int quotient = numberToEncode / this->m;
+    int remainder = numberToEncode % this->m;
 
     //  Write the unary code for the quotient 
     unaryCode(quotient);
 
-    int k = static_cast<int>(floor(log2(m))); // Calculate b as floor(log2(m))
+    int k = static_cast<int>(floor(log2(this->m))); // Calculate b as floor(log2(m))
     for (int i = k - 1; i >= 0; i--)
     {
         stream.writeOneFileBit((remainder >> i) & 1);
@@ -64,6 +58,20 @@ void Golomb_Encoder::unaryCode(int num) {
     return;
 }
 
+
+//  Write an integer in the file with the maximum specified number of bytes
+void Golomb_Encoder::writeInt(int num, int numBytes) {
+
+    for (int i = (numBytes * 8) - 1; i >= 0; i--) {
+        stream.writeOneFileBit((num >> i) & 1);
+    }
+
+    return;
+}
+
+void Golomb_Encoder::setMParam(int mParam) {
+    this->m = mParam;
+}
 
 void Golomb_Encoder::closeStreams() {
     stream.close();

@@ -1,13 +1,10 @@
 #include "Golomb_Decoder.hpp"
 #include "BitStream.h"
+#include <string>
 
 using namespace std;
 
-Golomb_Decoder::Golomb_Decoder (int param, BitStream& newStream) : m(param), stream(newStream) {
-    if(m <= 0 ){
-        cerr<<"Error: The golomb parameter m should be positive" ;
-    }
-}
+Golomb_Decoder::Golomb_Decoder(string inputFile, string outputFile) : stream(BitStream::makeFromFiles(inputFile, outputFile)) {}
 
 /**
  * @brief Decodes a sequence of encoded bits.
@@ -30,7 +27,7 @@ int Golomb_Decoder::decode() {
     
     quotient--;
 
-    int b = static_cast<int>(floor(log2(m))); // Calculate b as floor(log2(m))
+    int b = static_cast<int>(floor(log2(this->m))); // Calculate b as floor(log2(m))
 
     for(int i = 0; i < b; i++){
         binValue.append(to_string(stream.readOneFileBit()));
@@ -76,6 +73,19 @@ int Golomb_Decoder::binaryToDecimal(string n) {
     return dec_value;
 }
 
+int Golomb_Decoder::readInt(int numBytes) {
+    string binValue;
+
+    for(int i = 0; i < (numBytes * 8); i++) {
+        binValue.append(to_string(stream.readOneFileBit()));
+    }
+
+    return binaryToDecimal(binValue);
+}
+
+void Golomb_Decoder::setMParam(int mParam) {
+    this->m = mParam;
+}
 
 
 

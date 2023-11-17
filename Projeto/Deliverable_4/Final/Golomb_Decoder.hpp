@@ -16,6 +16,7 @@ using namespace std;
  */
 class Golomb_Decoder {
     public:
+        Golomb_Decoder(string inputFile, string outputFile);
         /**
          * @brief Constructs a Golomb_Decoder object with the specified parameter.
          *
@@ -23,7 +24,7 @@ class Golomb_Decoder {
          *
          * @param param The value of the parameter used in the Golomb decoding algorithm.
          */
-        Golomb_Decoder(int param, BitStream& stream);
+        Golomb_Decoder(BitStream stream);
 
         /**
          * @brief Decodes a sequence of encoded bits.
@@ -34,8 +35,11 @@ class Golomb_Decoder {
          */
         int decode();
 
-        int m; ///< The value of parameter m used in the Golomb decoding algorithm.
-        BitStream& stream;
+        int readInt(int numBytes);
+
+        void setMParam(int mParam);
+
+        BitStream stream;
 
     private:
         /**
@@ -47,6 +51,8 @@ class Golomb_Decoder {
          * @return The decimal integer representation of the binary string.
          */
         int binaryToDecimal(string n);
+
+        int m; ///< The value of parameter m used in the Golomb decoding algorithm.
 };
 
 #endif // Golomb_Decoder_HPP

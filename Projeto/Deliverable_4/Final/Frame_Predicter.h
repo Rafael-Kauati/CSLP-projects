@@ -14,27 +14,67 @@ class Frame_Predicter
 private:
     Golomb_Encoder encoder;
     Golomb_Decoder decoder;
+    int mParam;
+    int xFrameSize;
+    int yFrameSize;
+    int fileType;
 
     //  Public methods
     public:
         Frame_Predicter();
 
-        Frame_Predicter(Golomb_Encoder newEncoder, Golomb_Decoder newDecoder)  : encoder(newEncoder), decoder(newDecoder) {}
+        Frame_Predicter(string inputFile, string outputFile) : encoder(inputFile, outputFile), decoder(inputFile, outputFile) {
+            mParam = 0;
+            xFrameSize = 0;
+            yFrameSize = 0;
+            fileType = 0;
+        }
 
         void closeStreams() {
             encoder.closeStreams();
         }
+
+    void writeParams(int newmParam, int newxFrameSize, int newyFrameSize, int newfileType) {
+        mParam = newmParam;
+        xFrameSize = newxFrameSize;
+        yFrameSize = newyFrameSize;
+        fileType = newfileType;
+        //  Write the m parameter with 1 byte (max: 255)
+        encoder.writeInt(newmParam, 1);
+        //  Write the x and y frame sizes with 2 bytes each (max: 65,535)
+        encoder.writeInt(newxFrameSize, 2);
+        encoder.writeInt(newyFrameSize, 2);
+        //  Write the file format index with 1 byte (max: 255)
+        encoder.writeInt(newfileType, 1);
+        encoder.setMParam(newmParam);
+    }
+
+
+    void readParams() {
+        //  Read the m parameter with 1 byte (max: 255)
+        this->mParam = decoder.readInt(1);
+        //  Read the x and y frame sizes with 2 bytes each (max: 65,535)
+        this->xFrameSize = decoder.readInt(2);
+        this->yFrameSize = decoder.readInt(2);
+        //  Read the file format index with 1 byte (max: 255)
+        this->fileType = decoder.readInt(1);
+        decoder.setMParam(this->mParam);
+    }
 
     int writeFrame(cv::Mat &frame, int predictor=6) {
         int pixelValue = 0;
         int estimatedValue = 0;
         int errorValue = 0;
 
+        cout << "\n";
         //   For every row
-        for (int i = 0; i < frame.rows; i++)
+        for (int i = 0; i < yFrameSize; i++)
         {
+            cout << "\e[A";
+            cout << "\r";
+            cout << " -> ENCODING ROW: " << i+1 << " of " << yFrameSize << "                    \n";
             //  For every column
-            for (int j = 0; j < frame.cols; j++)
+            for (int j = 0; j < xFrameSize; j++)
             {
                 int a, b, c;
                 if (i == 0 && j == 0)
@@ -117,24 +157,24 @@ private:
         return 0;
     }
 
-    cv::Mat readFrame(int xFrameSize, int yFrameSize, int predictor=6) {
+    cv::Mat readFrame(int predictor=6) {
         int pixelValue = 0;
         int estimatedValue = 0;
         int errorValue = 0;
 
         cv::Mat frame = cv::Mat::zeros(cv::Size(xFrameSize, yFrameSize), cv::IMREAD_GRAYSCALE);
+        cout << "\n";
 
         //   For every row
-        for (int i = 0; i < yFrameSize; i++)
+        for (int i = 0; i < this->yFrameSize; i++)
         {
-            cout << "DECODING ROW: " << i << " of " << yFrameSize << "                    \n";
             cout << "\e[A";
             cout << "\r";
+            cout << " -> DECODING ROW: " << i+1 << " of " << yFrameSize << "                    \n";
 
             //  For every column
-            for (int j = 0; j < xFrameSize; j++)
+            for (int j = 0; j < this->xFrameSize; j++)
             {
-
                 int a, b, c;
                 if (i == 0 && j == 0)
                 {

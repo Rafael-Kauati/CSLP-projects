@@ -5,7 +5,7 @@
 
 class Golomb {
 public:
-    Golomb(int param, string inputFile, string outputFile, BitStream& stream) : encoder(param, stream), decoder(param, stream), writer(inputFile, outputFile), reader(outputFile, "") {}
+    Golomb(int param, string inputFile, string outputFile) : encoder(inputFile, outputFile), decoder(inputFile, outputFile), writer(inputFile, outputFile), reader(outputFile, "") {}
 
     /**
      * @brief Encodes an integer using the Golomb encoding algorithm.

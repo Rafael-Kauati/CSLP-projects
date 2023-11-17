@@ -27,6 +27,12 @@ private:
 
     //  Public methods
 public:
+
+    static BitStream makeFromFiles(const string inFile, const string outFile)
+    {
+        BitStream stream(inFile, outFile);
+        return stream;
+    }
     /**
      * @brief Constructor for BitStream
      *
@@ -35,6 +41,7 @@ public:
      * @param inFile Path to the input file
      * @param outFile Path to the output file
      */
+
     BitStream(string inFile, string outFile)
     {
         bufferLen = 0;
