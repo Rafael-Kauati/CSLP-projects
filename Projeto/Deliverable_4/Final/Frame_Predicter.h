@@ -18,6 +18,8 @@ private:
     int xFrameSize;
     int yFrameSize;
     int fileType;
+    int numFrames;
+    int fps;
 
     //  Public methods
     public:
@@ -28,17 +30,20 @@ private:
             xFrameSize = 0;
             yFrameSize = 0;
             fileType = 0;
+            fps = 0;
         }
 
         void closeStreams() {
             encoder.closeStreams();
         }
 
-    void writeParams(int newmParam, int newxFrameSize, int newyFrameSize, int newfileType) {
+    void writeParams(int newmParam, int newxFrameSize, int newyFrameSize, int newfileType, int newnumFrames=1, int newfps=1) {
         mParam = newmParam;
         xFrameSize = newxFrameSize;
         yFrameSize = newyFrameSize;
         fileType = newfileType;
+        numFrames = newnumFrames;
+        fps = newfps;
         //  Write the m parameter with 1 byte (max: 255)
         encoder.writeInt(newmParam, 1);
         //  Write the x and y frame sizes with 2 bytes each (max: 65,535)
@@ -46,6 +51,11 @@ private:
         encoder.writeInt(newyFrameSize, 2);
         //  Write the file format index with 1 byte (max: 255)
         encoder.writeInt(newfileType, 1);
+        //  Write the number of frames with 4 bytes (max: 2,147,483,647)
+        encoder.writeInt(newnumFrames, 4);
+        //  Write the FPS of the video with 1 byte (max: 255)
+        encoder.writeInt(newfps, 1);
+
         encoder.setMParam(newmParam);
     }
 
@@ -58,21 +68,111 @@ private:
         this->yFrameSize = decoder.readInt(2);
         //  Read the file format index with 1 byte (max: 255)
         this->fileType = decoder.readInt(1);
+        //  Read the number of frames with 4 bytes (max: 2,147,483,647)
+        this->numFrames = decoder.readInt(4);
+        //  Read the FPS of the video with 1 byte (max: 255)
+        this->fps = decoder.readInt(1);
+
         decoder.setMParam(this->mParam);
     }
 
-    int writeFrame(cv::Mat &frame, int predictor=6) {
+    void writeVideo(cv::VideoCapture video, int predictor=6) {
+        cv::Mat frame;
+        bool read;
+        int numFrame = 1;
+        int maxFrames = (int)video.get(cv::CAP_PROP_FRAME_COUNT);
+
+        cout << "\n";
+        
+        //  For every frame 
+        while (video.isOpened()) {
+            read = video.read(frame);
+
+            //  Last frame has been read
+            if (!read) {
+                break;
+            }
+
+            cout << "\e[A";
+            cout << "\r";
+            cout << " -> WRITING FRAME: " << numFrame << " of " << this->numFrames << "    \n";
+
+            //  Write the frame
+            this->writeFrame(frame, predictor, 0);
+            
+            numFrame++;
+        }
+    }
+
+    void readVideo(string outputFile, int predictor=6) {
+        int fileT;
+        if (this->fileType == 1) {
+            fileT = cv::VideoWriter::fourcc('m', 'p', '4', 'v');
+        }
+
+        cout << "\n";
+
+        cv::VideoWriter decodedVideoWriter(outputFile, fileT, (double)this->fps, cv::Size(this->xFrameSize, this->yFrameSize), 0);
+        cv::Mat frame;
+
+        for (int frameIndex = 0; frameIndex < this->numFrames; frameIndex++) {
+            cout << "\e[A";
+            cout << "\r";
+            cout << " -> READING FRAME: " << frameIndex+1 << " of " << this->numFrames << "    \n";
+
+            frame = readFrame(predictor, 0);
+            decodedVideoWriter.write(frame);
+        }
+        decodedVideoWriter.release();
+        
+        return;
+    }
+
+
+    void writeFrameRGB(cv::Mat &frame, int predictor=6, bool prints=1) { 
+        // Split the image into its RGB channels
+        std::vector<cv::Mat> channels;
+        cv::split(frame, channels);
+
+        cv::Mat blueChannel = channels[0];
+        cv::Mat greenChannel = channels[1];
+        cv::Mat redChannel = channels[2];
+
+        writeFrame(blueChannel, predictor, prints);
+        writeFrame(greenChannel, predictor, prints);
+        writeFrame(redChannel, predictor, prints);
+    }
+
+    cv::Mat readFrameRGB(int predictor=6, bool prints=1) { 
+        // Split the image into its RGB channels
+        std::vector<cv::Mat> channels;
+        cv::Mat rgbFrame;
+
+        channels.push_back(readFrame(predictor, prints));
+        channels.push_back(readFrame(predictor, prints));
+        channels.push_back(readFrame(predictor, prints));
+
+        cv::merge(channels, rgbFrame);
+
+        return rgbFrame;
+    }
+
+    void writeFrame(cv::Mat &frame, int predictor=6, bool prints=1) {
         int pixelValue = 0;
         int estimatedValue = 0;
         int errorValue = 0;
 
-        cout << "\n";
+        if (prints) {
+            std::cout << "\n";
+        }
         //   For every row
         for (int i = 0; i < yFrameSize; i++)
         {
-            cout << "\e[A";
-            cout << "\r";
-            cout << " -> ENCODING ROW: " << i+1 << " of " << yFrameSize << "                    \n";
+            if (prints) {
+                std::cout << "\e[A";
+                std::cout << "\r";
+                std::cout << " -> ENCODING ROW: " << i+1 << " of " << yFrameSize << "                    \n";
+            }
             //  For every column
             for (int j = 0; j < xFrameSize; j++)
             {
@@ -154,24 +254,28 @@ private:
             }
         }
 
-        return 0;
+        return;
     }
 
-    cv::Mat readFrame(int predictor=6) {
+    cv::Mat readFrame(int predictor=6, bool prints=1) {
         int pixelValue = 0;
         int estimatedValue = 0;
         int errorValue = 0;
 
         cv::Mat frame = cv::Mat::zeros(cv::Size(xFrameSize, yFrameSize), cv::IMREAD_GRAYSCALE);
-        cout << "\n";
+        
+        if (prints) {
+            std::cout << "\n";
+        }
 
         //   For every row
         for (int i = 0; i < this->yFrameSize; i++)
         {
-            cout << "\e[A";
-            cout << "\r";
-            cout << " -> DECODING ROW: " << i+1 << " of " << yFrameSize << "                    \n";
-
+            if (prints) {
+                std::cout << "\e[A";
+                std::cout << "\r";
+                std::cout << " -> DECODING ROW: " << i+1 << " of " << yFrameSize << "                    \n";
+            }
             //  For every column
             for (int j = 0; j < this->xFrameSize; j++)
             {
