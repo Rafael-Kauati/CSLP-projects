@@ -86,6 +86,18 @@ int Golomb_Decoder::decode() {
     return numberToDecode;
 }
 
+Mat Golomb_Decoder::decodeBlock(int block_size) {
+    Mat block = Mat::zeros(block_size, block_size, CV_8UC1);
+    int count = 0;
+    for (int i = 0; i < block.rows; i++) {
+        for (int j = 0; j < block.cols; j++) {
+            block.at<uchar>(i, j) = decode();
+            count++;
+        }
+    }
+    return block;
+}
+
 /**
  * @brief Converts a binary string to a decimal integer.
  *

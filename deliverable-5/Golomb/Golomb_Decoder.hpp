@@ -4,10 +4,12 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <opencv2/opencv.hpp>
 #include <cmath>
 #include "BitStream.h"
 
 using namespace std;
+using namespace cv;
 
 /**
  * @brief A class for decoding Golomb-encoded bit sequences.
@@ -33,6 +35,8 @@ class Golomb_Decoder {
          * @return The decoded integer value.
          */
         int decode();
+
+        Mat decodeBlock(int block_size);
 
         int m; ///< The value of parameter m used in the Golomb decoding algorithm.
         BitStream& stream;

@@ -3,6 +3,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/videoio.hpp>
 #include <cmath>
+#include "Golomb.hpp"
 
 using namespace std;
 using namespace cv;
@@ -12,6 +13,7 @@ private:
     string filename;
     int BLOCK_SIZE;
     int SEARCH_SIZE;
+    Golomb g;
     
 public:
     HybridCodec(/* args */);
@@ -80,7 +82,10 @@ void encode() {
                     subtract(block, bestBlock, diff);
                                         
                     // encode the diff and the deslocation vector
-                    // TODO: encode the diff and the deslocation vector
+                    g.encodeBlock(diff);
+                    g.encode(x - x_0);
+                    g.encode(y - y_0);
+                    
                     
                     // write the encoded block to the file
                     // TODO: write the encoded block to the file

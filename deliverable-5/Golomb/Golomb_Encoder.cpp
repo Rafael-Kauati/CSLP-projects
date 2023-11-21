@@ -2,6 +2,7 @@
 #include "Golomb_Encoder.hpp"
 
 using namespace std;
+using namespace cv;
 
 Golomb_Encoder::Golomb_Encoder(int param, BitStream& newStream) : m(param), stream(newStream)
 {
@@ -65,6 +66,8 @@ void Golomb_Encode::encodeBlock(Mat block) {
     }
     return;
 }
+
+
 
 
 /**

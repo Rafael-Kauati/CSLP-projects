@@ -4,9 +4,11 @@
 #include <vector>
 #include <iostream>
 #include <cmath>
+#include <opencv2/opencv.hpp>
 #include "BitStream.h"
 
 using namespace std;
+using namespace cv;
 
 /**
  * @brief A class for encoding integers using the Golomb encoding algorithm.
@@ -33,7 +35,14 @@ class Golomb_Encoder {
          */
         void encode(int num);
 
-        void encodeBlock(Mat block)
+        /**
+         * @brief Encodes a block of integers using the Golomb encoding algorithm.
+         *
+         * This method takes a block of integers as input and encodes it using the Golomb encoding algorithm.
+         *
+         * @param block The block to be encoded.
+         */
+        void encodeBlock(Mat block);
 
 
         void closeStreams();
