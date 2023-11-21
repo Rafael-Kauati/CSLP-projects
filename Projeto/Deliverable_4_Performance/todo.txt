@@ -1,0 +1,4 @@
+TODO:
+
+argumentos como entrada dos testes (pelo menos do video)
+calcular o melhor jpeg encoder ao testar para a mesma imagem 8 vezes
