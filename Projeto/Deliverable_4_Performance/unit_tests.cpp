@@ -7,6 +7,7 @@
 #include "Frame_Predicter.h"
 #include "Golomb.cpp"
 #include "BitStream.h"
+#include <chrono>
 
 using namespace std;
 
@@ -36,6 +37,7 @@ TEST_CASE("Frame Encoding/Decoding") {
         cout << " -> Output Bin File = " << outputBinFile << "\n";
         cout << " -> Output Img File = " << outputImgFile << "\n";
 
+
         Frame_Predicter predicterEnc("", outputBinFile);
 
         cout << "\n ---------- Write Parameters ---------- \n";
@@ -43,9 +45,13 @@ TEST_CASE("Frame Encoding/Decoding") {
         cout << " -> OK\n";
 
         cout << "\n ------------ Write Frame ------------ \n";
+        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
         //  Repeat this for every frame
         predicterEnc.writeFrame(frame);
-        cout << " -> OK\n";
+
+        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+        cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
 
         predicterEnc.closeStreams();
         
@@ -57,9 +63,13 @@ TEST_CASE("Frame Encoding/Decoding") {
         cout << " -> OK\n";
 
         cout << "\n ------------ Read Frame ------------ \n";
+        begin = std::chrono::steady_clock::now();
+
         //  Repeat this for every frame
         cv::Mat decodedFrame = predicterDec.readFrame();
-        cout << " -> OK\n";
+
+        end = std::chrono::steady_clock::now();
+        cout << " -> Decode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
 
         predicterDec.closeStreams();
 
@@ -73,9 +83,6 @@ TEST_CASE("Frame Encoding/Decoding") {
 
             //  For every column
             for (int j = 0; j < xFrameSize; j++) {
-                /* cout << " -> CHECKING COL: " << j+1 << " of " << xFrameSize << "                   \n";
-                cout << "\e[A";
-                cout << "\r"; */
                 REQUIRE((int)frame.at<uchar>(i, j) == (int)decodedFrame.at<uchar>(i, j));
             }
         }
@@ -116,9 +123,13 @@ TEST_CASE("Frame Encoding/Decoding") {
         cout << " -> OK\n";
 
         cout << "\n ------------ Write Frame ------------ \n";
+        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
         //  Repeat this for every frame
         predicterEnc.writeFrameColour(frame);
-        cout << " -> OK\n";
+
+        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+        cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
 
         predicterEnc.closeStreams();
         
@@ -130,9 +141,13 @@ TEST_CASE("Frame Encoding/Decoding") {
         cout << " -> OK\n";
 
         cout << "\n ------------ Read Frame ------------ \n";
+        begin = std::chrono::steady_clock::now();
+
         //  Repeat this for every frame
         cv::Mat decodedFrame = predicterDec.readFrameColour();
-        cout << " -> OK\n";
+        
+        end = std::chrono::steady_clock::now();
+        cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
 
         predicterDec.closeStreams();
 
@@ -146,9 +161,6 @@ TEST_CASE("Frame Encoding/Decoding") {
 
             //  For every column
             for (int j = 0; j < xFrameSize; j++) {
-                /* cout << " -> CHECKING COL: " << j+1 << " of " << xFrameSize << "                   \n";
-                cout << "\e[A";
-                cout << "\r"; */
                 REQUIRE(frame.at<cv::Vec3b>(i, j) == decodedFrame.at<cv::Vec3b>(i, j));
             }
         }
@@ -167,7 +179,7 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << " ------------- ---------- ------------- \n";
         int m = 8;
         
-        string videoLocation = "TestFiles/tennis_sif.y4m";
+        string videoLocation = "TestFiles/ducks_100_frames.y4m";
         string outputBinFile = "BinOutput/output.bin";
         string outputVidFile = "OutputFiles/output.mp4";
         
@@ -197,11 +209,14 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << " -> OK\n";
 
         cout << "\n ------------ Write Video ------------ \n";
+        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
 
         //  Repeat this for every frame
         predicterEnc.writeVideo(video);
-        cout << " -> OK\n";
-
+        
+        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+        cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
         predicterEnc.closeStreams();
         
 
@@ -212,9 +227,13 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << " -> OK\n";
 
         cout << "\n ------------ Read Video ------------ \n";
+        begin = std::chrono::steady_clock::now();
+
         //  Repeat this for every frame
         vector<cv::Mat> decodedVideo = predicterDec.readVideo(outputVidFile);
-        cout << " -> OK\n";
+        
+        end = std::chrono::steady_clock::now();
+        cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
 
         predicterDec.closeStreams();
 
