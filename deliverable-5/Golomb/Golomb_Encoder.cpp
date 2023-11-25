@@ -1,16 +1,10 @@
 #include <bitset>
 #include "Golomb_Encoder.hpp"
+#include <opencv4/opencv2/opencv.hpp>
 
 using namespace std;
-using namespace cv;
 
-Golomb_Encoder::Golomb_Encoder(int param, BitStream& newStream) : m(param), stream(newStream)
-{
-    if (m <= 0)
-    {
-        cerr << "Error: The golomb parameter m should be positive";
-    }
-}
+Golomb_Encoder::Golomb_Encoder(string inputFile, string outputFile) : stream(BitStream::makeFromFiles(inputFile, outputFile)) {}
 
 /**
  * @brief Encodes an integer using the Golomb encoding algorithm.
@@ -32,31 +26,59 @@ void Golomb_Encoder::encode(int num) {
     }
 
     //  Iterate frame X and Y, encode each pixel and do bitstream write
-    int quotient = num / m;
-    int remainder = num % m;
+    int quotient = numberToEncode / this->m;
+    int remainder = numberToEncode % this->m;
 
     //  Write the unary code for the quotient 
     unaryCode(quotient);
 
-    int b = static_cast<int>(floor(log2(m))); // Calculate b as floor(log2(m))
-
-    if (remainder < (1 << (b + 1)) - m) {
-        // If remainder < 2^(b+1) - m, code remainder using b bits
-        for (int i = b - 1; i >= 0; --i) {
-            stream.writeOneFileBit((remainder >> i) & 1);
-        }
+    int k = static_cast<int>(floor(log2(this->m))); // Calculate b as floor(log2(m))
+    for (int i = k - 1; i >= 0; i--)
+    {
+        stream.writeOneFileBit((remainder >> i) & 1);
     }
-    else {
-        // If remainder >= 2^(b+1) - m, code remainder using b+1 bits
-        for (int i = b; i >= 0; --i) {
-            stream.writeOneFileBit((remainder >> i) & 1);
-        }
+
+
+    return;
+}
+
+
+/**decodeBlock
+ * @brief Generates the unary code representation of a non-negative integer.
+ *
+ * This method takes a non-negative integer as input and generates its unary code representation.
+ *
+ * @param num The non-negative integer to be encoded.
+ */
+void Golomb_Encoder::unaryCode(int num) {
+    for (int i = 0; i < num; i++) {
+        stream.writeOneFileBit(1);
+    }
+
+    stream.writeOneFileBit(0);  // Adicionar um 0 no final
+    return;
+}
+
+
+//  Write an integer in the file with the maximum specified number of bytes
+void Golomb_Encoder::writeInt(int num, int numBytes) {
+
+    for (int i = (numBytes * 8) - 1; i >= 0; i--) {
+        stream.writeOneFileBit((num >> i) & 1);
     }
 
     return;
 }
 
-void Golomb_Encode::encodeBlock(Mat block) {
+void Golomb_Encoder::setMParam(int mParam) {
+    this->m = mParam;
+}
+
+void Golomb_Encoder::closeStreams() {
+    stream.close();
+}
+
+void Golomb_Encoder::encodeBlock(cv::Mat block) {
     int count = 0;
     for (int i = 0; i < block.rows; i++) {
         for (int j = 0; j < block.cols; j++) {
@@ -69,28 +91,4 @@ void Golomb_Encode::encodeBlock(Mat block) {
         }
     }
     return;
-}
-
-
-
-
-/**
- * @brief Generates the unary code representation of a non-negative integer.
- *
- * This method takes a non-negative integer as input and generates its unary code representation.
- *
- * @param num The non-negative integer to be encoded.
- */
-void Golomb_Encoder::unaryCode(int num) {
-    for (int i = 0; i < num; ++i) {
-        stream.writeOneFileBit(1);
-    }
-
-    stream.writeOneFileBit(0);  // Adicionar um 0 no final
-    return;
-}
-
-
-void Golomb_Encoder::closeStreams() {
-    stream.close();
 }

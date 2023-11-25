@@ -3,8 +3,8 @@
 #include <string>
 #include <vector>
 #include <opencv4/opencv2/opencv.hpp>
-#include "./Golomb/Golomb_Encoder.hpp"
-#include "./Golomb/Golomb_Decoder.hpp"
+#include "../Golomb/Golomb_Encoder.hpp"
+#include "../Golomb/Golomb_Decoder.hpp"
 
 using namespace std;
 
@@ -297,4 +297,21 @@ private:
 
         return frame;
     }
+
+    cv::Mat decodeBlock(int block_size) {
+        return decoder.decodeBlock(block_size);
+    }
+
+    void encodeBlock(cv::Mat block) {
+        encoder.encodeBlock(block);
+    }
+
+    int decode() {
+        return decoder.decode();
+    }
+
+    void encode(int num) {
+        encoder.encode(num);
+    }
+
 };

@@ -4,11 +4,9 @@
 #include <vector>
 #include <iostream>
 #include <cmath>
-#include <opencv2/opencv.hpp>
-#include "BitStream.h"
+#include "../HybridCodec/BitStream.h"
 
 using namespace std;
-using namespace cv;
 
 /**
  * @brief A class for encoding integers using the Golomb encoding algorithm.
@@ -17,6 +15,7 @@ using namespace cv;
  */
 class Golomb_Encoder {
     public:
+        Golomb_Encoder(string inputFile, string outputFile);
         /**
          * @brief Constructs a Golomb_Encoder object with the specified parameter.
          *
@@ -24,7 +23,7 @@ class Golomb_Encoder {
          *
          * @param param The value of the parameter used in the Golomb encoding algorithm.
          */
-        Golomb_Encoder(int param, BitStream& newStream);
+        Golomb_Encoder(BitStream newStream);
 
         /**
          * @brief Encodes an integer using the Golomb encoding algorithm.
@@ -35,20 +34,15 @@ class Golomb_Encoder {
          */
         void encode(int num);
 
-        /**
-         * @brief Encodes a block of integers using the Golomb encoding algorithm.
-         *
-         * This method takes a block of integers as input and encodes it using the Golomb encoding algorithm.
-         *
-         * @param block The block to be encoded.
-         */
-        void encodeBlock(Mat block);
+        void writeInt(int num, int numBytes);
 
+        void encodeBlock(cv::Mat block);
+
+        void setMParam(int mParam);
 
         void closeStreams();
 
-        int m; ///< The value of parameter m used in the Golomb encoding algorithm.
-        BitStream& stream;
+        BitStream stream;
 
     private:
         /**
@@ -59,6 +53,8 @@ class Golomb_Encoder {
          * @param num The integer to be encoded.
          */
         void unaryCode(int num);
+
+        int m; ///< The value of parameter m used in the Golomb encoding algorithm.
 };
 
 #endif // Golomb_Encoder_HPP

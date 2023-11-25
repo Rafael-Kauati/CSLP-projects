@@ -1,11 +1,14 @@
+#ifndef Golomb_CPP
+#define Golomb_CPP
+
 #include "Golomb_Encoder.hpp"
 #include "Golomb_Decoder.hpp"
-#include "BitStream.h"
+#include "../HybridCodec/BitStream.h"
 #include <string>
 
 class Golomb {
 public:
-    Golomb(int param, string inputFile, string outputFile, BitStream& stream) : encoder(param, stream), decoder(param, stream), writer(inputFile, outputFile), reader(outputFile, "") {}
+    Golomb(int param, string inputFile, string outputFile) : encoder(inputFile, outputFile), decoder(inputFile, outputFile), writer(inputFile, outputFile), reader(outputFile, "") {}
 
     /**
      * @brief Encodes an integer using the Golomb encoding algorithm.
@@ -48,3 +51,5 @@ private:
     BitStream     writer, reader;
 
 };
+
+#endif // Golomb_CPP

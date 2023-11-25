@@ -4,12 +4,11 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include <opencv2/opencv.hpp>
 #include <cmath>
-#include "BitStream.h"
+#include <opencv4/opencv2/opencv.hpp>
+#include "../HybridCodec/BitStream.h"
 
 using namespace std;
-using namespace cv;
 
 /**
  * @brief A class for decoding Golomb-encoded bit sequences.
@@ -18,6 +17,7 @@ using namespace cv;
  */
 class Golomb_Decoder {
     public:
+        Golomb_Decoder(string inputFile, string outputFile);
         /**
          * @brief Constructs a Golomb_Decoder object with the specified parameter.
          *
@@ -25,7 +25,7 @@ class Golomb_Decoder {
          *
          * @param param The value of the parameter used in the Golomb decoding algorithm.
          */
-        Golomb_Decoder(int param, BitStream& stream);
+        Golomb_Decoder(BitStream stream);
 
         /**
          * @brief Decodes a sequence of encoded bits.
@@ -36,10 +36,13 @@ class Golomb_Decoder {
          */
         int decode();
 
-        Mat decodeBlock(int block_size);
+        int readInt(int numBytes);
 
-        int m; ///< The value of parameter m used in the Golomb decoding algorithm.
-        BitStream& stream;
+        void setMParam(int mParam);
+
+        cv::Mat decodeBlock(int block_size);
+
+        BitStream stream;
 
     private:
         /**
@@ -51,6 +54,8 @@ class Golomb_Decoder {
          * @return The decimal integer representation of the binary string.
          */
         int binaryToDecimal(string n);
+
+        int m; ///< The value of parameter m used in the Golomb decoding algorithm.
 };
 
 #endif // Golomb_Decoder_HPP
