@@ -1,4 +1,6 @@
+#define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
+
 #include <vector>
 #include <opencv4/opencv2/opencv.hpp>
 #include <string>
