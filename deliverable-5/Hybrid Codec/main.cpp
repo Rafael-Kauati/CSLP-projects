@@ -5,10 +5,10 @@ using namespace cv;
 #include <opencv4/opencv2/opencv.hpp>
 #include <string>
 #include "Frame_Predicter.h"
-#include "Golomb.cpp"
+#include "../Golomb/Golomb.hpp"
 #include "BitStream.h"
 #include <chrono>
-#include "Hybrid Codec/HybridCodec.cpp"
+#include "HybridCodec.cpp"
 
 
 
@@ -86,7 +86,7 @@ TEST_CASE("Video Encoding/Decoding") {
         end = std::chrono::steady_clock::now();
         cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
 
-        predicterDec.closeStreams();
+        predicterDec.close();
 
         cout << "\n ------------ Check Video ------------ \n";
 
