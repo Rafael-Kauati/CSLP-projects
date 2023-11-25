@@ -104,41 +104,6 @@ vector<cv::Mat> decode()
         frameVector.push_back(decodedFrame);
 
         count++;
-    Mat prevFrame;
-    Mat frame;
-    VideoCapture cap(outputfile);
-
-    // read the first encoded block
-    Mat decodedBlock;
-    g.decodeBlock(decodedBlock);
-    Mat decodedChannel(decodedBlock.size(), decodedBlock.type());
-
-    // create a BlockSearch instance
-    BlockSearch blockSearch(BLOCK_SIZE, SEARCH_SIZE);
-
-    while (!decodedBlock.empty())
-    {
-        int dx = g.decode();
-        int dy = g.decode();
-
-        Mat currentBlock;
-
-        Mat reconstructedBlock;
-        add(currentBlock, decodedBlock, reconstructedBlock);
-
-        decodedChannel(Rect(0, 0, BLOCK_SIZE, BLOCK_SIZE)) = reconstructedBlock;
-
-        g.decodeBlock(decodedBlock);
-
-        if (decodedBlock.empty())
-        {
-            Mat decodedFrame;
-            merge(channels, decodedFrame);
-
-            // outputVideo.write(decodedFrame);
-
-            prevFrame = decodedFrame;
-            count++;
 
         if (decodedFrame.empty())
         {
