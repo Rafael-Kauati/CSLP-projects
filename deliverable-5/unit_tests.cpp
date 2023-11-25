@@ -21,13 +21,13 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << " ------------- ---------- ------------- \n";
         int m = 8;
         int blockSize = 8;
-        int searchSize = 16;
+        int searchSize = 8;
         int frequency = 6;
 
-        string defaultVideoLocation = "testVideo.mp4";
+        string defaultVideoLocation = "TestFiles/testVideo.mp4";
         string videoLocation = "";
-        string outputBinFile = "output.bin";
-        string outputVidFile = "output.mp4";
+        string outputBinFile = "BinFiles/output.bin";
+        string outputVidFile = "OutputFiles/output.mp4";
 
         cout << "\n Please select the input video file: ";
         cout << "\n (empty for TestFiles/testVideo.mp4) \n";
@@ -63,13 +63,13 @@ TEST_CASE("Video Encoding/Decoding") {
         HybridCodec hybridEnc("", outputBinFile, blockSize, searchSize, frequency);
 
         cout << "\n ---------- Write Parameters ---------- \n";
-        hybridEnc.writeParams(m, xFrameSize, yFrameSize, 1, numFrames, fps);
+        hybridEnc.writeParams(m, xFrameSize, yFrameSize, 1, numFrames, fps, blockSize, searchSize, frequency);
         cout << " -> OK\n";
 
         cout << "\n ------------ Write Video ------------ \n";
         std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
-        hybridEnc.writeVideo(video);
+        hybridEnc.encodeVideo(video);
 
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
         cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
@@ -85,7 +85,7 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << "\n ------------ Read Video ------------ \n";
         begin = std::chrono::steady_clock::now();
 
-        vector<cv::Mat> decodedVideo = hybridDec.readVideo(outputVidFile);
+        vector<cv::Mat> decodedVideo = hybridDec.decodeVideo(outputVidFile);
 
         end = std::chrono::steady_clock::now();
         cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
@@ -104,8 +104,6 @@ TEST_CASE("Video Encoding/Decoding") {
         for(cv::Mat decodedFrame : decodedVideo) {
             readOriginal = video.read(originalFrame);
             cout << " -> CHECKING Frame: " << frameIndex << "\n";
-            cout << "\e[A";
-            cout << "\r";
 
             //  Last frame has been read
             if (!readOriginal) {
@@ -117,9 +115,14 @@ TEST_CASE("Video Encoding/Decoding") {
             for (int i = 0; i < yFrameSize; i++) {
                 //  For every column
                 for (int j = 0; j < xFrameSize; j++) {
+                    cout << "Y : " << i << " | X : " << j << "                 \n";
+                    cout << "\e[A";
+                    cout << "\r";
                     REQUIRE(originalFrame.at<cv::Vec3b>(i, j) == decodedFrame.at<cv::Vec3b>(i, j));
                 }
             }
+            cout << "\e[A";
+            cout << "\r";
             frameIndex++;
         }
         cout << "\n -> OK\n";
