@@ -85,11 +85,6 @@ void encode() {
                     g.encodeBlock(diff);
                     g.encode(x - x_0);
                     g.encode(y - y_0);
-                    
-                    
-                    // write the encoded block to the file
-                    // TODO: write the encoded block to the file
-
 
                 }
             }
@@ -99,5 +94,6 @@ void encode() {
         prevFrame = frame;
         count++;
     }
-
 }
+
+
