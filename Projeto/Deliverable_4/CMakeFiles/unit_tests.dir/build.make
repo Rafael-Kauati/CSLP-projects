@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4
+CMAKE_SOURCE_DIR = /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4
+CMAKE_BINARY_DIR = /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance
 
 # Include any dependencies generated for this target.
 include CMakeFiles/unit_tests.dir/depend.make
@@ -72,58 +72,58 @@ include CMakeFiles/unit_tests.dir/flags.make
 CMakeFiles/unit_tests.dir/unit_tests.cpp.o: CMakeFiles/unit_tests.dir/flags.make
 CMakeFiles/unit_tests.dir/unit_tests.cpp.o: unit_tests.cpp
 CMakeFiles/unit_tests.dir/unit_tests.cpp.o: CMakeFiles/unit_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/unit_tests.dir/unit_tests.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unit_tests.dir/unit_tests.cpp.o -MF CMakeFiles/unit_tests.dir/unit_tests.cpp.o.d -o CMakeFiles/unit_tests.dir/unit_tests.cpp.o -c /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/unit_tests.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/unit_tests.dir/unit_tests.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unit_tests.dir/unit_tests.cpp.o -MF CMakeFiles/unit_tests.dir/unit_tests.cpp.o.d -o CMakeFiles/unit_tests.dir/unit_tests.cpp.o -c /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/unit_tests.cpp
 
 CMakeFiles/unit_tests.dir/unit_tests.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/unit_tests.dir/unit_tests.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/unit_tests.cpp > CMakeFiles/unit_tests.dir/unit_tests.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/unit_tests.cpp > CMakeFiles/unit_tests.dir/unit_tests.cpp.i
 
 CMakeFiles/unit_tests.dir/unit_tests.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/unit_tests.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/unit_tests.cpp -o CMakeFiles/unit_tests.dir/unit_tests.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/unit_tests.cpp -o CMakeFiles/unit_tests.dir/unit_tests.cpp.s
 
 CMakeFiles/unit_tests.dir/Golomb.cpp.o: CMakeFiles/unit_tests.dir/flags.make
 CMakeFiles/unit_tests.dir/Golomb.cpp.o: Golomb.cpp
 CMakeFiles/unit_tests.dir/Golomb.cpp.o: CMakeFiles/unit_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/unit_tests.dir/Golomb.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unit_tests.dir/Golomb.cpp.o -MF CMakeFiles/unit_tests.dir/Golomb.cpp.o.d -o CMakeFiles/unit_tests.dir/Golomb.cpp.o -c /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Golomb.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/unit_tests.dir/Golomb.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unit_tests.dir/Golomb.cpp.o -MF CMakeFiles/unit_tests.dir/Golomb.cpp.o.d -o CMakeFiles/unit_tests.dir/Golomb.cpp.o -c /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/Golomb.cpp
 
 CMakeFiles/unit_tests.dir/Golomb.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/unit_tests.dir/Golomb.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Golomb.cpp > CMakeFiles/unit_tests.dir/Golomb.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/Golomb.cpp > CMakeFiles/unit_tests.dir/Golomb.cpp.i
 
 CMakeFiles/unit_tests.dir/Golomb.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/Golomb.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Golomb.cpp -o CMakeFiles/unit_tests.dir/Golomb.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/Golomb.cpp -o CMakeFiles/unit_tests.dir/Golomb.cpp.s
 
 CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.o: CMakeFiles/unit_tests.dir/flags.make
 CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.o: Golomb_Encoder.cpp
 CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.o: CMakeFiles/unit_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.o -MF CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.o.d -o CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.o -c /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Golomb_Encoder.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.o -MF CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.o.d -o CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.o -c /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/Golomb_Encoder.cpp
 
 CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Golomb_Encoder.cpp > CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/Golomb_Encoder.cpp > CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.i
 
 CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Golomb_Encoder.cpp -o CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/Golomb_Encoder.cpp -o CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.s
 
 CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o: CMakeFiles/unit_tests.dir/flags.make
 CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o: Golomb_Decoder.cpp
 CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o: CMakeFiles/unit_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o -MF CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o.d -o CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o -c /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Golomb_Decoder.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o -MF CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o.d -o CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o -c /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/Golomb_Decoder.cpp
 
 CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Golomb_Decoder.cpp > CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/Golomb_Decoder.cpp > CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.i
 
 CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/Golomb_Decoder.cpp -o CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/Golomb_Decoder.cpp -o CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.s
 
 # Object files for target unit_tests
 unit_tests_OBJECTS = \
@@ -194,7 +194,7 @@ unit_tests: /usr/local/lib/libopencv_photo.so.4.8.0
 unit_tests: /usr/local/lib/libopencv_imgproc.so.4.8.0
 unit_tests: /usr/local/lib/libopencv_core.so.4.8.0
 unit_tests: CMakeFiles/unit_tests.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable unit_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable unit_tests"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/unit_tests.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -206,6 +206,6 @@ CMakeFiles/unit_tests.dir/clean:
 .PHONY : CMakeFiles/unit_tests.dir/clean
 
 CMakeFiles/unit_tests.dir/depend:
-	cd /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4 /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4 /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4 /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4 /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/CMakeFiles/unit_tests.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/CMakeFiles/unit_tests.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/unit_tests.dir/depend
 

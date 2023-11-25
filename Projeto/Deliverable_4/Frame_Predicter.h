@@ -76,13 +76,11 @@ private:
         decoder.setMParam(this->mParam);
     }
 
-    void writeVideo(cv::VideoCapture video, int predictor=6) {
+    void writeVideo(cv::VideoCapture video) {
         cv::Mat frame;
         bool read;
         int numFrame = 1;
         int maxFrames = (int)video.get(cv::CAP_PROP_FRAME_COUNT);
-
-        cout << "\n";
         
         //  For every frame 
         while (video.isOpened()) {
@@ -93,86 +91,85 @@ private:
                 break;
             }
 
+            cout << " -> WRITING FRAME: " << numFrame << " of " << this->numFrames << "    \n";
             cout << "\e[A";
             cout << "\r";
-            cout << " -> WRITING FRAME: " << numFrame << " of " << this->numFrames << "    \n";
 
             //  Write the frame
-            this->writeFrameRGB(frame, predictor, 0);
+            this->writeFrameColour(frame);
             
             numFrame++;
         }
-    }
-
-    void readVideo(string outputFile, int predictor=6) {
-        int fileT;
-        if (this->fileType == 1) {
-            fileT = cv::VideoWriter::fourcc('h', '2', '6', '4');
-        }
 
         cout << "\n";
+    }
+
+    vector<cv::Mat> readVideo(string outputFile) {
+        int fileT;
+        if (this->fileType == 1) {
+            fileT = cv::VideoWriter::fourcc('m', 'p', '4', 'v');
+        }
+
+        vector<cv::Mat> frameVector;
 
         cv::VideoWriter decodedVideoWriter(outputFile, fileT, (double)this->fps, cv::Size(this->xFrameSize, this->yFrameSize), 1);
         cv::Mat frame;
 
         for (int frameIndex = 0; frameIndex < this->numFrames; frameIndex++) {
+            cout << " -> READING FRAME: " << frameIndex+1 << " of " << this->numFrames << "    \n";
             cout << "\e[A";
             cout << "\r";
-            cout << " -> READING FRAME: " << frameIndex+1 << " of " << this->numFrames << "    \n";
 
-            frame = readFrameRGB(predictor, 0);
+            frame = readFrameColour();
+
+            frameVector.push_back(frame);
+
             decodedVideoWriter.write(frame);
         }
         decodedVideoWriter.release();
+
+        cout << "\n";
         
-        return;
+        return frameVector;
     }
 
 
-    void writeFrameRGB(cv::Mat &frame, int predictor=6, bool prints=1) { 
-        // Split the image into its RGB channels
+    void writeFrameColour(cv::Mat &frame) { 
+        // Split the image into its Colour channels
         std::vector<cv::Mat> channels;
         cv::split(frame, channels);
 
-        cv::Mat blueChannel = channels[0];
-        cv::Mat greenChannel = channels[1];
-        cv::Mat redChannel = channels[2];
+        cv::Mat VChannel = channels[0];
+        cv::Mat UChannel = channels[1];
+        cv::Mat YChannel = channels[2];
 
-        writeFrame(blueChannel, predictor, prints);
-        writeFrame(greenChannel, predictor, prints);
-        writeFrame(redChannel, predictor, prints);
+        writeFrame(VChannel);
+        writeFrame(UChannel);
+        writeFrame(YChannel);
     }
 
-    cv::Mat readFrameRGB(int predictor=6, bool prints=1) { 
-        // Split the image into its RGB channels
+    cv::Mat readFrameColour() { 
+        // Split the image into its Colour channels
         std::vector<cv::Mat> channels;
-        cv::Mat rgbFrame;
+        cv::Mat ColourFrame;
 
-        channels.push_back(readFrame(predictor, prints));
-        channels.push_back(readFrame(predictor, prints));
-        channels.push_back(readFrame(predictor, prints));
+        channels.push_back(readFrame());
+        channels.push_back(readFrame());
+        channels.push_back(readFrame());
 
-        cv::merge(channels, rgbFrame);
+        cv::merge(channels, ColourFrame);
 
-        return rgbFrame;
+        return ColourFrame;
     }
 
-    void writeFrame(cv::Mat &frame, int predictor=6, bool prints=1) {
+    void writeFrame(cv::Mat &frame) {
         int pixelValue = 0;
         int estimatedValue = 0;
         int errorValue = 0;
 
-        if (prints) {
-            std::cout << "\n";
-        }
         //   For every row
         for (int i = 0; i < yFrameSize; i++)
         {
-            if (prints) {
-                std::cout << "\e[A";
-                std::cout << "\r";
-                std::cout << " -> ENCODING ROW: " << i+1 << " of " << yFrameSize << "                    \n";
-            }
             //  For every column
             for (int j = 0; j < xFrameSize; j++)
             {
@@ -202,43 +199,7 @@ private:
                     c = (int)frame.at<uchar>(i - 1, j - 1);
                 }
 
-                //  Estimate the pixel value using the predictor
-                switch (predictor) {
-                case 1:
-                    estimatedValue = a;
-                    break;
-                case 2:
-                    estimatedValue = b;
-                    break;
-                case 3:
-                    estimatedValue = c;
-                    break;
-                case 4:
-                    estimatedValue = a + b - c;
-                    break;
-                case 5:
-                    estimatedValue = a + (b - c) / 2;
-                    break;
-                case 6:
-                    estimatedValue = b + (a - c) / 2;
-                    break;
-                case 7:
-                    estimatedValue = (a + b) / 2;
-                    break;
-                case -1:
-                    if (c >= max(a, b))
-                    {
-                        estimatedValue = min(a, b);
-                    }
-                    else if (c <= min(a, b))
-                    {
-                        estimatedValue = max(a, b);
-                    }
-                    else
-                    {
-                        estimatedValue = a + b - c;
-                    }
-                }
+                estimatedValue = b + (a - c) / 2;
 
                 //  Extract monochrome value
                 pixelValue = (int)frame.at<uchar>(i, j);
@@ -257,25 +218,16 @@ private:
         return;
     }
 
-    cv::Mat readFrame(int predictor=6, bool prints=1) {
+    cv::Mat readFrame() {
         int pixelValue = 0;
         int estimatedValue = 0;
         int errorValue = 0;
 
         cv::Mat frame = cv::Mat::zeros(cv::Size(xFrameSize, yFrameSize), cv::IMREAD_GRAYSCALE);
         
-        if (prints) {
-            std::cout << "\n";
-        }
-
         //   For every row
         for (int i = 0; i < this->yFrameSize; i++)
         {
-            if (prints) {
-                std::cout << "\e[A";
-                std::cout << "\r";
-                std::cout << " -> DECODING ROW: " << i+1 << " of " << yFrameSize << "                    \n";
-            }
             //  For every column
             for (int j = 0; j < this->xFrameSize; j++)
             {
@@ -305,43 +257,7 @@ private:
                     c = (int)frame.at<uchar>(i - 1, j - 1);
                 }
 
-                //  Estimate the pixel value using the predictor
-                switch (predictor) {
-                case 1:
-                    estimatedValue = a;
-                    break;
-                case 2:
-                    estimatedValue = b;
-                    break;
-                case 3:
-                    estimatedValue = c;
-                    break;
-                case 4:
-                    estimatedValue = a + b - c;
-                    break;
-                case 5:
-                    estimatedValue = a + (b - c) / 2;
-                    break;
-                case 6:
-                    estimatedValue = b + (a - c) / 2;
-                    break;
-                case 7:
-                    estimatedValue = (a + b) / 2;
-                    break;
-                case -1:
-                    if (c >= max(a, b))
-                    {
-                        estimatedValue = min(a, b);
-                    }
-                    else if (c <= min(a, b))
-                    {
-                        estimatedValue = max(a, b);
-                    }
-                    else
-                    {
-                        estimatedValue = a + b - c;
-                    }
-                }
+                estimatedValue = b + (a - c) / 2;
 
                 //  Extract monochrome value
                 errorValue = decoder.decode();

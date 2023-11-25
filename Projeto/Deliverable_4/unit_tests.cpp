@@ -7,6 +7,7 @@
 #include "Frame_Predicter.h"
 #include "Golomb.cpp"
 #include "BitStream.h"
+#include <chrono>
 
 using namespace std;
 
@@ -18,7 +19,7 @@ TEST_CASE("Frame Encoding/Decoding") {
         cout << " --- SINGLE FRAME ENCODING/DECODING --- \n";
         cout << " ---           Grey scale           --- \n";
         cout << " ------------- ---------- ------------- \n";
-        int m = 16;
+        int m = 2;
         
         string imageLocation = "TestFiles/testImage.png";
         string outputBinFile = "BinOutput/output.bin";
@@ -36,6 +37,7 @@ TEST_CASE("Frame Encoding/Decoding") {
         cout << " -> Output Bin File = " << outputBinFile << "\n";
         cout << " -> Output Img File = " << outputImgFile << "\n";
 
+
         Frame_Predicter predicterEnc("", outputBinFile);
 
         cout << "\n ---------- Write Parameters ---------- \n";
@@ -43,8 +45,13 @@ TEST_CASE("Frame Encoding/Decoding") {
         cout << " -> OK\n";
 
         cout << "\n ------------ Write Frame ------------ \n";
+        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
         //  Repeat this for every frame
-        predicterEnc.writeFrame(frame, 6);
+        predicterEnc.writeFrame(frame);
+
+        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+        cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
 
         predicterEnc.closeStreams();
         
@@ -56,8 +63,13 @@ TEST_CASE("Frame Encoding/Decoding") {
         cout << " -> OK\n";
 
         cout << "\n ------------ Read Frame ------------ \n";
+        begin = std::chrono::steady_clock::now();
+
         //  Repeat this for every frame
-        cv::Mat decodedFrame = predicterDec.readFrame(6);
+        cv::Mat decodedFrame = predicterDec.readFrame();
+
+        end = std::chrono::steady_clock::now();
+        cout << " -> Decode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
 
         predicterDec.closeStreams();
 
@@ -71,9 +83,6 @@ TEST_CASE("Frame Encoding/Decoding") {
 
             //  For every column
             for (int j = 0; j < xFrameSize; j++) {
-                /* cout << " -> CHECKING COL: " << j+1 << " of " << xFrameSize << "                   \n";
-                cout << "\e[A";
-                cout << "\r"; */
                 REQUIRE((int)frame.at<uchar>(i, j) == (int)decodedFrame.at<uchar>(i, j));
             }
         }
@@ -83,13 +92,13 @@ TEST_CASE("Frame Encoding/Decoding") {
 
     }
 
-    SECTION("Single Frame, RGB") {
+    SECTION("Single Frame, YUV") {
 
         cout << " ------------- ---------- ------------- \n";
         cout << " --- SINGLE FRAME ENCODING/DECODING --- \n";
-        cout << " ---               RGB              --- \n";
+        cout << " ---               YUV              --- \n";
         cout << " ------------- ---------- ------------- \n";
-        int m = 16;
+        int m = 2;
         
         string imageLocation = "TestFiles/testImageRGB.jpg";
         string outputBinFile = "BinOutput/output.bin";
@@ -114,8 +123,13 @@ TEST_CASE("Frame Encoding/Decoding") {
         cout << " -> OK\n";
 
         cout << "\n ------------ Write Frame ------------ \n";
+        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
         //  Repeat this for every frame
-        predicterEnc.writeFrameRGB(frame, 6);
+        predicterEnc.writeFrameColour(frame);
+
+        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+        cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
 
         predicterEnc.closeStreams();
         
@@ -127,8 +141,13 @@ TEST_CASE("Frame Encoding/Decoding") {
         cout << " -> OK\n";
 
         cout << "\n ------------ Read Frame ------------ \n";
+        begin = std::chrono::steady_clock::now();
+
         //  Repeat this for every frame
-        cv::Mat decodedFrame = predicterDec.readFrameRGB(6);
+        cv::Mat decodedFrame = predicterDec.readFrameColour();
+        
+        end = std::chrono::steady_clock::now();
+        cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
 
         predicterDec.closeStreams();
 
@@ -142,9 +161,6 @@ TEST_CASE("Frame Encoding/Decoding") {
 
             //  For every column
             for (int j = 0; j < xFrameSize; j++) {
-                /* cout << " -> CHECKING COL: " << j+1 << " of " << xFrameSize << "                   \n";
-                cout << "\e[A";
-                cout << "\r"; */
                 REQUIRE(frame.at<cv::Vec3b>(i, j) == decodedFrame.at<cv::Vec3b>(i, j));
             }
         }
@@ -161,11 +177,21 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << " ------------- ---------- ------------- \n";
         cout << " -- COMPLETE VIDEO ENCODING/DECODING -- \n";
         cout << " ------------- ---------- ------------- \n";
-        int m = 16;
+        int m = 8;
         
-        string videoLocation = "TestFiles/testVideoSmaller.mkv";
+        string defaultVideoLocation = "TestFiles/testVideo.mp4";
+        string videoLocation = "";
         string outputBinFile = "BinOutput/output.bin";
-        string outputVidFile = "OutputFiles/output.mkv";
+        string outputVidFile = "OutputFiles/output.mp4";
+
+        cout << "\n Please select the input video file: ";
+        cout << "\n (empty for TestFiles/testVideo.mp4) \n";
+        cout << "        -=> ";
+        getline(std::cin, videoLocation);;
+
+        if (videoLocation == "") {
+            videoLocation = defaultVideoLocation;
+        }
         
         cv::VideoCapture video(videoLocation);
         
@@ -179,7 +205,7 @@ TEST_CASE("Video Encoding/Decoding") {
         int numFrames = (int)video.get(cv::CAP_PROP_FRAME_COUNT);
         int fps = (int)video.get(cv::CAP_PROP_FPS);
 
-        cout << " ------------- Parameters ------------- \n";
+        cout << "\n ------------- Parameters ------------- \n";
         cout << " -> M = " << m << "\n";
         cout << " -> Video = " << videoLocation << "\n";
         cout << " -> Video Size = " << xFrameSize << "x" << yFrameSize << "\n";
@@ -193,10 +219,14 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << " -> OK\n";
 
         cout << "\n ------------ Write Video ------------ \n";
+        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
 
         //  Repeat this for every frame
-        predicterEnc.writeVideo(video, 6);
-
+        predicterEnc.writeVideo(video);
+        
+        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+        cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
         predicterEnc.closeStreams();
         
 
@@ -207,54 +237,46 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << " -> OK\n";
 
         cout << "\n ------------ Read Video ------------ \n";
+        begin = std::chrono::steady_clock::now();
+
         //  Repeat this for every frame
-        predicterDec.readVideo(outputVidFile, 6);
+        vector<cv::Mat> decodedVideo = predicterDec.readVideo(outputVidFile);
+        
+        end = std::chrono::steady_clock::now();
+        cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
 
         predicterDec.closeStreams();
 
         cout << "\n ------------ Check Video ------------ \n";
-        cout << "\n";
 
         //  Reopen the original video
         video = cv::VideoCapture(videoLocation);
-        //  Open the decoded video
-        cv::VideoCapture decodedVideo(outputVidFile);
 
-        cv::Mat decodedFrame;
         cv::Mat originalFrame;
         bool readOriginal, readDecoded;
+        int frameIndex = 1;
         //  For every frame CHANGE TO ONE LATER
-        for (int frameIndex = 0; frameIndex < 1; frameIndex++) {
+        for(cv::Mat decodedFrame : decodedVideo) {
             readOriginal = video.read(originalFrame);
-            readDecoded = decodedVideo.read(decodedFrame);
+            cout << " -> CHECKING Frame: " << frameIndex << "\n";
             cout << "\e[A";
             cout << "\r";
-            cout << " -> CHECKING Frame: " << frameIndex+1 << " of " << numFrames << "    \n";
 
             //  Last frame has been read
             if (!readOriginal) {
                 cout << "ERROR! Tried reading non existent frame from the original video!\n";
                 return;
             }
-            if (!readDecoded) {
-                cout << "ERROR! Tried reading non existent frame from the decoded video!\n";
-                return;
-            }
-
-            cout << "\n";
 
             //  For every row
             for (int i = 0; i < yFrameSize; i++) {
-                cout << "\e[A";
-                cout << "\r";
-                cout << " -> CHECKING ROW: " << i+1 << " of " << yFrameSize << "    \n";
-
                 //  For every column
                 for (int j = 0; j < xFrameSize; j++) {
                     REQUIRE(originalFrame.at<cv::Vec3b>(i, j) == decodedFrame.at<cv::Vec3b>(i, j));
                 }
             }
-            cout << "\n";
+            frameIndex++;
         }
+        cout << "\n -> OK\n";
     }
 }

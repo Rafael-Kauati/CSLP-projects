@@ -1,0 +1,48 @@
+TODO:
+
+argumentos como entrada dos testes (pelo menos do video)
+calcular o melhor jpeg encoder ao testar para a mesma imagem 8 vezes
+
+
+
+
+Para um ficheiro YUV de aproximadamente 18.1 MiB (19 008 946 Bytes)
+
+time is (encode/decode)
+
+JPEG  1: time: 3279 / 8121
+  size of bin: 29,9 MiB (31 302 247 Bytes)
+
+JPEG  2: time: 3449 / 8187
+  size of bin: 34,1 MiB (35 796 992 Bytes)
+
+JPEG  3: time: 3429 / 13300
+  size of bin: 37,0 MiB (38 819 772 Bytes)
+
+JPEG  4: time: 3430 / 13310
+  size of bin: 30,9 MiB (32 400 157 Bytes)
+
+JPEG  5: time: 3509 / 8152
+  size of bin: 29,0 MiB (30 375 371 Bytes)
+
+JPEG  6: time: 3331 / 8163
+  size of bin: 30,5 MiB (31 952 330 Bytes)
+
+JPEG  7: time: 3157 / 8242
+  size of bin: 29,5 MiB (30 890 049 Bytes)
+
+JPEG -1: time: 3898 / 8354
+  size of bin: 27,9 MiB (29 270 245 Bytes)
+
+
+Ficheiro YUV 4:4:4 de 266,0 MiB (278 921 216 Bytes)
+100 Frames
+
+JPEG  1: time: 22 595 / 75 034
+  size of bin: 180,2 MiB (188 974 064) Bytes)
+
+JPEG  6: time: 29 791 / 76 355
+  size of bin: 205,9 MiB (215 932 629 Bytes)
+
+JPEG -1: time: 32 210 / 81 308
+  size of bin: 181,2 MiB (189 956 886 Bytes)
