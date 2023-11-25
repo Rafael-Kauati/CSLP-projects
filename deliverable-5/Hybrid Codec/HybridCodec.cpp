@@ -11,11 +11,12 @@ using namespace cv;
 class HybridCodec
 {
 private:
-    string filename, outputfile;
+    string inputfile, outputfile;
     int BLOCK_SIZE;
     int SEARCH_SIZE;
     Golomb g;
     int frequency;
+    Frame_Predicter p;
 
 public:
     HybridCodec(/* args */);
@@ -24,12 +25,15 @@ public:
     decode();
 };
 
-HybridCodec::HybridCodec(string filename, string outputfile, int blockSize = 8, int searchSize = 16, int frequency = 100)
+HybridCodec::HybridCodec(string inputfile, string outputfile, int blockSize = 8, int searchSize = 16, int frequency = 100)
 {
-    this->filename = filename;
+    this->inputfile = inputfile;
+    this->outputfile = outputfile;
     this->BLOCK_SIZE = blockSize;
     this->SEARCH_SIZE = searchSize;
     this->frequency = frequency;
+    this->p = Frame_Predicter p(inputfile,outputfile);
+
 }
 
 HybridCodec::~HybridCodec()
@@ -42,7 +46,7 @@ void decode()
 
     Mat prevFrame;
     Mat frame;
-    VideoCapture cap(filename);
+    VideoCapture cap(outputfile);
 
     // read the first encoded block
     Mat decodedBlock;
@@ -90,7 +94,7 @@ void encode()
     Mat frame;
 
     // get the first frame
-    VideoCapture cap(filename);
+    VideoCapture cap(inputfile);
     cap >> prevFrame;
 
     // loop through the video
