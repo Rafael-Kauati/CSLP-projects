@@ -149,7 +149,7 @@ vector<cv::Mat> decode()
 
 }
 
-void encode()
+/* void encode()
 {
     int count = 0;
 
@@ -230,7 +230,7 @@ void encode()
         prevFrame = frame;
         count++;
     }
-}
+} */
 
 void encodeVideo() {
     int count = 0;
