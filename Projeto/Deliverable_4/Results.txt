@@ -22,7 +22,7 @@ JPEG  6: time: 3331 / 8163
 JPEG  7: time: 3157 / 8242
   size of bin: 29,5 MiB (30 890 049 Bytes)
 
-JPEG -1: time: 3898 / 8354
+JPEG LS: time: 3898 / 8354
   size of bin: 27,9 MiB (29 270 245 Bytes)
 
 
@@ -36,7 +36,7 @@ JPEG  1: time: 22 595 / 75 034
 JPEG  6: time: 29 791 / 76 355
   size of bin: 205,9 MiB (215 932 629 Bytes)
 
-JPEG -1: time: 32 210 / 81 308
+JPEG LS: time: 32 210 / 81 308
   size of bin: 181,2 MiB (189 956 886 Bytes)
 
 
