@@ -14,33 +14,34 @@ private:
     int BLOCK_SIZE;
     int SEARCH_SIZE;
     Golomb g;
-    
+    int frequency;
+
 public:
     HybridCodec(/* args */);
     ~HybridCodec();
     encode()
 };
 
-HybridCodec::HybridCodec(string filename, string outputfile ,int blockSize = 8, int searchSize=16)
+HybridCodec::HybridCodec(string filename, string outputfile, int blockSize = 8, int searchSize = 16, int frequency = 100)
 {
     this->filename = filename;
     this->outputfile = outputfile;
     this->BLOCK_SIZE = blockSize;
     this->SEARCH_SIZE = searchSize;
+    this->frequency = frequency;
 }
-
 
 HybridCodec::~HybridCodec()
 {
 }
 
-void decode() {
+void decode()
+{
     int count = 1;
 
     Mat prevFrame;
     Mat frame;
     VideoCapture cap(filename);
-
 
     // read the first encoded block
     Mat decodedBlock;
@@ -50,7 +51,8 @@ void decode() {
     // create a BlockSearch instance
     BlockSearch blockSearch(BLOCK_SIZE, SEARCH_SIZE);
 
-    while (!decodedBlock.empty()) {
+    while (!decodedBlock.empty())
+    {
         int dx = g.decode();
         int dy = g.decode();
 
@@ -64,7 +66,8 @@ void decode() {
 
         g.decodeBlock(decodedBlock);
 
-        if (decodedBlock.empty()) {
+        if (decodedBlock.empty())
+        {
             Mat decodedFrame;
             merge(channels, decodedFrame);
 
@@ -77,13 +80,11 @@ void decode() {
             decodedChannel = Mat(decodedBlock.size(), decodedBlock.type());
         }
     }
-
-
 }
 
-
-void encode() {
-    int count = 1;
+void encode()
+{
+    int count = 0;
 
     Mat prevFrame;
     Mat frame;
@@ -93,10 +94,12 @@ void encode() {
     cap >> prevFrame;
 
     // loop through the video
-    while(!prevFrame.empty()) {
+    while (!prevFrame.empty())
+    {
         cap >> frame;
         // if the frame is empty, break immediately
-        if(frame.empty()) {
+        if (frame.empty())
+        {
             break;
         }
         // split the frame into channels
@@ -104,9 +107,10 @@ void encode() {
         split(frame, channels);
 
         BlockSearch blockSearch(BLOCK_SIZE, SEARCH_SIZE);
-        
+
         // loop through the channels
-        for(int i = 0; i < channels.size(); i++) {
+        for (int i = 0; i < channels.size(); i++)
+        {
             // get the current channel
             Mat channel = channels[i];
             // get the height and width of the channel
@@ -115,8 +119,10 @@ void encode() {
 
             // loop through the channel in blocks
 
-            for(int y = 0; y < height; y += BLOCK_SIZE) {
-                for(int x = 0; x < width; x += BLOCK_SIZE) {
+            for (int y = 0; y < height; y += BLOCK_SIZE)
+            {
+                for (int x = 0; x < width; x += BLOCK_SIZE)
+                {
                     Mat block = channel(Rect(x, y, BLOCK_SIZE, BLOCK_SIZE));
                     // get the best block
                     vector<int> bestBlock = blockSearch.findBestBlock(prevFrame, block, x, y);
@@ -129,12 +135,11 @@ void encode() {
                     // get the diff between the best block and the current block
                     Mat diff;
                     subtract(block, bestBlock, diff);
-                                        
+
                     // encode the diff and the deslocation vector
                     g.encodeBlock(diff);
                     g.encode(x - x_0);
                     g.encode(y - y_0);
-
                 }
             }
         }
@@ -144,5 +149,3 @@ void encode() {
         count++;
     }
 }
-
-
