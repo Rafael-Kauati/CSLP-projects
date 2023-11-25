@@ -10,7 +10,7 @@ using namespace cv;
 class HybridCodec
 {
 private:
-    string filename;
+    string filename, outputfile;
     int BLOCK_SIZE;
     int SEARCH_SIZE;
     Golomb g;
@@ -21,9 +21,10 @@ public:
     encode()
 };
 
-HybridCodec::HybridCodec(string filename, int blockSize = 8, int searchSize=16)
+HybridCodec::HybridCodec(string filename, string outputfile ,int blockSize = 8, int searchSize=16)
 {
     this->filename = filename;
+    this->outputfile = outputfile;
     this->BLOCK_SIZE = blockSize;
     this->SEARCH_SIZE = searchSize;
 }
@@ -32,6 +33,54 @@ HybridCodec::HybridCodec(string filename, int blockSize = 8, int searchSize=16)
 HybridCodec::~HybridCodec()
 {
 }
+
+void decode() {
+    int count = 1;
+
+    Mat prevFrame;
+    Mat frame;
+    VideoCapture cap(filename);
+
+
+    // read the first encoded block
+    Mat decodedBlock;
+    g.decodeBlock(decodedBlock);
+    Mat decodedChannel(decodedBlock.size(), decodedBlock.type());
+
+    // create a BlockSearch instance
+    BlockSearch blockSearch(BLOCK_SIZE, SEARCH_SIZE);
+
+    while (!decodedBlock.empty()) {
+        int dx = g.decode();
+        int dy = g.decode();
+
+        Mat currentBlock;
+        blockSearch.applyMotionCompensation(prevFrame, currentBlock, dx, dy);
+
+        Mat reconstructedBlock;
+        add(currentBlock, decodedBlock, reconstructedBlock);
+
+        decodedChannel(Rect(0, 0, BLOCK_SIZE, BLOCK_SIZE)) = reconstructedBlock;
+
+        g.decodeBlock(decodedBlock);
+
+        if (decodedBlock.empty()) {
+            Mat decodedFrame;
+            merge(channels, decodedFrame);
+
+            outputVideo.write(decodedFrame);
+
+            prevFrame = decodedFrame;
+            count++;
+
+            g.decodeBlock(decodedBlock);
+            decodedChannel = Mat(decodedBlock.size(), decodedBlock.type());
+        }
+    }
+
+
+}
+
 
 void encode() {
     int count = 1;
