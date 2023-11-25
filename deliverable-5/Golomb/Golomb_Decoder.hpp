@@ -6,7 +6,7 @@
 #include <iostream>
 #include <cmath>
 #include <opencv4/opencv2/opencv.hpp>
-#include "BitStream.h"
+#include "../HybridCodec/BitStream.h"
 
 using namespace std;
 

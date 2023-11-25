@@ -4,10 +4,10 @@
 #include <vector>
 #include <opencv4/opencv2/opencv.hpp>
 #include <string>
-#include "Golomb.cpp"
-#include "BitStream.h"
+#include "Golomb/Golomb.cpp"
+#include "HybridCodec/BitStream.h"
 #include <chrono>
-#include "HybridCodec.cpp"
+#include "HybridCodec/HybridCodec.cpp"
 
 using namespace std;
 using namespace cv;
