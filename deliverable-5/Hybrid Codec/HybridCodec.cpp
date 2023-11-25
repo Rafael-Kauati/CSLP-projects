@@ -57,7 +57,6 @@ void decode()
         int dy = g.decode();
 
         Mat currentBlock;
-        blockSearch.applyMotionCompensation(prevFrame, currentBlock, dx, dy);
 
         Mat reconstructedBlock;
         add(currentBlock, decodedBlock, reconstructedBlock);
