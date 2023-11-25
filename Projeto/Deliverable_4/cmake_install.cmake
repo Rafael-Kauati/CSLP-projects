@@ -1,4 +1,4 @@
-# Install script for directory: /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance
+# Install script for directory: /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4_Performance/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_4/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
