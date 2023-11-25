@@ -70,10 +70,40 @@ void close()
     p.closeStreams();
 }
 
-void decode()
+vector<cv::Mat> decode()
 {
-    int count = 1;
+    int count = 0;
 
+    Mat decodedFrame;
+
+    vector<cv::Mat> frameVector;
+
+    while (true)
+    {
+        if (count % frequency == 0)
+        {
+            Frame_Predicter fp;
+
+            Mat intraCodedFrame = fp.readFrameColour(inputfile);
+
+            decodedFrame = intraCodedFrame;
+        }
+        else
+        {
+            cout<< "\nDeconding inter-frames  at frame : "<< count<< "\n"<<endl;
+            Mat diff = g.decodeBlock();
+            int x_diff = g.decode();
+            int y_diff = g.decode();
+
+            Mat bestBlock = prevFrame(Rect(x_diff, y_diff, BLOCK_SIZE, BLOCK_SIZE));
+
+            decodedFrame = bestBlock + diff;
+        }
+
+
+        frameVector.push_back(decodedFrame);
+
+        count++;
     Mat prevFrame;
     Mat frame;
     VideoCapture cap(outputfile);
@@ -110,13 +140,16 @@ void decode()
             prevFrame = decodedFrame;
             count++;
 
-            g.decodeBlock(decodedBlock);
-            decodedChannel = Mat(decodedBlock.size(), decodedBlock.type());
+        if (decodedFrame.empty())
+        {
+            break;
         }
     }
+    return frameVector;
+
 }
 
-/* void encode()
+void encode()
 {
     int count = 0;
 
@@ -197,7 +230,7 @@ void decode()
         prevFrame = frame;
         count++;
     }
-} */
+}
 
 void encodeVideo() {
     int count = 0;
