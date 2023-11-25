@@ -4,7 +4,7 @@
 #include <opencv2/videoio.hpp>
 #include <cmath>
 #include "Golomb.hpp"
-#include "Frame_Predicter.h"
+#include "../Frame_Predicter.h"
 
 using namespace std;
 using namespace cv;
@@ -16,29 +16,36 @@ private:
     int SEARCH_SIZE;
     Golomb g;
     int frequency;
-    Frame_Predicter p;
 
 public:
     HybridCodec(/* args */);
     ~HybridCodec();
     encode();
     decode();
+    close();
+    Frame_Predicter p;
+
 };
 
 HybridCodec::HybridCodec(string inputfile, string outputfile, int blockSize = 8, int searchSize = 16, int frequency = 100)
+: p(inputfile, outputfile)
 {
     this->inputfile = inputfile;
     this->outputfile = outputfile;
     this->BLOCK_SIZE = blockSize;
     this->SEARCH_SIZE = searchSize;
     this->frequency = frequency;
-    this->p = Frame_Predicter p(inputfile,outputfile);
 
 }
 
 HybridCodec::~HybridCodec()
 {
 }
+
+    void close()
+    {
+        p.closeStreams();
+    }
 
 void decode()
 {
