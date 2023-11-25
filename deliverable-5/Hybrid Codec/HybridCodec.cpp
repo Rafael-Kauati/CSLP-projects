@@ -70,51 +70,50 @@ void close()
         p.closeStreams();
     }
 
-void decode()
+vector<cv::Mat> decode()
 {
-    int count = 1;
+    int count = 0;
 
-    Mat prevFrame;
-    Mat frame;
-    VideoCapture cap(outputfile);
+    Mat decodedFrame;
 
-    // read the first encoded block
-    Mat decodedBlock;
-    g.decodeBlock(decodedBlock);
-    Mat decodedChannel(decodedBlock.size(), decodedBlock.type());
+    vector<cv::Mat> frameVector;
 
-    // create a BlockSearch instance
-    BlockSearch blockSearch(BLOCK_SIZE, SEARCH_SIZE);
-
-    while (!decodedBlock.empty())
+    while (true)
     {
-        int dx = g.decode();
-        int dy = g.decode();
-
-        Mat currentBlock;
-
-        Mat reconstructedBlock;
-        add(currentBlock, decodedBlock, reconstructedBlock);
-
-        decodedChannel(Rect(0, 0, BLOCK_SIZE, BLOCK_SIZE)) = reconstructedBlock;
-
-        g.decodeBlock(decodedBlock);
-
-        if (decodedBlock.empty())
+        if (count % frequency == 0)
         {
-            Mat decodedFrame;
-            merge(channels, decodedFrame);
+            Frame_Predicter fp;
 
-            //outputVideo.write(decodedFrame);
+            Mat intraCodedFrame = fp.readFrameColour(inputfile);
 
-            prevFrame = decodedFrame;
-            count++;
+            decodedFrame = intraCodedFrame;
+        }
+        else
+        {
+            cout<< "\nDeconding inter-frames  at frame : "<< count<< "\n"<<endl;
+            Mat diff = g.decodeBlock();
+            int x_diff = g.decode();
+            int y_diff = g.decode();
 
-            g.decodeBlock(decodedBlock);
-            decodedChannel = Mat(decodedBlock.size(), decodedBlock.type());
+            Mat bestBlock = prevFrame(Rect(x_diff, y_diff, BLOCK_SIZE, BLOCK_SIZE));
+
+            decodedFrame = bestBlock + diff;
+        }
+
+
+        frameVector.push_back(decodedFrame);
+
+        count++;
+
+        if (decodedFrame.empty())
+        {
+            break;
         }
     }
+    return frameVector;
+
 }
+
 
 void encode()
 {
