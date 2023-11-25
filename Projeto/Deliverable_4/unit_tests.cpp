@@ -147,7 +147,7 @@ TEST_CASE("Frame Encoding/Decoding") {
         cv::Mat decodedFrame = predicterDec.readFrameColour();
         
         end = std::chrono::steady_clock::now();
-        cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
+        cout << " -> Decode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
 
         predicterDec.closeStreams();
 
@@ -243,7 +243,7 @@ TEST_CASE("Video Encoding/Decoding") {
         vector<cv::Mat> decodedVideo = predicterDec.readVideo(outputVidFile);
         
         end = std::chrono::steady_clock::now();
-        cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
+        cout << " -> Decode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
 
         predicterDec.closeStreams();
 
