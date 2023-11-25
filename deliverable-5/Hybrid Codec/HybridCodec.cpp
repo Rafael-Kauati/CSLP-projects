@@ -42,7 +42,14 @@ HybridCodec::~HybridCodec()
 {
 }
 
-    void close()
+void writeParams(int newmParam, int newxFrameSize, int newyFrameSize, int newfileType, int newnumFrames=1, int newfps=1)
+{
+    p.writeParams(int newmParam, int newxFrameSize, int newyFrameSize, int newfileType, int newnumFrames=1, int newfps=1);
+}
+
+
+
+void close()
     {
         p.closeStreams();
     }
