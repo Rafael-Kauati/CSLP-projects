@@ -1,5 +1,5 @@
 #include "Golomb_Decoder.hpp"
-#include "../HybridCodec/BitStream.h"
+#include "BitStream.h"
 #include <opencv4/opencv2/opencv.hpp>
 #include <string>
 

@@ -1,10 +1,13 @@
+#ifndef Frame_Predicter_HPP
+#define Frame_Predicter_HPP
+
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
 #include <opencv4/opencv2/opencv.hpp>
-#include "../Golomb/Golomb_Encoder.hpp"
-#include "../Golomb/Golomb_Decoder.hpp"
+#include "Golomb_Encoder.hpp"
+#include "Golomb_Decoder.hpp"
 
 using namespace std;
 
@@ -315,3 +318,5 @@ private:
     }
 
 };
+
+#endif

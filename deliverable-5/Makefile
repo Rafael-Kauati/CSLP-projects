@@ -139,77 +139,125 @@ unit_tests/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/build
 .PHONY : unit_tests/fast
 
-Golomb/Golomb.o: Golomb/Golomb.cpp.o
-.PHONY : Golomb/Golomb.o
+BlockSearch.o: BlockSearch.cpp.o
+.PHONY : BlockSearch.o
 
 # target to build an object file
-Golomb/Golomb.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb/Golomb.cpp.o
-.PHONY : Golomb/Golomb.cpp.o
+BlockSearch.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/BlockSearch.cpp.o
+.PHONY : BlockSearch.cpp.o
 
-Golomb/Golomb.i: Golomb/Golomb.cpp.i
-.PHONY : Golomb/Golomb.i
+BlockSearch.i: BlockSearch.cpp.i
+.PHONY : BlockSearch.i
 
 # target to preprocess a source file
-Golomb/Golomb.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb/Golomb.cpp.i
-.PHONY : Golomb/Golomb.cpp.i
+BlockSearch.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/BlockSearch.cpp.i
+.PHONY : BlockSearch.cpp.i
 
-Golomb/Golomb.s: Golomb/Golomb.cpp.s
-.PHONY : Golomb/Golomb.s
+BlockSearch.s: BlockSearch.cpp.s
+.PHONY : BlockSearch.s
 
 # target to generate assembly for a file
-Golomb/Golomb.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb/Golomb.cpp.s
-.PHONY : Golomb/Golomb.cpp.s
+BlockSearch.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/BlockSearch.cpp.s
+.PHONY : BlockSearch.cpp.s
 
-Golomb/Golomb_Decoder.o: Golomb/Golomb_Decoder.cpp.o
-.PHONY : Golomb/Golomb_Decoder.o
+Golomb.o: Golomb.cpp.o
+.PHONY : Golomb.o
 
 # target to build an object file
-Golomb/Golomb_Decoder.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb/Golomb_Decoder.cpp.o
-.PHONY : Golomb/Golomb_Decoder.cpp.o
+Golomb.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb.cpp.o
+.PHONY : Golomb.cpp.o
 
-Golomb/Golomb_Decoder.i: Golomb/Golomb_Decoder.cpp.i
-.PHONY : Golomb/Golomb_Decoder.i
+Golomb.i: Golomb.cpp.i
+.PHONY : Golomb.i
 
 # target to preprocess a source file
-Golomb/Golomb_Decoder.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb/Golomb_Decoder.cpp.i
-.PHONY : Golomb/Golomb_Decoder.cpp.i
+Golomb.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb.cpp.i
+.PHONY : Golomb.cpp.i
 
-Golomb/Golomb_Decoder.s: Golomb/Golomb_Decoder.cpp.s
-.PHONY : Golomb/Golomb_Decoder.s
+Golomb.s: Golomb.cpp.s
+.PHONY : Golomb.s
 
 # target to generate assembly for a file
-Golomb/Golomb_Decoder.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb/Golomb_Decoder.cpp.s
-.PHONY : Golomb/Golomb_Decoder.cpp.s
+Golomb.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb.cpp.s
+.PHONY : Golomb.cpp.s
 
-Golomb/Golomb_Encoder.o: Golomb/Golomb_Encoder.cpp.o
-.PHONY : Golomb/Golomb_Encoder.o
+Golomb_Decoder.o: Golomb_Decoder.cpp.o
+.PHONY : Golomb_Decoder.o
 
 # target to build an object file
-Golomb/Golomb_Encoder.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb/Golomb_Encoder.cpp.o
-.PHONY : Golomb/Golomb_Encoder.cpp.o
+Golomb_Decoder.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.o
+.PHONY : Golomb_Decoder.cpp.o
 
-Golomb/Golomb_Encoder.i: Golomb/Golomb_Encoder.cpp.i
-.PHONY : Golomb/Golomb_Encoder.i
+Golomb_Decoder.i: Golomb_Decoder.cpp.i
+.PHONY : Golomb_Decoder.i
 
 # target to preprocess a source file
-Golomb/Golomb_Encoder.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb/Golomb_Encoder.cpp.i
-.PHONY : Golomb/Golomb_Encoder.cpp.i
+Golomb_Decoder.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.i
+.PHONY : Golomb_Decoder.cpp.i
 
-Golomb/Golomb_Encoder.s: Golomb/Golomb_Encoder.cpp.s
-.PHONY : Golomb/Golomb_Encoder.s
+Golomb_Decoder.s: Golomb_Decoder.cpp.s
+.PHONY : Golomb_Decoder.s
 
 # target to generate assembly for a file
-Golomb/Golomb_Encoder.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb/Golomb_Encoder.cpp.s
-.PHONY : Golomb/Golomb_Encoder.cpp.s
+Golomb_Decoder.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb_Decoder.cpp.s
+.PHONY : Golomb_Decoder.cpp.s
+
+Golomb_Encoder.o: Golomb_Encoder.cpp.o
+.PHONY : Golomb_Encoder.o
+
+# target to build an object file
+Golomb_Encoder.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.o
+.PHONY : Golomb_Encoder.cpp.o
+
+Golomb_Encoder.i: Golomb_Encoder.cpp.i
+.PHONY : Golomb_Encoder.i
+
+# target to preprocess a source file
+Golomb_Encoder.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.i
+.PHONY : Golomb_Encoder.cpp.i
+
+Golomb_Encoder.s: Golomb_Encoder.cpp.s
+.PHONY : Golomb_Encoder.s
+
+# target to generate assembly for a file
+Golomb_Encoder.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/Golomb_Encoder.cpp.s
+.PHONY : Golomb_Encoder.cpp.s
+
+HybridCodec.o: HybridCodec.cpp.o
+.PHONY : HybridCodec.o
+
+# target to build an object file
+HybridCodec.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/HybridCodec.cpp.o
+.PHONY : HybridCodec.cpp.o
+
+HybridCodec.i: HybridCodec.cpp.i
+.PHONY : HybridCodec.i
+
+# target to preprocess a source file
+HybridCodec.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/HybridCodec.cpp.i
+.PHONY : HybridCodec.cpp.i
+
+HybridCodec.s: HybridCodec.cpp.s
+.PHONY : HybridCodec.s
+
+# target to generate assembly for a file
+HybridCodec.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/HybridCodec.cpp.s
+.PHONY : HybridCodec.cpp.s
 
 unit_tests.o: unit_tests.cpp.o
 .PHONY : unit_tests.o
@@ -245,15 +293,21 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... unit_tests"
-	@echo "... Golomb/Golomb.o"
-	@echo "... Golomb/Golomb.i"
-	@echo "... Golomb/Golomb.s"
-	@echo "... Golomb/Golomb_Decoder.o"
-	@echo "... Golomb/Golomb_Decoder.i"
-	@echo "... Golomb/Golomb_Decoder.s"
-	@echo "... Golomb/Golomb_Encoder.o"
-	@echo "... Golomb/Golomb_Encoder.i"
-	@echo "... Golomb/Golomb_Encoder.s"
+	@echo "... BlockSearch.o"
+	@echo "... BlockSearch.i"
+	@echo "... BlockSearch.s"
+	@echo "... Golomb.o"
+	@echo "... Golomb.i"
+	@echo "... Golomb.s"
+	@echo "... Golomb_Decoder.o"
+	@echo "... Golomb_Decoder.i"
+	@echo "... Golomb_Decoder.s"
+	@echo "... Golomb_Encoder.o"
+	@echo "... Golomb_Encoder.i"
+	@echo "... Golomb_Encoder.s"
+	@echo "... HybridCodec.o"
+	@echo "... HybridCodec.i"
+	@echo "... HybridCodec.s"
 	@echo "... unit_tests.o"
 	@echo "... unit_tests.i"
 	@echo "... unit_tests.s"

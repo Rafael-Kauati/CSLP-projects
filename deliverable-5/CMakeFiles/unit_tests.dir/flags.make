@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/frostywolf/Documents/GitReps/CSLP-projects/deliverable-5/Golomb -isystem /usr/local/include/opencv4
+CXX_INCLUDES = -isystem /usr/local/include/opencv4
 
 CXX_FLAGS = 
 

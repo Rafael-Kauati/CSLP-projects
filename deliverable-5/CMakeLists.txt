@@ -5,8 +5,17 @@ find_package(Catch2 REQUIRED)
 find_package(OpenCV REQUIRED)
 
 include_directories( ${OpenCV_INCLUDE_DIRS} )
-include_directories(Golomb)
-add_executable(unit_tests unit_tests.cpp Golomb/Golomb.cpp Golomb/Golomb_Encoder.cpp Golomb/Golomb_Encoder.hpp Golomb/Golomb_Decoder.cpp Golomb/Golomb_Decoder.hpp HybridCodec/BitStream.h)
+add_executable(unit_tests unit_tests.cpp
+                Golomb.cpp 
+                Golomb_Encoder.cpp 
+                Golomb_Encoder.hpp 
+                Golomb_Decoder.cpp 
+                Golomb_Decoder.hpp
+                BitStream.h
+                BlockSearch.cpp
+                Frame_Predicter.h
+                HybridCodec.cpp)
+
 
 target_link_libraries(unit_tests Catch2::Catch2 ${OpenCV_LIBS})
 

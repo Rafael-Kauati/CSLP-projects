@@ -3,7 +3,7 @@
 
 #include "Golomb_Encoder.hpp"
 #include "Golomb_Decoder.hpp"
-#include "../HybridCodec/BitStream.h"
+#include "BitStream.h"
 #include <string>
 
 class Golomb {

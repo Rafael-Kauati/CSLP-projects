@@ -2,10 +2,10 @@
 #include <vector>
 #include <opencv4/opencv2/opencv.hpp>
 #include <string>
-#include "Golomb/Golomb.cpp"
-#include "HybridCodec/BitStream.h"
+#include "Golomb.cpp"
+#include "BitStream.h"
 #include <chrono>
-#include "HybridCodec/HybridCodec.cpp"
+#include "HybridCodec.cpp"
 
 using namespace std;
 using namespace cv;
@@ -18,6 +18,9 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << " --    WITH INTERFRAME PREDICTION    -- \n";
         cout << " ------------- ---------- ------------- \n";
         int m = 8;
+        int blockSize = 8;
+        int searchSize = 16;
+        int frequency = 6;
 
         string defaultVideoLocation = "testVideo.mp4";
         string videoLocation = "";
@@ -47,12 +50,15 @@ TEST_CASE("Video Encoding/Decoding") {
 
         cout << "\n ------------- Parameters ------------- \n";
         cout << " -> M = " << m << "\n";
+        cout << " -> Block Size = " << blockSize << "\n";
+        cout << " -> Search Size = " << searchSize << "\n";
+        cout << " -> Frequency = " << frequency << "\n";
         cout << " -> Video = " << videoLocation << "\n";
         cout << " -> Video Size = " << xFrameSize << "x" << yFrameSize << "\n";
         cout << " -> Output Bin File = " << outputBinFile << "\n";
         cout << " -> Output Vid File = " << outputVidFile << "\n";
 
-        HybridCodec hybridEnc(outputBinFile);
+        HybridCodec hybridEnc("", outputBinFile, blockSize, searchSize, frequency);
 
         cout << "\n ---------- Write Parameters ---------- \n";
         hybridEnc.writeParams(m, xFrameSize, yFrameSize, 1, numFrames, fps);
@@ -65,10 +71,10 @@ TEST_CASE("Video Encoding/Decoding") {
 
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
         cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
-        hybridEnc.closeStreams();
+        hybridEnc.close();
 
 
-        HybridCodec hybridDec(outputBinFile);
+        HybridCodec hybridDec(outputBinFile, "");
 
         cout << "\n ---------- Read Parameters ---------- \n";
         hybridDec.readParams();
