@@ -1,86 +1,3 @@
-#include <iostream>
-#include <vector>
-#include <opencv2/opencv.hpp>
-#include <opencv2/videoio.hpp>
-#include <cmath>
-#include "Golomb.hpp"
-
-using namespace std;
-using namespace cv;
-class HybridCodec
-{
-private:
-    string filename, outputfile;
-    int BLOCK_SIZE;
-    int SEARCH_SIZE;
-    Golomb g;
-    
-public:
-    HybridCodec(/* args */);
-    ~HybridCodec();
-    encode()
-};
-
-HybridCodec::HybridCodec(string filename, string outputfile ,int blockSize = 8, int searchSize=16)
-{
-    this->filename = filename;
-    this->outputfile = outputfile;
-    this->BLOCK_SIZE = blockSize;
-    this->SEARCH_SIZE = searchSize;
-}
-
-
-HybridCodec::~HybridCodec()
-{
-}
-
-void decode() {
-    int count = 1;
-
-    Mat prevFrame;
-    Mat frame;
-    VideoCapture cap(filename);
-
-
-    // read the first encoded block
-    Mat decodedBlock;
-    g.decodeBlock(decodedBlock);
-    Mat decodedChannel(decodedBlock.size(), decodedBlock.type());
-
-    // create a BlockSearch instance
-    BlockSearch blockSearch(BLOCK_SIZE, SEARCH_SIZE);
-
-    while (!decodedBlock.empty()) {
-        int dx = g.decode();
-        int dy = g.decode();
-
-        Mat currentBlock;
-
-        Mat reconstructedBlock;
-        add(currentBlock, decodedBlock, reconstructedBlock);
-
-        decodedChannel(Rect(0, 0, BLOCK_SIZE, BLOCK_SIZE)) = reconstructedBlock;
-
-        g.decodeBlock(decodedBlock);
-
-        if (decodedBlock.empty()) {
-            Mat decodedFrame;
-            merge(channels, decodedFrame);
-
-            outputVideo.write(decodedFrame);
-
-            prevFrame = decodedFrame;
-            count++;
-
-            g.decodeBlock(decodedBlock);
-            decodedChannel = Mat(decodedBlock.size(), decodedBlock.type());
-        }
-    }
-
-
-}
-
-
 void encode() {
     int count = 1;
 
@@ -103,7 +20,7 @@ void encode() {
         split(frame, channels);
 
         BlockSearch blockSearch(BLOCK_SIZE, SEARCH_SIZE);
-        
+
         // loop through the channels
         for(int i = 0; i < channels.size(); i++) {
             // get the current channel
@@ -128,13 +45,13 @@ void encode() {
                     // get the diff between the best block and the current block
                     Mat diff;
                     subtract(block, bestBlock, diff);
-                                        
+
                     // encode the diff and the deslocation vector
                     g.encodeBlock(diff);
                     g.encode(x - x_0);
                     g.encode(y - y_0);
-                    
-                    
+
+
                     // write the encoded block to the file
                     // TODO: write the encoded block to the file
 
