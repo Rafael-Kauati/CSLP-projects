@@ -79,15 +79,9 @@ void Golomb_Encoder::closeStreams() {
 }
 
 void Golomb_Encoder::encodeBlock(cv::Mat block) {
-    int count = 0;
     for (int i = 0; i < block.rows; i++) {
         for (int j = 0; j < block.cols; j++) {
             encode(block.at<uchar>(i, j));
-            // write to file
-            for (int k = 0; k < 8; k++) {
-                stream.writeOneFileBit((block.at<uchar>(i, j) >> k) & 1);
-            }
-            count++;
         }
     }
     return;

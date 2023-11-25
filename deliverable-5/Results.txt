@@ -1,0 +1,5 @@
+Ficheiro YUV 4:4:4 de 1,3 GiB (1 382 403 040 Bytes)
+500 Frames
+
+JPEG  6: time: 157 847 / 376 840
+  size of bin: 1,1 GiB (1 168 809 205)

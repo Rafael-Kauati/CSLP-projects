@@ -80,7 +80,7 @@ private:
     }
 
 
-    void readParams() {
+    vector<int> readParams() {
         //  Read the m parameter with 1 byte (max: 255)
         this->mParam = decoder.readInt(1);
         //  Read the x and y frame sizes with 2 bytes each (max: 65,535)
@@ -100,6 +100,9 @@ private:
         this->intraframe_period = decoder.readInt(1);
 
         decoder.setMParam(this->mParam);
+
+        return vector<int> {this->mParam, this->xFrameSize, this->yFrameSize, this->fileType, this->numFrames, 
+                            this->fps, this->block_size, this->search_area, this->intraframe_period};
     }
 
     void writeVideo(cv::VideoCapture video) {

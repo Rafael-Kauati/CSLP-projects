@@ -34,9 +34,9 @@ private:
 public:// Constructor: Sets the block size and search area size
     BlockSearch(int blockSize, int searchSize, int stepSize=1)
     {
-        BLOCK_SIZE = blockSize;
-        SEARCH_SIZE = searchSize;
-        STEP_SIZE = stepSize;
+        this->BLOCK_SIZE = blockSize;
+        this->SEARCH_SIZE = searchSize;
+        this->STEP_SIZE = stepSize;
     };
 
 
@@ -51,10 +51,10 @@ public:// Constructor: Sets the block size and search area size
         double dy = 0;
 
         // Search area
-        int startX = max(0, x_0 - SEARCH_SIZE);
-        int startY = max(0, y_0 - SEARCH_SIZE);
-        int endX = min(prevFrame.cols - BLOCK_SIZE, x_0 + SEARCH_SIZE);
-        int endY = min(prevFrame.rows - BLOCK_SIZE, y_0 + SEARCH_SIZE);
+        int startX = max(0, x_0 - this->SEARCH_SIZE);
+        int startY = max(0, y_0 - this->SEARCH_SIZE);
+        int endX = min(prevFrame.cols - BLOCK_SIZE, x_0 + this->SEARCH_SIZE);
+        int endY = min(prevFrame.rows - BLOCK_SIZE, y_0 + this->SEARCH_SIZE);
 
         // Search for the best block
         for(int i = startX; i < endX; i += STEP_SIZE)
@@ -63,6 +63,7 @@ public:// Constructor: Sets the block size and search area size
             {   
                 // get the block
                 Mat searchBlock = prevFrame(Rect(i, j, BLOCK_SIZE, BLOCK_SIZE));
+
 
                 // get the MSE
                 double mse = MSE(block, searchBlock);
