@@ -3,8 +3,8 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/videoio.hpp>
 #include <cmath>
-#include "Golomb.hpp"
-#include "../Frame_Predicter.h"
+#include "../Golomb/Golomb.hpp"
+#include "Frame_Predicter.h"
 
 using namespace std;
 using namespace cv;
@@ -42,7 +42,30 @@ HybridCodec::~HybridCodec()
 {
 }
 
-    void close()
+void writeParams(int newmParam, int newxFrameSize, int newyFrameSize,
+                 int newfileType, int newnumFrames=1, int newfps=1)
+
+{
+    p.writeParams(int newmParam, int newxFrameSize, int newyFrameSize, int newfileType, int newnumFrames=1, int newfps=1);
+}
+
+
+void readParams()
+{
+    p.readParams();
+}
+
+vector<cv::Mat> readVideo(string outputFile)
+{
+    return p.readVideo(outputFile);
+}
+
+void writeVideo(cv::VideoCapture video)
+{
+    p.writeVideo(video);
+}
+
+void close()
     {
         p.closeStreams();
     }
