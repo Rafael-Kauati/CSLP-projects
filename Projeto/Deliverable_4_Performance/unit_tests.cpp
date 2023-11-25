@@ -179,9 +179,19 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << " ------------- ---------- ------------- \n";
         int m = 8;
         
-        string videoLocation = "TestFiles/ducks_100_frames.y4m";
+        string defaultVideoLocation = "TestFiles/testVideo.mp4";
+        string videoLocation = "";
         string outputBinFile = "BinOutput/output.bin";
         string outputVidFile = "OutputFiles/output.mp4";
+
+        cout << "\n Please select the input video file: ";
+        cout << "\n (empty for TestFiles/testVideo.mp4) \n";
+        cout << "        -=> ";
+        getline(std::cin, videoLocation);;
+
+        if (videoLocation == "") {
+            videoLocation = defaultVideoLocation;
+        }
         
         cv::VideoCapture video(videoLocation);
         
@@ -195,7 +205,7 @@ TEST_CASE("Video Encoding/Decoding") {
         int numFrames = (int)video.get(cv::CAP_PROP_FRAME_COUNT);
         int fps = (int)video.get(cv::CAP_PROP_FPS);
 
-        cout << " ------------- Parameters ------------- \n";
+        cout << "\n ------------- Parameters ------------- \n";
         cout << " -> M = " << m << "\n";
         cout << " -> Video = " << videoLocation << "\n";
         cout << " -> Video Size = " << xFrameSize << "x" << yFrameSize << "\n";
