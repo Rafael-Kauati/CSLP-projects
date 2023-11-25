@@ -59,7 +59,18 @@ void Golomb_Encoder::unaryCode(int num) {
 }
 
 
-//  Write an integer in the file with the maximum specified number of bytes
+/**
+ * @brief Writes an integer to the Golomb encoder stream.
+ *
+ * This method writes the binary representation of the specified integer to
+ * the BitStream. The number of bits to write can
+ * be controlled by the 'numBytes' parameter. The most significant bits
+ * are written first.
+ *
+ * @param num The integer value to be written.
+ * @param numBytes The number of bytes (and bits) to write from the integer.
+ * @see Golomb_Encoder, Golomb_Decoder, BitStream
+ */
 void Golomb_Encoder::writeInt(int num, int numBytes) {
 
     for (int i = (numBytes * 8) - 1; i >= 0; i--) {
@@ -69,10 +80,30 @@ void Golomb_Encoder::writeInt(int num, int numBytes) {
     return;
 }
 
+
+/**
+ * @brief Sets the value of the parameter 'm' for Golomb encoding.
+ *
+ * This method sets the value of the parameter 'm' used in Golomb encoding.
+ * The parameter 'm' is a positive integer that influences the efficiency
+ * of Golomb encoding. Adjusting this parameter can affect the compression
+ * ratio and performance of the Golomb encoding algorithm.
+ *
+ * @param mParam The new value to set for the 'm' parameter.
+ */
 void Golomb_Encoder::setMParam(int mParam) {
     this->m = mParam;
 }
 
+/**
+ * @brief Closes the stream used by the Golomb encoder.
+ *
+ * This method closes the BitStream. It is
+ * essential to call this method to ensure proper cleanup and resource
+ * management after encoding is complete.
+ *
+ * @see Golomb_Encoder, Golomb_Decoder, BitStream
+ */
 void Golomb_Encoder::closeStreams() {
     stream.close();
 }
