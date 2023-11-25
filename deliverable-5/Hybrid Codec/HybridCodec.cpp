@@ -18,13 +18,13 @@ private:
 public:
     HybridCodec(/* args */);
     ~HybridCodec();
-    encode()
+    encode();
+    decode();
 };
 
-HybridCodec::HybridCodec(string filename, string outputfile ,int blockSize = 8, int searchSize=16)
+HybridCodec::HybridCodec(string filename ,int blockSize = 8, int searchSize=16)
 {
     this->filename = filename;
-    this->outputfile = outputfile;
     this->BLOCK_SIZE = blockSize;
     this->SEARCH_SIZE = searchSize;
 }
@@ -67,7 +67,7 @@ void decode() {
             Mat decodedFrame;
             merge(channels, decodedFrame);
 
-            outputVideo.write(decodedFrame);
+            //outputVideo.write(decodedFrame);
 
             prevFrame = decodedFrame;
             count++;
