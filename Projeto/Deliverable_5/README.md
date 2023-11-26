@@ -1,9 +1,9 @@
 # Deliverable 5
 
 <p align="center">
-    <img src="https://github.com/Rafael-Kauati/CSLP-projects/blob/main/Projeto/Deliverable_5/ScreenShots/tests_0.png?raw=true" height="250px">
-    <img src="https://github.com/Rafael-Kauati/CSLP-projects/blob/main/Projeto/Deliverable_5/ScreenShots/tests_1.png?raw=true" height="250px">
-    <img src="https://github.com/Rafael-Kauati/CSLP-projects/blob/main/Projeto/Deliverable_5/ScreenShots/tests_2.png?raw=true" height="250px">
+    <img src="https://github.com/Rafael-Kauati/CSLP-projects/blob/main/Projeto/Deliverable_5/ScreenShots/tests_0.png?raw=true" height="450px">
+    <img src="https://github.com/Rafael-Kauati/CSLP-projects/blob/main/Projeto/Deliverable_5/ScreenShots/tests_1.png?raw=true" height="450px">
+    <img src="https://github.com/Rafael-Kauati/CSLP-projects/blob/main/Projeto/Deliverable_5/ScreenShots/tests_2.png?raw=true" height="450px">
 </p>
 
 ## Description
