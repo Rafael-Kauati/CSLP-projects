@@ -24,13 +24,13 @@ TEST_CASE("Video Encoding/Decoding") {
         int searchSize = 8;
         int frequency = 6;
 
-        string defaultVideoLocation = "TestFiles/testVideo.mp4";
+        string defaultVideoLocation = "TestFiles/ducks_7_frames.y4m";
         string videoLocation = "";
         string outputBinFile = "BinFiles/output.bin";
         string outputVidFile = "OutputFiles/output.mp4";
 
         cout << "\n Please select the input video file: ";
-        cout << "\n (empty for TestFiles/testVideo.mp4) \n";
+        cout << "\n (empty for " << defaultVideoLocation << ") \n";
         cout << "        -=> ";
         getline(std::cin, videoLocation);;
 
@@ -125,6 +125,6 @@ TEST_CASE("Video Encoding/Decoding") {
             cout << "\r";
             frameIndex++;
         }
-        cout << "\n -> OK\n";
+        cout << "\n\n -> OK\n";
     }
 }

@@ -83,6 +83,7 @@ public:
         this->search_area = params[7];
         //  Read the period between intraframes of the video with 1 byte (max: 255)
         this->intraframe_period = params[8];
+
     }
 
     vector<cv::Mat> readVideo(string outputFile)
@@ -117,7 +118,7 @@ public:
         // get the best block
         std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-        for (int frameIndex = 0; frameIndex < this->numFrames; frameIndex++)
+        for (int frameIndex = 0; frameIndex < this->numFrames && frameIndex < 2; frameIndex++)
         {
             begin = std::chrono::steady_clock::now();
             if (frameIndex % frequency == 0)
@@ -167,11 +168,8 @@ public:
     }
 
 
-    Mat decodeChannel(Mat prevFrame)
+    Mat decodeChannel(Mat prevChannel)
     {
-        int x_diff = p.decode();
-        int y_diff = p.decode();
-
         // get the height and width of the channe
         int height = this->yFrameSize;
         int width = this->xFrameSize;
@@ -180,8 +178,6 @@ public:
 
         // loop through the channel in blocks
         // get the best block
-        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-
         for (int y = 0; y < height; y += this->BLOCK_SIZE)
         {
             for (int x = 0; x < width; x += this->BLOCK_SIZE)
@@ -193,12 +189,14 @@ public:
                 // get the best block's coordinates
                 int xPos = p.decode();
                 int yPos = p.decode();
-                Mat lastBlock = prevFrame(Rect(x+xPos, y+yPos, this->BLOCK_SIZE, this->BLOCK_SIZE));
 
 
-                for (int yd = y; yd < y + this->BLOCK_SIZE; yd++) {
-                    for (int xd = x; xd < x + this->BLOCK_SIZE; xd++) {
-                        decodedFrame.at<uchar>(yd, xd) = diff.at<uchar>(yd - y, xd - x) + lastBlock.at<uchar>(yd - y, xd - x);
+                Mat lastBlock = prevChannel(Rect(x+xPos, y+yPos, this->BLOCK_SIZE, this->BLOCK_SIZE));
+
+
+                for (int yd = 0; yd < this->BLOCK_SIZE; yd++) {
+                    for (int xd = 0; xd < this->BLOCK_SIZE; xd++) {
+                        decodedFrame.at<uchar>(yd + y, xd + x) = lastBlock.at<uchar>(yd, xd) - diff.at<uchar>(yd, xd);
                     }
                 }
             }
@@ -227,7 +225,7 @@ public:
         std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
         // loop through the video
-        while (!frame.empty())
+        while (!frame.empty() && count < 2)
         {
             begin = std::chrono::steady_clock::now();
 
@@ -279,8 +277,6 @@ public:
 
         // loop through the channel in blocks
         // get the best block
-        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-
         for (int y = 0; y < height; y += this->BLOCK_SIZE)
         {
             for (int x = 0; x < width; x += this->BLOCK_SIZE)
@@ -295,7 +291,9 @@ public:
 
                 // get the diff between the best block and the current block
                 Mat diff;
-                Mat bestBlockMat = channel(Rect(x+x_0, y+y_0, this->BLOCK_SIZE, this->BLOCK_SIZE));
+
+                //  TODO : PrevChannel ou só channel????
+                Mat bestBlockMat = prevChannel(Rect(x+x_0, y+y_0, this->BLOCK_SIZE, this->BLOCK_SIZE));
 
                 subtract(block, bestBlockMat, diff);
 

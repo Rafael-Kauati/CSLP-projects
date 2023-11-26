@@ -57,9 +57,9 @@ public:// Constructor: Sets the block size and search area size
         int endY = min(prevFrame.rows - BLOCK_SIZE, y_0 + this->SEARCH_SIZE);
 
         // Search for the best block
-        for(int i = startX; i < endX; i += STEP_SIZE)
+        for(int j = startY; j < endY; j += STEP_SIZE)
         {
-            for(int j = startY; j < endY; j += STEP_SIZE)
+            for(int i = startX; i < endX; i += STEP_SIZE)
             {   
                 // get the block
                 Mat searchBlock = prevFrame(Rect(i, j, BLOCK_SIZE, BLOCK_SIZE));
