@@ -138,6 +138,14 @@ cmake . && make
 ```
 
 
+## OPENCV Disclosure
+In this code, we use openCV to manage videos and frames.
+
+The OpenCV library converts YUV frames to RGB frames internaly, and while the option for maintaning YUV compatibility was once implemented, it was removed.
+
+We must keep in mind that a lot of the large .bin files created by our supposed "compression" algorithm became twice as large as the original file largely due to this fact, and with some more time parts of our code should be rewritten to remove the need for OpenCV, so as to manipulate the input YUV videos manually.
+
+
 ## Variable Tests
 To test which JPEG predictor we will use in our deliverable, we tested all of them with a YUV file of aproximatly 18.1MiB (19 008 946 Bytes), that has about 15 frames.
 
@@ -149,7 +157,7 @@ The tests evaluate time to encode and decode (in milliseconds) aswell as final b
 
     - JPEG  2:
         -> time: 3449 / 8187
-        ->size of bin: 34,1 MiB (35 796 992 Bytes)
+        -> size of bin: 34,1 MiB (35 796 992 Bytes)
 
     - JPEG  3:
         -> time: 3429 / 13300
