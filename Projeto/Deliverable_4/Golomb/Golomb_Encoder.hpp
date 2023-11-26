@@ -76,6 +76,13 @@ public:
      */
     void closeStreams();
 
+    /**
+     * @brief BitStream member variable.
+     *
+     * This member variable represents a BitStream, which is used for reading and writing
+     * binary data. It is a part of the Golomb_Encoder class and is utilized for encoding
+     * and decoding operations.
+     */
     BitStream stream;
 
 private:

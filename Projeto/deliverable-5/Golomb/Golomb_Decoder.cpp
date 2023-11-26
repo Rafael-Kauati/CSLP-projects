@@ -6,12 +6,21 @@
 using namespace std;
 using namespace cv;
 
+/**
+ * @brief Constructs a Golomb_Decoder object with specified input and output files.
+ *
+ * Initializes a Golomb_Decoder object with the provided input and output file names.
+ *
+ * @param inputFile The name of the input file.
+ * @param outputFile The name of the output file.
+ */
 Golomb_Decoder::Golomb_Decoder(string inputFile, string outputFile) : stream(BitStream::makeFromFiles(inputFile, outputFile)) {}
 
 /**
- * @brief Decodes a sequence of encoded bits.
+ * @brief Decodes a sequence of encoded bits using the Golomb decoding algorithm.
  *
- * This method takes a vector of boolean values representing the encoded bits and decodes them using the Golomb decoding algorithm.
+ * This method takes a vector of boolean values representing the encoded bits
+ * and decodes them using the Golomb decoding algorithm, returning the decoded integer value.
  *
  * @return The decoded integer value.
  */
@@ -82,6 +91,15 @@ int Golomb_Decoder::binaryToDecimal(string n)
     return dec_value;
 }
 
+/**
+ * @brief Reads an integer from the associated BitStream.
+ *
+ * Reads a binary representation of an integer from the BitStream. The number
+ * of bits to read is controlled by the 'numBytes' parameter.
+ *
+ * @param numBytes The number of bytes (and bits) to read from the BitStream.
+ * @return The decoded integer value.
+ */
 int Golomb_Decoder::readInt(int numBytes)
 {
     string binValue;
@@ -94,6 +112,15 @@ int Golomb_Decoder::readInt(int numBytes)
     return binaryToDecimal(binValue);
 }
 
+/**
+ * @brief Sets the value of the parameter 'm' for Golomb decoding.
+ *
+ * This method sets the value of the parameter 'm' used in the Golomb decoding
+ * algorithm. The parameter 'm' is a positive integer that influences the
+ * efficiency of the decoding process.
+ *
+ * @param mParam The new value to set for the 'm' parameter.
+ */
 void Golomb_Decoder::setMParam(int mParam)
 {
     this->m = mParam;

@@ -24,12 +24,21 @@ private:
     int STEP_SIZE;   ///< Step size for the search within the search area
 
     /**
-     * @brief Calculates the Mean Squared Error (MSE) between two blocks.
+     * @brief Calculates the Mean Squared Error (MSE) between two matrices.
      *
-     * @param A The first block.
-     * @param B The second block.
-     * @return The MSE between the two blocks.
+     * This function computes the Mean Squared Error (MSE) between two matrices A and B.
+     * The MSE is a measure of the average squared difference between corresponding
+     * elements of the two matrices. It is commonly used to quantify the difference
+     * between an original and a reconstructed image.
+     *
+     * @param A The first matrix for MSE calculation.
+     * @param B The second matrix for MSE calculation.
+     * @return The computed Mean Squared Error (MSE) between matrices A and B.
+     *
+     * @note The matrices A and B are expected to have the same dimensions.
      */
+    double MSE(Mat &A, Mat &B);
+
     double MSE(Mat &A, Mat &B)
     {
         double sum = 0.0;
@@ -66,19 +75,22 @@ public: // Constructor: Sets the block size and search area size
     ~BlockSearch(){};
 
     /**
-     * @brief Finds the best-matching block in a specified search area for a given target block.
-     * 
-     * The search area is defined by the previous frame and the target block is defined by the current frame.
-     * This function uses an exhaustive search to find the best-matching block in the search area.
-     * 
+     * @brief Finds the best-matching block in a search area for motion estimation.
+     *
+     * This function performs motion estimation by searching for the best-matching block
+     * in a specified search area within the previous frame. It calculates the Mean Squared Error (MSE)
+     * between the target block and each block in the search area and returns the motion vector
+     * (displacement) corresponding to the block with the minimum MSE.
+     *
      * Because of time constraints, this function is not as efficient as it could be. It is possible to
      * use a more efficient search algorithm such as the three-step search algorithm or the diamond search algorithm.
      *
-     * @param prevFrame The previous frame containing the search area.
+     * @param prevFrame The previous frame for motion estimation.
      * @param block The target block for motion estimation.
-     * @param x_0 The x-coordinate of the target block in the frame.
-     * @param y_0 The y-coordinate of the target block in the frame.
-     * @return A vector representing the displacement (dx, dy) of the best-matching block.
+     * @param x_0 The x-coordinate of the top-left corner of the target block in the current frame.
+     * @param y_0 The y-coordinate of the top-left corner of the target block in the current frame.
+     * @return A vector containing the motion vector [dx, dy] representing the displacement
+     * of the best-matching block in the search area.
      */
     vector<double> findBestBlock(Mat &prevFrame, Mat &block, int x_0, int y_0)
     {

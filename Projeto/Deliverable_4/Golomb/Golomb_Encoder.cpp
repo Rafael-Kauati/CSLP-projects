@@ -3,6 +3,16 @@
 
 using namespace std;
 
+/**
+ * @brief Golomb Encoder Constructor.
+ *
+ * This constructor initializes a Golomb Encoder object. It takes input and output file
+ * paths to create a BitStream for encoding. The encoder will use this BitStream for
+ * writing encoded data.
+ *
+ * @param inputFile The path to the input file.
+ * @param outputFile The path to the output file.
+ */
 Golomb_Encoder::Golomb_Encoder(string inputFile, string outputFile) : stream(BitStream::makeFromFiles(inputFile, outputFile)) {}
 
 /**
@@ -79,7 +89,6 @@ void Golomb_Encoder::writeInt(int num, int numBytes) {
 
     return;
 }
-
 
 /**
  * @brief Sets the value of the parameter 'm' for Golomb encoding.

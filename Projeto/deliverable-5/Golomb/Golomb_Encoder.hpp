@@ -10,9 +10,14 @@
 using namespace std;
 
 /**
- * @brief A class for encoding integers using the Golomb encoding algorithm.
+ * @class Golomb_Encoder
  *
- * The Golomb_Encoder class provides methods to encode integers using the Golomb encoding algorithm.
+ * @brief Represents a Golomb encoder for integer compression.
+ *
+ * The Golomb_Encoder class provides functionality to encode integers using
+ * the Golomb encoding algorithm. It supports customization of the encoding
+ * parameter 'm' and manages the associated BitStream for writing encoded
+ * data.
  */
 class Golomb_Encoder
 {
@@ -36,6 +41,17 @@ public:
      */
     void encode(int num);
 
+    /**
+     * @brief Writes an integer to the stream.
+     *
+     * This method writes the binary representation of the specified integer to
+     * the BitStream. The number of bits to write is controlled by the
+     * 'numBytes' parameter. The most significant bits are written first.
+     *
+     * @param num The integer value to be written to the stream.
+     * @param numBytes The number of bytes (and bits) to write from the integer.
+     * @see closeStreams()
+     */
     void writeInt(int num, int numBytes);
 
     /**
@@ -49,10 +65,36 @@ public:
      */
     void encodeBlock(cv::Mat block);
 
+    /**
+     * @brief Sets the value of the parameter 'm'.
+     *
+     * This method sets the value of the parameter 'm' used in the Golomb encoding
+     * algorithm. The parameter 'm' is a positive integer that influences the
+     * efficiency of the encoding process.
+     *
+     * @param mParam The new value to set for the 'm' parameter.
+     * @see writeInt(), closeStreams()
+     */
     void setMParam(int mParam);
 
+    /**
+     * @brief Closes the associated stream.
+     *
+     * This method closes the BitStream. It is essential to call
+     * this method to ensure proper cleanup and resource management after encoding
+     * is complete.
+     *
+     * @see writeInt(), setMParam()
+     */
     void closeStreams();
 
+    /**
+     * @brief BitStream member variable.
+     *
+     * This member variable represents a BitStream, which is used for reading and writing
+     * binary data. It is a part of the Golomb_Encoder class and is utilized for encoding
+     * and decoding operations.
+     */
     BitStream stream;
 
 private:

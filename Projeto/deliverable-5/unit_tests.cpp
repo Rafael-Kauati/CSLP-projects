@@ -1,3 +1,8 @@
+/**
+ * @file unit_tests.cpp
+ * @brief Test case for Video Encoding and Decoding with Interframe Prediction.
+ */
+
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
@@ -12,8 +17,32 @@
 using namespace std;
 using namespace cv;
 
-TEST_CASE("Video Encoding/Decoding") {
-    SECTION("Complete Video (array of frames)") {
+/**
+ * @defgroup HybridCodecTest Video Encoding/Decoding Test
+ * @brief Test suite for the Hybrid Codec implementation.
+ */
+
+/**
+ * @ingroup HybridCodecTest
+ * @brief Complete Video (Array of Frames) Test Case.
+ *
+ * This test case covers the encoding and decoding of a video using the Hybrid Codec
+ * with interframe prediction. It allows the user to select input parameters such as
+ * search size, block size, and step size. The test includes measuring and printing the
+ * time taken for encoding and decoding processes. Finally, it compares the pixels of
+ * the original video with the decoded video.
+ */
+TEST_CASE("Video Encoding/Decoding")
+{
+    /**
+     * @brief Pixel-by-Pixel Comparison.
+     *
+     * This section compares each pixel of the original video with the corresponding
+     * pixel in the decoded video. It checks if the decoded video matches the original
+     * video frame by frame.
+     */
+    SECTION("Complete Video (array of frames)")
+    {
 
         cout << " ------------- ---------- ------------- \n";
         cout << " -- COMPLETE VIDEO ENCODING/DECODING -- \n";
@@ -37,9 +66,11 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << "\n Please select the input video file: ";
         cout << "\n (empty for " << defaultVideoLocation << ") \n";
         cout << "        -=> ";
-        getline(std::cin, videoLocation);;
+        getline(std::cin, videoLocation);
+        ;
 
-        if (videoLocation == "") {
+        if (videoLocation == "")
+        {
             videoLocation = defaultVideoLocation;
         }
 
@@ -50,7 +81,8 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << "        -=> ";
         getline(std::cin, temp);
 
-        if (temp != "") {
+        if (temp != "")
+        {
             searchSize = stoi(temp);
         }
 
@@ -60,7 +92,8 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << "        -=> ";
         getline(std::cin, temp);
 
-        if (temp != "") {
+        if (temp != "")
+        {
             blockSize = stoi(temp);
         }
 
@@ -70,15 +103,16 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << "        -=> ";
         getline(std::cin, temp);
 
-        if (temp != "") {
+        if (temp != "")
+        {
             stepSize = stoi(temp);
         }
 
-        
         //  Open the input video capture
         cv::VideoCapture video(videoLocation);
 
-        if (!video.isOpened()) {
+        if (!video.isOpened())
+        {
             cout << " ERROR: Cannot read video file!\n";
             return;
         }
@@ -101,7 +135,6 @@ TEST_CASE("Video Encoding/Decoding") {
         cout << " -> Output Bin File = " << outputBinFile << "\n";
         cout << " -> Output Vid File = " << outputVidFile << "\n";
 
-
         //        ENCODING
         //  Instanciate the Hybrid Codec for encoding
         HybridCodec hybridEnc("", outputBinFile, blockSize, searchSize, frequency, stepSize);
@@ -118,11 +151,10 @@ TEST_CASE("Video Encoding/Decoding") {
         hybridEnc.encodeVideo(video);
 
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-        cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
-        
+        cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "\n";
+
         //  Close the used classes
         hybridEnc.close();
-
 
         //  Instanciate the Hybrid Codec for decoding
         HybridCodec hybridDec(outputBinFile, "", blockSize, searchSize, frequency, stepSize);
@@ -139,7 +171,7 @@ TEST_CASE("Video Encoding/Decoding") {
         vector<cv::Mat> decodedVideo = hybridDec.decodeVideo(outputVidFile);
 
         end = std::chrono::steady_clock::now();
-        cout << " -> Decode Time: " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
+        cout << " -> Decode Time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "\n";
 
         //  Close the used classes
         hybridDec.close();
@@ -155,31 +187,34 @@ TEST_CASE("Video Encoding/Decoding") {
         int frameIndex = 1;
 
         //  Search every frame in the vector of frames
-        for(cv::Mat decodedFrame : decodedVideo) {
+        for (cv::Mat decodedFrame : decodedVideo)
+        {
             //  Read the oposing original frame
             readOriginal = video.read(originalFrame);
-            
+
             cout << " -> CHECKING Frame: " << frameIndex << "\n";
 
             //  Decoded video still has frames but the original does not (should not happen)
-            if (!readOriginal) {
+            if (!readOriginal)
+            {
                 cout << "ERROR! Tried reading non existent frame from the original video!\n";
                 return;
             }
 
             //  For every row of pixels
-            for (int i = 0; i < yFrameSize; i++) {
+            for (int i = 0; i < yFrameSize; i++)
+            {
 
                 cout << "Row: " << i << "                 \n";
                 cout << "\e[A";
                 cout << "\r";
-                
+
                 //  For every column of pixels
-                for (int j = 0; j < xFrameSize; j++) {
+                for (int j = 0; j < xFrameSize; j++)
+                {
                     //  Test if the decoded pixel is the same as the original pixel
                     REQUIRE(originalFrame.at<cv::Vec3b>(i, j) == decodedFrame.at<cv::Vec3b>(i, j));
                 }
-            
             }
 
             cout << "\e[A";

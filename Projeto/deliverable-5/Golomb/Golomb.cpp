@@ -6,8 +6,25 @@
 #include "../HybridCodec/BitStream.h"
 #include <string>
 
-class Golomb {
+/**
+ * @brief Golomb class for Golomb encoding and decoding.
+ *
+ * This class provides functionality for Golomb encoding and decoding. It includes
+ * methods to encode integers, decode encoded bits, and manage input/output streams.
+ */
+class Golomb
+{
 public:
+    /**
+     * @brief Constructor for Golomb class.
+     *
+     * Initializes Golomb class with specified parameters and creates associated
+     * Golomb_Encoder, Golomb_Decoder, BitStream (writer), and BitStream (reader) objects.
+     *
+     * @param param The Golomb parameter.
+     * @param inputFile The input file for encoding and decoding.
+     * @param outputFile The output file for encoding and decoding.
+     */
     Golomb(int param, string inputFile, string outputFile) : encoder(inputFile, outputFile), decoder(inputFile, outputFile), writer(inputFile, outputFile), reader(outputFile, "") {}
 
     /**
@@ -18,7 +35,8 @@ public:
      * @param num The integer to be encoded.
      * @return A vector of boolean values representing the encoded bits.
      */
-    void encode(int value) {
+    void encode(int value)
+    {
         encoder.encode(value);
     }
 
@@ -30,7 +48,8 @@ public:
      * @param encodedBits The vector of boolean values representing the encoded bits.
      * @return The decoded integer value.
      */
-    int decode() {
+    int decode()
+    {
         int decodedNumber;
 
         decodedNumber = decoder.decode();
@@ -38,18 +57,25 @@ public:
         return decodedNumber;
     }
 
-    void close() {
+    /**
+     * @brief Closes the reader and writer, releasing associated resources.
+     *
+     * This method is responsible for closing the underlying reader and writer,
+     * releasing any resources they may hold, such as file handles or network
+     * connections. It is essential to call this method to ensure proper cleanup
+     * and resource management.
+     */
+    void close()
+    {
         reader.close();
         writer.close();
     }
 
-
 private:
-
-    Golomb_Encoder encoder;
-    Golomb_Decoder decoder;
-    BitStream     writer, reader;
-
+    Golomb_Encoder encoder; ///< Golomb Encoder object.
+    Golomb_Decoder decoder; ///< Golomb Decoder object.
+    BitStream writer;       ///< BitStream object for writing.
+    BitStream reader;       ///< BitStream object for reading.
 };
 
 #endif // Golomb_CPP

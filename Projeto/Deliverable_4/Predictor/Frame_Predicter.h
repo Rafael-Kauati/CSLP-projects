@@ -127,11 +127,12 @@ public:
     }
 
     /**
-     * @brief Writes video frames to the Golomb encoder stream.
+     * @brief Writes video frames to the Golomb encoded file.
      *
-     * Reads frames from a given video capture object and writes them to the Golomb encoder stream.
+     * This method reads frames from the given video capture and writes Golomb encoded versions of
+     * each frame to the Golomb encoded file. It displays progress information while writing frames.
      *
-     * @param video A cv::VideoCapture object representing the input video.
+     * @param video The video capture object.
      */
     void writeVideo(cv::VideoCapture video)
     {
@@ -165,12 +166,14 @@ public:
     }
 
     /**
-     * @brief Reads video frames from the Golomb decoder stream.
+     * @brief Reads the parameters for the video encoding and decoding.
      *
-     * Reads video frames from the Golomb decoder stream and returns them as a vector of cv::Mat objects.
+     * This method reads the parameters for video encoding and decoding, including Golomb encoding
+     * parameter 'm', frame dimensions, file type, number of frames, frames per second (FPS),
+     * block size, search area size, and intraframe period. It then sets these parameters for further use.
      *
-     * @param outputFile The name of the output file for writing the decoded video.
-     * @return A vector containing decoded video frames.
+     * @return A vector containing the read parameters in the following order:
+     *         [mParam, xFrameSize, yFrameSize, fileType, numFrames, fps, block_size, search_area, intraframe_period].
      */
     vector<cv::Mat> readVideo(string outputFile)
     {
@@ -205,13 +208,17 @@ public:
     }
 
     /**
-     * @brief Writes a color video frame to the Golomb encoder stream.
+     * @brief Writes a color frame by encoding separate color channels.
      *
-     * Splits the input frame into color channels and writes them to the Golomb encoder stream.
+     * This method takes a color frame, splits it into individual color channels,
+     * and encodes each channel separately using Golomb encoding. The resulting Golomb
+     * encoded frames are then written to the output stream.
      *
-     * @note This method is originaly a helper method for writeVideo(). As the writeVideo() method accepts a cv::VideoCapture object, the channels are automatically converted to RGB format, despite the input frame being in YUV format.
+     * @param frame The input color frame in YUV format.
      *
-     * @param frame The input color video frame.
+     * @note This method is originaly a helper method for writeVideo(). As the writeVideo()
+     *       method accepts a cv::VideoCapture object, the channels are automatically converted to
+     *       RGB format, despite the input frame being in YUV format.
      */
     void writeFrameColour(cv::Mat &frame)
     {
@@ -229,11 +236,13 @@ public:
     }
 
     /**
-     * @brief Reads a color video frame from the Golomb decoder stream.
+     * @brief Reads a color frame by decoding separate color channels.
      *
-     * Reads color video channels from the Golomb decoder stream and merges them into a single cv::Mat object.
+     * This method reads Golomb encoded frames for individual color channels,
+     * decodes each channel separately using Golomb decoding, and then merges them to
+     * reconstruct the original color frame.
      *
-     * @return A cv::Mat object containing the decoded color video frame.
+     * @return The reconstructed color frame.
      */
     cv::Mat readFrameColour()
     {
@@ -250,12 +259,20 @@ public:
         return ColourFrame;
     }
 
-/**
-     * @brief Writes a video frame to the Golomb encoder stream.
+    /**
+     * @brief Writes a frame by encoding pixel values using Golomb encoding.
      *
-     * Encodes a monochrome video frame/ video frame channel using Golomb encoding and writes it to the Golomb encoder stream.
+     * This method encodes a frame by calculating the prediction error for each pixel
+     * based on the previously encoded pixels in the frame. The prediction error is
+     * then encoded using Golomb encoding and written to the output stream.
      *
-     * @param frame The input monochrome video frame/ video frame channel.
+     * @param frame The input frame to be encoded.
+     *
+     * @note The Golomb encoding is used to compress the prediction error of each pixel.
+     *       The encoding process involves estimating pixel values, calculating prediction
+     *       errors, and updating the prediction for subsequent pixels.
+     *       We are using JPEG-6's prediction algorithm, which is based on the
+     *       formula: a + (b - c) / 2, because is the most balanced one.
      */
     void writeFrame(cv::Mat &frame)
     {
@@ -315,11 +332,21 @@ public:
     }
 
     /**
-     * @brief Reads a video frame from the Golomb decoder stream.
+     * @brief Reads and reconstructs a frame using Golomb decoding.
      *
-     * Decodes a monochrome video frame/ video frame channel from the Golomb decoder stream and returns it as a cv::Mat object.
+     * This method reads the Golomb-encoded prediction errors from the input stream,
+     * reconstructs the pixel values, and assembles them into a frame using Golomb decoding.
+     * The Golomb decoding algorithm is applied to reconstruct the entire frame based on
+     * the encoded prediction errors for each pixel.
      *
-     * @return A cv::Mat object containing the decoded monochrome video frame/ video frame channel.
+     * @return The reconstructed frame as a cv::Mat.
+     *
+     * @note The Golomb decoding process involves reading the encoded prediction errors,
+     *       reconstructing the pixel values, and assembling them into a cv::Mat frame.
+     *       The decoding process is applied to each pixel of the frame to reconstruct the
+     *       original pixel values.
+     *       We are using JPEG-6's prediction algorithm, which is based on the
+     *       formula: a + (b - c) / 2, because is the most balanced one.
      */
     cv::Mat readFrame()
     {

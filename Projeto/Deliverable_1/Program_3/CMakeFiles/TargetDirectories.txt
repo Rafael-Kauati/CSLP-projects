@@ -1,3 +1,0 @@
-/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_1/Program_3/CMakeFiles/main.dir
-/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_1/Program_3/CMakeFiles/edit_cache.dir
-/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_1/Program_3/CMakeFiles/rebuild_cache.dir

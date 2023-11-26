@@ -73,8 +73,8 @@ public:
     /**
      * @brief Writes parameters for encoding to the predictor and saves them in the HybridCodec object.
      *
-     * This method writes the parameters for encoding to the BitStream object of the predictor and saves them in the HybridCodec object.
-     * These params are wirtten in the BitStream as an header for the video file.
+     * This method writes the parameters for encoding to the BitStream object of the predictor and saves them
+     * in the HybridCodec object. These parameters are written in the BitStream as a header for the video file.
      *
      * @param newmParam The m parameter.
      * @param newxFrameSize The x-frame size.
@@ -86,6 +86,7 @@ public:
      * @param newsearch_area Search area size for encoding.
      * @param newintraframe_period Period between intra-frames.
      */
+
     void writeParams(int newmParam, int newxFrameSize, int newyFrameSize,
                      int newfileType, int newnumFrames = 1, int newfps = 1,
                      int newblock_size = 1, int newsearch_area = 1, int newintraframe_period = 1)
@@ -109,7 +110,7 @@ public:
      * @brief Reads parameters from the BitStream and stores them in the HybridCodec object.
      *
      * This method reads the parameters from the BitStream and stores them in the HybridCodec object.
-     * These params are read from the BitStream's header for the bin video file.
+     * These parameters are read from the BitStream's header for the bin video file.
      */
     void readParams()
     {
@@ -135,7 +136,10 @@ public:
     }
 
     /**
-     * @brief Reads a video from the specified bin output file file using the Golomb decoder.
+     * @brief Reads a video from the specified bin output file using the Golomb decoder.
+     *
+     * This method reads a video from the specified bin output file using the Golomb decoder.
+     *
      * @param outputFile The path to the output video file.
      * @return A vector of frames from the video.
      */
@@ -146,6 +150,9 @@ public:
 
     /**
      * @brief Writes a video to the BitStream using the specified VideoCapture object.
+     *
+     * This method writes a video to the BitStream using the specified VideoCapture object.
+     *
      * @param video The VideoCapture object containing the video to be written.
      */
     void writeVideo(cv::VideoCapture video)
@@ -155,16 +162,28 @@ public:
 
     /**
      * @brief Closes the streams used by the predictor.
+     *
+     * This method closes the streams used by the predictor. It is responsible for closing any open streams, finalizing
+     * any pending operations, and releasing associated resources.
      */
     void close()
     {
         p.closeStreams();
     }
-
     /**
      * @brief Decodes a video and returns a vector of frames.
+     *
+     * This method decodes a video using the specified output video file path. It utilizes intra-frame coding for frames
+     * at the specified frequency and inter-frame coding for other frames. The decoded frames are saved in a vector, and
+     * the final decoded video is written to the specified output video file.
+     *
      * @param outputVidFile The path to the output video file.
      * @return A vector of frames from the decoded video.
+     *
+     * @note The video frames are decoded using intra-frame coding at a specified frequency and inter-frame coding for other frames.
+     * @note The decoded frames are saved in a vector and added to the final video written to the specified output video file.
+     * @note The timing information for each frame's decoding duration is printed to the console.
+     * @note The frequency parameter determines the frames at which intra-frame coding is applied.
      */
     vector<cv::Mat> decodeVideo(string outputVidFile)
     {
@@ -223,9 +242,18 @@ public:
     }
 
     /**
-     * @brief Decodes a frame using the previous frame.
+     * @brief Decodes a frame using the previous frame for inter-frame decoding.
+     *
+     * This method decodes a frame by utilizing the previous frame for inter-frame decoding. It splits the previous frame
+     * into its color channels, decodes each channel separately, and then merges the decoded channels to reconstruct the
+     * final decoded frame.
+     *
      * @param prevFrame The previous frame for inter-frame decoding.
      * @return The decoded frame.
+     *
+     * @note This method performs inter-frame decoding by utilizing the previous frame.
+     * @note The previous frame is split into its color channels, and each channel is decoded separately.
+     * @note The decoded channels are merged to reconstruct the final decoded frame.
      */
     Mat decodeFrame(Mat prevFrame)
     {
@@ -248,9 +276,22 @@ public:
     }
 
     /**
-     * @brief Decodes a channel using the previous channel.
+     * @brief Decodes a channel using the previous channel for inter-channel decoding.
+     *
+     * This method decodes a channel using the previous channel for inter-channel decoding. It processes the channel in
+     * blocks, decoding the difference block between the previous frame's block and the current block. It also decodes the
+     * relative offset for the block's coordinates, retrieves the last block at the specified coordinates, and calculates
+     * the decoded frame from the last block and the difference block.
+     *
      * @param prevChannel The previous channel for inter-channel decoding.
      * @return The decoded channel.
+     *
+     * @note This method performs inter-channel decoding using the previous channel.
+     * @note The channel is processed in blocks, and the difference block between the previous frame's block and the current
+     * block is decoded.
+     * @note The relative offset for the block's coordinates is decoded.
+     * @note The last block is retrieved from the previous channel at the specified coordinates.
+     * @note The decoded channel is calculated from the last block and the difference block.
      */
     Mat decodeChannel(Mat prevChannel)
     {
@@ -292,7 +333,20 @@ public:
 
     /**
      * @brief Encodes a video using the specified VideoCapture object.
+     *
+     * This method encodes a video using the specified VideoCapture object. It reads frames from the video, and for each
+     * frame, it either encodes it with intra-frame coding if it is the frequency-th frame or with inter-frame coding
+     * otherwise. The encoding process involves writing the frame to the BitStream, performing color channel splitting,
+     * and encoding each channel separately.
+     *
      * @param cap The VideoCapture object containing the video to be encoded.
+     *
+     * @note The video must be opened successfully using the VideoCapture object.
+     * @note The encoding process involves reading frames, determining whether to use intra-frame or inter-frame coding,
+     * writing frames to the BitStream, and encoding color channels separately.
+     * @note For intra-frame coding, the frame is written directly to the BitStream using writeFrameColour.
+     * @note For inter-frame coding, the frame is encoded using encodeFrame with the previous frame.
+     * @note The time taken for encoding each frame is printed.
      */
     void encodeVideo(cv::VideoCapture cap)
     {
@@ -345,8 +399,16 @@ public:
 
     /**
      * @brief Encodes a frame using the previous frame.
+     *
+     * This method encodes a frame using the previous frame for inter-frame encoding. It operates on each color channel
+     * separately, encoding the differences between the current frame and the previous frame in each channel.
+     *
      * @param frame The current frame to be encoded.
      * @param prevFrame The previous frame for inter-frame encoding.
+     *
+     * @note The method splits the frames into color channels and then encodes the differences between the corresponding
+     * channels of the current frame and the previous frame.
+     * @note The encoding process involves encoding each color channel using the encodeChannel method.
      */
     void encodeFrame(Mat frame, Mat prevFrame)
     {
@@ -366,8 +428,19 @@ public:
 
     /**
      * @brief Encodes a channel using the previous channel.
+     *
+     * This method encodes a channel using the previous channel for inter-channel encoding. It operates on blocks within
+     * the channel, finding the best matching block in the previous channel, calculating the difference between the current
+     * block and the best block, and encoding the difference block along with the relative offset of the best block.
+     *
      * @param channel The current channel to be encoded.
      * @param prevChannel The previous channel for inter-channel encoding.
+     *
+     * @note The encoding process involves dividing the channel into blocks, finding the best matching block in the
+     * previous channel, and encoding the difference block along with the relative offset of the best block.
+     * @note The BlockSearch entity is used to find the best block position in the previous channel.
+     * @note The difference block is calculated as the element-wise difference between the current block and the best block.
+     * @note The encoded difference block and the relative offset of the best block are saved using the BitStream.
      */
     void encodeChannel(Mat channel, Mat prevChannel)
     {

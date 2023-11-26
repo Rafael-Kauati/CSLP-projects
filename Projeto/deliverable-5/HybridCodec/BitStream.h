@@ -9,6 +9,7 @@
 using namespace std;
 
 /**
+ * @class BitStream
  * @brief Class for handling bit-level operations on files
  *
  * This class provides methods for reading and writing bits, chars, and strings from/to binary files.
@@ -27,7 +28,6 @@ private:
 
     //  Public methods
 public:
-
     static BitStream makeFromFiles(const string inFile, const string outFile)
     {
         BitStream stream(inFile, outFile);
@@ -69,10 +69,10 @@ public:
 
         //  Get the intended bit
         int tmp = ((currentReadChar >> (7 - currBitInByte)) & 1);
-        
+
         //  Advance the current read bit index
         currentReadBit++;
-        
+
         return tmp;
     }
 

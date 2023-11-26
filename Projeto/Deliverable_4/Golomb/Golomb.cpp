@@ -3,9 +3,25 @@
 #include "../Predictor/BitStream.h"
 #include <string>
 
+/**
+ * @brief Golomb class for Golomb encoding and decoding.
+ *
+ * This class provides functionality for Golomb encoding and decoding. It includes
+ * methods to encode integers, decode encoded bits, and manage input/output streams.
+ */
 class Golomb
 {
 public:
+    /**
+     * @brief Constructor for Golomb class.
+     *
+     * Initializes Golomb class with specified parameters and creates associated
+     * Golomb_Encoder, Golomb_Decoder, BitStream (writer), and BitStream (reader) objects.
+     *
+     * @param param The Golomb parameter.
+     * @param inputFile The input file for encoding and decoding.
+     * @param outputFile The output file for encoding and decoding.
+     */
     Golomb(int param, string inputFile, string outputFile) : encoder(inputFile, outputFile), decoder(inputFile, outputFile), writer(inputFile, outputFile), reader(outputFile, "") {}
 
     /**
@@ -46,7 +62,6 @@ public:
      * connections. It is essential to call this method to ensure proper cleanup
      * and resource management.
      */
-
     void close()
     {
         reader.close();
@@ -54,7 +69,8 @@ public:
     }
 
 private:
-    Golomb_Encoder encoder;
-    Golomb_Decoder decoder;
-    BitStream writer, reader;
+    Golomb_Encoder encoder; ///< Golomb Encoder object.
+    Golomb_Decoder decoder; ///< Golomb Decoder object.
+    BitStream writer;       ///< BitStream object for writing.
+    BitStream reader;       ///< BitStream object for reading.
 };

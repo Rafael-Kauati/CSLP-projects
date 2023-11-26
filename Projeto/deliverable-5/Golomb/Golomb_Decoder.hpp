@@ -11,9 +11,13 @@
 using namespace std;
 
 /**
- * @brief A class for decoding Golomb-encoded bit sequences.
+ * @class Golomb_Decoder
  *
- * The Golomb_Decoder class provides methods to decode Golomb-encoded bit sequences using the Golomb decoding algorithm.
+ * @brief Represents a Golomb decoder for integer decompression.
+ *
+ * The Golomb_Decoder class provides functionality to decode Golomb-encoded
+ * integers from a sequence of bits. It supports customization of the decoding
+ * parameter 'm' and manages the associated BitStream for reading encoded data.
  */
 class Golomb_Decoder
 {
@@ -37,8 +41,26 @@ public:
      */
     int decode();
 
+    /**
+     * @brief Reads an integer from the associated BitStream.
+     *
+     * Reads a binary representation of an integer from the BitStream. The number
+     * of bits to read is controlled by the 'numBytes' parameter.
+     *
+     * @param numBytes The number of bytes (and bits) to read from the BitStream.
+     * @return The decoded integer value.
+     */
     int readInt(int numBytes);
 
+    /**
+     * @brief Sets the value of the parameter 'm' for Golomb decoding.
+     *
+     * This method sets the value of the parameter 'm' used in the Golomb decoding
+     * algorithm. The parameter 'm' is a positive integer that influences the
+     * efficiency of the decoding process.
+     *
+     * @param mParam The new value to set for the 'm' parameter.
+     */
     void setMParam(int mParam);
 
     /**
