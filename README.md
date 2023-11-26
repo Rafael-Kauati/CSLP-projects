@@ -8,7 +8,7 @@
 
 &nbsp;
 
-[![All Contributors](https://img.shields.io/badge/Contributors-3-brightgreen.svg?style=for-the-badge)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/Contributors-3-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
 [![PRs Welcome](https://img.shields.io/badge/Completed%20Deliverables-Del%201%20%203%204%20%205-orange.svg?style=for-the-badge)](http://makeapullrequest.com)
 [![PRs Welcome](https://img.shields.io/badge/Current%20Deliverables-Del%206-blue.svg?style=for-the-badge)](http://makeapullrequest.com)
 
@@ -31,14 +31,14 @@ cmake . && make
 ```
 
 ### To run the unit tests:
-Only some Programs, such as Program_5 and Program_7, have unit tests!
+Only some Programs, such as Program_5 and Program_7, and deliverables 4 and 5 have unit tests!
 ```
 ./unit_tests
 ```
 
 ## Other stuff
 
-Deliverables 2 and 3 have unit tests in CATCH2 which can be applied sucessfully.
+Deliverables 2, 3, 4 and 5 have unit tests in CATCH2 which can be applied sucessfully.
 
 ## Our Team ✨
 
