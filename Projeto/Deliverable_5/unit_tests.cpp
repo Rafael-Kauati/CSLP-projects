@@ -108,6 +108,17 @@ TEST_CASE("Video Encoding/Decoding")
             stepSize = stoi(temp);
         }
 
+        //  Ask for the frequency of intra-frame coding
+        cout << "\n Please select the intra-frame frquency: ";
+        cout << "\n (empty for " << frequency << ") \n";
+        cout << "        -=> ";
+        getline(std::cin, temp);
+
+        if (temp != "")
+        {
+            frequency = stoi(temp);
+        }
+
         //  Open the input video capture
         cv::VideoCapture video(videoLocation);
 

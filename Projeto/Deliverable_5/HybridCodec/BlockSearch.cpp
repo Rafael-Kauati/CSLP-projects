@@ -37,7 +37,6 @@ private:
      *
      * @note The matrices A and B are expected to have the same dimensions.
      */
-    double MSE(Mat &A, Mat &B);
 
     double MSE(Mat &A, Mat &B)
     {
