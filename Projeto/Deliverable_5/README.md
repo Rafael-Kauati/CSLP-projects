@@ -65,12 +65,11 @@ The tests are inside the root (of the deliverable).
 ```
 
 ## Code Components
-#### Frame Predicter, Golomb and BitStream
-All these classes where imported from the previous deliverables, and the colomb classes where modified to work better with blocks of frames (blocks of numbers to encode/decode).
+#### Frame Predictor, Golomb and BitStream
+All these classes where imported from the previous deliverables, and the Golomb classes where modified to work better with blocks of frames (blocks of numbers to encode/decode).
 
 #### HybridCodec
-This class is responsible of managing the Frame Predicter (for intra-frame coding) aswell as calculating and interacting with the Colomb classes to encode/decode the blocks and positions needed to implement the inter-frame coding.
-
+This class is responsible of managing the Frame Predictor (for intra-frame coding) as well as calculating and interacting with the Golomb classes to encode/decode the blocks and positions needed to implement the inter-frame coding.
 
 The HybridCodec's inter-frame coding takes into account the defined variables given by the user (block size, frequency, etc) and codes the frames based on the selected coding for each.
 
@@ -103,7 +102,7 @@ cmake . && make
 ## OPENCV Disclosure
 In this code and the previous deliverable 4, we use openCV to manage videos and frames.
 
-The OpenCV library converts YUV frames to RGB frames internaly, and while the option for maintaning YUV compatibility was once implemented, it was removed.
+The OpenCV library converts YUV frames to RGB frames internally, and while the option for maintaining YUV compatibility was once implemented, it was removed.
 
 We must keep in mind that a lot of the large .bin files created by our supposed "compression" algorithm became twice as large as the original file largely due to this fact, and with some more time parts of our code should be rewritten to remove the need for OpenCV, so as to manipulate the input YUV videos manually.
 
@@ -155,7 +154,7 @@ After the last test, we set our search size to 4 and tested the block size:
         -> time: 45 821 / 34 425
         -> size of bin: 246,0 MiB (257 922 738 Bytes)
 
-Analysing these results we selected a block size of 8, since it provides the best final file size and reduces performance impact, since bigger blocks cause less total blocks, which in turn reduces the times we need to call the function to get the most simillar block of the previous frame, which is our most computational demanding function.
+Analyzing these results we selected a block size of 8, since it provides the best final file size and reduces performance impact, since bigger blocks cause less total blocks, which in turn reduces the times we need to call the function to get the most similar block of the previous frame, which is our most computational demanding function.
 
 ---
 
@@ -191,8 +190,8 @@ Step_Size = 4;
 It must be noted that inter-frame frequency is also a parameter to keep in mind, but since it mostly impacts reliability, we chose to keep it at a value between 3 and 6.
 
 ## Conclusions
-Concluding, we found that these parameters greatly impact performance and compression ratios, and must be carefully choosen for any given final implementation.
+In conclusion, we found that these parameters greatly impact performance and compression ratios, and must be carefully chosen for any given final implementation.
 
-This algorithm became much more complex and resource consuming than antecipated, but we believe with some more code optimizations a better performance can be obtain.
+This algorithm became much more complex and resource consuming than anticipated, but we believe with some more code optimizations a better performance can be obtain.
 
-Although we must keep in mind that a lot of these functions are inherently resource-heavy, and no amount of optimization can bring them a lot closer to perfect.
+Although we must keep in mind that a lot of these functions are inherently resource-heavy, and no amount of optimization can bring them a lot closer to perfection.

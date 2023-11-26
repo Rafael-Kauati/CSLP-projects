@@ -8,7 +8,7 @@
 
 ## Description
 
-This deliverable encompasses implementing a video codec based on the Golomg and BitStream deliverables previously developed
+This deliverable encompasses implementing a video codec based on the Golomb and BitStream deliverables previously developed
 
 This codec relies on block based motion compensation and predictive coding, with a similar codec to the JPEG algorithms.
 
@@ -63,26 +63,26 @@ The tests are inside the root (of the deliverable).
 ```
 
 ## Code Components
-#### Frame Predicter
-The Frame predicter is the class that analyses and develops the final values used to encode the input frames.
+#### Frame Predictor
+The Frame predictor is the class that analyses and develops the final values used to encode the input frames.
 
 This class also manages all other inner classes and guarantees they have all the values they need to fully work.
 
 
-For encoding, the frame predicter accepts frames one by one and predicts the values of each pixel.
+For encoding, the frame predictor accepts frames one by one and predicts the values of each pixel.
 
 These values are then passed along to the Golomb encoder.
 
 
 For decoding, the frame predictor calls the Golomb decoder which then promptly returns the values as needed.
 
-The predicter then compares the value with the previous and assembles the decoded frame.
+The predictor then compares the value with the previous and assembles the decoded frame.
 
 
 #### Golomb
 The Golomb classes have two main functions: encode a number and decode a given number.
 
-This encoding/decoding is then called multiple times by some set functions and all the required values to read or write are transmited to/from the BitStream class.
+This encoding/decoding is then called multiple times by some set functions and all the required values to read or write are transmitted to/from the BitStream class.
 
 Our Golomb implementation takes into account negative numbers by transforming all into positive representations.
 
@@ -108,16 +108,16 @@ else {
 
 
 #### BitStream
-The Bistream is the class used to abstract single bit reads and writes to the final binary file.
+The BitStream is the class used to abstract single bit reads and writes to the final binary file.
 
-It can read and write bits as needed and sequencially.
+It can read and write bits as needed and sequentially.
 
 
 #### Unit Tests
-The unit tests are seperated into three distinct groups:
-    - Greyscale image
-    - Colour (RGB or YUV) image
-    - Colour video
+The unit tests are separated into three distinct groups:
+    - Grayscale image
+    - Color (RGB or YUV) image
+    - Color video
 
 All three do a complete check of the integrity of the final decoded file against all the pixels of the original files.
 
@@ -141,15 +141,15 @@ cmake . && make
 ## OPENCV Disclosure
 In this code, we use openCV to manage videos and frames.
 
-The OpenCV library converts YUV frames to RGB frames internaly, and while the option for maintaning YUV compatibility was once implemented, it was removed.
+The OpenCV library converts YUV frames to RGB frames internally, and while the option for maintaining YUV compatibility was once implemented, it was removed.
 
 We must keep in mind that a lot of the large .bin files created by our supposed "compression" algorithm became twice as large as the original file largely due to this fact, and with some more time parts of our code should be rewritten to remove the need for OpenCV, so as to manipulate the input YUV videos manually.
 
 
 ## Variable Tests
-To test which JPEG predictor we will use in our deliverable, we tested all of them with a YUV file of aproximatly 18.1MiB (19 008 946 Bytes), that has about 15 frames.
+To test which JPEG predictor we will use in our deliverable, we tested all of them with a YUV file of approximately 18.1MiB (19 008 946 Bytes), that has about 15 frames.
 
-The tests evaluate time to encode and decode (in milliseconds) aswell as final binary file size.
+The tests evaluate time to encode and decode (in milliseconds) as well as final binary file size.
 
     - JPEG  1: 
         -> time: 3279 / 8121

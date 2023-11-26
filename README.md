@@ -20,7 +20,7 @@ Created by [Doxygen](https://www.doxygen.nl/) and available inside every Deliver
 ```
 cd Project
 doxygen Doxyfile
-firefox ../docs/html/index.html
+firefox ./docs/html/index.html
 ```
 
 ### To compile the programs:
@@ -35,6 +35,11 @@ Only some Programs, such as Program_5 and Program_7, and deliverables 4 and 5 ha
 ```
 ./unit_tests
 ```
+## About deliverable 4 and 5
+Because deliverable 4 and 5 are substantially different from the previous deliverables, and because they had some decision making that is important fro the overall implementation, we have decided to create a more detailed description of them to explain the challenges and decisions made when implementing deliverable 4 and 5.
+You can see them here:
+- [Deliverable 4](./Projeto/Deliverable_4/README.md)
+- [Deliverable 5](./Projeto/Deliverable_5/README.md)
 
 ## Other stuff
 
