@@ -90,7 +90,7 @@ void Golomb_Decoder::setMParam(int mParam) {
 }
 
 cv::Mat Golomb_Decoder::decodeBlock(int block_size) {
-    Mat block = Mat::zeros(block_size, block_size, CV_8UC1);
+    Mat block = Mat::zeros(cv::Size(block_size, block_size), cv::IMREAD_GRAYSCALE);
     for (int i = 0; i < block_size; i++) {
         for (int j = 0; j < block_size; j++) {
             block.at<uchar>(i, j) = decode();
