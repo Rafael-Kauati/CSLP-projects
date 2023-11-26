@@ -28,11 +28,12 @@ private:
     int block_size;
     int search_area;
     int intraframe_period;
+    int SEARCH_STEP_SIZE;
 
 public:
     Frame_Predicter p;
 
-    HybridCodec(string inputfile, string outputfile, int blockSize = 8, int searchSize = 8, int frequency = 100)
+    HybridCodec(string inputfile, string outputfile, int blockSize = 8, int searchSize = 8, int frequency = 6, int stepSize = 4)
         : p(inputfile, outputfile)
     {
         this->inputfile = inputfile;
@@ -40,6 +41,7 @@ public:
         this->BLOCK_SIZE = blockSize;
         this->SEARCH_SIZE = searchSize;
         this->frequency = frequency;
+        this->SEARCH_STEP_SIZE = stepSize;
     }
 
     ~HybridCodec()
@@ -118,11 +120,12 @@ public:
         // get the best block
         std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-        for (int frameIndex = 0; frameIndex < this->numFrames && frameIndex < 2; frameIndex++)
+        for (int frameIndex = 0; frameIndex < this->numFrames; frameIndex++)
         {
             begin = std::chrono::steady_clock::now();
-            if (frameIndex % frequency == 0)
+            if (frameIndex % this->frequency == 0)
             {
+                cout << "DECODED FRAME " << frameIndex << " NORMALLY! FREQ: " << this->frequency << "\n";
                 decodedFrame = p.readFrameColour();
             }
             else
@@ -130,7 +133,7 @@ public:
                 decodedFrame = decodeFrame(prevFrame);
             }
 
-            prevFrame = decodedFrame;
+            prevFrame = decodedFrame.clone();
 
             if (decodedFrame.empty())
             {
@@ -141,7 +144,7 @@ public:
             decodedVideoWriter.write(decodedFrame);
 
             end = std::chrono::steady_clock::now();
-            cout << " -> Time for frame "<< frameIndex << " : " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
+            cout << " -> Time for frame "<< frameIndex+1 << " : " << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count() << "\n";
         }
         decodedVideoWriter.release();
 
@@ -187,16 +190,14 @@ public:
                 Mat diff = p.decodeBlock(this->BLOCK_SIZE);
 
                 // get the best block's coordinates
-                int xPos = p.decode();
-                int yPos = p.decode();
+                int xDiff = p.decode();
+                int yDiff = p.decode();
 
-
-                Mat lastBlock = prevChannel(Rect(x+xPos, y+yPos, this->BLOCK_SIZE, this->BLOCK_SIZE));
-
+                Mat lastBlock = prevChannel(Rect(x+xDiff, y+yDiff, this->BLOCK_SIZE, this->BLOCK_SIZE));
 
                 for (int yd = 0; yd < this->BLOCK_SIZE; yd++) {
                     for (int xd = 0; xd < this->BLOCK_SIZE; xd++) {
-                        decodedFrame.at<uchar>(yd + y, xd + x) = lastBlock.at<uchar>(yd, xd) - diff.at<uchar>(yd, xd);
+                        decodedFrame.at<uchar>(yd + y, xd + x) = (int)lastBlock.at<uchar>(yd, xd) + (int)diff.at<uchar>(yd, xd);
                     }
                 }
             }
@@ -225,11 +226,11 @@ public:
         std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
         // loop through the video
-        while (!frame.empty() && count < 2)
+        while (!frame.empty())
         {
             begin = std::chrono::steady_clock::now();
 
-            if (count % frequency == 0)
+            if (count % this->frequency == 0)
             {
                 // if is the frequency-th frame, encode the frame with intra-frame coding
                 p.writeFrameColour(frame);
@@ -240,7 +241,7 @@ public:
                 encodeFrame(frame, prevFrame);
             }
 
-            prevFrame = frame;
+            prevFrame = frame.clone();
             count++;
 
             //read the frame
@@ -273,7 +274,7 @@ public:
         int height = this->yFrameSize;
         int width = this->xFrameSize;
 
-        BlockSearch bSearch = BlockSearch(this->BLOCK_SIZE, this->SEARCH_SIZE, 4);
+        BlockSearch bSearch = BlockSearch(this->BLOCK_SIZE, this->SEARCH_SIZE, this->SEARCH_STEP_SIZE);
 
         // loop through the channel in blocks
         // get the best block
@@ -296,6 +297,12 @@ public:
                 Mat bestBlockMat = prevChannel(Rect(x+x_0, y+y_0, this->BLOCK_SIZE, this->BLOCK_SIZE));
 
                 subtract(block, bestBlockMat, diff);
+
+                for (int yd = 0; yd < this->BLOCK_SIZE; yd++) {
+                    for (int xd = 0; xd < this->BLOCK_SIZE; xd++) {
+                        diff.at<uchar>(yd, xd) = (int)block.at<uchar>(yd, xd) - (int)bestBlockMat.at<uchar>(yd, xd);
+                    }
+                }
 
                 // encode the diff and the deslocation vector
                 p.encodeBlock(diff);
