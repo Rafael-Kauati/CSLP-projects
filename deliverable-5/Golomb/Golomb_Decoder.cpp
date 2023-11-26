@@ -15,23 +15,26 @@ Golomb_Decoder::Golomb_Decoder(string inputFile, string outputFile) : stream(Bit
  *
  * @return The decoded integer value.
  */
-int Golomb_Decoder::decode() {
+int Golomb_Decoder::decode()
+{
     int quotient = 0;
     int remainder = 0;
     int encodedBit = 1;
     string binValue;
 
     // Decoding the unary part to find the quotient
-    while (encodedBit == 1) {
+    while (encodedBit == 1)
+    {
         encodedBit = stream.readOneFileBit();
         quotient++;
     }
-    
+
     quotient--;
 
     int b = static_cast<int>(floor(log2(this->m))); // Calculate b as floor(log2(m))
 
-    for(int i = 0; i < b; i++){
+    for (int i = 0; i < b; i++)
+    {
         binValue.append(to_string(stream.readOneFileBit()));
     }
 
@@ -40,10 +43,12 @@ int Golomb_Decoder::decode() {
     int decodedValue = quotient * m + remainder;
 
     //  Alter the number to encode to account for negative numbers
-    if (decodedValue % 2 == 1) {
-        decodedValue = (decodedValue + 1) / -2 ;
+    if (decodedValue % 2 == 1)
+    {
+        decodedValue = (decodedValue + 1) / -2;
     }
-    else {
+    else
+    {
         decodedValue = decodedValue / 2;
     }
 
@@ -58,7 +63,8 @@ int Golomb_Decoder::decode() {
  * @param n The binary string to be converted.
  * @return The decimal integer representation of the binary string.
  */
-int Golomb_Decoder::binaryToDecimal(string n) {
+int Golomb_Decoder::binaryToDecimal(string n)
+{
     string num = n;
     int dec_value = 0;
 
@@ -66,7 +72,8 @@ int Golomb_Decoder::binaryToDecimal(string n) {
     int base = 1;
 
     int len = num.length();
-    for (int i = len - 1; i >= 0; i--) {
+    for (int i = len - 1; i >= 0; i--)
+    {
         if (num[i] == '1')
             dec_value += base;
         base = base * 2;
@@ -75,28 +82,38 @@ int Golomb_Decoder::binaryToDecimal(string n) {
     return dec_value;
 }
 
-int Golomb_Decoder::readInt(int numBytes) {
+int Golomb_Decoder::readInt(int numBytes)
+{
     string binValue;
 
-    for(int i = 0; i < (numBytes * 8); i++) {
+    for (int i = 0; i < (numBytes * 8); i++)
+    {
         binValue.append(to_string(stream.readOneFileBit()));
     }
 
     return binaryToDecimal(binValue);
 }
 
-void Golomb_Decoder::setMParam(int mParam) {
+void Golomb_Decoder::setMParam(int mParam)
+{
     this->m = mParam;
 }
 
-cv::Mat Golomb_Decoder::decodeBlock(int block_size) {
+/**
+ * @brief Decodes a block of Golomb-encoded values into a grayscale OpenCV Mat.
+ *
+ * @param block_size The size of the square block to be decoded.
+ * @return The decoded block represented as an OpenCV Mat.
+ */
+cv::Mat Golomb_Decoder::decodeBlock(int block_size)
+{
     Mat block = Mat::zeros(cv::Size(block_size, block_size), cv::IMREAD_GRAYSCALE);
-    for (int i = 0; i < block_size; i++) {
-        for (int j = 0; j < block_size; j++) {
+    for (int i = 0; i < block_size; i++)
+    {
+        for (int j = 0; j < block_size; j++)
+        {
             block.at<uchar>(i, j) = decode();
         }
     }
     return block;
 }
-
-

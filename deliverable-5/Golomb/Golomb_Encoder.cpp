@@ -78,6 +78,15 @@ void Golomb_Encoder::closeStreams() {
     stream.close();
 }
 
+/**
+ * @brief Encodes a block of pixel values using the Golomb encoding algorithm.
+ *
+ * This method encodes a square block of pixel values with a specified size using the Golomb encoding algorithm.
+ * Each pixel value in the block is individually encoded using the Golomb encoding technique, and the resulting
+ * encoded bits are written to the output bitstream.
+ *
+ * @param block The square block of pixel values to be encoded.
+ */
 void Golomb_Encoder::encodeBlock(cv::Mat block) {
     for (int i = 0; i < block.rows; i++) {
         for (int j = 0; j < block.cols; j++) {
