@@ -9,8 +9,8 @@
 &nbsp;
 
 [![All Contributors](https://img.shields.io/badge/Contributors-3-brightgreen.svg?style=for-the-badge)](#contributors-)
-[![PRs Welcome](https://img.shields.io/badge/Completed%20Deliverables-Del%201-orange.svg?style=for-the-badge)](http://makeapullrequest.com)
-[![PRs Welcome](https://img.shields.io/badge/Current%20Deliverables-Del%202%20and%203-blue.svg?style=for-the-badge)](http://makeapullrequest.com)
+[![PRs Welcome](https://img.shields.io/badge/Completed%20Deliverables-Del%201%20%203%204%20%205-orange.svg?style=for-the-badge)](http://makeapullrequest.com)
+[![PRs Welcome](https://img.shields.io/badge/Current%20Deliverables-Del%206-blue.svg?style=for-the-badge)](http://makeapullrequest.com)
 
 ## Documentation
 
