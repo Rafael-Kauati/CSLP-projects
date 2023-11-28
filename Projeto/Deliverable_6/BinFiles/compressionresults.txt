@@ -1,0 +1,8 @@
+1 382 403 040 Bytes initial file
+1 145 453 242 Bytes final encoded file
+
+Final Compression ratio => 17%
+(1 - (final size / initial size))
+
+Encode time 1.4Ghz => 625.996s
+Decode time 1.4Ghz => 625.996s
