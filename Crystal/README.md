@@ -10,7 +10,7 @@
 
 [![All Contributors](https://img.shields.io/badge/Current%20Version-1.10.13-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
 [![PRs Welcome](https://img.shields.io/badge/Latest%20Release-13%20October%202023-orange.svg?style=for-the-badge)](http://makeapullrequest.com)
-[![PRs Welcome](https://img.shields.io/badge/Documentation-crystal-lang.org-blue.svg?style=for-the-badge)](http://makeapullrequest.com)
+[![PRs Welcome](https://img.shields.io/badge/Documentation-crystal%20lang%20org-blue.svg?style=for-the-badge)](http://makeapullrequest.com)
 
 ## Description
 This page is dedicated to our one hour tutorial for the Crystal programming language.
@@ -91,6 +91,7 @@ custom_square.printOut
 #  Execute the file with
 crystal prototype.cr
 ```
+---
 This is a simple shard dependency file, that can be generated with the command:
 ```bash
 shards init
