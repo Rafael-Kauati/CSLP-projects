@@ -47,60 +47,60 @@ int main() {
         }
     }
 
+    cout << " -> VIDEO FPS: " << videoFPS << "    \n";
     cout << " -> IMAGE SIZE: y = " << frameHeight << " | x = " << frameWidth << "    \n\n";
     getline(yuvFile, str);
 
     char ch;
     string lastFiveChars;
     int frameCount = 0;
-    vector<vector<int>> yframe;
-    vector<vector<int>> uframe;
-    vector<vector<int>> vframe;
+    int colourCount = 0;
+    vector<vector<int>> readframe[3];
     
     //  Parse 3 (y, u and v) times width * height 
-    //while (frameCount < 1) {
+    while (colourCount < 3) {
+        cout << "\e[A";
+        cout << "\r";
+        cout << " -> READING COLOUR: " << colourCount << "    \n";
+        int numPixelsPerFrame = frameWidth * frameHeight;
+        //  Read all frame rows
+        for(int pixelHeightIdx = 0; pixelHeightIdx < frameHeight; pixelHeightIdx++) {
+            vector<int> rowVector;
+            
+            //  Read all frame columns
+            for(int pixelWidthIdx = 0; pixelWidthIdx < frameWidth; pixelWidthIdx++) {
+                yuvFile.get(ch);
+                rowVector.push_back(int(ch));
+            }
 
-    int numPixelsPerFrame = frameWidth * frameHeight;
-    //  Read all frame rows
-    for(int pixelHeightIdx = 0; pixelHeightIdx < frameHeight; pixelHeightIdx++) {
-        vector<int> rowVector;
-        
-        //  Read all frame columns
-        for(int pixelWidthIdx = 0; pixelWidthIdx < frameWidth; pixelWidthIdx++) {
-            cout << "\e[A";
-            cout << "\r";
-            cout << " -> READING PIXEL: y = " << pixelHeightIdx << " | x = " << pixelWidthIdx << "    \n";
-            yuvFile.get(ch);
-            rowVector.push_back(int(ch));
+            readframe[colourCount].push_back(rowVector);
         }
 
-        yframe.push_back(rowVector);
+        /* cout << "HERE" << endl; */
+
+        colourCount++;
+
     }
 
-    cout << "HERE" << endl;
 
-    frameCount++;
+    cv::Vec3b pixelValue;
+    cv::Mat finalFrame(frameHeight, frameWidth, CV_8UC3);
 
-    //}
-
-
-    cv::Mat finalFrame = cv::Mat(frameHeight, frameWidth, cv::IMREAD_GRAYSCALE);
+    cout << " -> CREATING FINAL IMAGE:\n";
 
     //  Write img to file ONLY FOR VISUAL TESTING
     for(int pixelHeightIdx = 0; pixelHeightIdx < frameHeight; pixelHeightIdx++) {
         //  Read all frame columns
         for(int pixelWidthIdx = 0; pixelWidthIdx < frameWidth; pixelWidthIdx++) {
-            cout << "\e[A";
-            cout << "\r";
-            cout << " -> CHECKING PIXEL: y = " << pixelHeightIdx << " | x = " << pixelWidthIdx << "    \n";
-            finalFrame.at<uchar>(pixelHeightIdx, pixelWidthIdx) = yframe.at(pixelHeightIdx).at(pixelWidthIdx);
+
+            pixelValue = cv::Vec3b(readframe[0].at(pixelHeightIdx).at(pixelWidthIdx), readframe[1].at(pixelHeightIdx).at(pixelWidthIdx), readframe[2].at(pixelHeightIdx).at(pixelWidthIdx));
+            finalFrame.at<cv::Vec3b>(pixelHeightIdx, pixelWidthIdx) = pixelValue;
         }
     }
     //  Write the final image to the output file
     cv::imwrite("testImgFile.png", finalFrame);
 
+    cout << "       => DONE!\n";
 
-    cout << "\n";
-    
     return 0;
 }
