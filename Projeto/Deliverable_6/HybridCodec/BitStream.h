@@ -25,6 +25,7 @@ private:
     int bufferLen;        ///< Current length of the buffer
     int currentReadBit;   ///< Current read bit index
     char currentReadChar; ///< Current char being read
+    bool FILE_END;
 
     //  Public methods
 public:
@@ -49,6 +50,11 @@ public:
         currentReadChar = '\0';
         inputFile = ifstream(inFile, ios::binary | ios::in);
         outputFile = ofstream(outFile, ios::binary | ios::out);
+        FILE_END = false;
+    }
+
+    bool fileEnd() {
+        return this->FILE_END;
     }
 
     /**
@@ -61,9 +67,14 @@ public:
         //  Calculate bit position in the current char
         int currBitInByte = currentReadBit % 8;
 
+
         //  If the current bit is 0, advence to the next byte
-        if (currBitInByte == 0)
-        {
+        if (currBitInByte == 0) {
+            if (inputFile.peek() == EOF) {
+                this->FILE_END = true;
+                return 0;
+            }
+
             inputFile.get(currentReadChar);
         }
 

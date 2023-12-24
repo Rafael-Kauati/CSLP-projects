@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/unit_tests.dir/HybridCodec/BlockSearch.cpp.o.d"
   "CMakeFiles/unit_tests.dir/HybridCodec/HybridCodec.cpp.o"
   "CMakeFiles/unit_tests.dir/HybridCodec/HybridCodec.cpp.o.d"
+  "CMakeFiles/unit_tests.dir/VideoReader/VideoReader.cpp.o"
+  "CMakeFiles/unit_tests.dir/VideoReader/VideoReader.cpp.o.d"
   "CMakeFiles/unit_tests.dir/unit_tests.cpp.o"
   "CMakeFiles/unit_tests.dir/unit_tests.cpp.o.d"
   "unit_tests"

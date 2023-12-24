@@ -6,6 +6,7 @@ find_package(OpenCV REQUIRED)
 
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 add_executable(unit_tests unit_tests.cpp
+                VideoReader/VideoReader.cpp 
                 Golomb/Golomb.cpp 
                 Golomb/Golomb_Encoder.cpp 
                 Golomb/Golomb_Encoder.hpp 
@@ -15,7 +16,6 @@ add_executable(unit_tests unit_tests.cpp
                 HybridCodec/BlockSearch.cpp
                 HybridCodec/Frame_Predicter.h
                 HybridCodec/HybridCodec.cpp)
-
 
 target_link_libraries(unit_tests Catch2::Catch2 ${OpenCV_LIBS})
 

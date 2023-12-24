@@ -29,7 +29,6 @@ private:
     int xFrameSize;         ///< Width of the frame.
     int yFrameSize;         ///< Height of the frame.
     int fileType;           ///< File format index.
-    int numFrames;          ///< Number of frames in the video.
     int fps;                ///< Frames per second of the video.
     int block_size;         ///< Block size for encoding and decoding.
     int search_area;        ///< Search area size for prediction.
@@ -62,6 +61,10 @@ public:
         intraframe_period = 0;
     }
 
+    bool fileEnd() {
+        return decoder.fileEnd();
+    }
+
     /**
      * @brief Closes the associated Golomb encoder streams.
      *
@@ -77,7 +80,7 @@ public:
      * @brief Writes the parameters for the video encoding and decoding.
      *
      * This method sets the parameters for video encoding and decoding, including Golomb encoding
-     * parameter 'm', frame dimensions, file type, number of frames, frames per second (FPS),
+     * parameter 'm', frame dimensions, file type, frames per second (FPS),
      * block size, search area size, and intraframe period. It then writes these parameters to the
      * output file using Golomb encoding.
      *
@@ -85,19 +88,17 @@ public:
      * @param newxFrameSize Width of the frame.
      * @param newyFrameSize Height of the frame.
      * @param newfileType File format index.
-     * @param newnumFrames Number of frames in the video.
      * @param newfps Frames per second of the video.
      * @param newblock_size Block size for encoding and decoding.
      * @param newsearch_area Search area size for prediction.
      * @param newintraframe_period Period between intraframes in the video.
      */
-    void writeParams(int newmParam, int newxFrameSize, int newyFrameSize, int newfileType, int newnumFrames = 1, int newfps = 1, int newblock_size = 1, int newsearch_area = 1, int newintraframe_period = 1)
+    void writeParams(int newmParam, int newxFrameSize, int newyFrameSize, int newfileType, int newfps = 1, int newblock_size = 1, int newsearch_area = 1, int newintraframe_period = 1)
     {
         mParam = newmParam;
         xFrameSize = newxFrameSize;
         yFrameSize = newyFrameSize;
         fileType = newfileType;
-        numFrames = newnumFrames;
         fps = newfps;
         block_size = newblock_size;
         search_area = newsearch_area;
@@ -110,8 +111,6 @@ public:
         encoder.writeInt(newyFrameSize, 2);
         //  Write the file format index with 1 byte (max: 255)
         encoder.writeInt(newfileType, 1);
-        //  Write the number of frames with 4 bytes (max: 2,147,483,647)
-        encoder.writeInt(newnumFrames, 4);
         //  Write the FPS of the video with 1 byte (max: 255)
         encoder.writeInt(newfps, 1);
         //  Write the block size of the video with 2 bytes (max: 65,535)
@@ -128,12 +127,12 @@ public:
      * @brief Reads the parameters for the video encoding and decoding.
      *
      * This method reads the parameters for video encoding and decoding, including Golomb encoding
-     * parameter 'm', frame dimensions, file type, number of frames, frames per second (FPS),
+     * parameter 'm', frame dimensions, file type, frames per second (FPS),
      * block size, search area size, and intraframe period. It then sets these parameters for further use.
      * These params are read from the encoded file's header.
      *
      * @return A vector containing the read parameters in the following order:
-     *         [mParam, xFrameSize, yFrameSize, fileType, numFrames, fps, block_size, search_area, intraframe_period].
+     *         [mParam, xFrameSize, yFrameSize, fileType, fps, block_size, search_area, intraframe_period].
      *
      */
     vector<int> readParams()
@@ -145,8 +144,6 @@ public:
         this->yFrameSize = decoder.readInt(2);
         //  Read the file format index with 1 byte (max: 255)
         this->fileType = decoder.readInt(1);
-        //  Read the number of frames with 4 bytes (max: 2,147,483,647)
-        this->numFrames = decoder.readInt(4);
         //  Read the FPS of the video with 1 byte (max: 255)
         this->fps = decoder.readInt(1);
         //  Read the block size of the video with 2 bytes (max: 65,535)
@@ -158,89 +155,8 @@ public:
 
         decoder.setMParam(this->mParam);
 
-        return vector<int>{this->mParam, this->xFrameSize, this->yFrameSize, this->fileType, this->numFrames,
+        return vector<int>{this->mParam, this->xFrameSize, this->yFrameSize, this->fileType,
                            this->fps, this->block_size, this->search_area, this->intraframe_period};
-    }
-
-    /**
-     * @brief Writes video frames to the Golomb encoded file.
-     *
-     * This method reads frames from the given video capture and writes Golomb encoded versions of
-     * each frame to the Golomb encoded file. It displays progress information while writing frames.
-     *
-     * @param video The video capture object.
-     */
-    void writeVideo(cv::VideoCapture video)
-    {
-        cv::Mat frame;
-        bool read;
-        int numFrame = 1;
-        int maxFrames = (int)video.get(cv::CAP_PROP_FRAME_COUNT);
-
-        //  For every frame
-        while (video.isOpened())
-        {
-            read = video.read(frame);
-
-            //  Last frame has been read
-            if (!read)
-            {
-                break;
-            }
-
-            cout << " -> WRITING FRAME: " << numFrame << " of " << this->numFrames << "    \n";
-            cout << "\e[A";
-            cout << "\r";
-
-            //  Write the frame
-            this->writeFrameColour(frame);
-
-            numFrame++;
-        }
-
-        cout << "\n";
-    }
-
-    /**
-     * @brief Reads the parameters for the video encoding and decoding.
-     *
-     * This method reads the parameters for video encoding and decoding, including Golomb encoding
-     * parameter 'm', frame dimensions, file type, number of frames, frames per second (FPS),
-     * block size, search area size, and intraframe period. It then sets these parameters for further use.
-     *
-     * @return A vector containing the read parameters in the following order:
-     *         [mParam, xFrameSize, yFrameSize, fileType, numFrames, fps, block_size, search_area, intraframe_period].
-     */
-    vector<cv::Mat> readVideo(string outputFile)
-    {
-        int fileT;
-        if (this->fileType == 1)
-        {
-            fileT = cv::VideoWriter::fourcc('m', 'p', '4', 'v');
-        }
-
-        vector<cv::Mat> frameVector;
-
-        cv::VideoWriter decodedVideoWriter(outputFile, fileT, (double)this->fps, cv::Size(this->xFrameSize, this->yFrameSize), 1);
-        cv::Mat frame;
-
-        for (int frameIndex = 0; frameIndex < this->numFrames; frameIndex++)
-        {
-            cout << " -> READING FRAME: " << frameIndex + 1 << " of " << this->numFrames << "    \n";
-            cout << "\e[A";
-            cout << "\r";
-
-            frame = readFrameColour();
-
-            frameVector.push_back(frame);
-
-            decodedVideoWriter.write(frame);
-        }
-        decodedVideoWriter.release();
-
-        cout << "\n";
-
-        return frameVector;
     }
 
     /**
@@ -310,6 +226,7 @@ public:
      *       We are using JPEG-6's prediction algorithm, which is based on the
      *       formula: a + (b - c) / 2, because is the most balanced one.
      */
+
     void writeFrame(cv::Mat &frame)
     {
         int pixelValue = 0;

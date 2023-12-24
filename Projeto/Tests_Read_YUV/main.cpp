@@ -62,7 +62,6 @@ int main() {
         cout << "\e[A";
         cout << "\r";
         cout << " -> READING COLOUR: " << colourCount << "    \n";
-        int numPixelsPerFrame = frameWidth * frameHeight;
         //  Read all frame rows
         for(int pixelHeightIdx = 0; pixelHeightIdx < frameHeight; pixelHeightIdx++) {
             vector<int> rowVector;

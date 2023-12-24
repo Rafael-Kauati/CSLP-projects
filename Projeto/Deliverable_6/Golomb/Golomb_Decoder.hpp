@@ -63,6 +63,8 @@ public:
      */
     void setMParam(int mParam);
 
+    bool fileEnd();
+
     /**
      * @brief Decodes a block of Golomb-encoded values into a OpenCV Mat.
      *

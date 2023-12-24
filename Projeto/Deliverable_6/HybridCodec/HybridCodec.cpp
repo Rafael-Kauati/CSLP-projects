@@ -7,6 +7,7 @@
 #include <opencv2/videoio.hpp>
 #include <cmath>
 #include "../Golomb/Golomb.cpp"
+#include "../VideoReader/VideoReader.cpp"
 #include "Frame_Predicter.h"
 #include "BlockSearch.cpp"
 
@@ -34,7 +35,6 @@ private:
     int xFrameSize;        /**< X-frame size. */
     int yFrameSize;        /**< Y-frame size. */
     int fps;               /**< Frames per second. */
-    int numFrames;         /**< Number of frames in the video. */
     int block_size;        /**< Block size for encoding. */
     int search_area;       /**< Search area size for encoding. */
     int intraframe_period; /**< Period between intra-frames. */
@@ -80,7 +80,6 @@ public:
      * @param newxFrameSize The x-frame size.
      * @param newyFrameSize The y-frame size.
      * @param newfileType The file type index.
-     * @param newnumFrames Number of frames in the video.
      * @param newfps Frames per second.
      * @param newblock_size Block size for encoding.
      * @param newsearch_area Search area size for encoding.
@@ -88,7 +87,7 @@ public:
      */
 
     void writeParams(int newmParam, int newxFrameSize, int newyFrameSize,
-                     int newfileType, int newnumFrames = 1, int newfps = 1,
+                     int newfileType, int newfps = 1,
                      int newblock_size = 1, int newsearch_area = 1, int newintraframe_period = 1)
     {
 
@@ -98,12 +97,11 @@ public:
         this->xFrameSize = newxFrameSize;
         this->yFrameSize = newyFrameSize;
         this->fps = newfps;
-        this->numFrames = newnumFrames;
         this->block_size = newblock_size;
         this->search_area = newsearch_area;
         this->intraframe_period = newintraframe_period;
 
-        p.writeParams(newmParam, newxFrameSize, newyFrameSize, newfileType, newnumFrames, newfps, newblock_size, newsearch_area, newintraframe_period);
+        p.writeParams(newmParam, newxFrameSize, newyFrameSize, newfileType, newfps, newblock_size, newsearch_area, newintraframe_period);
     }
 
     /**
@@ -123,41 +121,14 @@ public:
         this->yFrameSize = params[2];
         //  Read the file format index with 1 byte (max: 255)
         this->fileType = params[3];
-        //  Read the number of frames with 4 bytes (max: 2,147,483,647)
-        this->numFrames = params[4];
         //  Read the FPS of the video with 1 byte (max: 255)
-        this->fps = params[5];
+        this->fps = params[4];
         //  Read the block size of the video with 2 bytes (max: 65,535)
-        this->block_size = params[6];
+        this->block_size = params[5];
         //  Read the search area size of the video with 2 bytes (max: 65,535)
-        this->search_area = params[7];
+        this->search_area = params[6];
         //  Read the period between intraframes of the video with 1 byte (max: 255)
-        this->intraframe_period = params[8];
-    }
-
-    /**
-     * @brief Reads a video from the specified bin output file using the Golomb decoder.
-     *
-     * This method reads a video from the specified bin output file using the Golomb decoder.
-     *
-     * @param outputFile The path to the output video file.
-     * @return A vector of frames from the video.
-     */
-    vector<cv::Mat> readVideo(string outputFile)
-    {
-        return p.readVideo(outputFile);
-    }
-
-    /**
-     * @brief Writes a video to the BitStream using the specified VideoCapture object.
-     *
-     * This method writes a video to the BitStream using the specified VideoCapture object.
-     *
-     * @param video The VideoCapture object containing the video to be written.
-     */
-    void writeVideo(cv::VideoCapture video)
-    {
-        p.writeVideo(video);
+        this->intraframe_period = params[7];
     }
 
     /**
@@ -207,7 +178,7 @@ public:
         std::chrono::steady_clock::time_point end;
 
         //  Loop through the video's frames
-        for (int frameIndex = 0; frameIndex < this->numFrames; frameIndex++)
+        for (int frameIndex = 0; !p.fileEnd(); frameIndex++)
         {
 
             //  Time the encoding
@@ -322,7 +293,7 @@ public:
                 {
                     for (int xd = 0; xd < this->BLOCK_SIZE; xd++)
                     {
-                        decodedFrame.at<uchar>(yd + y, xd + x) = (int)lastBlock.at<uchar>(yd, xd) + diff[yd][xd];
+                        decodedFrame.at<uchar>(yd + y, xd + x) = (int)lastBlock.at<uchar>(yd, xd) + diff.at(yd).at(xd);
                     }
                 }
             }
@@ -348,28 +319,27 @@ public:
      * @note For inter-frame coding, the frame is encoded using encodeFrame with the previous frame.
      * @note The time taken for encoding each frame is printed.
      */
-    void encodeVideo(cv::VideoCapture cap)
-    {
+    void encodeVideo(VideoReader& video) {
+            
+        int frameIndex = 0;
         Mat frame;
         Mat prevFrame;
 
         //  Check if the video can be opened
-        if (!cap.isOpened())
-        {
+        if (video.readError()) {
             cout << "Error opening video stream or file" << endl;
             return;
         }
 
         //  Read the next frame
-        cap >> frame;
+        frame = video.readNextYUVFrame();
 
         //  Time the encoding
         std::chrono::steady_clock::time_point begin;
         std::chrono::steady_clock::time_point end;
 
         //  Loop through the video's frames
-        for (int frameIndex = 0; frameIndex < this->numFrames; frameIndex++)
-        {
+        for (frameIndex = 0; !video.videoEnd(); frameIndex++) {
 
             //  Start the timer
             begin = std::chrono::steady_clock::now();
@@ -385,11 +355,11 @@ public:
                 encodeFrame(frame, prevFrame);
             }
 
-            //  Save the previous frame
+            //  Copy the previous frame
             prevFrame = frame.clone();
 
             //  Read the next frame
-            cap >> frame;
+            frame = video.readNextYUVFrame();
 
             //  Stop the timer and print the time result
             end = std::chrono::steady_clock::now();
@@ -476,13 +446,10 @@ public:
 
                 //  Calculate the difference between the current block and the best block
                 //  Save the differene in a new diff block
-                for (int yd = 0; yd < this->BLOCK_SIZE; yd++)
-                {                        
+                for (int yd = 0; yd < this->BLOCK_SIZE; yd++) {                        
                     diff[yd] = vector<int>(this->BLOCK_SIZE); 
 
-                    for (int xd = 0; xd < this->BLOCK_SIZE; xd++)
-                    {
-
+                    for (int xd = 0; xd < this->BLOCK_SIZE; xd++) {
                         diff[yd][xd] = (int)block.at<uchar>(yd, xd) - (int)bestBlockMat.at<uchar>(yd, xd);
                     }
                 }

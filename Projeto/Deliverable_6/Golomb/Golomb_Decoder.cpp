@@ -24,6 +24,8 @@ Golomb_Decoder::Golomb_Decoder(string inputFile, string outputFile) : stream(Bit
  *
  * @return The decoded integer value.
  */
+
+
 int Golomb_Decoder::decode()
 {
     int quotient = 0;
@@ -146,4 +148,8 @@ vector<vector<int>> Golomb_Decoder::decodeBlock(int block_size)
         }
     }
     return block;
+}
+
+bool Golomb_Decoder::fileEnd() {
+    return stream.fileEnd();
 }

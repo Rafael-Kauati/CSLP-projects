@@ -4,7 +4,8 @@
  */
 
 #define CATCH_CONFIG_MAIN
-#include <catch2/catch.hpp>
+#include "catch_amalgamated.hpp"
+#include "catch_amalgamated.cpp"
 
 #include <vector>
 #include <opencv4/opencv2/opencv.hpp>
@@ -13,6 +14,7 @@
 #include "HybridCodec/BitStream.h"
 #include <chrono>
 #include "HybridCodec/HybridCodec.cpp"
+#include "VideoReader/VideoReader.cpp"
 
 using namespace std;
 using namespace cv;
@@ -120,19 +122,18 @@ TEST_CASE("Video Encoding/Decoding")
         }
 
         //  Open the input video capture
-        cv::VideoCapture video(videoLocation);
 
-        if (!video.isOpened())
-        {
+        VideoReader video(videoLocation);
+
+        if (video.readError()) {
             cout << " ERROR: Cannot read video file!\n";
             return;
         }
 
         //  Calculate the video's metadata
-        int xFrameSize = (int)video.get(cv::CAP_PROP_FRAME_WIDTH);
-        int yFrameSize = (int)video.get(cv::CAP_PROP_FRAME_HEIGHT);
-        int numFrames = (int)video.get(cv::CAP_PROP_FRAME_COUNT);
-        int fps = (int)video.get(cv::CAP_PROP_FPS);
+        int xFrameSize = video.getFrameWidth();
+        int yFrameSize = video.getFrameHeigth();
+        int fps = video.getVideoFPS();
 
         //  Print all the final parameters
         cout << "\n ------------- Parameters ------------- \n";
@@ -152,7 +153,7 @@ TEST_CASE("Video Encoding/Decoding")
 
         //  Write the parameters needed for all the classes
         cout << "\n ---------- Write Parameters ---------- \n";
-        hybridEnc.writeParams(m, xFrameSize, yFrameSize, 1, numFrames, fps, blockSize, searchSize, frequency);
+        hybridEnc.writeParams(m, xFrameSize, yFrameSize, 1, fps, blockSize, searchSize, frequency);
         cout << " -> OK\n";
 
         //  Write the video itself to the file (and time the execution)
@@ -166,7 +167,7 @@ TEST_CASE("Video Encoding/Decoding")
 
         //  Close the used classes
         hybridEnc.close();
-
+        
         //  Instanciate the Hybrid Codec for decoding
         HybridCodec hybridDec(outputBinFile, "", blockSize, searchSize, frequency, stepSize);
 
@@ -191,7 +192,7 @@ TEST_CASE("Video Encoding/Decoding")
         cout << "\n ------------ Check Video ------------ \n";
 
         //  Reopen the original video
-        video = cv::VideoCapture(videoLocation);
+        VideoCapture oldvideo = cv::VideoCapture(videoLocation);
 
         cv::Mat originalFrame;
         bool readOriginal, readDecoded;
@@ -201,7 +202,7 @@ TEST_CASE("Video Encoding/Decoding")
         for (cv::Mat decodedFrame : decodedVideo)
         {
             //  Read the oposing original frame
-            readOriginal = video.read(originalFrame);
+            readOriginal = oldvideo.read(originalFrame);
 
             cout << " -> CHECKING Frame: " << frameIndex << "\n";
 

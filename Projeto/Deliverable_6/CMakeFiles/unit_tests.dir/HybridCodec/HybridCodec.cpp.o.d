@@ -359,6 +359,7 @@ CMakeFiles/unit_tests.dir/HybridCodec/HybridCodec.cpp.o: \
  /usr/include/c++/13.2.1/bits/fstream.tcc \
  /usr/local/include/opencv4/opencv2/opencv.hpp \
  /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_6/HybridCodec/../Golomb/Golomb_Decoder.hpp \
+ /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_6/HybridCodec/../VideoReader/VideoReader.cpp \
  /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_6/HybridCodec/Frame_Predicter.h \
  /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_6/HybridCodec/../Golomb/Golomb_Encoder.hpp \
  /home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Deliverable_6/HybridCodec/../Golomb/Golomb_Decoder.hpp \
