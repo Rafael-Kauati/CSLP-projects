@@ -1,0 +1,12 @@
+How to implement the lossy codec:
+Quantize the frame independently in every Y, U and V channel
+Each Channel has a specific number of possible colours and instead of being 255, they will be 2^n, with n being the chosen quantitizer parameter for each specific channel.
+
+So: we quantize the frame, leading to many of the difference Matrices to be just arrays of zeroes.
+We then work as normal and decode the frame as normal.
+
+
+If there is time, we should implement a way of telling the decoder to skip reading differnece frames of just zeroes, probably by inserting an extra bit to tell it that the difference matrice is just zeroes.
+With this we can avoid coding matrices of zeroes, at the cost of an extra bit per matrix.
+
+If possible, test if this is worth it, if not, include as "possible future improvements" in the report.
