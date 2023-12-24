@@ -59,7 +59,6 @@ public:
                 }
             }
         }
-
     };
 
     /**
@@ -89,7 +88,6 @@ public:
         cv::Mat readframe;
         std::vector<cv::Mat> channels;
         char ch;
-        string lastFiveChars;
         int colourCount = 0;
 
         if (this->yuvFile.peek() == EOF) {
@@ -98,11 +96,18 @@ public:
         }
 
         //  Skip the "FRAME" line
-        getline(this->yuvFile, str);
+        for (int charIdx = 0; charIdx < 5; charIdx ++) {
+            yuvFile.get(ch);
+        }
+        //  Ignore the line break
+        if (this->yuvFile.peek() == '\n') {
+            yuvFile.get(ch);
+        }
     
         //  Parse 3 (y, u and v) * width * height 
         while (colourCount < 3) {
             cv::Mat tempframe = cv::Mat::zeros(cv::Size(this->FRAME_WIDTH, this->FRAME_HEIGHT), cv::IMREAD_GRAYSCALE);
+
             //  Read all frame rows
             for(int pixelHeightIdx = 0; pixelHeightIdx < this->FRAME_HEIGHT; pixelHeightIdx++) {
                 vector<int> rowVector;
@@ -114,12 +119,13 @@ public:
                         this->VIDEO_END = true;
                         return readframe;
                     }
+
                     yuvFile.get(ch);
                     tempframe.at<uchar>(pixelHeightIdx, pixelWidthIdx) = int(ch);
                 }
             }
-            channels.push_back(tempframe);
 
+            channels.push_back(tempframe);
             colourCount++;
         }
 
@@ -127,6 +133,28 @@ public:
         cv::merge(channels, readframe);
 
         return readframe;
+    }
+    
+    //  IMPORTANT: this simple compare function was obtained from here, we did not write it:
+    //  https://stackoverflow.com/questions/6163611/compare-two-files
+    static bool compareFiles(const std::string& p1, const std::string& p2) {
+        std::ifstream f1(p1, std::ifstream::binary|std::ifstream::ate);
+        std::ifstream f2(p2, std::ifstream::binary|std::ifstream::ate);
+
+        if (f1.fail() || f2.fail()) {
+            return false; //file problem
+        }
+
+        if (f1.tellg() != f2.tellg()) {
+            return false; //size mismatch
+        }
+
+        //seek back to beginning and use std::equal to compare contents
+        f1.seekg(0, std::ifstream::beg);
+        f2.seekg(0, std::ifstream::beg);
+        return std::equal(std::istreambuf_iterator<char>(f1.rdbuf()),
+                            std::istreambuf_iterator<char>(),
+                            std::istreambuf_iterator<char>(f2.rdbuf()));
     }
 };
 

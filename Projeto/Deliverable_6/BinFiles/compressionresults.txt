@@ -5,4 +5,30 @@ Final Compression ratio => 17%
 (1 - (final size / initial size))
 
 Encode time 1.4Ghz => 625.996s
-Decode time 1.4Ghz => 625.996s
+
+
+DELIVERABLE 6:
+500 frames:
+1 382 403 040 Bytes initial file
+  892 722 021 Bytes final encoded file
+
+Final Compression ratio => 35.42%
+(1 - (final size / initial size))
+
+Encode time 1.4Ghz => 634.221s
+Encode time 4.3Ghz => 317.565s
+Decode time 1.4Ghz => s
+Total memory usage: 101.892mb
+
+notar: crasha a dar decode depois de 154 frames
+
+
+30 frames:
+  82 944 220 Bytes initial file
+  51 109 283 Bytes final encoded file
+
+Final Compression ratio => 38.38%
+
+Encode time 1.4Ghz => 37.946s
+Decode time 1.4Ghz => 51.125s
+Total memory usage: 102.180mb

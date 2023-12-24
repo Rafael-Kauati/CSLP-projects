@@ -36,6 +36,7 @@ using namespace cv;
  */
 TEST_CASE("Video Encoding/Decoding")
 {
+
     /**
      * @brief Pixel-by-Pixel Comparison.
      *
@@ -59,10 +60,11 @@ TEST_CASE("Video Encoding/Decoding")
         int stepSize = 4;
 
         //  File system locations
-        string defaultVideoLocation = "TestFiles/ducks_30_frames.y4m";
+        string defaultVideoLocation = "TestFiles/ducks_11_frames.y4m";
         string videoLocation = "";
         string outputBinFile = "BinFiles/output.bin";
         string outputVidFile = "OutputFiles/output.mp4";
+        string outputYUVFile = "OutputFiles/output.y4m";
 
         //  Ask for the file to read
         cout << "\n Please select the input video file: ";
@@ -146,6 +148,7 @@ TEST_CASE("Video Encoding/Decoding")
         cout << " -> Video Size = " << xFrameSize << "x" << yFrameSize << "\n";
         cout << " -> Output Bin File = " << outputBinFile << "\n";
         cout << " -> Output Vid File = " << outputVidFile << "\n";
+        cout << " -> Output Y4M File = " << outputYUVFile << "\n";
 
         //        ENCODING
         //  Instanciate the Hybrid Codec for encoding
@@ -180,7 +183,7 @@ TEST_CASE("Video Encoding/Decoding")
         cout << "\n ------------ Read Video ------------ \n";
         begin = std::chrono::steady_clock::now();
 
-        vector<cv::Mat> decodedVideo = hybridDec.decodeVideo(outputVidFile);
+        hybridDec.decodeVideo(outputVidFile, outputYUVFile);
 
         end = std::chrono::steady_clock::now();
         cout << " -> Decode Time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "\n";
@@ -188,53 +191,13 @@ TEST_CASE("Video Encoding/Decoding")
         //  Close the used classes
         hybridDec.close();
 
-        //  Test all the pixels for all the frames of the decoded video against the original video
-        cout << "\n ------------ Check Video ------------ \n";
+        //  Test if the original y4m file is the same as the output y4m file
+        cout << "\n ------------ Check File ------------ \n";
 
-        //  Reopen the original video
-        VideoCapture oldvideo = cv::VideoCapture(videoLocation);
+        //  Check if the two files are the same
+        REQUIRE(VideoReader::compareFiles(outputYUVFile, videoLocation));
 
-        cv::Mat originalFrame;
-        bool readOriginal, readDecoded;
-        int frameIndex = 1;
-
-        //  Search every frame in the vector of frames
-        for (cv::Mat decodedFrame : decodedVideo)
-        {
-            //  Read the oposing original frame
-            readOriginal = oldvideo.read(originalFrame);
-
-            cout << " -> CHECKING Frame: " << frameIndex << "\n";
-
-            //  Decoded video still has frames but the original does not (should not happen)
-            if (!readOriginal)
-            {
-                cout << "ERROR! Tried reading non existent frame from the original video!\n";
-                return;
-            }
-
-            //  For every row of pixels
-            for (int i = 0; i < yFrameSize; i++)
-            {
-
-                cout << "Row: " << i << "                 \n";
-                cout << "\e[A";
-                cout << "\r";
-
-                //  For every column of pixels
-                for (int j = 0; j < xFrameSize; j++)
-                {
-                    //  Test if the decoded pixel is the same as the original pixel
-                    REQUIRE(originalFrame.at<cv::Vec3b>(i, j) == decodedFrame.at<cv::Vec3b>(i, j));
-                }
-            }
-
-            cout << "\e[A";
-            cout << "\r";
-
-            frameIndex++;
-        }
-        cout << "\n -> OK            \n";
         //  All tests passed if we get here!
+        cout << "\n -> OK            \n";
     }
 }

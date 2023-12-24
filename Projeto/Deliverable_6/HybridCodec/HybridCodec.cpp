@@ -2,6 +2,7 @@
 #define HybridCodec_CPP
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <opencv2/opencv.hpp>
 #include <opencv2/videoio.hpp>
@@ -156,7 +157,7 @@ public:
      * @note The timing information for each frame's decoding duration is printed to the console.
      * @note The frequency parameter determines the frames at which intra-frame coding is applied.
      */
-    vector<cv::Mat> decodeVideo(string outputVidFile)
+    void decodeVideo(string outputVidFile, string outputYUVFile)
     {
         int fileT = 0;
 
@@ -168,10 +169,14 @@ public:
 
         Mat decodedFrame;
         Mat prevFrame;
-        vector<cv::Mat> frameVector;
 
         //  Instanciate the video writer that will create the final mp4 file
         cv::VideoWriter decodedVideoWriter(outputVidFile, fileT, (double)this->fps, cv::Size(this->xFrameSize, this->yFrameSize), 1);
+
+        //  Open the y4m file to write to
+        ofstream outfile (outputYUVFile);           
+        //  Write the y4m header
+        outfile << "YUV4MPEG2 W" << this->xFrameSize << " H" << this->yFrameSize << " F" << this->fps << ":1 Ip A1:1 C444" << endl;
 
         //  Time the decoding
         std::chrono::steady_clock::time_point begin;
@@ -202,8 +207,17 @@ public:
             }
 
             //  Save the decoded frame inside a vector of frames and also add it to the final video
-            frameVector.push_back(decodedFrame);
             decodedVideoWriter.write(decodedFrame);
+            
+            outfile << "FRAME" << endl;
+
+            for (int colour = 0; colour < 3; colour++) {
+                for (int y = 0; y < this->yFrameSize; y++) {
+                    for (int x = 0; x < this->xFrameSize; x++) {
+                        outfile << decodedFrame.at<cv::Vec3b>(y, x)[colour];
+                    }
+                }
+            }
 
             //  Stop the timer and print the time result
             end = std::chrono::steady_clock::now();
@@ -212,8 +226,10 @@ public:
 
         //  Create the final video
         decodedVideoWriter.release();
+        //  Close the output file
+        outfile.close();
 
-        return frameVector;
+        return;
     }
 
     /**
