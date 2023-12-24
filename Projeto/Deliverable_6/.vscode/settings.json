@@ -82,7 +82,11 @@
         "locale": "cpp",
         "regex": "cpp",
         "charconv": "cpp",
-        "__memory": "cpp"
+        "__memory": "cpp",
+        "future": "cpp",
+        "semaphore": "cpp",
+        "span": "cpp",
+        "stack": "cpp"
     },
     "cmake.configureOnOpen": false
 }

@@ -40,6 +40,7 @@ private:
     int search_area;       /**< Search area size for encoding. */
     int intraframe_period; /**< Period between intra-frames. */
     int SEARCH_STEP_SIZE;  /**< Step size for inter-frame coding. */
+    array<int, 3> QUANT_STEPS;
 
 public:
     Frame_Predicter p; /**< Frame predictor object for intra-frame coding. */
@@ -54,7 +55,7 @@ public:
      * @param frequency Frequency of intra-frame coding.
      * @param stepSize Step size for inter-frame coding.
      */
-    HybridCodec(string inputfile, string outputfile, int blockSize = 8, int searchSize = 8, int frequency = 6, int stepSize = 4)
+    HybridCodec(string inputfile, string outputfile, int blockSize = 8, int searchSize = 8, int frequency = 6, int stepSize = 4, array<int, 3> quantizationSteps = {8, 8, 8})
         : p(inputfile, outputfile)
     {
 
@@ -64,6 +65,7 @@ public:
         this->SEARCH_SIZE = searchSize;
         this->frequency = frequency;
         this->SEARCH_STEP_SIZE = stepSize;
+        this->QUANT_STEPS = quantizationSteps;
     }
 
     /**
@@ -292,6 +294,7 @@ public:
 
         cv::Mat decodedFrame = cv::Mat::zeros(cv::Size(width, height), cv::IMREAD_GRAYSCALE);
 
+
         //  Loop through the channel in blocks
         for (int y = 0; y < height; y += this->BLOCK_SIZE)
         {
@@ -321,6 +324,56 @@ public:
 
         return decodedFrame;
     }
+
+    
+    cv::Mat quantizeFrame(cv::Mat frame) {
+        //  Assuming the pixel's value is within the range [0, 255]
+        int range = 255;
+        cv::Mat quantizedFrame = cv::Mat::zeros(this->yFrameSize, this->xFrameSize, CV_8UC3);
+        std::vector<cv::Mat> channels;
+        array<int, 3> quantizationStep;
+        int originalPixelValue = 0;
+        
+        // Calculate the quantization step
+        for (int channel = 0; channel < 3; channel++) {
+            int channelQuantLevels = this->QUANT_STEPS[channel];
+            quantizationStep[channel] = (int)floor(range / static_cast<double>(channelQuantLevels));
+        }
+
+
+        //  Frame 11, x0 y0 and c0 crashing with SIGSEGV - Segmentation violation signal in originalPixelValue line
+/*      HERE-1277x719c0
+        HERE0 54 - 1277x719c0
+        HERE1 54 - x127731
+        HERE-1278x719c0
+        HERE0 52 - 1278x719c0
+        HERE1 52 - x127831
+        HERE-1279x719c0
+        HERE0 50 - 1279x719c0
+        HERE1 50 - x127931
+        -> Time for frame 10 : 12276
+        HERE-0x0c0 */
+
+
+
+
+        // Perform quantization
+        for (int y = 0; y < this->yFrameSize; y++) {
+            for (int x = 0; x < this->xFrameSize; x++) {
+                for (int colour = 0; colour < 1; colour++) {
+                    cout << "HERE-" << x << "x" << y << "c" << colour << endl;
+                    originalPixelValue = frame.at<cv::Vec3b>(y, x)[colour]; 
+                    cout << "HERE0 " << (int)originalPixelValue << " - " << x << "x" << y << "c" << colour << endl;
+                    quantizedFrame.at<cv::Vec3b>(y, x)[colour] = (int)(floor(originalPixelValue / quantizationStep[colour]) * quantizationStep[colour]);
+                    cout << "HERE1 " << (int)originalPixelValue << " - " << "x" << x << " - " << (int)quantizedFrame.at<cv::Vec3b>(y, x)[colour] << endl;
+                }
+            }
+        }
+
+        return frame;
+
+    }
+
 
     /**
      * @brief Encodes a video using the specified VideoCapture object.
@@ -352,7 +405,7 @@ public:
         }
 
         //  Read the next frame
-        frame = video.readNextYUVFrame();
+        frame = quantizeFrame(video.readNextYUVFrame());
 
         //  Time the encoding
         std::chrono::steady_clock::time_point begin;
@@ -365,13 +418,11 @@ public:
             begin = std::chrono::steady_clock::now();
 
             //  If is the frequency-th frame, encode the frame with intra-frame coding
-            if (frameIndex % this->frequency == 0)
-            {
+            if (frameIndex % this->frequency == 0) {
                 p.writeFrameColour(frame);
             }
             //  Else, encode the frame with inter-frame coding
-            else
-            {
+            else {
                 encodeFrame(frame, prevFrame);
             }
 
@@ -379,7 +430,7 @@ public:
             prevFrame = frame.clone();
 
             //  Read the next frame
-            frame = video.readNextYUVFrame();
+            frame = quantizeFrame(video.readNextYUVFrame());
 
             //  Stop the timer and print the time result
             end = std::chrono::steady_clock::now();
@@ -411,9 +462,9 @@ public:
         split(prevFrame, prevChannels);
 
         //  Encode each channel
-        encodeChannel(channels[0], prevChannels[0]);
-        encodeChannel(channels[1], prevChannels[1]);
-        encodeChannel(channels[2], prevChannels[2]);
+        encodeChannel(channels[0], prevChannels[0], this->QUANT_STEPS[0]);
+        encodeChannel(channels[1], prevChannels[1], this->QUANT_STEPS[1]);
+        encodeChannel(channels[2], prevChannels[2], this->QUANT_STEPS[2]);
     }
 
     /**
@@ -432,7 +483,7 @@ public:
      * @note The difference block is calculated as the element-wise difference between the current block and the best block.
      * @note The encoded difference block and the relative offset of the best block are saved using the BitStream.
      */
-    void encodeChannel(Mat channel, Mat prevChannel)
+    void encodeChannel(Mat channel, Mat prevChannel, int quantizStep)
     {
         //  Get the height and width of the channel
         int height = this->yFrameSize;

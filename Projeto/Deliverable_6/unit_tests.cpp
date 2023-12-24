@@ -58,6 +58,7 @@ TEST_CASE("Video Encoding/Decoding")
         int searchSize = 4;
         int frequency = 3;
         int stepSize = 4;
+        array<int, 3> quantizationSteps = {8, 8, 8};
 
         //  File system locations
         string defaultVideoLocation = "TestFiles/ducks_11_frames.y4m";
@@ -113,7 +114,7 @@ TEST_CASE("Video Encoding/Decoding")
         }
 
         //  Ask for the frequency of intra-frame coding
-        cout << "\n Please select the intra-frame frquency: ";
+        cout << "\n Please select the intra-frame frequency: ";
         cout << "\n (empty for " << frequency << ") \n";
         cout << "        -=> ";
         getline(std::cin, temp);
@@ -121,6 +122,26 @@ TEST_CASE("Video Encoding/Decoding")
         if (temp != "")
         {
             frequency = stoi(temp);
+        }
+
+        //  Ask for the quantization step size for the lossy encoding
+        cout << "\n Please select the quantization step size for the Y, U and V channels: ";
+        cout << "\n (empty for lossless channel which is " << quantizationSteps[0] << " steps for y, u and v) \n";
+        
+        cout << "      Y -=> ";
+        getline(std::cin, temp);
+        if (temp != "") {
+            quantizationSteps[0] = stoi(temp);
+        }
+        cout << "      U -=> ";
+        getline(std::cin, temp);
+        if (temp != "") {
+            quantizationSteps[1] = stoi(temp);
+        }
+        cout << "      V -=> ";
+        getline(std::cin, temp);
+        if (temp != "") {
+            quantizationSteps[1] = stoi(temp);
         }
 
         //  Open the input video capture
@@ -139,20 +160,27 @@ TEST_CASE("Video Encoding/Decoding")
 
         //  Print all the final parameters
         cout << "\n ------------- Parameters ------------- \n";
-        cout << " -> M = " << m << "\n";
+        cout << " ----- Block ----- \n";
+        cout << " -> Golomb M = " << m << "\n";
         cout << " -> Block Size = " << blockSize << "\n";
-        cout << " -> Search Size = " << searchSize << "\n";
-        cout << " -> Frequency = " << frequency << "\n";
-        cout << " -> Step Size = " << stepSize << "\n";
-        cout << " -> Video = " << videoLocation << "\n";
-        cout << " -> Video Size = " << xFrameSize << "x" << yFrameSize << "\n";
+        cout << " -> Best Block Search Size = " << searchSize << "\n";
+        cout << " -> Block Step Size = " << stepSize << "\n";
+        cout << " -> Interframe Frequency = " << frequency << "\n";
+        cout << " ----- Files ----- \n";
+        cout << " -> Input Vid File = " << videoLocation << "\n";
+        cout << " -> Input Vid Size = " << xFrameSize << "x" << yFrameSize << "\n";
         cout << " -> Output Bin File = " << outputBinFile << "\n";
         cout << " -> Output Vid File = " << outputVidFile << "\n";
         cout << " -> Output Y4M File = " << outputYUVFile << "\n";
+        cout << " ----- Lossy ----- \n";
+        cout << " -> Lossy Y Quantization Step = " << quantizationSteps[0] << "\n";
+        cout << " -> Lossy U Quantization Step = " << quantizationSteps[1] << "\n";
+        cout << " -> Lossy V Quantization Step = " << quantizationSteps[2] << "\n";
+
 
         //        ENCODING
         //  Instanciate the Hybrid Codec for encoding
-        HybridCodec hybridEnc("", outputBinFile, blockSize, searchSize, frequency, stepSize);
+        HybridCodec hybridEnc("", outputBinFile, blockSize, searchSize, frequency, stepSize, quantizationSteps);
 
         //  Write the parameters needed for all the classes
         cout << "\n ---------- Write Parameters ---------- \n";
