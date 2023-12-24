@@ -197,6 +197,10 @@ public:
             //  Save the previous frame
             prevFrame = decodedFrame.clone();
 
+            if (p.fileEnd()) {
+                break;
+            }
+
             //  Save the decoded frame inside a vector of frames and also add it to the final video
             frameVector.push_back(decodedFrame);
             decodedVideoWriter.write(decodedFrame);
@@ -363,7 +367,7 @@ public:
 
             //  Stop the timer and print the time result
             end = std::chrono::steady_clock::now();
-            cout << " -> Time for frame " << frameIndex << " : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "\n";
+            cout << " -> Time for frame " << frameIndex + 1 << " : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "\n";
         }
     }
 

@@ -94,7 +94,6 @@ public:
 
         if (this->yuvFile.peek() == EOF) {
             this->VIDEO_END = true;
-            cout << "FILE ENDED\n" << endl;
             return readframe;
         }
 
@@ -113,7 +112,6 @@ public:
 
                     if (this->yuvFile.peek() == EOF) {
                         this->VIDEO_END = true;
-                        cout << "FILE ENDED\n" << endl;
                         return readframe;
                     }
                     yuvFile.get(ch);
