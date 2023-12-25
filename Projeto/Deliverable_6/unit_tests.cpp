@@ -128,7 +128,7 @@ TEST_CASE("Video Encoding/Decoding")
 
         //  Ask for the quantization step size for the lossy encoding
         cout << "\n Would you like lossless or lossy encoding?: \n";
-        cout << "\n (empty for lossless, any character for lossy ): \n";
+        cout << " (empty for lossless, any character for lossy) \n";
 
         cout << "        -=> ";
         getline(std::cin, temp);
@@ -153,7 +153,7 @@ TEST_CASE("Video Encoding/Decoding")
             cout << "      V -=> ";
             getline(std::cin, temp);
             if (temp != "") {
-                quantizationSteps[1] = stoi(temp);
+                quantizationSteps[2] = stoi(temp);
             }
         }
         else {

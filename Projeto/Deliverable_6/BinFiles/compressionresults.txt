@@ -32,3 +32,18 @@ Final Compression ratio => 38.38%
 Encode time 1.4Ghz => 37.946s
 Decode time 1.4Ghz => 51.125s
 Total memory usage: 102.180mb
+
+
+
+
+LOSSY 8 bits for every channel:
+500 frames:
+1 382 403 040 Bytes initial file
+  910 191 555 Bytes final encoded file
+
+Final Compression ratio => 34.16%
+(1 - (final size / initial size))
+
+Encode time 4.3Ghz => 250.449s
+Encode time compared to lossless: 78.87%
+Total memory usage: 83.312mb

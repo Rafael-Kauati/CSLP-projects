@@ -16,3 +16,5 @@ QUESTIONS:
  1 - Quantization only for intraframe? or also for inter? that would make 1/3 frames more detailed then the others, but without it long videos will get progressively more "destroyed".
 
  2 - Should the quantization happen before the frame is seperated and encoded? This would make the code cleaner and allow us to not change already working code, but make us split the frame into channels twice, once for quantization and again for encoding. For now we will make the quantization happen before encoding, instead of at the same time.
+
+ 3 - Should we just quantize the read frame? ou quantize the predicted value?
