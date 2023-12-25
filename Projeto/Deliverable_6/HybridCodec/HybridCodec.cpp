@@ -65,7 +65,18 @@ public:
         this->SEARCH_SIZE = searchSize;
         this->frequency = frequency;
         this->SEARCH_STEP_SIZE = stepSize;
-        this->QUANT_STEPS = quantizationSteps;
+
+        if (quantizationSteps[0] != -1) {
+            // Calculate the quantization step
+            int range = 255;
+            for (int channel = 0; channel < 3; channel++) {
+                int channelQuantLevels = quantizationSteps[channel];
+                this->QUANT_STEPS[channel] = (int)floor(range / static_cast<double>(channelQuantLevels));
+            }
+        }
+        else {
+            this->QUANT_STEPS = quantizationSteps;
+        }
     }
 
     /**
@@ -334,30 +345,29 @@ public:
         }
 
         //  Assuming the pixel's value is within the range [0, 255]
-        int range = 255;
         cv::Mat quantizedFrame = cv::Mat::zeros(this->yFrameSize, this->xFrameSize, CV_8UC3);
         std::vector<cv::Mat> channels;
-        array<int, 3> quantizationStep;
         int originalPixelValue = 0;
-        
-        // Calculate the quantization step
-        for (int channel = 0; channel < 3; channel++) {
-            int channelQuantLevels = this->QUANT_STEPS[channel];
-            quantizationStep[channel] = (int)floor(range / static_cast<double>(channelQuantLevels));
-        }
 
         // Perform quantization
         for (int y = 0; y < this->yFrameSize; y++) {
             for (int x = 0; x < this->xFrameSize; x++) {
-                for (int colour = 0; colour < 3; colour++) {
-                    originalPixelValue = frame.at<cv::Vec3b>(y, x)[colour]; 
-                    quantizedFrame.at<cv::Vec3b>(y, x)[colour] = (int)(floor(originalPixelValue / quantizationStep[colour]) * quantizationStep[colour]);
+                for (int channel = 0; channel < 3; channel++) {
+                    originalPixelValue = frame.at<cv::Vec3b>(y, x)[channel]; 
+                    quantizedFrame.at<cv::Vec3b>(y, x)[channel] = (int)(floor(originalPixelValue / this->QUANT_STEPS[channel]) * this->QUANT_STEPS[channel]);
                 }
             }
         }
 
         return quantizedFrame;
 
+    }
+
+    int quantizeValue(int value, int quantizStep) {
+        if (quantizStep == -1) {
+            return value;
+        }
+        return (int)(floor(value / quantizStep) * quantizStep);
     }
 
 
@@ -391,7 +401,7 @@ public:
         }
 
         //  Read the next frame
-        frame = quantizeFrame(video.readNextYUVFrame());
+        frame = video.readNextYUVFrame();
 
         //  Time the encoding
         std::chrono::steady_clock::time_point begin;
@@ -416,7 +426,7 @@ public:
             prevFrame = frame.clone();
 
             //  Read the next frame
-            frame = quantizeFrame(video.readNextYUVFrame());
+            frame = video.readNextYUVFrame();
 
             //  Stop the timer and print the time result
             end = std::chrono::steady_clock::now();
@@ -507,7 +517,7 @@ public:
                     diff[yd] = vector<int>(this->BLOCK_SIZE); 
 
                     for (int xd = 0; xd < this->BLOCK_SIZE; xd++) {
-                        diff[yd][xd] = (int)block.at<uchar>(yd, xd) - (int)bestBlockMat.at<uchar>(yd, xd);
+                        diff[yd][xd] = quantizeValue((int)block.at<uchar>(yd, xd) - (int)bestBlockMat.at<uchar>(yd, xd), quantizStep);
                     }
                 }
 

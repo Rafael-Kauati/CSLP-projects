@@ -35,8 +35,22 @@ Total memory usage: 102.180mb
 
 
 
+DIFFERENCE BLOCK QUANTIZED LOSSY 8 bits for every channel:
+500 frames:
+1 382 403 040 Bytes initial file
+  787 390 915 Bytes final encoded file
 
-LOSSY 8 bits for every channel:
+Final Compression ratio => 43.04%
+(1 - (final size / initial size))
+
+Encode time 4.3Ghz => 258.754s
+Encode time compared to lossless: 81.48%
+Total memory usage: 88.812mb
+
+
+
+
+FRAME QUANTIZED LOSSY 8 bits for every channel:
 500 frames:
 1 382 403 040 Bytes initial file
   910 191 555 Bytes final encoded file
