@@ -58,6 +58,7 @@ TEST_CASE("Video Encoding/Decoding")
         int searchSize = 4;
         int frequency = 3;
         int stepSize = 4;
+        bool lossy = false;
         array<int, 3> quantizationSteps = {8, 8, 8};
 
         //  File system locations
@@ -124,24 +125,39 @@ TEST_CASE("Video Encoding/Decoding")
             frequency = stoi(temp);
         }
 
+
         //  Ask for the quantization step size for the lossy encoding
-        cout << "\n Please select the quantization step size for the Y, U and V channels: ";
-        cout << "\n (empty for lossless channel which is " << quantizationSteps[0] << " steps for y, u and v) \n";
-        
-        cout << "      Y -=> ";
+        cout << "\n Would you like lossless or lossy encoding?: \n";
+        cout << "\n (empty for lossless, any character for lossy ): \n";
+
+        cout << "        -=> ";
         getline(std::cin, temp);
+
+        //  Lossy encoding was chosen
         if (temp != "") {
-            quantizationSteps[0] = stoi(temp);
+            lossy = true;
+            //  Ask for the quantization step size for the lossy encoding
+            cout << "\n Please select the quantization step size for the Y, U and V channels: \n";
+            cout << " (empty for lossless channel which is " << quantizationSteps[0] << " steps for y, u and v) \n";
+            
+            cout << "      Y -=> ";
+            getline(std::cin, temp);
+            if (temp != "") {
+                quantizationSteps[0] = stoi(temp);
+            }
+            cout << "      U -=> ";
+            getline(std::cin, temp);
+            if (temp != "") {
+                quantizationSteps[1] = stoi(temp);
+            }
+            cout << "      V -=> ";
+            getline(std::cin, temp);
+            if (temp != "") {
+                quantizationSteps[1] = stoi(temp);
+            }
         }
-        cout << "      U -=> ";
-        getline(std::cin, temp);
-        if (temp != "") {
-            quantizationSteps[1] = stoi(temp);
-        }
-        cout << "      V -=> ";
-        getline(std::cin, temp);
-        if (temp != "") {
-            quantizationSteps[1] = stoi(temp);
+        else {
+                quantizationSteps[0] = -1;
         }
 
         //  Open the input video capture
@@ -173,13 +189,19 @@ TEST_CASE("Video Encoding/Decoding")
         cout << " -> Output Vid File = " << outputVidFile << "\n";
         cout << " -> Output Y4M File = " << outputYUVFile << "\n";
         cout << " ----- Lossy ----- \n";
-        cout << " -> Lossy Y Quantization Step = " << quantizationSteps[0] << "\n";
-        cout << " -> Lossy U Quantization Step = " << quantizationSteps[1] << "\n";
-        cout << " -> Lossy V Quantization Step = " << quantizationSteps[2] << "\n";
-
+        if (lossy) {
+            cout << " -> Lossy encoding was choosen \n";
+            cout << " -> Lossy Y Quantization Step = " << quantizationSteps[0] << "\n";
+            cout << " -> Lossy U Quantization Step = " << quantizationSteps[1] << "\n";
+            cout << " -> Lossy V Quantization Step = " << quantizationSteps[2] << "\n";
+        }
+        else {
+            cout << " -> Lossless encoding was choosen \n";
+        }
 
         //        ENCODING
         //  Instanciate the Hybrid Codec for encoding
+        //  To note, if the quantization steps are not specified, the function will be lossless.
         HybridCodec hybridEnc("", outputBinFile, blockSize, searchSize, frequency, stepSize, quantizationSteps);
 
         //  Write the parameters needed for all the classes
@@ -222,10 +244,16 @@ TEST_CASE("Video Encoding/Decoding")
         //  Test if the original y4m file is the same as the output y4m file
         cout << "\n ------------ Check File ------------ \n";
 
-        //  Check if the two files are the same
-        REQUIRE(VideoReader::compareFiles(outputYUVFile, videoLocation));
+        //  If lossless encoding was choosen, check if the initial y4m file is equal to the output one
+        if (!lossy) {
+            REQUIRE(VideoReader::compareFiles(outputYUVFile, videoLocation));
+        }
+        //  Else, just require the program to finish with no errors
+        else {
+            REQUIRE(1==1);
+        }
 
         //  All tests passed if we get here!
-        cout << "\n -> OK            \n";
+        cout << " -> OK            \n\n";
     }
 }

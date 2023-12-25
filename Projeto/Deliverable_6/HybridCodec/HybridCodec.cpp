@@ -55,7 +55,7 @@ public:
      * @param frequency Frequency of intra-frame coding.
      * @param stepSize Step size for inter-frame coding.
      */
-    HybridCodec(string inputfile, string outputfile, int blockSize = 8, int searchSize = 8, int frequency = 6, int stepSize = 4, array<int, 3> quantizationSteps = {8, 8, 8})
+    HybridCodec(string inputfile, string outputfile, int blockSize = 8, int searchSize = 8, int frequency = 6, int stepSize = 4, array<int, 3> quantizationSteps = {-1, -1, -1})
         : p(inputfile, outputfile)
     {
 
@@ -327,6 +327,12 @@ public:
 
     
     cv::Mat quantizeFrame(cv::Mat frame) {
+
+        //  If lossless encoding was specified, dont quantize the frame
+        if (this->QUANT_STEPS[0] == -1) {
+            return frame;
+        }
+
         //  Assuming the pixel's value is within the range [0, 255]
         int range = 255;
         cv::Mat quantizedFrame = cv::Mat::zeros(this->yFrameSize, this->xFrameSize, CV_8UC3);
@@ -340,37 +346,17 @@ public:
             quantizationStep[channel] = (int)floor(range / static_cast<double>(channelQuantLevels));
         }
 
-
-        //  Frame 11, x0 y0 and c0 crashing with SIGSEGV - Segmentation violation signal in originalPixelValue line
-/*      HERE-1277x719c0
-        HERE0 54 - 1277x719c0
-        HERE1 54 - x127731
-        HERE-1278x719c0
-        HERE0 52 - 1278x719c0
-        HERE1 52 - x127831
-        HERE-1279x719c0
-        HERE0 50 - 1279x719c0
-        HERE1 50 - x127931
-        -> Time for frame 10 : 12276
-        HERE-0x0c0 */
-
-
-
-
         // Perform quantization
         for (int y = 0; y < this->yFrameSize; y++) {
             for (int x = 0; x < this->xFrameSize; x++) {
-                for (int colour = 0; colour < 1; colour++) {
-                    cout << "HERE-" << x << "x" << y << "c" << colour << endl;
+                for (int colour = 0; colour < 3; colour++) {
                     originalPixelValue = frame.at<cv::Vec3b>(y, x)[colour]; 
-                    cout << "HERE0 " << (int)originalPixelValue << " - " << x << "x" << y << "c" << colour << endl;
                     quantizedFrame.at<cv::Vec3b>(y, x)[colour] = (int)(floor(originalPixelValue / quantizationStep[colour]) * quantizationStep[colour]);
-                    cout << "HERE1 " << (int)originalPixelValue << " - " << "x" << x << " - " << (int)quantizedFrame.at<cv::Vec3b>(y, x)[colour] << endl;
                 }
             }
         }
 
-        return frame;
+        return quantizedFrame;
 
     }
 

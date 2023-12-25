@@ -85,7 +85,7 @@ public:
     //  Returns an cv::Mat with the respective Y, U and V matrix of pixels
     cv::Mat readNextYUVFrame() {
         string str;
-        cv::Mat readframe;
+        cv::Mat readframe = cv::Mat::zeros(cv::Size(this->FRAME_WIDTH, this->FRAME_HEIGHT), CV_8UC3);
         std::vector<cv::Mat> channels;
         char ch;
         int colourCount = 0;
@@ -95,12 +95,8 @@ public:
             return readframe;
         }
 
-        //  Skip the "FRAME" line
-        for (int charIdx = 0; charIdx < 5; charIdx ++) {
-            yuvFile.get(ch);
-        }
-        //  Ignore the line break
-        if (this->yuvFile.peek() == '\n') {
+        //  Skip the "FRAME\n" line
+        for (int charIdx = 0; charIdx < 6; charIdx ++) {
             yuvFile.get(ch);
         }
     
