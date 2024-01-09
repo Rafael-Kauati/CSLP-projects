@@ -86,7 +86,8 @@
         "future": "cpp",
         "semaphore": "cpp",
         "span": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "codecvt": "cpp"
     },
     "cmake.configureOnOpen": false
 }

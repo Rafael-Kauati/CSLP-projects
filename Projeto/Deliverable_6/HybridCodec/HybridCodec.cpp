@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <iomanip>
 #include <opencv2/opencv.hpp>
 #include <opencv2/videoio.hpp>
 #include <cmath>
@@ -42,6 +43,9 @@ private:
     int SEARCH_STEP_SIZE;  /**< Step size for inter-frame coding. */
     array<int, 3> QUANT_STEPS;
 
+    long realSignal;
+    long noiseSignal;
+
 public:
     Frame_Predicter p; /**< Frame predictor object for intra-frame coding. */
 
@@ -55,27 +59,30 @@ public:
      * @param frequency Frequency of intra-frame coding.
      * @param stepSize Step size for inter-frame coding.
      */
-    HybridCodec(string inputfile, string outputfile, int blockSize = 8, int searchSize = 8, int frequency = 6, int stepSize = 4, array<int, 3> quantizationSteps = {-1, -1, -1})
+    HybridCodec(string inputfile, string outputfile, int blockSize = 8, int frequency = 6, int searchSize = 8, int stepSize = 4, array<int, 3> quantizationSteps = {-1, -1, -1})
         : p(inputfile, outputfile)
     {
 
         this->inputfile = inputfile;
         this->outputfile = outputfile;
         this->BLOCK_SIZE = blockSize;
-        this->SEARCH_SIZE = searchSize;
         this->frequency = frequency;
+        this->SEARCH_SIZE = searchSize;
         this->SEARCH_STEP_SIZE = stepSize;
+
+        this->realSignal = 0;
+        this->noiseSignal = 0;
 
         if (quantizationSteps[0] != -1) {
             // Calculate the quantization step
-            int range = 255;
+            int range = 256;
             for (int channel = 0; channel < 3; channel++) {
                 int channelQuantLevels = quantizationSteps[channel];
                 this->QUANT_STEPS[channel] = (int)floor(range / static_cast<double>(channelQuantLevels));
             }
         }
         else {
-            this->QUANT_STEPS = quantizationSteps;
+            this->QUANT_STEPS = {-1, -1, -1};
         }
     }
 
@@ -101,8 +108,8 @@ public:
      */
 
     void writeParams(int newmParam, int newxFrameSize, int newyFrameSize,
-                     int newfileType, int newfps = 1,
-                     int newblock_size = 1, int newsearch_area = 1, int newintraframe_period = 1)
+                     int newfileType, int newfps = 1, int newblock_size = 1, 
+                     int newfrequency = 3, int newsearch_area = 1, int newintraframe_period = 1)
     {
 
         //  Save all the given params and give them to the predictor
@@ -112,10 +119,12 @@ public:
         this->yFrameSize = newyFrameSize;
         this->fps = newfps;
         this->block_size = newblock_size;
+        this->frequency = newfrequency;
         this->search_area = newsearch_area;
         this->intraframe_period = newintraframe_period;
 
-        p.writeParams(newmParam, newxFrameSize, newyFrameSize, newfileType, newfps, newblock_size, newsearch_area, newintraframe_period);
+        p.writeParams(newmParam, newxFrameSize, newyFrameSize, newfileType, newfps, newblock_size, newfrequency, 
+                      newsearch_area, newintraframe_period, this->QUANT_STEPS);
     }
 
     /**
@@ -139,10 +148,14 @@ public:
         this->fps = params[4];
         //  Read the block size of the video with 2 bytes (max: 65,535)
         this->block_size = params[5];
+        //  Read the frequency of intraframes with 1 byte (max: 255)
+        this->frequency = params[6];
         //  Read the search area size of the video with 2 bytes (max: 65,535)
-        this->search_area = params[6];
+        this->search_area = params[7];
         //  Read the period between intraframes of the video with 1 byte (max: 255)
-        this->intraframe_period = params[7];
+        this->intraframe_period = params[8];
+        //  Read the lossy quantization params for Y, U and V with 1 byte (max: 255)
+        this->QUANT_STEPS = {params[9], params[10], params[11]};
     }
 
     /**
@@ -269,9 +282,9 @@ public:
         split(prevFrame, prevChannels);
 
         //  Decode each channel
-        channels.push_back(decodeChannel(prevChannels[0]));
-        channels.push_back(decodeChannel(prevChannels[1]));
-        channels.push_back(decodeChannel(prevChannels[2]));
+        channels.push_back(decodeChannel(prevChannels[0], 0));
+        channels.push_back(decodeChannel(prevChannels[1], 1));
+        channels.push_back(decodeChannel(prevChannels[2], 2));
 
         //  Merge the current frame from the decoded channels
         cv::merge(channels, decodedFrame);
@@ -297,11 +310,16 @@ public:
      * @note The last block is retrieved from the previous channel at the specified coordinates.
      * @note The decoded channel is calculated from the last block and the difference block.
      */
-    Mat decodeChannel(Mat prevChannel)
+    Mat decodeChannel(Mat prevChannel, int channel)
     {
         //  Get the height and width of the channe
         int height = this->yFrameSize;
         int width = this->xFrameSize;
+
+        int quantizStep = this->QUANT_STEPS[channel];
+        if (this->QUANT_STEPS[0] == 255) {
+            quantizStep = 1;
+        }
 
         cv::Mat decodedFrame = cv::Mat::zeros(cv::Size(width, height), cv::IMREAD_GRAYSCALE);
 
@@ -327,7 +345,7 @@ public:
                 {
                     for (int xd = 0; xd < this->BLOCK_SIZE; xd++)
                     {
-                        decodedFrame.at<uchar>(yd + y, xd + x) = (int)lastBlock.at<uchar>(yd, xd) + diff.at(yd).at(xd);
+                        decodedFrame.at<uchar>(yd + y, xd + x) = (int)lastBlock.at<uchar>(yd, xd) + diff.at(yd).at(xd) * quantizStep;
                     }
                 }
             }
@@ -336,38 +354,14 @@ public:
         return decodedFrame;
     }
 
-    
-    cv::Mat quantizeFrame(cv::Mat frame) {
-
-        //  If lossless encoding was specified, dont quantize the frame
-        if (this->QUANT_STEPS[0] == -1) {
-            return frame;
-        }
-
-        //  Assuming the pixel's value is within the range [0, 255]
-        cv::Mat quantizedFrame = cv::Mat::zeros(this->yFrameSize, this->xFrameSize, CV_8UC3);
-        std::vector<cv::Mat> channels;
-        int originalPixelValue = 0;
-
-        // Perform quantization
-        for (int y = 0; y < this->yFrameSize; y++) {
-            for (int x = 0; x < this->xFrameSize; x++) {
-                for (int channel = 0; channel < 3; channel++) {
-                    originalPixelValue = frame.at<cv::Vec3b>(y, x)[channel]; 
-                    quantizedFrame.at<cv::Vec3b>(y, x)[channel] = (int)(floor(originalPixelValue / this->QUANT_STEPS[channel]) * this->QUANT_STEPS[channel]);
-                }
-            }
-        }
-
-        return quantizedFrame;
-
-    }
-
     int quantizeValue(int value, int quantizStep) {
         if (quantizStep == -1) {
             return value;
         }
-        return (int)(floor(value / quantizStep) * quantizStep);
+        
+        int quantizedValue = (int)(floor(value / quantizStep));
+        
+        return quantizedValue;
     }
 
 
@@ -430,7 +424,26 @@ public:
 
             //  Stop the timer and print the time result
             end = std::chrono::steady_clock::now();
-            cout << " -> Time for frame " << frameIndex + 1 << " : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "\n";
+            cout << " -> Time for frame " << frameIndex + 1 << " : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "ms\n";
+        }
+
+        ifstream in(this->inputfile, std::ifstream::ate | std::ifstream::binary);
+        int ogYUVFileSize = in.tellg(); 
+        in = ifstream(this->outputfile, std::ifstream::ate | std::ifstream::binary);
+        int compressedFileSize = in.tellg();
+
+        cout << " ---------- ---------- ----------\n";
+        cout << " -> Initial file size: " << std::setprecision (4) << (float) ogYUVFileSize / 1048576 << "mb\n";
+        cout << " -> Binary file size: " << std::setprecision (4) << (float) compressedFileSize / 1048576 << "mb\n";
+        float compression = ((float)compressedFileSize * 100 * 100 / ogYUVFileSize) / 100;
+        cout << " -> Final Compression: " << std::setprecision (4) << compression << "%\n";
+        float bitsPerPixel = (float)compressedFileSize * 4 / (frameIndex * this->yFrameSize * this->xFrameSize);
+        cout << " -> Bits per pixel: " << std::setprecision (4) << bitsPerPixel << "\n";
+        if (this->noiseSignal != 0) {
+            cout << " -> SNR value: " << std::setprecision (4) << (this->realSignal/(float)this->noiseSignal) << "\n";
+        }
+        else {
+            cout << " -> SNR value: ထ  (lossless compression was chosen) \n";
         }
     }
 
@@ -517,7 +530,16 @@ public:
                     diff[yd] = vector<int>(this->BLOCK_SIZE); 
 
                     for (int xd = 0; xd < this->BLOCK_SIZE; xd++) {
-                        diff[yd][xd] = quantizeValue((int)block.at<uchar>(yd, xd) - (int)bestBlockMat.at<uchar>(yd, xd), quantizStep);
+                        int actualValue = (int)block.at<uchar>(yd, xd);
+                        int diffValue = actualValue - (int)bestBlockMat.at<uchar>(yd, xd);
+                        int quantValue = quantizeValue(diffValue, quantizStep);
+
+                        diff[yd][xd] = quantValue;
+
+                        this->realSignal += actualValue;
+                        if (quantizStep != -1) {
+                            this->noiseSignal += abs(diffValue - (quantValue * quantizStep));
+                        }
                     }
                 }
 

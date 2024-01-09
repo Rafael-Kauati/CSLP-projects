@@ -61,3 +61,38 @@ Final Compression ratio => 34.16%
 Encode time 4.3Ghz => 250.449s
 Encode time compared to lossless: 78.87%
 Total memory usage: 83.312mb
+
+
+
+
+
+
+
+
+TESTES JANEIRO
+Lossy com valores 0, 127, etc
+TestFiles/ducks_30_frames.y4m
+30 frames tudo default (lossy 8 8 8):
+ 
+ -> Lossy Y Quantization Step = 2
+ -> Lossy U Quantization Step = 2
+ -> Lossy V Quantization Step = 2
+ -> Encode Time: 17884
+ -> Decode Time: 19913
+
+og:  82 944 220
+bin: 45 936 787 - 55.4%
+
+Com 0, 1, 2, 3, etc
+bin: 45 705 391 - 55.1%
+
+com lossless:
+bin: 48 597 063 - 58.6%
+
+
+COM M=4
+og:  82 944 220
+Com 0, 1, 2, 3, etc
+bin: 39 960 389 - 48.2%
+com lossless:
+bin: 46 787 404 - 56.4%

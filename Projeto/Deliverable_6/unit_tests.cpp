@@ -53,16 +53,16 @@ TEST_CASE("Video Encoding/Decoding")
         cout << " ------------- ---------- ------------- \n";
 
         //  Define the test variables here
-        int m = 8;
+        int m = 4;
         int blockSize = 8;
         int searchSize = 4;
-        int frequency = 3;
+        int frequency = 6;
         int stepSize = 4;
         bool lossy = false;
-        array<int, 3> quantizationSteps = {8, 8, 8};
+        array<int, 3> quantizationSteps = {16, 16, 16};
 
         //  File system locations
-        string defaultVideoLocation = "TestFiles/ducks_11_frames.y4m";
+        string defaultVideoLocation = "TestFiles/ducks_100_frames.y4m";
         string videoLocation = "";
         string outputBinFile = "BinFiles/output.bin";
         string outputVidFile = "OutputFiles/output.mp4";
@@ -81,6 +81,17 @@ TEST_CASE("Video Encoding/Decoding")
         }
 
         string temp;
+        //  Ask for the Goulomb parameter
+        cout << "\n Please select the Goulomb parameter: ";
+        cout << "\n (empty for " << m << ") \n";
+        cout << "        -=> ";
+        getline(std::cin, temp);
+
+        if (temp != "")
+        {
+            m = stoi(temp);
+        }
+
         //  Ask for the search size
         cout << "\n Please select the search size: ";
         cout << "\n (empty for " << searchSize << ") \n";
@@ -116,7 +127,7 @@ TEST_CASE("Video Encoding/Decoding")
 
         //  Ask for the frequency of intra-frame coding
         cout << "\n Please select the intra-frame frequency: ";
-        cout << "\n (empty for " << frequency << ") \n";
+        cout << "\n (empty for " << frequency << ", 1 for intra-frame only) \n";
         cout << "        -=> ";
         getline(std::cin, temp);
 
@@ -198,15 +209,16 @@ TEST_CASE("Video Encoding/Decoding")
         else {
             cout << " -> Lossless encoding was choosen \n";
         }
+        lossy = false;
 
         //        ENCODING
         //  Instanciate the Hybrid Codec for encoding
         //  To note, if the quantization steps are not specified, the function will be lossless.
-        HybridCodec hybridEnc("", outputBinFile, blockSize, searchSize, frequency, stepSize, quantizationSteps);
+        HybridCodec hybridEnc(videoLocation, outputBinFile, blockSize, frequency, searchSize, stepSize, quantizationSteps);
 
         //  Write the parameters needed for all the classes
         cout << "\n ---------- Write Parameters ---------- \n";
-        hybridEnc.writeParams(m, xFrameSize, yFrameSize, 1, fps, blockSize, searchSize, frequency);
+        hybridEnc.writeParams(m, xFrameSize, yFrameSize, 1, fps, blockSize, frequency, searchSize);
         cout << " -> OK\n";
 
         //  Write the video itself to the file (and time the execution)
@@ -216,13 +228,13 @@ TEST_CASE("Video Encoding/Decoding")
         hybridEnc.encodeVideo(video);
 
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-        cout << " -> Encode Time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "\n";
+        cout << " -> Encode Time: " << std::setprecision (5) << (float)std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count()/1000 << "s \n";
 
         //  Close the used classes
         hybridEnc.close();
         
         //  Instanciate the Hybrid Codec for decoding
-        HybridCodec hybridDec(outputBinFile, "", blockSize, searchSize, frequency, stepSize);
+        HybridCodec hybridDec(outputBinFile, "");
 
         //  Read the parameters needed for all the classes
         cout << "\n ---------- Read Parameters ---------- \n";
@@ -236,7 +248,7 @@ TEST_CASE("Video Encoding/Decoding")
         hybridDec.decodeVideo(outputVidFile, outputYUVFile);
 
         end = std::chrono::steady_clock::now();
-        cout << " -> Decode Time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "\n";
+        cout << " -> Decode Time: " << std::setprecision (5) << (float)std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count()/1000 << "s \n";
 
         //  Close the used classes
         hybridDec.close();

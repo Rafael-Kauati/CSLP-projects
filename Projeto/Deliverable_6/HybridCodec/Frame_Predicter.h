@@ -31,6 +31,7 @@ private:
     int fileType;           ///< File format index.
     int fps;                ///< Frames per second of the video.
     int block_size;         ///< Block size for encoding and decoding.
+    int frequency;          ///< Frequency of intraframes.
     int search_area;        ///< Search area size for prediction.
     int intraframe_period;  ///< Period between intraframes in the video.
 
@@ -57,6 +58,7 @@ public:
         fileType = 0;
         fps = 0;
         block_size = 0;
+        frequency = 0;
         search_area = 0;
         intraframe_period = 0;
     }
@@ -93,7 +95,8 @@ public:
      * @param newsearch_area Search area size for prediction.
      * @param newintraframe_period Period between intraframes in the video.
      */
-    void writeParams(int newmParam, int newxFrameSize, int newyFrameSize, int newfileType, int newfps = 1, int newblock_size = 1, int newsearch_area = 1, int newintraframe_period = 1)
+    void writeParams(int newmParam, int newxFrameSize, int newyFrameSize, int newfileType, int newfps = 1, int newblock_size = 1, int newfrequency = 3, 
+                     int newsearch_area = 1, int newintraframe_period = 1, array<int, 3> quantizationSteps = {-1, -1, -1})
     {
         mParam = newmParam;
         xFrameSize = newxFrameSize;
@@ -101,6 +104,7 @@ public:
         fileType = newfileType;
         fps = newfps;
         block_size = newblock_size;
+        frequency = newfrequency;
         search_area = newsearch_area;
         intraframe_period = newintraframe_period;
 
@@ -115,10 +119,16 @@ public:
         encoder.writeInt(newfps, 1);
         //  Write the block size of the video with 2 bytes (max: 65,535)
         encoder.writeInt(newblock_size, 2);
+        //  Write the frequency of intraframes with 1 byte (max: 255)
+        encoder.writeInt(newfrequency, 1);
         //  Write the search area size of the video 2 bytes (max: 65,535)
         encoder.writeInt(newsearch_area, 2);
         //  Write the period between intraframes of the video with 1 byte (max: 255)
         encoder.writeInt(newintraframe_period, 1);
+        //  Write the quantization parameters (lossy, y, u and v) with 1 byte (max: 255)
+        encoder.writeInt(quantizationSteps[0], 1);
+        encoder.writeInt(quantizationSteps[1], 1);
+        encoder.writeInt(quantizationSteps[2], 1);
 
         encoder.setMParam(newmParam);
     }
@@ -148,15 +158,22 @@ public:
         this->fps = decoder.readInt(1);
         //  Read the block size of the video with 2 bytes (max: 65,535)
         this->block_size = decoder.readInt(2);
+        //  Read the frequency of intraframes with 1 byte (max: 255)
+        this->frequency = decoder.readInt(1);
         //  Read the search area size of the video with 2 bytes (max: 65,535)
         this->search_area = decoder.readInt(2);
         //  Read the period between intraframes of the video with 1 byte (max: 255)
         this->intraframe_period = decoder.readInt(1);
+        //  Read the lossy quantization params for Y, U and V with 1 byte (max: 255)
+        int quantY = decoder.readInt(1);
+        int quantU = decoder.readInt(1);
+        int quantV = decoder.readInt(1);
 
         decoder.setMParam(this->mParam);
 
         return vector<int>{this->mParam, this->xFrameSize, this->yFrameSize, this->fileType,
-                           this->fps, this->block_size, this->search_area, this->intraframe_period};
+                           this->fps, this->block_size, this->frequency, this->search_area, this->intraframe_period, 
+                           quantY, quantU, quantV};
     }
 
     /**
