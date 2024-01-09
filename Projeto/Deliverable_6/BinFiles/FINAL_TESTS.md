@@ -26,12 +26,12 @@
 
 | Compression Type | Final Compression | Bits per pixel | SNR | Encode time | Decode time | Compressed file size |
 | :--- | :---: | :---: | :---: | :---: | :---: | ---: |
-| Intra Lossless | 66.37% | 8.034 | None | 25.905s | 52.116s | 176.5mb |
-| Hybrid Lossless | 56.64% | 6.857 | None | 54.359s | 58.255s | 150.7mb |
-| Hybrid Lossy 64:64:64 | 49.65% | 6.011 | 92.39 | 65.334s | 70.055s | 132.1mb |
-| Hybrid Lossy 16:16:16 | 47.94% | 5.803 | 31.33 | 52.993s | 59.890s | 127.5mb |
-| Hybrid Lossy 8:8:8 | 47.9% | 5.799 | 26.94 | 55.683s | 58.275s | 127.4mb |
-| Hybrid Lossy 3:3:3 | 47.89% | 5.798 | 25.75 | 54.825s | 54.825s | 127.4mb |
+| Intra Lossless | 33.63% | 8.034 | None | 25.905s | 52.116s | 176.5mb |
+| Hybrid Lossless | 43.36% | 6.857 | None | 54.359s | 58.255s | 150.7mb |
+| Hybrid Lossy 64:64:64 | 50.35% | 6.011 | 92.39 | 65.334s | 70.055s | 132.1mb |
+| Hybrid Lossy 16:16:16 | 52.06% | 5.803 | 31.33 | 52.993s | 59.890s | 127.5mb |
+| Hybrid Lossy 8:8:8 | 52.1% | 5.799 | 26.94 | 55.683s | 58.275s | 127.4mb |
+| Hybrid Lossy 3:3:3 | 52.11% | 5.798 | 25.75 | 54.825s | 54.825s | 127.4mb |
 
 
 Conclusões da tabela acima:
@@ -48,18 +48,18 @@ Assumindo o algoritmo Hybrid Lossy 16:16:16 obtido na tabela acima.
 
 | Parametro do Golomb (M) | Compression Type | Final Compression | Bits per pixel | Compressed file size | SNR |
 | :--- | :---: | :---: | :---: |  :---: | ---: |
-| 2 | Intra | 88.87% | 10.76 | 236.4mb | None |
-| 4 | Intra | 66.37% | 8.034 | 176.5mb | None |
-| 8 | Intra | 61.57% | 7.454 | 163.8mb | None |
-| 16 | Intra | 65.93% | 7.982 | 175.4mb | None |
-| 2 | Hybrid Lossless | 85.02% | 10.29 | 226.1mb | None |
-| 4 | Hybrid Lossless | 56.64% | 6.857 | 150.7mb | None |
-| 8 | Hybrid Lossless | 61.51% | 7.447 | 163.6mb | None |
-| 16 | Hybrid Lossless | 66.73% | 8.078 | 177.5mb | None |
-| 2 | Hybrid Lossy 16 | 47.46% | 5.745 | 126.2mb | 31.33 |
-| 4 | Hybrid Lossy 16 | 47.94% | 5.803 | 127.5mb | 31.33 |
-| 8 | Hybrid Lossy 16 | 54.67% | 6.619 | 145.4mb | 31.33 |
-| 16 | Hybrid Lossy 16 | 64.58% | 7.818 | 171.8mb | 31.33 |
+| 2 | Intra | 11.13% | 10.76 | 236.4mb | None |
+| 4 | Intra | 33.62% | 8.034 | 176.5mb | None |
+| 8 | Intra | 38.43% | 7.454 | 163.8mb | None |
+| 16 | Intra | 34.07% | 7.982 | 175.4mb | None |
+| 2 | Hybrid Lossless | 14.98% | 10.29 | 226.1mb | None |
+| 4 | Hybrid Lossless | 43.36% | 6.857 | 150.7mb | None |
+| 8 | Hybrid Lossless | 38.49% | 7.447 | 163.6mb | None |
+| 16 | Hybrid Lossless | 33.27% | 8.078 | 177.5mb | None |
+| 2 | Hybrid Lossy 16 | 52.54% | 5.745 | 126.2mb | 31.33 |
+| 4 | Hybrid Lossy 16 | 52.06% | 5.803 | 127.5mb | 31.33 |
+| 8 | Hybrid Lossy 16 | 45.33% | 6.619 | 145.4mb | 31.33 |
+| 16 | Hybrid Lossy 16 | 35.42% | 7.818 | 171.8mb | 31.33 |
 
 Conclusões da tabela acima:
  - Para a encodificação intra-frame, um M de 8 é preferível, visto que muitos valores encodificados podem ser maiores;
@@ -72,14 +72,14 @@ Conclusões da tabela acima:
 Usando a encodificação Hybrid Lossy 16:
 | Parametro do Golomb (M) | Video utilizado | Final Compression | Compressed file size | SNR |
 | :--- | :---: | :---: | :---: | ---: |
-| 4 | ducks_take_off | 47.94% | 127.5mb | 31.33 |
-| 8 | ducks_take_off | 54.67% | 145.4mb | 31.33 |
-| 4 | park_joy | 49.27% | 130.6mb | 23.18 |
-| 8 | park_joy | 55.37% | 146.7mb | 23.18 |
-| 4 | old_town_cross | 44.89% | 119.0mb | 36.53 |
-| 8 | old_town_cross | 53.28% | 141.2mb | 36.53 |
-| 4 | in_to_tree | 44.21% | 117.2mb | 35.26 |
-| 8 | in_to_tree | 52.98% | 140.4mb | 35.26 |
+| 4 | ducks_take_off | 52.06% | 127.5mb | 31.33 |
+| 8 | ducks_take_off | 45.33% | 145.4mb | 31.33 |
+| 4 | park_joy | 50.73% | 130.6mb | 23.18 |
+| 8 | park_joy | 44.63% | 146.7mb | 23.18 |
+| 4 | old_town_cross | 55.11% | 119.0mb | 36.53 |
+| 8 | old_town_cross | 46.72% | 141.2mb | 36.53 |
+| 4 | in_to_tree | 55.79% | 117.2mb | 35.26 |
+| 8 | in_to_tree | 47.02% | 140.4mb | 35.26 |
 
 Conclusões da tabela acima:
  - Independente do video, um parâmetro de M com valor 4 é sempre superior ao de valor 8, provando que o valor do parâmetro, apesar de sempre relacionado com o próprio video, não é afetado o suficiente por este em condições reais para ser nessário adapta-lo ao video em si, sendo então o valor final escolhido o 4.
@@ -92,10 +92,10 @@ O search size é 4 e o step lenght é 2
 
 | Block Size | Final Compression | Compressed file size | Encode time |
 | :--- | :---: | :---: | ---: |
-| 2  | 60.80% | 161.7mb | 205.75s |
-| 4  | 50.46% | 134.2mb | 140.03s |
-| 8  | 47.94% | 127.5mb | 121.22s |
-| 16 | 47.34% | 125.9mb | 111.72s |
+| 2  | 39.2% | 161.7mb | 205.75s |
+| 4  | 49.54% | 134.2mb | 140.03s |
+| 8  | 52.06% | 127.5mb | 121.22s |
+| 16 | 52.66% | 125.9mb | 111.72s |
 
 
 Conclusões da tabela acima:
@@ -107,12 +107,12 @@ Assumindo um block size de 8 e step size de 2 a 2 até o tamanho do best block s
 
 | Best Block Search Size | Step Size | Final Compression | Compressed file size | Encode time |
 | :--- | :---: | :---: | :---: | ---: |
-| 2  | 2 | 47.91% | 127.4mb | 55.936s |
-| 4  | 2 | 47.94% | 127.5mb | 128.29s |
-| 4  | 4 | 47.94% | 127.5mb |  68.21s |
-| 8  | 2 | 48.00% | 127.7mb | 403.05s |
-| 8  | 4 | 48.00% | 127.7mb | 125.43s |
-| 8  | 8 | 47.97% | 127.6mb | 59.761s |
+| 2  | 2 | 52.09% | 127.4mb | 55.936s |
+| 4  | 2 | 52.06% | 127.5mb | 128.29s |
+| 4  | 4 | 52.06% | 127.5mb |  68.21s |
+| 8  | 2 | 52.00% | 127.7mb | 403.05s |
+| 8  | 4 | 52.00% | 127.7mb | 125.43s |
+| 8  | 8 | 52.03% | 127.6mb | 59.761s |
 
 Com este teste concluimos:
   - Apesar de um best block search size de 2 com step size de 2 serem os valores optimais para estes parâmetros, estes valores são muito bons para videos com altas frames por segundo, dado que os melhores blocos vão ser todos perto dos originais, logo vamos optar por um best block search de 4 e step size de 4;
@@ -126,11 +126,11 @@ O block size é 8, o search size é 4 e o step lenght é 4
 
 | Intra-frame Frequency | Final Compression | Compressed file size | Encode time | SNR |
 | :--- | :---: | :---: | :---: | ---: |
-| 3  | 47.94% | 127.5mb | 63.18s | 31.33 |
-| 6  | 43.18% | 114.9mb | 60.869s | 31.32 |
-| 12 | 40.95% | 108.9mb | 68.772s |  31.32 |
-| 24 | 39.85% | 106mb | 71.732s |  31.33 |
-| 100 | 38.72% | 103mb | 75.892s |  31.31 |
+| 3  | 52.06% | 127.5mb | 63.18s | 31.33 |
+| 6  | 56.82% | 114.9mb | 60.869s | 31.32 |
+| 12 | 59.05% | 108.9mb | 68.772s |  31.32 |
+| 24 | 60.15% | 106mb | 71.732s |  31.33 |
+| 100 | 61.28% | 103mb | 75.892s |  31.31 |
 
 Com este teste concluimos:
   - Apesar de um maior intra frame frequency parecer melhorar considerávelmente a performance do algoritmo, apenas aumentado o tempo de encodificação, o ficheiro final para uma frequencia maior de 6 contém muitos erros visíveis, pois a soma das perdas da quantização após muitas frames leva a uma extrema perca de informação do video final;
@@ -161,8 +161,8 @@ Os parametros optimos finais são os seguintes:
 ```
 Com os resultados:
 
-| Encodificação | Final Compression | Compressed file size | Initial File Size | Bits per Pixel | Encode time | Decode time | SNR |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | ---: |
-| Intra-frame | 66.37% | 176.5mb | 266mb | 8.034 | 26.971s | 71.433s | None (ထ) |
-| Hybrid Lossless | 64.61% | 171.9mb | 266mb | 7.822 | 69.287s | 67.748s | None (ထ) |
-| Hybrid Lossy 16:16:16 | 43.18% | 114.9mb | 266mb | 5.228 | 68.545s | 75.541s | 31.32 |
+| Encodificação | Final Compression | Final size comparison (compressed /initial)| Compressed file size | Initial File Size | Bits per Pixel | Encode time | Decode time | SNR |
+| :--- | :---: | :---: | :---: | :---:| :---: | :---: | :---: | ---: |
+| Intra-frame | 33.63% | 66.37% | 176.5mb | 266mb | 8.034 | 26.971s | 71.433s | None (ထ) |
+| Hybrid Lossless | 35.39% | 64.61% | 171.9mb | 266mb | 7.822 | 69.287s | 67.748s | None (ထ) |
+| Hybrid Lossy 16:16:16 | 56.82% | 43.18% | 114.9mb | 266mb | 5.228 | 68.545s | 75.541s | 31.32 |
