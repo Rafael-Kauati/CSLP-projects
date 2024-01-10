@@ -1,4 +1,0 @@
-/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Tests_Read_YUV/CMakeFiles/main.dir
-/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Tests_Read_YUV/CMakeFiles/test.dir
-/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Tests_Read_YUV/CMakeFiles/edit_cache.dir
-/home/frostywolf/Documents/GitReps/CSLP-projects/Projeto/Tests_Read_YUV/CMakeFiles/rebuild_cache.dir
