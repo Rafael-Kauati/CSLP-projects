@@ -1,4 +1,4 @@
-# Deliverable 5
+# Deliverable 6
 
 <p align="center">
     <img src="https://github.com/Rafael-Kauati/CSLP-projects/blob/main/Projeto/Deliverable_5/ScreenShots/tests_0.png?raw=true" height="450px">
@@ -141,7 +141,7 @@ cmake . && make
     -> Block Size = 8
     -> Best Block Search Size = 4
     -> Block Step Size = 4
-    -> Interframe Frequency = 3
+    -> Intraframe Frequency = 3
 ```
 
 | Compression Type | Final Compression | Bits per pixel | SNR | Encode time | Decode time | Compressed file size |
