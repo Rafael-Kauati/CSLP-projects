@@ -137,7 +137,7 @@ cmake . && make
 #### Default Parameters:
 ```
      ----- Block ----- 
-    -> Golomb M = 4
+    -> Golomb M = 8
     -> Block Size = 8
     -> Best Block Search Size = 4
     -> Block Step Size = 4
