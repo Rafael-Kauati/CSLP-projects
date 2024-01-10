@@ -192,7 +192,7 @@ TEST_CASE("Video Encoding/Decoding")
         cout << " -> Block Size = " << blockSize << "\n";
         cout << " -> Best Block Search Size = " << searchSize << "\n";
         cout << " -> Block Step Size = " << stepSize << "\n";
-        cout << " -> Interframe Frequency = " << frequency << "\n";
+        cout << " -> Intraframe Frequency = " << frequency << "\n";
         cout << " ----- Files ----- \n";
         cout << " -> Input Vid File = " << videoLocation << "\n";
         cout << " -> Input Vid Size = " << xFrameSize << "x" << yFrameSize << "\n";
