@@ -206,7 +206,7 @@ Conclusões da tabela acima:
   
 ---
 
-## TEST 3: Decidir o Block Size, Best Block search size e seach block step lenght
+## TEST 3: Decidir o Block Size, Best Block search size e seach block step length
 Utilizando o video ducks_100_frames.y4m, o algoritmo Hybrid Lossy 16 e o parâmetro de Golomb 8.
 O search size é 4 e o step lenght é 2
 
