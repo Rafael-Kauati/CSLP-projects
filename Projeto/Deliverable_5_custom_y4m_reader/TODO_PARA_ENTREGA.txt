@@ -1,0 +1,37 @@
+USAR SÓ YUV 4:4:4
+
+Loader YUV 4:4:4
+ver frame a frame
+taxa de compressão entre o yuv e o bin
+video final tem de ser do tamanho do original
+
+
+parser de YUV para 3 matrizes e parser 3 matrizes para YUV
+
+
+versão com perdas, 
+melhor compressão
+video final menor do que o original (provavelmente?)
+
+apresentar gráfico com x= relação sinal/ruido???? (perda de dados) y= loss???? ()
+
+SUPER IMPORTANTE:
+ - stor tem de ser capaz de correr e replicar os resultados com script que gere o tal gráfico
+
+grupo com melhor taxa de compressão sem perdas = extra valores para um grupo
+melhor taxa tem menos tempo e melhor compressão
+
+
+grande focos é analise de resultados, não o código em si
+
+extra mile é analisar a performance
+
+
+
+
+
+
+ler o yuv:
+V = ler a mat y
+U = ler a mat u
+V = ler a mat u

@@ -1,0 +1,20 @@
+How to implement the lossy codec:
+Quantize the frame independently in every Y, U and V channel
+Each Channel has a specific number of possible colours and instead of being 255, they will be 2^n, with n being the chosen quantitizer parameter for each specific channel.
+
+So: we quantize the frame, leading to many of the difference Matrices to be just arrays of zeroes.
+We then work as normal and decode the frame as normal.
+
+
+If there is time, we should implement a way of telling the decoder to skip reading differnece frames of just zeroes, probably by inserting an extra bit to tell it that the difference matrice is just zeroes.
+With this we can avoid coding matrices of zeroes, at the cost of an extra bit per matrix.
+
+If possible, test if this is worth it, if not, include as "possible future improvements" in the report.
+
+
+QUESTIONS:
+ 1 - Quantization only for intraframe? or also for inter? that would make 1/3 frames more detailed then the others, but without it long videos will get progressively more "destroyed".
+
+ 2 - Should the quantization happen before the frame is seperated and encoded? This would make the code cleaner and allow us to not change already working code, but make us split the frame into channels twice, once for quantization and again for encoding. For now we will make the quantization happen before encoding, instead of at the same time.
+
+ 3 - Should we just quantize the read frame? ou quantize the predicted value?
