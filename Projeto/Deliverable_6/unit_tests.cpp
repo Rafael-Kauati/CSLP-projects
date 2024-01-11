@@ -209,7 +209,6 @@ TEST_CASE("Video Encoding/Decoding")
         else {
             cout << " -> Lossless encoding was choosen \n";
         }
-        lossy = false;
 
         //        ENCODING
         //  Instanciate the Hybrid Codec for encoding
